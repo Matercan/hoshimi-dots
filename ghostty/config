@@ -1,12 +1,4 @@
-# This is the configuration file for Ghostty.
-#
-# This template file has been automatically created at the following
-# path since Ghostty couldn't find any existing config files on your system:
-#
-#   /home/Matercan/.config/ghostty/config
-#
-
+background-opacity = 0.8
 theme = catppuccin-macchiato
 shell-integration = fish
-background-opacity = 0.8
 font-size = 9

@@ -12,5 +12,8 @@ Here's some useless screenshots for you to gape and gaw at
 
 ![afbeelding](https://github.com/user-attachments/assets/44c0b8a2-a251-4e54-8bc5-a5c24b68edd5)
 
+![afbeelding](https://github.com/user-attachments/assets/38264f14-60c8-408e-9fa9-88947f9a3b9a)
+
+
 Wow very cool I know, anyways, you should probably get GNU stow it will make your life a lot easier to transfer the actual files to your ~/.config.
 Also yes, I love celeteste who would've guessed

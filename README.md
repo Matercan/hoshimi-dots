@@ -2,13 +2,14 @@ Welcome to my .dotfiles for linux, you may have seen my screenshots on the vario
 
 Requirements:
 - xdg-desktop-portal, xdg-desktop-portal-hyprland, xdg-desktop-portal-gtk if you want icons for waybar and wofi. my icons are Colorful-Dark icons.
-- Arch linux is my distro, it will probably only work for hyprland
+- Just any ssh key manager will work, I have lxqt-openssh-askpass which should generate a file /usr/lib/ssh/ssh-askpass on reboot after installing it.
+- Arch linux is my distro, it will probably only work for hyprland.
 - Also get the apps of the dotfiles before actually making the dotfiles work?
-- If you want shell integration, you should probably work at getting ghostty although I'm sure other places have it too
+- If you want shell integration, you should probably work at getting ghostty although I'm sure other places have it too.
 
-Also my hyprland.conf is very similar to the regular hyprland.conf so I wouldn't recommend stowing it because yours is probably better than mine
+Also my hyprland.conf is very similar to the regular hyprland.conf so I wouldn't recommend stowing it because yours is probably better than mine.
 
-Here's some useless screenshots for you to gape and gaw at
+Here's some useless screenshots for you to gape and gaw at:
 
 ![afbeelding](https://github.com/user-attachments/assets/d3482df2-9459-409f-a219-3d13bef30665) 
 
@@ -18,4 +19,4 @@ Here's some useless screenshots for you to gape and gaw at
 
 
 Wow very cool I know, anyways, you should probably get GNU stow it will make your life a lot easier to transfer the actual files to your ~/.config.
-Also yes, I love celeteste who would've guessed
+Also yes, I love celeste who would've guessed.

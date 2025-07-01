@@ -6,6 +6,8 @@ Requirements:
 - Also get the apps of the dotfiles before actually making the dotfiles work?
 - If you want shell integration, you should probably work at getting ghostty although I'm sure other places have it too
 
+Also my hyprland.conf is very similar to the regular hyprland.conf so I wouldn't recommend stowing it because yours is probably better than mine
+
 Here's some useless screenshots for you to gape and gaw at
 
 ![afbeelding](https://github.com/user-attachments/assets/d3482df2-9459-409f-a219-3d13bef30665) 

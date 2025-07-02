@@ -24,7 +24,8 @@ Here's some useless screenshots for you to gape and gaw at:
 
 ![afbeelding](https://github.com/user-attachments/assets/44c0b8a2-a251-4e54-8bc5-a5c24b68edd5)
 
-![afbeelding](https://github.com/user-attachments/assets/7c36a540-f62f-4f53-ae2a-e9eb643da663)
+![afbeelding](https://github.com/user-attachments/assets/950b20e9-47b9-4a4b-bff6-e8504e44fdaa)
+
 
 
 

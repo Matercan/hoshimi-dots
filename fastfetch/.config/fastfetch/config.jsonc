@@ -3,7 +3,7 @@
   "logo": {
     "type": "kitty",
     "source": "/home/Matercan/Downloads/converted-removebg-preview.png",
-    "height": 30,
+    "height": 29,
     "width": 40
   },
   "display": {
@@ -129,7 +129,7 @@
     {
       "type": "packages",
       "key": "{#90}{$1}│ {#95}Packages    {#90}│",
-      "format": "{$2}{$3}pacman ({pacman}) flatpak ({flatpak-system}) all ({all})"
+      "format": "{$2}{$3}pacman ({pacman}) flatpak ({flatpak-system}) {#2}[all: {all}]"
     },
     {
       "type": "custom",

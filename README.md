@@ -1,5 +1,6 @@
 Welcome to my .dotfiles for linux, you may have seen my screenshots on the various discord servers I'm in so I may as well give them to you for anyone to share.
 Things will probably be a lot easier if you get GNU stow
+For icons, I personally use dark colorful icons, though you can change this in the gtk-4.0/.config/gtk-4.0 config file
 
 Installation proccess (for arch linux):
 - ``sudo pacman -S stow``

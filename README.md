@@ -1,4 +1,13 @@
 Welcome to my .dotfiles for linux, you may have seen my screenshots on the various discord servers I'm in so I may as well give them to you for anyone to share.
+Things will probably be a lot easier if you get GNU stow
+
+Installation proccess (for arch linux):
+- ``sudo pacman -S stow``
+- ``git clone https://github.com/Matercan/mater_dotfiles/``
+- ``cd mater_dotfiles``
+- ``stow <package>``
+To get my config for any package
+
 
 Requirements:
 - xdg-desktop-portal, xdg-desktop-portal-hyprland, xdg-desktop-portal-gtk if you want icons for waybar and wofi. my icons are Colorful-Dark icons.
@@ -15,7 +24,8 @@ Here's some useless screenshots for you to gape and gaw at:
 
 ![afbeelding](https://github.com/user-attachments/assets/44c0b8a2-a251-4e54-8bc5-a5c24b68edd5)
 
-![afbeelding](https://github.com/user-attachments/assets/7c36a540-f62f-4f53-ae2a-e9eb643da663)
+![afbeelding](https://github.com/user-attachments/assets/950b20e9-47b9-4a4b-bff6-e8504e44fdaa)
+
 
 
 

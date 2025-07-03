@@ -38,26 +38,23 @@ return {
     opts = {},
   },
   {
-    "folke/snacks.nvim",
-    priority = 1000,
-    lazy = false,
-    ---@type snacks.Config
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-      bigfile = { enabled = true },
-      dashboard = { enabled = true },
-      explorer = { enabled = true },
-      indent = { enabled = true },
-      input = { enabled = true },
-      picker = { enabled = true },
-      notifier = { enabled = true },
-      quickfile = { enabled = true },
-      scope = { enabled = true },
-      scroll = { enabled = true },
-      statuscolumn = { enabled = true },
-      words = { enabled = true },
-    },
+    'rcarriga/nvim-notify',
+    event = "VeryLazy",
+    config = function()
+      require('notify').setup({
+        -- You can add your configuration options here
+        -- These are some common ones to get started:
+
+        background_color = "#000000", -- Example: Set a black background for notifications
+        timeout = 5000,               -- Notifications disappear after 5 seconds (5000ms)
+        top_padding = 0,              -- No padding at the top of the screen
+        stages = "fade_in_slide_out", -- Animation style
+        max_height = function() return math.floor(vim.opt.columns:get() * 0.75) end, -- Max height based on screen size
+        max_width = function() return math.floor(vim.opt.lines:get() * 0.75) end,   -- Max width based on screen size
+
+        -- Render function for custom appearance (optional, this is the default basic one)
+        -- render = "default",
+      })
+    end,
   }
 }

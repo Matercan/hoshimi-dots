@@ -48,8 +48,24 @@ return {
     -- No 'config' key needed here since its setup is part of the main Telescope setup.
     -- If you had specific build steps for ui-select, they would go here.
   },
-
-  -- Add any other Telescope-related plugins here if you have them, e.g.:
-  -- { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-  -- { 'nvim-telescope/telescope-file-browser.nvim' },
+  -- Install and configure dressing.nvim
+  {
+    'stevearc/dressing.nvim',
+    event = "VeryLazy", -- Load it lazily
+    config = function()
+      require('dressing').setup({
+        input = {
+          -- Set the backend for command-line inputs
+          -- 'telescope' is the key here to make it look like Telescope
+          backend = { 'telescope', 'builtin' }, -- Try telescope first, then builtin if unavailable
+          -- You can customize Telescope-specific options for inputs here if needed
+          -- telescope = {
+          --   -- layout_strategy = 'vertical',
+          --   -- layout_config = { width = 0.5, height = 0.4 },
+          -- },
+        },
+        -- You can configure other prompt types here as well (select, confirm)
+      })
+    end,
+  }
 }

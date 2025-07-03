@@ -27,6 +27,7 @@ return {
       local bufferline = require('bufferline')
       bufferline.setup({
         options = {
+          -- Styling and display
           mode = "tabs", -- or "buffers"
           themable = true,
           separator_style = "solid", -- "slant", "padded_slant", "solid", "thin"
@@ -38,7 +39,6 @@ return {
             delay = 200,
             reveal = {'close'}
           },
-          -- Corrected: Added comma here
           indicator = {
             icon = '▎',
             style = 'icon', -- CORRECT: Choose one value, e.g., 'icon'
@@ -60,7 +60,7 @@ return {
           diagnostics_update_in_insert = false, -- only applies to coc
           diagnostics_update_on_event = true, -- use nvim's diagnostic handler
 
-          -- Corrected: Moved diagnostics_indicator inside the options table
+          -- Diagnostics 
           diagnostics_indicator = function(count, level, diagnostics_dict, context)
             -- This function needs to return a string, not perform a check with if context.buffer:current() then
             -- The context.buffer:current() check is likely for more advanced logic or specific diagnostic sources.
@@ -70,9 +70,45 @@ return {
             end
             return '' -- Return empty string if no diagnostics
           end,
-        } -- <-- End of options table.
+          
+         
+
+        }, -- <-- End of options table.
+
+        -- Custom highlights
+        
+        highlights = {
+          fill = {
+            -- Link to a common background highlight group, e.g., 'Normal' or 'TabLineFill'
+            -- 'Normal' is the default background of your editor.
+            -- 'TabLineFill' is usually the background for Vim's default tabline.
+            link = 'Normal',
+          },
+          buffer_selected = {
+            -- Link the selected buffer's background to a group that stands out, e.g., 'StatusLine'
+            link = 'StatusLine',
+          },
+          buffer_visible = {
+            -- Link visible but not selected buffers to a slightly different background
+            link = 'StatusLineNC', -- StatusLineNC is usually for inactive status lines
+          },
+          buffer_selected_text = {
+            link = 'StatusLineText', -- Or 'NormalText', depends on your colorscheme
+          },
+          buffer_text = {
+            link = 'Comment', -- Example: make inactive text color like comments
+          },
+          -- For separators, you can link them too
+          separator = {
+            link = 'TabLineFill' -- Or Normal
+          },
+          separator_selected = {
+            link = 'StatusLine' -- Or TabLineSel
+          },
+        } -- <-- End of highlights table
+
       }) -- <-- End of bufferline.setup call.
 
-    end -- <-- End of config function.
+  end -- <-- End of config function.
   }
 }

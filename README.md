@@ -16,6 +16,7 @@ Requirements:
 - Arch linux is my distro, it will probably only work for hyprland.
 - Also get the apps of the dotfiles before actually making the dotfiles work?
 - If you want shell integration, you should probably work at getting ghostty although I'm sure other places have it too.
+- If you want to copy things from neovim to the clipboard, make sure you download xclip (this took me too long to realize, don't fall to the same fate).
 
 Also my hyprland.conf is very similar to the regular hyprland.conf so I wouldn't recommend stowing it because yours is probably better than mine.
 

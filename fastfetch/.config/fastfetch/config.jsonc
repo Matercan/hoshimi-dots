@@ -14,9 +14,7 @@
       // CONSTANT {$2} - COLOR BACKGROUND FOR OUTPUT
       "\u001b[48;2;20;47;85m",
       // CONSTANT {$3} - VERTICAL BARS AT START AND 75th CHARACTERS FORWARD AND BACKWARD
-      "\u001b[90m│                                                            │\u001b[60D\u001b[39m",
-      // CONSTANT {$4} - COLOR OF TEXT
-      "\u001b[38;2;179;212;245"
+      "\u001b[90m│                                                            │\u001b[60D\u001b[39m"
     ]
   },
   "modules": [

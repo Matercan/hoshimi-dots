@@ -44,7 +44,7 @@
 @define-color	surface1-rgb  rgb(69, 71, 90);
 @define-color	surface0  #313244;
 @define-color	surface0-rgb  rgb(49, 50, 68);
-@define-color	base  rgba(30, 30, 46, 0.7);
+@define-color	base  rgba(25, 51, 155, 0.8);
 @define-color	mantle  #181825;
 @define-color	mantle-rgb  rgb(24, 24, 37);
 @define-color	crust  #11111b;
@@ -70,7 +70,7 @@ window {
 #inner-box {
   margin: 5px;
   padding: 10px;
-  border: none;
+  border: none; /*Adds a border for the item select */
   background-color: transparent; /* make this transparent */
 }
 
@@ -78,8 +78,16 @@ window {
 #outer-box {
   margin: 5px;
   padding: 10px;
-  border: none;
+  border: @lavender;
   background-color: transparent; /* Also make outer-box transparent */
+}
+
+/* Expandeed box */
+#expander-box {
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  background-color: transparent; /* Makes expanded boxes also transparent */
 }
 
 /* Scroll */
@@ -94,10 +102,10 @@ window {
 #input {
   margin: 5px 20px;
   padding: 10px;
-  border: none;
+  border: 2px solid @lavender;
   border-radius: 0.1em;
   color: @text;
-  background-color: transparent; /* This will be transparent */
+  background-color: transparent; 
 }
 
 #input image {
@@ -117,7 +125,9 @@ window {
 }
 
 #entry {
-  background-color: transparent; /* <--- Make entries transparent by default */
+  margin: 0px;
+  border: 0px solid @mantle;
+  background-color: transparent; /* Make entries transparent by default */
 }
 
 #entry arrow {
@@ -128,7 +138,7 @@ window {
 /* Selected Entry */
 #entry:selected {
   border: 0.11em solid @lavender;
-  background-color: @transparent; /* Or a transparent version if you want */
+  background-color: @transparent; /* makes selected entry transparent */
 }
 
 #entry:selected #text {

@@ -45,7 +45,7 @@ require("lazy").setup(plugins)
 vim.keymap.set('n', '<C-n>', function() vim.cmd('Neotree filesystem reveal left') end, {desc = "Toggle Neotree"})
 vim.keymap.set('n', '<leader>s', '<Esc> :w <CR>', {})
 vim.keymap.set('n', '<leader>e', '<Esc> :q <CR>', {})
-vim.keymap.set('n', '<C-x>', '<Esc> :wq <CR> :q <CR>', {})
+vim.keymap.set('n', '<C-x>', '<Esc> :wqa <CR>', {})
 
 
 -- local builtin = require("telescope.builtin")

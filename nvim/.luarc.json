@@ -1,5 +1,8 @@
 {
     "diagnostics.globals": [
-        "vim"
+        "vim",
+        "virtual_view",
+        "window_view",
+        "formats"
     ]
 }

@@ -31,13 +31,10 @@ return {
     end,
   },
   {
-    "j-hui/fidget.nvim",
-    tag = "v1.6.1", -- Make sure to update this to something recent!
-    opts = {
-      -- options
-    },
-    config = function ()
-      require("telescope").load_extension("fidget")
-    end
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    ---@module "ibl"
+    ---@type ibl.config
+    opts = {},
   }
 }

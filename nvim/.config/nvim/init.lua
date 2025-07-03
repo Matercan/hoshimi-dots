@@ -24,12 +24,11 @@ local plugins = {
   require("plugins.neotree"),
   require("plugins.lualine"),
   require("plugins.lsp-config"),
-  require("plugins.indent-blankline"),
   require("plugins.alpha"),
   require("plugins.completions"),
   require("plugins.gitsigns"),
   require("plugins.essentials"),
-  -- require("plugins"),
+  require("plugins.git"),
   require("plugins.trouble")
 }
 

@@ -1,0 +1,78 @@
+return {
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",         -- required
+      "sindrets/diffview.nvim",        -- optional - Diff integration
+
+      -- Only one of these is needed.
+      "nvim-telescope/telescope.nvim", -- optional 
+    },
+  },
+  {
+    'akinsho/nvim-bufferline.lua',
+    version = "*",
+    dependencies = 'nvim-tree/nvim-web-devicons',
+
+    config = function ()
+
+      -- Keybinds (These are fine where they are, they are global keymaps)
+      vim.keymap.set('n', '<leader>gt', ':tabnext<CR>', { desc = 'Go to next tab' })
+      vim.keymap.set('n', '<leader>gT', ':tabprevious<CR>', { desc = 'Go to previous tab' })
+      vim.keymap.set('n', '<leader>tn', ':tabnew<CR>', { desc = 'Create new tab' })
+      vim.keymap.set('n', '<leader>tc', ':tabclose<CR>', { desc = 'Close current tab' })
+
+
+      -- Styling
+      local bufferline = require('bufferline')
+      bufferline.setup({
+        options = {
+          mode = "tabs", -- or "buffers"
+          themable = true,
+          separator_style = "solid", -- "slant", "padded_slant", "solid", "thin"
+          show_buffer_close_icon = false,
+          show_close_icon = false,
+          show_tab_indicators = true,
+          hover = {
+            enabled = true,
+            delay = 200,
+            reveal = {'close'}
+          },
+          -- Corrected: Added comma here
+          indicator = {
+            icon = '▎',
+            style = 'icon', -- CORRECT: Choose one value, e.g., 'icon'
+          },
+          buffer_close_icon = '󰅖',
+          modified_icon = '● ',
+          close_icon = ' ',
+          left_trunc_marker = ' ',
+          right_trunc_marker = ' ',
+          name_formatter = function(buf)
+              -- You need to return a string here, otherwise it will be nil
+              return buf.name or "" -- Example: Return buffer name
+          end,
+          max_name_length = 18,
+          max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
+          truncate_names = true, -- whether or not tab names should be truncated
+          tab_size = 18,
+          diagnostics = "nvim_lsp", -- This enables diagnostics from LSP. Keep it simple first.
+          diagnostics_update_in_insert = false, -- only applies to coc
+          diagnostics_update_on_event = true, -- use nvim's diagnostic handler
+
+          -- Corrected: Moved diagnostics_indicator inside the options table
+          diagnostics_indicator = function(count, level, diagnostics_dict, context)
+            -- This function needs to return a string, not perform a check with if context.buffer:current() then
+            -- The context.buffer:current() check is likely for more advanced logic or specific diagnostic sources.
+            -- For a basic indicator, just return based on count or level.
+            if count > 0 then
+              return ' (' .. count .. ') ' -- Example: returns (X) for diagnostics
+            end
+            return '' -- Return empty string if no diagnostics
+          end,
+        } -- <-- End of options table.
+      }) -- <-- End of bufferline.setup call.
+
+    end -- <-- End of config function.
+  }
+}

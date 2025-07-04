@@ -79,7 +79,7 @@
     {
       "type": "disk",
       "key": "{#90}{$1}│ {#91}Disk        {#90}│",
-      "format": "{$2}{$3}{size-used} / {size-total} ({size-percentage}{$2})"
+      "format": "{$2}{$3}{name} ({mountpoint}): {size-used} / {size-total} ({size-percentage}{$2})"
     },
     {
       "type": "gpu",
@@ -146,25 +146,25 @@
       "type": "command",
       "key": "{#90}{$1}│ {#94}Rust        {#90}│",
       "text": "rustc --version | cut -d' ' -f2",
-      "format": "{$2}{$3}rust {}"
+      "format": "{$2}{$3}rust version {}"
     },
     {
       "type": "command",
       "key": "{#90}{$1}│ {#94}Python      {#90}│",
       "text": "python --version",
-      "format": "{$2}{$3}python {~7}"
+      "format": "{$2}{$3}python version {~7}"
     },
     {
       "type": "command",
       "key": "{#90}{$1}│ {#94}Neovim      {#90}│",
       "text": "nvim --version | grep '^NVIM'",
-      "format": "{$2}{$3}nvim {~6}"
+      "format": "{$2}{$3}nvim version {~6}"
     },
     {
       "type": "command",
       "key": "{#90}{$1}│ {#94}Git         {#90}│",
       "text": "git --version",
-      "format": "{$2}{$3}git {~12}"
+      "format": "{$2}{$3}git version {~12}"
     },
     {
       "type": "custom",

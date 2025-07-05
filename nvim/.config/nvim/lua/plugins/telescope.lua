@@ -3,18 +3,23 @@ return {
   -- Main Telescope plugin definition
   {
     "nvim-telescope/telescope.nvim",
-    branch = "0.1.x", -- Make sure you specify the branch if you are on 0.1.x
+    -- CHANGE THIS LINE:
+    -- Instead of branch = "0.1.x", use a specific tag or the master branch
+    tag = "0.1.5", -- <--- RECOMMENDED: Use the latest stable tag (as of this knowledge cut-off)
+    -- OR, if 0.1.5 still gives issues (less likely), use the master branch for bleeding edge:
+    -- branch = "master",
+
     dependencies = {
       "nvim-lua/plenary.nvim",
-      -- Make sure trouble.nvim is a dependency if you're using it this way
-      { "folke/trouble.nvim", opts = {} }, -- Ensure trouble is also defined as a plugin
+      { "folke/trouble.nvim", opts = {} },
       "nvim-telescope/telescope-ui-select.nvim",
     },
     config = function()
       local telescope = require("telescope")
       local builtin = require("telescope.builtin")
       local actions = require("telescope.actions")
-      -- REMOVE THIS LINE: require("plugins")
+      -- REMOVE THIS LINE: require("plugins") -- This line is still present and should be removed if it's causing issues.
+                                           -- It's usually not needed in a lazy.nvim config.
 
       local open_with_trouble = require("trouble.sources.telescope").open
       local add_to_trouble = require("trouble.sources.telescope").add
@@ -31,13 +36,36 @@ return {
           ["ui-select"] = {
             require("telescope.themes").get_dropdown {},
           },
+          cmdline = {
+            -- Adjust telescope picker size and layout
+            picker = {
+              layout_config = {
+                width  = 120,
+                height = 25,
+              }
+            },
+            -- Adjust your mappings 
+            mappings    = {
+              complete      = '<Tab>',
+              run_selection = '<C-CR>',
+              run_input     = '<CR>',
+            },
+            -- Triggers any shell command using overseer.nvim (`:!`)
+            overseer    = {
+              enabled = true,
+            },
+          },
         },
       })
 
       telescope.load_extension('ui-select')
+      telescope.load_extension('cmdline')
 
       vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Find Files" })
       vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = "Live Grep" })
+
+      vim.api.nvim_set_keymap('n', 'Q', ':Telescope cmdline<CR>', { noremap = true, desc = "Cmdline" })
+     vim.api.nvim_set_keymap('n', '<leader><leader>', ':Telescope cmdline<CR>', { noremap = true, desc = "Cmdline" })
     end,
   },
 
@@ -47,6 +75,9 @@ return {
     'nvim-telescope/telescope-ui-select.nvim',
     -- No 'config' key needed here since its setup is part of the main Telescope setup.
     -- If you had specific build steps for ui-select, they would go here.
+  },
+  {
+    'jonarrien/telescope-cmdline.nvim'
   },
   -- Install and configure dressing.nvim
   {

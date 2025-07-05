@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-doc-name
 return {
   {
     "kylechui/nvim-surround",
@@ -54,5 +55,5 @@ return {
       animate = { enabled = true },
       image = { enabled = true },
     },
-  }
+  },
 }

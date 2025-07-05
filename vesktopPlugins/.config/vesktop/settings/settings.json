@@ -48,7 +48,8 @@
             "enabled": true
         },
         "AccountPanelServerProfile": {
-            "enabled": true
+            "enabled": true,
+            "prioritizeServerProfile": false
         },
         "AlwaysAnimate": {
             "enabled": true
@@ -270,7 +271,17 @@
             "enabled": false
         },
         "MessageLogger": {
-            "enabled": true
+            "enabled": true,
+            "collapseDeleted": false,
+            "deleteStyle": "text",
+            "ignoreBots": false,
+            "ignoreSelf": false,
+            "ignoreUsers": "",
+            "ignoreChannels": "",
+            "ignoreGuilds": "",
+            "logEdits": true,
+            "logDeletes": true,
+            "inlineEdits": true
         },
         "MessageTags": {
             "enabled": false
@@ -283,7 +294,8 @@
         },
         "NoBlockedMessages": {
             "enabled": true,
-            "ignoreMessages": false
+            "ignoreMessages": false,
+            "applyToIgnoredUsers": true
         },
         "NoDevtoolsWarning": {
             "enabled": false
@@ -307,7 +319,10 @@
             "enabled": false
         },
         "NoReplyMention": {
-            "enabled": true
+            "enabled": true,
+            "userList": "1234567890123445,1234567890123445",
+            "shouldPingListed": true,
+            "inverseShiftReply": false
         },
         "NoServerEmojis": {
             "enabled": false
@@ -325,7 +340,10 @@
             "enabled": false
         },
         "OnePingPerDM": {
-            "enabled": true
+            "enabled": true,
+            "channelToAffect": "both_dms",
+            "allowMentions": false,
+            "allowEveryone": false
         },
         "oneko": {
             "enabled": false
@@ -367,7 +385,8 @@
             "enabled": false
         },
         "QuickReply": {
-            "enabled": true
+            "enabled": true,
+            "shouldMention": 2
         },
         "ReactErrorDecoder": {
             "enabled": false
@@ -487,14 +506,14 @@
         "Translate": {
             "enabled": true,
             "showChatBarButton": true,
-            "service": "deepl",
+            "service": "google",
             "deeplApiKey": "",
             "autoTranslate": false,
             "showAutoTranslateTooltip": true,
-            "receivedInput": "",
-            "receivedOutput": "en-us",
-            "sentInput": "",
-            "sentOutput": "en-us"
+            "receivedInput": "ja",
+            "receivedOutput": "en",
+            "sentInput": "auto",
+            "sentOutput": "ja"
         },
         "TypingIndicator": {
             "enabled": false
@@ -596,6 +615,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1751719438229
+        "settingsSyncVersion": 1751749255153
     }
 }

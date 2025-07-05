@@ -39,7 +39,7 @@
             "enabled": true
         },
         "MessageUpdaterAPI": {
-            "enabled": false
+            "enabled": true
         },
         "ServerListAPI": {
             "enabled": true
@@ -69,7 +69,15 @@
             "enabled": false
         },
         "BetterFolders": {
-            "enabled": true
+            "enabled": true,
+            "sidebar": true,
+            "showFolderIcon": 1,
+            "keepIcons": false,
+            "closeAllHomeButton": false,
+            "closeAllFolders": false,
+            "forceOpen": false,
+            "sidebarAnim": true,
+            "closeOthers": false
         },
         "BetterGifAltText": {
             "enabled": true
@@ -262,7 +270,7 @@
             "enabled": false
         },
         "MessageLogger": {
-            "enabled": false
+            "enabled": true
         },
         "MessageTags": {
             "enabled": false
@@ -274,7 +282,8 @@
             "enabled": false
         },
         "NoBlockedMessages": {
-            "enabled": true
+            "enabled": true,
+            "ignoreMessages": false
         },
         "NoDevtoolsWarning": {
             "enabled": false
@@ -403,7 +412,9 @@
             "enabled": false
         },
         "ShikiCodeblocks": {
-            "enabled": true
+            "enabled": true,
+            "useDevIcon": "GREYSCALE",
+            "theme": "https://raw.githubusercontent.com/shikijs/textmate-grammars-themes/2d87559c7601a928b9f7e0f0dda243d2fb6d4499/packages/tm-themes/themes/dark-plus.json"
         },
         "ShowAllMessageButtons": {
             "enabled": false
@@ -585,6 +596,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1751718902987
+        "settingsSyncVersion": 1751719438229
     }
 }

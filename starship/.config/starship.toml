@@ -28,7 +28,6 @@ $line_break$character"""
 
 palette = 'catppuccin_mocha'
 
-command_timeout = 100
 
 [palettes.gruvbox_dark]
 color_fg0 = '#fbf1c7'

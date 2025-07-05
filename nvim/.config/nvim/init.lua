@@ -18,7 +18,7 @@ vim.opt.rtp:prepend(lazypath)
 
 
 local plugins = {
-  require("plugins.catppuccin"),
+  require("plugins.themes"),
   require("plugins.telescope"),
   require("plugins.treesitter"),
   require("plugins.neotree"),

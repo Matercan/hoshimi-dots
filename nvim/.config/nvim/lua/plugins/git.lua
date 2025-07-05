@@ -39,10 +39,20 @@ return {
       vim.keymap.set('n', '<leader>tn', ':tabnew<CR>', { desc = 'Create new tab' })
       vim.keymap.set('n', '<leader>tc', ':tabclose<CR>', { desc = 'Close current tab' })
 
+      vim.keymap.set('n', '<leader>1', '<Cmd>BufferLineGoToBuffer 1<CR>', { silent = true })
+      vim.keymap.set('n', '<leader>2', '<Cmd>BufferLineGoToBuffer 2<CR>', { silent = true })
+      vim.keymap.set('n', '<leader>3', '<Cmd>BufferLineGoToBuffer 3<CR>', { silent = true })
+      vim.keymap.set('n', '<leader>4', '<Cmd>BufferLineGoToBuffer 4<CR>', { silent = true })
+      vim.keymap.set('n', '<leader>5', '<Cmd>BufferLineGoToBuffer 5<CR>', { silent = true })
+      vim.keymap.set('n', '<leader>6', '<Cmd>BufferLineGoToBuffer 6<CR>', { silent = true })
+      vim.keymap.set('n', '<leader>7', '<Cmd>BufferLineGoToBuffer 7<CR>', { silent = true })
+      vim.keymap.set('n', '<leader>8', '<Cmd>BufferLineGoToBuffer 8<CR>', { silent = true })
+      vim.keymap.set('n', '<leader>9', '<Cmd>BufferLineGoToBuffer 9<CR>', { silent = true })
+      vim.keymap.set('n', '<leader>$', '<Cmd>BufferLineGoToBuffer -1<CR>', { silent = true })
 
       -- Styling
       local bufferline = require('bufferline')
-      bufferline.setup({
+      bufferline.setup {
         options = {
           -- Styling and display
           mode = "tabs", -- or "buffers"
@@ -91,36 +101,9 @@ return {
 
         -- Custom highlights
         highlights = {
-          fill = {
-            -- Link to a common background highlight group, e.g., 'Normal' or 'TabLineFill'
-            -- 'Normal' is the default background of your editor.
-            -- 'TabLineFill' is usually the background for Vim's default tabline.
-            link = 'Normal',
-          },
-          buffer_selected = {
-            -- Link the selected buffer's background to a group that stands out, e.g., 'StatusLine'
-            link = 'StatusLine',
-          },
-          buffer_visible = {
-            -- Link visible but not selected buffers to a slightly different background
-            link = 'StatusLineNC', -- StatusLineNC is usually for inactive status lines
-          },
-          buffer_selected_text = {
-            link = 'StatusLineText', -- Or 'NormalText', depends on your colorscheme
-          },
-          buffer_text = {
-            link = 'Comment', -- Example: make inactive text color like comments
-          },
-          -- For separators, you can link them too
-          separator = {
-            link = 'TabLineFill' -- Or Normal
-          },
-          separator_selected = {
-            link = 'StatusLine' -- Or TabLineSel
-          },
         } -- <-- End of highlights table
 
-      }) -- <-- End of bufferline.setup call.
+      } -- <-- End of bufferline.setup call.
 
   end -- <-- End of config function.
   }

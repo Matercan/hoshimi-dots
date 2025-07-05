@@ -1,8 +1,9 @@
+# Intoduction:
 Welcome to my .dotfiles for linux, you may have seen my screenshots on the various discord servers I'm in so I may as well give them to you for anyone to share.
 Things will probably be a lot easier if you get GNU stow
 For icons, I personally use dark colorful icons, though you can change this in the gtk-4.0/.config/gtk-4.0 config file
 
-Installation proccess (for arch linux):
+# Installation proccess (for arch linux):
 - ``sudo pacman -S stow``
 - ``git clone https://github.com/Matercan/mater_dotfiles/``
 - ``cd mater_dotfiles``
@@ -10,7 +11,7 @@ Installation proccess (for arch linux):
 To get my config for any package
 
 
-Requirements:
+# Requirements:
 - xdg-desktop-portal, xdg-desktop-portal-hyprland, xdg-desktop-portal-gtk if you want icons for waybar and wofi. my icons are Colorful-Dark icons.
 - Just any ssh key manager will work, I have lxqt-openssh-askpass which should generate a file /usr/lib/ssh/ssh-askpass on reboot after installing it.
 - Arch linux is my distro, it will probably only work for hyprland.
@@ -20,7 +21,7 @@ Requirements:
 
 Also my hyprland.conf is very similar to the regular hyprland.conf so I wouldn't recommend stowing it because yours is probably better than mine.
 
-Here's some useless screenshots for you to gape and gaw at:
+# Here's some useless screenshots for you to gape and gaw at:
 
 ![afbeelding](https://github.com/user-attachments/assets/d3482df2-9459-409f-a219-3d13bef30665) 
 

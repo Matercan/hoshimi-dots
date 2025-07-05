@@ -29,6 +29,9 @@ return {
         settings = {
           pylsp = {
             plugins = {
+              mccabe = {
+                enabled = false,
+              },
               pycodestyle = {
                 enabled = true,
                 maxLineLength = 200,
@@ -36,7 +39,7 @@ return {
                   'W291', 'E501', 'E303',
                   'W293', 'E261', 'E302',
                   'E701', 'E305', 'E252',
-                  'E127', 'E401'
+                  'E127', 'E401', 'E402'
                 },
               },
             },

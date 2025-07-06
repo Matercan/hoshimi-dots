@@ -39,6 +39,7 @@ return {
         ensure_installed = { "lua", "python" }, -- Add other languages you need
         highlight = { enable = true },
         indent = { enable = true },
+        folds = {enabled = true, }
       }
     end,
   }

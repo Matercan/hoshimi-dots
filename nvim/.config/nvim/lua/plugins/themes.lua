@@ -6,7 +6,7 @@ return {
     config = function()
       require("themery").setup({
         -- add the config here
-        themes = {"catppuccin", "gruvbox", "kanagawa"}, -- Put in your themes here
+        themes = {"catppuccin", "gruvbox", "kanagawa", "tokyonight"}, -- Put in your themes here
         -- Your themes will default to the theme during your last instance of neovim
         livePreview = true,
       })
@@ -67,7 +67,7 @@ return {
   },
   {
     "rebelot/kanagawa.nvim",
-    priority = 999,
+    priority = 998,
     config = function ()
       require('kanagawa').setup({
         compile = false,             -- enable compiling the colorscheme
@@ -91,33 +91,33 @@ return {
             return { fg = color, bg = c(color):blend(theme.ui.bg, 0.95):to_hex() }
           end
 
-            return {
-            -- Assign a static color to strings
-            String = { fg = colors.palette.carpYellow, italic = true },
-            -- theme colors will update dynamically when you change theme!
-            SomePluginHl = { fg = colors.theme.syn.type, bold = true },
+           return {
+          -- Assign a static color to strings
+          String = { fg = colors.palette.carpYellow, italic = true },
+          -- theme colors will update dynamically when you change theme!
+          SomePluginHl = { fg = colors.theme.syn.type, bold = true },
 
-            -- Telescope colors
-            TelescopeTitle = { fg = theme.ui.special, bold = true },
-            TelescopePromptNormal = { bg = theme.ui.bg_p1 },
-            TelescopePromptBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
-            TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
-            TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
-            TelescopePreviewNormal = { bg = theme.ui.bg_dim },
-            TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
+          -- Telescope colors
+          TelescopeTitle = { fg = theme.ui.special, bold = true },
+          TelescopePromptNormal = { bg = theme.ui.bg_p1 },
+          TelescopePromptBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
+          TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
+          TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
+          TelescopePreviewNormal = { bg = theme.ui.bg_dim },
+          TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
 
-            -- Uniform pop up menu colors
-            Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },  -- add `blend = vim.o.pumblend` to enable transparency
-            PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
-            PmenuSbar = { bg = theme.ui.bg_m1 },
-            PmenuThumb = { bg = theme.ui.bg_p2 },
+          -- Uniform pop up menu colors
+          Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },  -- add `blend = vim.o.pumblend` to enable transparency
+          PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+          PmenuSbar = { bg = theme.ui.bg_m1 },
+          PmenuThumb = { bg = theme.ui.bg_p2 },
 
-            -- Diganostics style from tokyonight.nvim
-            DiagnosticVirtualTextHint  = makeDiagnosticColor(theme.diag.hint),
-            DiagnosticVirtualTextInfo  = makeDiagnosticColor(theme.diag.info),
-            DiagnosticVirtualTextWarn  = makeDiagnosticColor(theme.diag.warning),
-            DiagnosticVirtualTextError = makeDiagnosticColor(theme.diag.error),
-          }
+          -- Diganostics style from tokyonight.nvim
+          DiagnosticVirtualTextHint  = makeDiagnosticColor(theme.diag.hint),
+          DiagnosticVirtualTextInfo  = makeDiagnosticColor(theme.diag.info),
+          DiagnosticVirtualTextWarn  = makeDiagnosticColor(theme.diag.warning),
+          DiagnosticVirtualTextError = makeDiagnosticColor(theme.diag.error),
+        }
         end,
         theme = "wave",              -- Load "wave" theme
         background = {               -- map the value of 'background' option to a theme
@@ -129,7 +129,7 @@ return {
   },
   {
     "ellisonleao/gruvbox.nvim",
-    priority = 998,
+    priority = 997,
     config = function ()
       require("gruvbox").setup({
         terminal_colors = true, -- add neovim terminal colors
@@ -160,5 +160,11 @@ return {
       })
       vim.cmd("colorscheme gruvbox")
     end,
+  },
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 999,
+    opts = {},
   }
 }

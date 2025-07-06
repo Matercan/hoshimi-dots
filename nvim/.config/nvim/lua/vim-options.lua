@@ -10,3 +10,5 @@ vim.opt.filetype.indent = true
 vim.opt.number = true
 vim.g.mapleader = ' ' -- You can use ' ' for space or ',' for comma as your leader key
 vim.opt.clipboard = "unnamedplus"
+vim.opt.foldmethod = "expr"
+vim.opt.foldlevelstart = 99

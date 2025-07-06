@@ -29,7 +29,7 @@ Also my hyprland.conf is very similar to the regular hyprland.conf so I wouldn't
 
 ![afbeelding](https://github.com/user-attachments/assets/950b20e9-47b9-4a4b-bff6-e8504e44fdaa)
 
-
+![afbeelding](https://github.com/user-attachments/assets/59d83db3-7bab-42b2-8947-89fa444b8eb0)
 
 
 Wow very cool I know, anyways, you should probably get GNU stow it will make your life a lot easier to transfer the actual files to your ~/.config.

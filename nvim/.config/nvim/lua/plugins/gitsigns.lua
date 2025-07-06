@@ -47,7 +47,7 @@ return {
         style = 'minimal',
         relative = 'cursor',
         row = 0,
-    
+
     on_attach = function(bufnr)
       local gitsigns = require('gitsigns')
 

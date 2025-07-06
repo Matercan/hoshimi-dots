@@ -88,7 +88,7 @@ return {
           diagnostics_update_on_event = true, -- use nvim's diagnostic handler
 
           -- Diagnostics 
-          diagnostics_indicator = function(count, level, diagnostics_dict, context)
+          diagnostics_indicator = function(count)
             -- This function needs to return a string, not perform a check with if context.buffer:current() then
             -- The context.buffer:current() check is likely for more advanced logic or specific diagnostic sources.
             -- For a basic indicator, just return based on count or level.

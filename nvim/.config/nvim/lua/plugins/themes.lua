@@ -6,7 +6,8 @@ return {
     config = function()
       require("themery").setup({
         -- add the config here
-        themes = {"catppuccin", "gruvbox"},
+        themes = {"catppuccin", "gruvbox", "kanagawa"}, -- Put in your themes here
+        -- Your themes will default to the theme during your last instance of neovim
         livePreview = true,
       })
     end,
@@ -14,11 +15,11 @@ return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    priority = 1000,
+    priority = 1000, -- priority is which plugins load first, just in case one fails 
     config = function()
       require("catppuccin").setup({
         -- You can still choose a flavor, but we'll override the background
-        flavour = "macchiato", -- Corrected: "macchiato" needs to be a string
+        flavour = "macchiato",
         background = {
           light = "latte",
           dark = "mocha",
@@ -55,18 +56,48 @@ return {
       -- vim.api.nvim_set_hl(0, "Normal", { bg = "#1a1a1a" })
 
       -- If you want to change the background for the status line and command line too
-      -- vim.api.nvim_set_hl(0, "End Of Buffer", { bg = "#1a1a1a" })
+       -- vim.api.nvim_set_hl(0, "End Of Buffer", { bg = "#1a1a1a" })
       -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#1a1a1a" })
 
       -- you might need to adjust those too or configure lualine's theme to match.
-      -- vim.api.nvim_set_hl(0, "StatusLine", { bg = "#1a1a1a" })
+      vim.api.nvim_set_hl(0, "StatusLine", { bg = "#1a1a1a" })
       vim.api.nvim_set_hl(0, "CmdLine", { bg = "#1a1a1a" })
       -- vim.api.nvim_set_hl(0, "MsgArea", { bg = "#1a1aa" })
     end,
   },
   {
+    "rebelot/kanagawa.nvim",
+    priority = 999,
+    config = function ()
+      require('kanagawa').setup({
+        compile = false,             -- enable compiling the colorscheme
+        undercurl = true,            -- enable undercurls
+        commentStyle = { italic = true },
+        functionStyle = {},
+        keywordStyle = { italic = true},
+        statementStyle = { bold = true },
+        typeStyle = {},
+        transparent = false,         -- do not set background color
+        dimInactive = false,         -- dim inactive window `:h hl-NormalNC`
+        terminalColors = true,       -- define vim.g.terminal_color_{0,17}
+        colors = {                   -- add/modify theme and palette colors
+          palette = {},
+          theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
+        },
+        overrides = function(colors) -- add/modify highlights
+            return {}
+        end,
+        theme = "wave",              -- Load "wave" theme
+        background = {               -- map the value of 'background' option to a theme
+            dark = "dragon",           -- try "dragon" !
+            light = "lotus"
+        },
+      })
+    end
+  },
+  {
     "ellisonleao/gruvbox.nvim",
-    priority = 999 ,
+    priority = 998,
     config = function ()
       require("gruvbox").setup({
         terminal_colors = true, -- add neovim terminal colors
@@ -86,8 +117,12 @@ return {
         invert_tabline = false,
         inverse = true, -- invert background for search, diffs, statuslines and errors
         contrast = "", -- can be "hard", "soft" or empty string
-        palette_overrides = {},
-        overrides = {},
+        palette_overrides = {
+          -- Put in your custom colors here
+        },
+        overrides = {
+          -- Change which attributes have different colors 
+        },
         dim_inactive = false,
         transparent_mode = false,
       })

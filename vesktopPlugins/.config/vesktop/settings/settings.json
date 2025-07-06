@@ -5,7 +5,7 @@
     "themeLinks": [],
     "eagerPatches": false,
     "enabledThemes": [
-        "NotAnotherAnimeTheme.theme.css"
+        "Azurite.theme.css"
     ],
     "enableReactDevtools": false,
     "frameless": false,
@@ -615,6 +615,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1751750230775
+        "settingsSyncVersion": 1751783786508
     }
 }

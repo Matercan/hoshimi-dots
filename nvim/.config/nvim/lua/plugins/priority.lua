@@ -36,7 +36,7 @@ return {
 
     config = function()
       require("nvim-treesitter.configs").setup {
-        ensure_installed = { "lua", "python" }, -- Add other languages you need
+        ensure_installed = { "lua", "python", "json", "javascript" }, -- Add other languages you need
         highlight = { enable = true },
         indent = { enable = true },
         folds = {enabled = true, }

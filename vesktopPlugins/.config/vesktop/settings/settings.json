@@ -5,7 +5,7 @@
     "themeLinks": [],
     "eagerPatches": false,
     "enabledThemes": [
-        "Azurite.theme.css"
+        "DiscordPlus.theme.css"
     ],
     "enableReactDevtools": false,
     "frameless": false,
@@ -58,7 +58,7 @@
             "enabled": true
         },
         "AlwaysTrust": {
-            "enabled": false
+            "enabled": true
         },
         "AnonymiseFileNames": {
             "enabled": false
@@ -113,7 +113,8 @@
             "enabled": false
         },
         "CallTimer": {
-            "enabled": false
+            "enabled": false,
+            "format": "stopwatch"
         },
         "ClearURLs": {
             "enabled": false
@@ -163,7 +164,7 @@
             "enabled": false
         },
         "DontRoundMyTimestamps": {
-            "enabled": false
+            "enabled": true
         },
         "Experiments": {
             "enabled": false
@@ -422,7 +423,7 @@
             "enabled": false
         },
         "SendTimestamps": {
-            "enabled": false
+            "enabled": true
         },
         "ServerInfo": {
             "enabled": false
@@ -615,6 +616,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1751783786508
+        "settingsSyncVersion": 1751819888745
     }
 }

@@ -20,11 +20,10 @@ vim.opt.rtp:prepend(lazypath)
 local plugins = {
   require("plugins.themes"),
   require("plugins.telescope"),
-  require("plugins.treesitter"),
   require("plugins.neotree"),
   require("plugins.lualine"),
   require("plugins.lsp-config"),
-  require("plugins.alpha"),
+  require("plugins.priority"),
   require("plugins.completions"),
   require("plugins.gitsigns"),
   require("plugins.essentials"),

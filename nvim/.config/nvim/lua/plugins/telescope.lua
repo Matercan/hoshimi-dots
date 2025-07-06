@@ -17,12 +17,8 @@ return {
     config = function()
       local telescope = require("telescope")
       local builtin = require("telescope.builtin")
-      local actions = require("telescope.actions")
-      -- REMOVE THIS LINE: require("plugins") -- This line is still present and should be removed if it's causing issues.
-                                           -- It's usually not needed in a lazy.nvim config.
 
       local open_with_trouble = require("trouble.sources.telescope").open
-      local add_to_trouble = require("trouble.sources.telescope").add
 
       -- Global Telescope setup
       telescope.setup({

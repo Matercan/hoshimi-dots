@@ -15,7 +15,7 @@ return {
     },
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = {"lua_ls", "pylsp", "jsonls", "ts_ls"}
+        ensure_installed = {"lua_ls", "pylsp", "jsonls", "ts_ls", "cssls"}
       })
     end
   },
@@ -47,6 +47,7 @@ return {
         },
       })
       lspconfig.ts_ls.setup({})
+      lspconfig.cssls.setup({})
 
       vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
       vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})

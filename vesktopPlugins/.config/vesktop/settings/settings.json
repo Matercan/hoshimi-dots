@@ -5,7 +5,7 @@
     "themeLinks": [],
     "eagerPatches": false,
     "enabledThemes": [
-        "DiscordPlus.theme.css"
+        "Translucence.theme.css"
     ],
     "enableReactDevtools": false,
     "frameless": false,
@@ -58,7 +58,9 @@
             "enabled": true
         },
         "AlwaysTrust": {
-            "enabled": true
+            "enabled": true,
+            "domain": true,
+            "file": true
         },
         "AnonymiseFileNames": {
             "enabled": false
@@ -90,7 +92,7 @@
             "enabled": false
         },
         "BetterRoleContext": {
-            "enabled": false
+            "enabled": true
         },
         "BetterRoleDot": {
             "enabled": false
@@ -101,7 +103,9 @@
             "checkInterval": 20
         },
         "BetterSettings": {
-            "enabled": false
+            "enabled": true,
+            "disableFade": true,
+            "eagerLoad": true
         },
         "BetterUploadButton": {
             "enabled": false
@@ -117,7 +121,7 @@
             "format": "stopwatch"
         },
         "ClearURLs": {
-            "enabled": false
+            "enabled": true
         },
         "ClientTheme": {
             "enabled": false
@@ -126,16 +130,20 @@
             "enabled": false
         },
         "ConsoleJanitor": {
-            "enabled": false
+            "enabled": true,
+            "disableLoggers": false,
+            "disableSpotifyLogger": true,
+            "whitelistedLoggers": "GatewaySocket; Routing/Utils"
         },
         "ConsoleShortcuts": {
             "enabled": false
         },
         "CopyEmojiMarkdown": {
-            "enabled": false
+            "enabled": true,
+            "copyUnicode": true
         },
         "CopyFileContents": {
-            "enabled": false
+            "enabled": true
         },
         "CopyUserURLs": {
             "enabled": false
@@ -158,7 +166,7 @@
             "enabled": false
         },
         "Decor": {
-            "enabled": false
+            "enabled": true
         },
         "DisableCallIdle": {
             "enabled": false
@@ -176,10 +184,17 @@
             "enabled": false
         },
         "FakeNitro": {
-            "enabled": false
+            "enabled": true,
+            "enableStickerBypass": true,
+            "enableStreamQualityBypass": true,
+            "enableEmojiBypass": true,
+            "transformEmojis": true,
+            "transformStickers": true,
+            "transformCompoundSentence": false
         },
         "FakeProfileThemes": {
-            "enabled": false
+            "enabled": true,
+            "nitroFirst": true
         },
         "FavoriteEmojiFirst": {
             "enabled": false
@@ -188,25 +203,25 @@
             "enabled": true
         },
         "FixCodeblockGap": {
-            "enabled": false
+            "enabled": true
         },
         "FixImagesQuality": {
-            "enabled": false
+            "enabled": true
         },
         "FixSpotifyEmbeds": {
-            "enabled": false
+            "enabled": true
         },
         "FixYoutubeEmbeds": {
-            "enabled": false
+            "enabled": true
         },
         "ForceOwnerCrown": {
             "enabled": false
         },
         "FriendInvites": {
-            "enabled": false
+            "enabled": true
         },
         "FriendsSince": {
-            "enabled": false
+            "enabled": true
         },
         "FullSearchContext": {
             "enabled": false
@@ -221,22 +236,28 @@
             "enabled": true
         },
         "GreetStickerPicker": {
-            "enabled": false
+            "enabled": true
         },
         "HideMedia": {
             "enabled": false
         },
         "iLoveSpam": {
-            "enabled": false
+            "enabled": true
         },
         "IgnoreActivities": {
             "enabled": false
         },
         "ImageLink": {
-            "enabled": false
+            "enabled": true
         },
         "ImageZoom": {
-            "enabled": false
+            "enabled": true,
+            "size": 100,
+            "zoom": 2,
+            "saveZoomValues": true,
+            "nearestNeighbour": false,
+            "square": false,
+            "zoomSpeed": 0.5
         },
         "ImplicitRelationships": {
             "enabled": false
@@ -269,7 +290,7 @@
             "enabled": false
         },
         "MessageLinkEmbeds": {
-            "enabled": false
+            "enabled": true
         },
         "MessageLogger": {
             "enabled": true,
@@ -423,7 +444,8 @@
             "enabled": false
         },
         "SendTimestamps": {
-            "enabled": true
+            "enabled": true,
+            "replaceMessageContents": true
         },
         "ServerInfo": {
             "enabled": false
@@ -616,6 +638,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1751819888745
+        "settingsSyncVersion": 1751829799600
     }
 }

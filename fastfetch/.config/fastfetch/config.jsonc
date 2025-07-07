@@ -109,7 +109,7 @@
     {
       "type": "terminalfont",
       "key": "{#90}{$1}│ {#95}Font        {#90}│",
-      "format": "{$2}{$3}{name}  {#2}[{size}]"
+      "format": "{$2}{$3}{name}  {#2}[size: {size}]"
     },
     {
       "type": "shell",

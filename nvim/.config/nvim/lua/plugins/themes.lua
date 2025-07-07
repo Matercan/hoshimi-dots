@@ -6,7 +6,16 @@ return {
     config = function()
       require("themery").setup({
         -- add the config here
-        themes = {"catppuccin", "gruvbox", "kanagawa", "tokyonight"}, -- Put in your themes here
+        themes = {
+          -- Put in your themes here
+          -- (Make sure they are spelt correctly as they are written in the top definition)
+          "catppuccin", "gruvbox",
+          "kanagawa", "tokyonight", -- Kanagawa uses the curly iscript part of Fira Code iscript
+          "cyberdream", "night-owl", -- So does night-owl. The others ignore it.
+          "mellifluous", "miasma",
+          "moonlight", "citruszest", -- moonlight too uses curly font
+          "aurora"
+        },
         -- Your themes will default to the theme during your last instance of neovim
         livePreview = true,
       })
@@ -74,10 +83,10 @@ return {
         undercurl = true,            -- enable undercurls
         commentStyle = { italic = true },
         functionStyle = {},
-        keywordStyle = { italic = true},
+        keywordStyle = { italic = true },
         statementStyle = { bold = true },
         typeStyle = {},
-        transparent = false,         -- do not set background color
+        transparent = false,         -- do not set a background color 
         dimInactive = false,         -- dim inactive window `:h hl-NormalNC`
         terminalColors = true,       -- define vim.g.terminal_color_{0,17}
         colors = {                   -- add/modify theme and palette colors
@@ -91,7 +100,7 @@ return {
             return { fg = color, bg = c(color):blend(theme.ui.bg, 0.95):to_hex() }
           end
 
-           return {
+          return {
           -- Assign a static color to strings
           String = { fg = colors.palette.carpYellow, italic = true },
           -- theme colors will update dynamically when you change theme!
@@ -117,8 +126,9 @@ return {
           DiagnosticVirtualTextInfo  = makeDiagnosticColor(theme.diag.info),
           DiagnosticVirtualTextWarn  = makeDiagnosticColor(theme.diag.warning),
           DiagnosticVirtualTextError = makeDiagnosticColor(theme.diag.error),
-        }
+          }
         end,
+
         theme = "wave",              -- Load "wave" theme
         background = {               -- map the value of 'background' option to a theme
             dark = "wave",           -- try "dragon" !
@@ -166,5 +176,165 @@ return {
     lazy = false,
     priority = 999,
     opts = {},
+  },
+  {
+    "scottmckendry/cyberdream.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function ()
+      local cyberdream = require("cyberdream")
+      cyberdream.setup({
+        variant = "default", -- use "light" for the light variant. Also accepts "auto" to set dark or light colors based on the current value of `vim.o.background`
+        transparent = true,
+        saturation = 1, -- accepts a value between 0 and 1. 0 will be fully desaturated (greyscale) and 1 will be the full color (default)
+        italic_comments = true,
+        hide_fillchars = false,
+        borderless_pickers = false,
+        terminal_colors = true,
+        cache = false,
+        -- Override highlight groups with your own colour values
+        highlights = {
+          -- Highlight groups to override, adding new groups is also possible
+          -- See `:h highlight-groups` for a list of highlight groups or run `:hi` to see all groups and their current values
+
+          -- Example:
+          -- Comment = { fg = "#696969", bg = "NONE", italic = true },
+
+          -- More examples can be found in `lua/cyberdream/extensions/*.lua`
+        },
+
+        -- Override a highlight group entirely using the built-in colour palette
+        overrides = function(colors) -- NOTE: This function nullifies the `highlights` option
+          -- Example:
+          return {
+            Comment = { fg=colors.teal, italic = true },
+            ["@property"] = { fg = colors.blue},
+            keyword = {fg = colors.orange},
+            string = {fg = colors.green}
+          }
+        end,
+
+        -- Override colors
+        colors = {
+          -- For a list of colors see `lua/cyberdream/colours.lua`
+
+          -- Override colors for both light and dark variants
+          bg = "#3b4154",
+          teal = "#257b4b",
+          orange = "#ff891a",
+          blue = "#91d1ff",
+          red = "#ea1e1e",
+          green = "#257b76",
+
+          -- If you want to override colors for light or dark variants only, use the following format:
+          dark = {
+            -- magenta = "#ff00ff",
+            -- fg = "#eeeeee",
+          },
+          light = {
+            -- red = "#ff5c57",
+            -- cyan = "#5ef1ff",
+          },
+        },
+
+      })
+    end,
+  },
+  {
+    "oxfist/night-owl.nvim",
+    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
+    config = function()
+      local nightOwl = require("night-owl")
+
+      nightOwl.setup({
+        italics = true,
+        bold = true,
+        underline = true,
+        undercurl = true,
+        transparent_background = false,
+      })
+      vim.cmd.colorscheme("night-owl")
+    end,
+  },
+  {
+    "ramojus/mellifluous.nvim",
+    lazy = false,
+    priority = 1000,
+
+    config = function ()
+      local mellifluous = require("mellifluous")
+
+      mellifluous.setup({
+        color_over_rides = {
+          dark = {
+            colors = function (colors)
+              return {
+                bg = "#3b4154",
+                teal = "#257b4b",
+                orange = "#ff891a",
+                blue = "#91d1ff",
+                red = "#ea1e1e",
+                green = "#257b76",
+              }
+            end,
+          }
+        }
+      })
+
+      vim.cmd("colorscheme mellifluous")
+    end
+  },
+  {
+    "xero/miasma.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd("colorscheme miasma")
+    end,
+  },
+  {
+    "shaunsingh/moonlight.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function ()
+      vim.cmd("colorscheme moonlight")
+    end
+  },
+  {
+    "zootedb0t/citruszest.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function ()
+      local citruszest = require("citruszest")
+
+      citruszest.setup({
+        option = {
+          transparent = false,
+          bold = false,
+          italic = true,
+        },
+
+        style = {
+          Constant = { fg = "#FFFFFF", bold = true }
+        }
+      })
+
+      vim.cmd("colorscheme citruszest")
+    end
+  },
+  {
+    'ray-x/aurora',
+    init = function()
+      vim.g.aurora_italic = 1
+      vim.g.aurora_transparent = 1
+      vim.g.aurora_bold = 1
+    end,
+    config = function()
+        vim.cmd.colorscheme "aurora"
+        -- override defaults
+        vim.api.nvim_set_hl(0, '@number', {fg='#e933e3'})
+    end
   }
 }
+

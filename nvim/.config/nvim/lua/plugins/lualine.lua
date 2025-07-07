@@ -8,6 +8,6 @@ return {
       options = {
         theme = 'everforest'
       }
-    }) -- <--- Make sure the outer parenthesis for setup() is closed here
+    })
   end
 }

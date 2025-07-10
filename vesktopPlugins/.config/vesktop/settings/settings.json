@@ -418,7 +418,7 @@
                         "id": "cvqltzpqn8g",
                         "name": "dougcord",
                         "color": 10070709,
-                        "collapsed": false,
+                        "collapsed": true,
                         "channels": [
                             "1377980688309030932",
                             "1391793342521676061",
@@ -703,6 +703,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1752161512984
+        "settingsSyncVersion": 1752164512124
     }
 }

@@ -1,14 +1,19 @@
 -- This file will contain your nvim-dap configuration
 local dap = require("dap")
 
--- Example configuration (you'll need to add your specific DAP clients here)
--- For C#, you'll need a debug adapter like netcoredbg or OmniSharp's debugger.
--- Assuming you have netcoredbg installed and its path is available
-dap.adapters.coreclr = {
-  type = 'executable',
-  command = '/path/to/netcoredbg/netcoredbg', -- Replace with your actual path
-  args = { '--interpreter=vscode' }
+local dotnet = require("configs.dap.nvim-dap-dotnet")
+local mason_path = vim.fn.stdpath("data") .. "/mason/packages/netcoredbg/netcoredbg"
+-- local explicit_path = "$HOME/Documents/debuggers/netcoredbg/netcoredbg"
+
+
+local netcoredbg_adapter = {
+  type = "executable",
+  command = mason_path,
+  args = { "--interpreter=vscode" },
 }
+
+dap.adapters.netcoredbg = netcoredbg_adapter -- needed for normal debugging
+dap.adapters.coreclr = netcoredbg_adapter    -- needed for unit test debugging
 
 dap.configurations.cs = {
   {
@@ -16,7 +21,7 @@ dap.configurations.cs = {
     name = 'launch - netcoredbg',
     request = 'launch',
     program = function()
-      return vim.fn.input('Path to .NET executable: ', vim.fn.getcwd() .. '/bin/Debug/net8.0/', 'file')
+      return dotnet.build_dll_path()
     end,
     args = {},
     cwd = function()

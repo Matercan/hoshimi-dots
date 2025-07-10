@@ -1,7 +1,20 @@
 local lspconfig = require('lspconfig')
-lspconfig.lua_ls.setup({})
-lspconfig.jsonls.setup({})
+local pid = vim.fn.getpid()
+local nvlsp = require("configs.lspconfig.nvlsp")
+
+lspconfig.lua_ls.setup({
+  on_attach = nvlsp.on_attach,
+  capabilities = nvlsp.capabilities
+})
+lspconfig.jsonls.setup({
+   on_attach = nvlsp.on_attach,
+  capabilities = nvlsp.capabilities
+
+})
 lspconfig.pylsp.setup({
+   on_attach = nvlsp.on_attach,
+  capabilities = nvlsp.capabilities,
+
   settings = {
     pylsp = {
       plugins = {
@@ -30,12 +43,35 @@ lspconfig.pylsp.setup({
     },
   },
 })
-lspconfig.ts_ls.setup({})
-lspconfig.cssls.setup({})
-lspconfig.postgres_lsp.setup({})
-lspconfig.ast_grep.setup({})
-lspconfig.csharp_ls.setup({})
-lspconfig.omnisharp.setup({})
+lspconfig.ts_ls.setup({
+   on_attach = nvlsp.on_attach,
+  capabilities = nvlsp.capabilities
+
+})
+lspconfig.cssls.setup({
+   on_attach = nvlsp.on_attach,
+  capabilities = nvlsp.capabilities
+
+})
+lspconfig.postgres_lsp.setup({
+   on_attach = nvlsp.on_attach,
+  capabilities = nvlsp.capabilities
+})
+lspconfig.ast_grep.setup({
+   on_attach = nvlsp.on_attach,
+  capabilities = nvlsp.capabilities
+
+})
+lspconfig.csharp_ls.setup({
+   on_attach = nvlsp.on_attach,
+  capabilities = nvlsp.capabilities
+})
+lspconfig.omnisharp.setup({
+  cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(pid) },
+  on_attach = nvlsp.on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+})
 
 vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})

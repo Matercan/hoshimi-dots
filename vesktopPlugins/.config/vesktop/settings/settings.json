@@ -5,7 +5,7 @@
     "themeLinks": [],
     "eagerPatches": false,
     "enabledThemes": [
-        "midnight.theme.css"
+        "DiscordPlus.theme.css"
     ],
     "enableReactDevtools": false,
     "frameless": false,
@@ -411,7 +411,8 @@
                         "collapsed": false,
                         "channels": [
                             "1350863981421793292",
-                            "1323229512045039627"
+                            "1323229512045039627",
+                            "1391370586760151110"
                         ]
                     },
                     {
@@ -703,6 +704,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1752164512124
+        "settingsSyncVersion": 1752174766308
     }
 }

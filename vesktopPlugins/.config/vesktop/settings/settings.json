@@ -5,7 +5,7 @@
     "themeLinks": [],
     "eagerPatches": false,
     "enabledThemes": [
-        "ClearVision-v7-BetterDiscord.theme.css"
+        "midnight.theme.css"
     ],
     "enableReactDevtools": false,
     "frameless": false,
@@ -190,7 +190,11 @@
             "enableEmojiBypass": true,
             "transformEmojis": true,
             "transformStickers": true,
-            "transformCompoundSentence": false
+            "transformCompoundSentence": false,
+            "emojiSize": 48,
+            "hyperLinkText": "{{NAME}}",
+            "useHyperLinks": true,
+            "disableEmbedPermissionCheck": false
         },
         "FakeProfileThemes": {
             "enabled": true,
@@ -236,7 +240,8 @@
             "enabled": true
         },
         "GreetStickerPicker": {
-            "enabled": true
+            "enabled": true,
+            "greetMode": "Greet"
         },
         "HideMedia": {
             "enabled": false
@@ -395,7 +400,64 @@
             "enabled": true
         },
         "PinDMs": {
-            "enabled": false
+            "enabled": true,
+            "canCollapseDmSection": false,
+            "userBasedCategoryList": {
+                "777170937682329601": [
+                    {
+                        "id": "rznudumhhn",
+                        "name": "TED",
+                        "color": 10070709,
+                        "collapsed": false,
+                        "channels": [
+                            "1350863981421793292",
+                            "1323229512045039627"
+                        ]
+                    },
+                    {
+                        "id": "cvqltzpqn8g",
+                        "name": "dougcord",
+                        "color": 10070709,
+                        "collapsed": false,
+                        "channels": [
+                            "1377980688309030932",
+                            "1391793342521676061",
+                            "1335697095167971399",
+                            "1141846359398428733",
+                            "1380847547618295881",
+                            "1366847826570645595",
+                            "1279218346805690449",
+                            "1340410917531418724"
+                        ]
+                    },
+                    {
+                        "id": "8w59bw5xir6",
+                        "name": "bop",
+                        "color": 10070709,
+                        "collapsed": true,
+                        "channels": [
+                            "1357982778288902365",
+                            "1389445412200513678",
+                            "1342213406765355018"
+                        ]
+                    },
+                    {
+                        "id": "41bwcnj68u8",
+                        "name": "irl",
+                        "color": 10070709,
+                        "collapsed": false,
+                        "channels": [
+                            "1088903579236044802",
+                            "1388884298022653952",
+                            "1151559811566149674",
+                            "1047905477889097759",
+                            "1304500264518160426"
+                        ]
+                    }
+                ],
+                "1248670950841516086": []
+            },
+            "pinOrder": 0
         },
         "PlainFolderIcon": {
             "enabled": false
@@ -641,6 +703,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1751830388282
+        "settingsSyncVersion": 1752161512984
     }
 }

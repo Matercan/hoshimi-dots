@@ -129,7 +129,7 @@
     {
       "type": "packages",
       "key": "{#90}{$1}│ {#95}Packages    {#90}│",
-      "format": "{$2}{$3}pacman ({pacman}) flatpak ({flatpak-system}) {#2}[all: {all}]"
+      "format": "{$2}{$3}yay ({pacman}) flatpak ({flatpak-system}) {#2}[all: {all}]"
     },
     {
       "type": "custom",

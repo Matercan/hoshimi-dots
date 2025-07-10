@@ -1,4 +1,4 @@
-background-opacity = 0.8
+background-opacity = 0.95
 theme = catppuccin-macchiato 
 # Kanagawa will change the theme automatically when using it for neovim
 shell-integration = fish

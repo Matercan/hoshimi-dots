@@ -8,15 +8,16 @@ return {
         -- add the config here
         themes = {
           -- Put in your themes here
-          -- (Make sure they are spelt correctly as they are written in the top definition)
+          -- Make sure they are spelt correctly as they are written in the top definition)
+          -- To make things use a curly font ( iScript ) make whatever you want to be curly italics
           "catppuccin", "gruvbox",
-          "kanagawa", "tokyonight", -- Kanagawa uses the curly iscript part of Fira Code iscript
-          "cyberdream", "night-owl", -- So does night-owl. The others ignore it.
+          "kanagawa", "tokyonight",
+          "cyberdream", "night-owl",
           "mellifluous", "miasma",
-          "moonlight", "citruszest", -- moonlight too uses curly font
+          "moonlight", "citruszest",
           "aurora"
         },
-        -- Your themes will default to the theme during your last instance of neovim
+
         livePreview = true,
       })
     end,
@@ -51,7 +52,7 @@ return {
             enabled = true,
             Comment = { fg = "#6c7086" },
             ["@variable"] = { fg = "#cad3f5" },
-          }
+          },
         },
         highlight_overrides = {
           all = {
@@ -71,7 +72,7 @@ return {
       -- you might need to adjust those too or configure lualine's theme to match.
       vim.api.nvim_set_hl(0, "StatusLine", { bg = "#1a1a1a" })
       vim.api.nvim_set_hl(0, "CmdLine", { bg = "#1a1a1a" })
-      -- vim.api.nvim_set_hl(0, "MsgArea", { bg = "#1a1aa" })
+      vim.api.nvim_set_hl(0, "MsgArea", { bg = "#1a1a1a" })
     end,
   },
   {
@@ -152,6 +153,7 @@ return {
           comments = true,
           operators = false,
           folds = true,
+          keywords = true
         },
         strikethrough = true,
         invert_selection = false,
@@ -209,8 +211,8 @@ return {
           return {
             Comment = { fg=colors.teal, italic = true },
             ["@property"] = { fg = colors.blue},
-            keyword = {fg = colors.orange},
-            string = {fg = colors.green}
+            keyword = {fg = colors.orange, italic = true },
+            ["@string"] = {fg = colors.green, italic = true },
           }
         end,
 
@@ -316,8 +318,11 @@ return {
         },
 
         style = {
-          Constant = { fg = "#FFFFFF", bold = true }
-        }
+          Constant = { fg = "#FFFFFF", bold = true },
+          Comment = { italic = true },
+          keyword = { italic = true },
+          ["@string"] = { italic = true },
+        },
       })
 
       vim.cmd("colorscheme citruszest")

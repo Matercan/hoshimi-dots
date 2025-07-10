@@ -28,7 +28,8 @@ local plugins = {
   require("plugins.gitsigns"),
   require("plugins.essentials"),
   require("plugins.git"),
-  require("plugins.trouble")
+  require("plugins.trouble"),
+  require("plugins.testing")
 }
 
 require("lazy").setup(plugins)

@@ -26,6 +26,20 @@ local on_attach = function(client, bufnr)
   buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap(bufnr, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
 
+  -- Enable LSP folding
+  if client and client.server_capabilities and client.server_capabilities.foldingRange then
+    print("LSP client supports foldingRange. Applying LSP folding.")
+    vim.opt_local.foldmethod = "expr"
+    vim.opt_local.foldexpr = "v:lua.vim.lsp.buf.folding_range()"
+    vim.opt_local.foldenable = true -- Explicitly set to true here
+    vim.opt_local.foldlevel = 99 -- Or your preferred level
+  else
+    print("LSP client does NOT support foldingRange or client is nil.")
+    if not client then print("Client is nil.") end
+    if client and not client.server_capabilities then print("Client server_capabilities is nil.") end
+    if client and client.server_capabilities and not client.server_capabilities.foldingRange then print("Client does not have foldingRange capability.") end
+  end
+
   -- You may want to set up specific formatting on save for certain clients
   -- if client.name == "omnisharp" then
   --   vim.api.nvim_create_autocmd("BufWritePre", {

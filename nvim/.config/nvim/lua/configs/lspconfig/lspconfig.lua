@@ -51,26 +51,19 @@ lspconfig.ts_ls.setup({
 lspconfig.cssls.setup({
    on_attach = nvlsp.on_attach,
   capabilities = nvlsp.capabilities
-
 })
 lspconfig.postgres_lsp.setup({
    on_attach = nvlsp.on_attach,
   capabilities = nvlsp.capabilities
 })
-lspconfig.ast_grep.setup({
-   on_attach = nvlsp.on_attach,
-  capabilities = nvlsp.capabilities
-
-})
-lspconfig.csharp_ls.setup({
-   on_attach = nvlsp.on_attach,
-  capabilities = nvlsp.capabilities
-})
 lspconfig.omnisharp.setup({
   cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(pid) },
+
   on_attach = nvlsp.on_attach,
   on_init = nvlsp.on_init,
   capabilities = nvlsp.capabilities,
+
+  root_dir = lspconfig.util.root_pattern("*.sln", ".git", "*.csproj", "omnisharp.json"),
 })
 
 vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})

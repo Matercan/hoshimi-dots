@@ -25,10 +25,8 @@ return {
           "jsonls",
           "ts_ls",
           "cssls",
-          "ast_grep",
           "postgres_lsp",
-          "csharp_ls",
-          "omnisharp"
+          "omnisharp",
         }
       })
     end

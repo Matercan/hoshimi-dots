@@ -4,5 +4,8 @@
         "virtual_view",
         "window_view",
         "formats"
+    ],
+    "diagnostics.disable": [
+        "undefined-field"
     ]
 }

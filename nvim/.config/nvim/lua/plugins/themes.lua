@@ -25,7 +25,7 @@ return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    priority = 1000, -- priority is which plugins load first, just in case one fails 
+    priority = 999, -- priority is which plugins load first, just in case one fails
     config = function()
       require("configs.themes.catppuccin")
     end,
@@ -33,14 +33,14 @@ return {
   {
     "rebelot/kanagawa.nvim",
     priority = 998,
-    config = function ()
+    config = function()
       require('configs.themes.kanagawa')
     end
   },
   {
     "ellisonleao/gruvbox.nvim",
     priority = 997,
-    config = function ()
+    config = function()
       require("configs.themes.gruvbox")
     end,
   },
@@ -53,14 +53,14 @@ return {
   {
     "scottmckendry/cyberdream.nvim",
     lazy = false,
-    priority = 1000,
-    config = function ()
+    priority = 999,
+    config = function()
       require("configs.themes.cyberdream")
     end,
   },
   {
     "oxfist/night-owl.nvim",
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       local nightOwl = require("night-owl")
@@ -78,9 +78,9 @@ return {
   {
     "ramojus/mellifluous.nvim",
     lazy = false,
-    priority = 1000,
+    priority = 999,
 
-    config = function ()
+    config = function()
       require("configs.themes.melliflous")
     end
   },
@@ -96,15 +96,15 @@ return {
     "shaunsingh/moonlight.nvim",
     lazy = false,
     priority = 1000,
-    config = function ()
+    config = function()
       vim.cmd("colorscheme moonlight")
     end
   },
   {
     "zootedb0t/citruszest.nvim",
     lazy = false,
-    priority = 1000,
-    config = function ()
+    priority = 999,
+    config = function()
       require("configs.themes.citruszest")
     end
   },
@@ -116,10 +116,9 @@ return {
       vim.g.aurora_bold = 1
     end,
     config = function()
-        vim.cmd.colorscheme "aurora"
-        -- override defaults
-        vim.api.nvim_set_hl(0, '@number', {fg='#e933e3'})
+      vim.cmd.colorscheme "aurora"
+      -- override defaults
+      vim.api.nvim_set_hl(0, '@number', { fg = '#e933e3' })
     end
   }
 }
-

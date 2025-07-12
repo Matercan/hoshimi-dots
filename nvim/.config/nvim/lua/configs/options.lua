@@ -40,6 +40,7 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.foldenable = true
     vim.opt_local.foldmethod = "manual"
     vim.opt_local.foldlevel = 0 -- Start with all folds open (or 0 for all closed)
+    vim.opt_local.shiftwidth = 4
   end,
 })
 
@@ -49,5 +50,6 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.foldenable = true
     vim.opt_local.foldmethod = "manual"
     vim.opt_local.foldlevel = 99
+    vim.opt_local.shiftwidth = 4
   end
 })

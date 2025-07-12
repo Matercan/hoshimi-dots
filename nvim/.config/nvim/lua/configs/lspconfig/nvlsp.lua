@@ -1,67 +1,51 @@
--- Define a default on_attach function
--- This function is called every time an LSP client attaches to a buffer.
--- It's a common place to set up keymaps for LSP functionalities.
+-- ~/.config/nvim/lua/configs/lspconfig/nvlsp.lua
+
+-- Define on_attach function
 local on_attach = function(client, bufnr)
-  -- Enable completion for LSP. Requires nvim-cmp to be set up.
-  -- This might be redundant if nvim-cmp sets it globally via its setup.
-  -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+  -- This function runs when an LSP client attaches to a buffer.
+  -- You can set up keymaps, autocommands, etc., here.
 
-  -- Basic keymaps (you might already have these in init.lua or a separate keymap file)
-  -- It's common to define LSP-specific keymaps here
-  local buf_set_keymap = vim.api.nvim_buf_set_keymap
-  local opts = { noremap = true, silent = true }
-
-  -- Diagnostics keymaps (optional, useful for quick navigation)
-  buf_set_keymap(bufnr, 'n', '[d', '<cmd>vim.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap(bufnr, 'n', ']d', '<cmd>vim.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap(bufnr, 'n', '<leader>vd', '<cmd>vim.diagnostic.open_float()<CR>', opts)
-  buf_set_keymap(bufnr, 'n', '<leader>ql', '<cmd>vim.diagnostic.setloclist()<CR>', opts)
-
-  -- Other LSP keymaps (example, adjust as needed)
-  buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap(bufnr, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
-
-  -- Enable LSP folding
-  if client and client.server_capabilities and client.server_capabilities.foldingRange then
-    print("LSP client supports foldingRange. Applying LSP folding.")
-    vim.opt_local.foldmethod = "expr"
-    vim.opt_local.foldexpr = "v:lua.vim.lsp.buf.folding_range()"
-    vim.opt_local.foldenable = true -- Explicitly set to true here
-    vim.opt_local.foldlevel = 99 -- Or your preferred level
-  else
-    print("LSP client does NOT support foldingRange or client is nil.")
-    if not client then print("Client is nil.") end
-    if client and not client.server_capabilities then print("Client server_capabilities is nil.") end
-    if client and client.server_capabilities and not client.server_capabilities.foldingRange then print("Client does not have foldingRange capability.") end
+  -- Example: enable formatting on save if the client supports it
+  if client.supports_method("textDocument/formatting") then
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = vim.api.nvim_create_augroup("LspFormatting.buffer" .. bufnr, { clear = true }),
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.format({ bufnr = bufnr })
+      end,
+    })
   end
 
-  -- You may want to set up specific formatting on save for certain clients
-  -- if client.name == "omnisharp" then
-  --   vim.api.nvim_create_autocmd("BufWritePre", {
-  --     buffer = bufnr,
-  --     callback = function()
-  --       vim.lsp.buf.format({ bufnr = bufnr })
-  --     end,
-  --   })
-  -- end
+  -- Example: Set up default keymaps for LSP actions
+  -- This is a common pattern for convenience
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local opts = { noremap = true, silent = true }
+
+  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', opts)
 end
 
--- Define a default on_init function (often not strictly needed unless for specific server initialization)
--- This function is called once when the LSP client is initializing.
-local on_init = function(client, initialize_result)
-  -- You can log or inspect initialize_result here if needed
+-- Define on_init function
+local on_init = function(client)
+  -- This function runs once when the LSP client is initialized.
+  -- You can modify the client's capabilities before it's attached to any buffer.
+  -- For example, disable specific capabilities if needed.
+  -- client.server_capabilities.foldingRange = false -- Example to disable foldingRange
 end
 
--- Define default capabilities (often handled by nvim-cmp for snippet support)
--- If you use nvim-cmp, you'd typically get capabilities from there.
+
+local cmp_nvim_lsp_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
--- If you're using nvim-cmp, you'd also include:
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+if cmp_nvim_lsp_ok then
+  capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+end
 
 return {
   on_attach = on_attach,

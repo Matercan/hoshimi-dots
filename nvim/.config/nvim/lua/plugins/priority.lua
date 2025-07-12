@@ -9,8 +9,5 @@ return {
         folds = {enabled = true, }
       }
     end,
-  },
-  {
-    "elkowar/yuck.vim"
   }
 }

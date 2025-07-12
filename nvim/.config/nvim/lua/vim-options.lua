@@ -11,3 +11,7 @@ vim.opt.number = true
 vim.g.mapleader = ' ' -- You can use ' ' for space or ',' for comma as your leader key
 vim.opt.clipboard = "unnamedplus"
 vim.opt.foldlevelstart = 99
+vim.opt.foldmethod = "expr"
+vim.opt.splitright = true
+vim.opt.shell = "/usr/bin/fish" -- Ensure this points to your fish executable
+vim.opt.shellcmdflag = "-c"     -- This is the default for most shells like fish, bash, zsh

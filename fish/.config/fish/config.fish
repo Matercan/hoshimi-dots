@@ -1,5 +1,6 @@
 if status is-interactive
     starship init fish | source
+    colorscript -e random
     set fish_greeting
 end
 

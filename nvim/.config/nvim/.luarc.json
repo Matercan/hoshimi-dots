@@ -3,9 +3,12 @@
         "vim",
         "virtual_view",
         "window_view",
-        "formats"
+        "formats",
+        "Snacks"
     ],
     "diagnostics.disable": [
-        "undefined-field"
+        "undefined-field",
+        "undefined-doc-name",
+        "assign-type-mismatch"
     ]
 }

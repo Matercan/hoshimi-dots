@@ -1,6 +1,6 @@
--- Keymaps 
+-- Keymaps
 
-vim.keymap.set('n', '<C-n>', function() vim.cmd('Neotree filesystem reveal left') end, {desc = "Toggle Neotree"})
+vim.keymap.set('n', '<C-n>', function() vim.cmd('Neotree filesystem reveal left') end, { desc = "Toggle Neotree" })
 vim.keymap.set('n', '<leader>s', '<Esc> :w <CR>', {})
 vim.keymap.set('n', '<leader>e', '<Esc> :q <CR>', {})
 vim.keymap.set('n', '<C-x>', '<Esc> :wqa <CR>', {})
@@ -25,8 +25,8 @@ end, { desc = 'Find and Replace (File)' })
 
 -- Property colorings
 
-vim.api.nvim_set_hl(0, "CmpItemKindClass", { fg = "#F8BD96" }) -- Example Catppuccin color for Classes (orange-ish)
-vim.api.nvim_set_hl(0, "CmpItemKindMethod", { fg = "#A6DA95" }) -- Example Catppuccin color for Methods (green-ish)
+vim.api.nvim_set_hl(0, "CmpItemKindClass", { fg = "#F8BD96" })    -- Example Catppuccin color for Classes (orange-ish)
+vim.api.nvim_set_hl(0, "CmpItemKindMethod", { fg = "#A6DA95" })   -- Example Catppuccin color for Methods (green-ish)
 vim.api.nvim_set_hl(0, "CmpItemKindFunction", { fg = "#7DC4E4" }) -- Example Catppuccin color for Functions (blue-ish)
 vim.api.nvim_set_hl(0, "CmpItemKindVariable", { fg = "#EED49F" }) -- Example Catppuccin color for Variables (yellow-ish)
 vim.api.nvim_set_hl(0, "CmpItemKindProperty", { fg = "#F28C8C" }) -- Example Catppuccin color for Properties (red-ish)
@@ -46,7 +46,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "py", -- Apply these settings only for Py files
-  callback = function ()
+  callback = function()
     vim.opt_local.foldenable = true
     vim.opt_local.foldmethod = "manual"
     vim.opt_local.foldlevel = 99

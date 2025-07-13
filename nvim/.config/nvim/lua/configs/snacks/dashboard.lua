@@ -1,7 +1,7 @@
 -- ~/.config/nvim/lua/configs/snacks/dashboard.lua
 
 local M = {}
-local devicons = nil -- Declare devicons as nil initially
+local devicons = nil               -- Declare devicons as nil initially
 local devicons_initialized = false -- New flag to track if setup() has run
 
 -- This function will determine the file/directory icon.
@@ -15,11 +15,11 @@ function M.icon(filename, filetype)
       -- This assumes you don't have a separate nvim-web-devicons setup function
       -- being called in your main plugins file that ensures it's always initialized.
       if type(devicons.setup) == 'function' and not devicons._loaded then -- _loaded is an internal flag
-          devicons.setup() -- Call setup with default options if needed
-          devicons_initialized = true
+        devicons.setup()                                                  -- Call setup with default options if needed
+        devicons_initialized = true
       end
     else
-      devicons = false -- Indicate that loading failed
+      devicons = false            -- Indicate that loading failed
       devicons_initialized = true -- Mark as attempted
     end
   end
@@ -52,9 +52,9 @@ end
 ---@field formats table<string, snacks.dashboard.Text|fun(item:snacks.dashboard.Item, ctx:snacks.dashboard.Format.ctx):snacks.dashboard.Text>
 return {
   width = 60,
-  row = nil, -- dashboard position. nil for center
-  col = nil, -- dashboard position. nil for center
-  pane_gap = 4, -- empty columns between vertical panes
+  row = nil,                                                                   -- dashboard position. nil for center
+  col = nil,                                                                   -- dashboard position. nil for center
+  pane_gap = 4,                                                                -- empty columns between vertical panes
   autokeys = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", -- autokey sequence
   -- These settings are used by some built-in sections
   preset = {
@@ -75,15 +75,14 @@ return {
       { icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
       { icon = " ", key = "q", desc = "Quit", action = ":qa" },
     },
-    -- ASCII art header moved to the 'sections' table directly
     header = [[
 
 
- /   |   \|__| ______   ______________  __ ____________/  |_ 
+ /   |   \|__| ______   ______________  __ ____________/  |_
 /    ~    \  | \____ \_/ __ \_  __ \  \/ // __ \_  __ \   __\
-\    Y    /  | |  |_> >  ___/|  | \/\   /\  ___/|  | \/|  |  
- \___|_  /|__| |   __/ \___  >__|    \_/  \___  >__|   |__|  
-       \/      |__|        \/                 \/             
+\    Y    /  | |  |_> >  ___/|  | \/\   /\  ___/|  | \/|  |
+ \___|_  /|__| |   __/ \___  >__|    \_/  \___  >__|   |__|
+       \/      |__|        \/                 \/
 
 
  ]],
@@ -115,12 +114,13 @@ return {
   },
   sections = {
     { section = "header", },
-    { section = "keys", gap = 1, padding = 1 }, -- Keep your keys from preset
-    { 
+    { section = "keys",   gap = 1, padding = 0 }, -- Keep your keys from preset
+    {
       pane = 2,
       section = "terminal",
-      cmd = "chafa ~/.config/nvim/lua/configs/snacks/header.jpg --format symbols --symbols vhalf --size 60x17 --stretch; sleep .1",
-      height = 17,
+      cmd =
+      "colorscript -e square",
+      height = 5,
       padding = 1,
     },
     { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },

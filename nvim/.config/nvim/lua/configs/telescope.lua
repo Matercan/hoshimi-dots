@@ -1,3 +1,4 @@
+---@diagnostic disable-next-line: different-requires
 local telescope = require("telescope")
 local builtin = require("telescope.builtin")
 

@@ -23,6 +23,22 @@ vim.keymap.set('n', '<leader>rh', function()
   end)
 end, { desc = 'Find and Replace (File)' })
 
+-- route things to notify
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+  group = vim.api.nvim_create_augroup("SnacksSaveNotify", { clear = true }),
+  callback = function(args)
+    -- Get the filename of the saved buffer
+    local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(args.buf), ":t")
+    -- You can customize the message
+    vim.notify("File '" .. filename .. "' saved!", vim.log.levels.INFO)
+    -- Or if you want to include full path:
+    -- vim.notify("File '" .. args.file .. "' saved!", vim.log.levels.INFO)
+  end,
+  -- You might want to filter by filetype or specific buffers if needed
+  -- pattern = "*", -- Apply to all files
+})
+
 -- Property colorings
 
 vim.api.nvim_set_hl(0, "CmpItemKindClass", { fg = "#F8BD96" })    -- Example Catppuccin color for Classes (orange-ish)

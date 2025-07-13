@@ -113,8 +113,8 @@ return {
     end,
   },
   sections = {
-    { section = "header", },
-    { section = "keys",   gap = 1, padding = 0 }, -- Keep your keys from preset
+    { section = "header", width = 40 },
+    { section = "keys",   gap = 1,   padding = 0 }, -- Keep your keys from preset
     {
       pane = 2,
       section = "terminal",

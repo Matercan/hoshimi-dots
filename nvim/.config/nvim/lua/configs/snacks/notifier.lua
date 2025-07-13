@@ -1,3 +1,7 @@
+---@class snacks.notifier.Config
+---@field enabled? boolean
+---@field keep? fun(notif: snacks.notifier.Notif): boolean # global keep function
+---@field filter? fun(notif: snacks.notifier.Notif): boolean # filter our unwanted notifications (return false to hide)
 return {
   {
     timeout = 3000, -- default timeout in ms
@@ -17,7 +21,6 @@ return {
       debug = " ",
       trace = " ",
     },
-    ---@diagnostic disable-next-line: unused-local
     keep = function(notif)
       return vim.fn.getcmdpos() > 0
     end,

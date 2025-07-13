@@ -17,20 +17,20 @@ telescope.setup({
     },
     cmdline = {
       -- Adjust telescope picker size and layout
-      picker = {
+      picker   = {
         layout_config = {
           width  = 120,
           height = 25,
         }
       },
-      -- Adjust your mappings 
-      mappings    = {
+      -- Adjust your mappings
+      mappings = {
         complete      = '<Tab>',
         run_selection = '<C-CR>',
         run_input     = '<CR>',
       },
       -- Triggers any shell command using overseer.nvim (`:!`)
-      overseer    = {
+      overseer = {
         enabled = true,
       },
     },

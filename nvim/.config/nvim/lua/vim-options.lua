@@ -15,3 +15,5 @@ vim.opt.foldmethod = "expr"
 vim.opt.splitright = true
 vim.opt.shell = "/usr/bin/fish" -- Ensure this points to your fish executable
 vim.opt.shellcmdflag = "-c"     -- This is the default for most shells like fish, bash, zsh
+vim.opt.termguicolors = true
+vim.opt.encoding = "utf-8"

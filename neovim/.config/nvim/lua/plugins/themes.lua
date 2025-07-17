@@ -16,7 +16,7 @@ return {
           "mellifluous", "miasma",
           "moonlight", "citruszest",
           "aurora", "nightfox",
-          "onedark", "papercolor-theme" -- Doesn't work, ignore it
+          "onedark", "papercolor" -- Doesn't work, ignore it
         },
 
         livePreview = true,
@@ -161,10 +161,9 @@ return {
   {
     "NLKNguyen/papercolor-theme",
     lazy = false,
-    priorty = 999,
+    priority = 999,
     config = function()
-      require("papercolor-theme").setup({})
-      vim.cmd("colorscheme papercolor-theme")
+      vim.cmd("colorscheme") -- The actual colorscheme name is typically 'papercolor'
     end,
-  }
+  },
 }

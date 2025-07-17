@@ -11,8 +11,21 @@ return {
     end
   },
   {
+    'nvim-treesitter/nvim-treesitter',
+    build = ":TSUpdate",
+
+    config = function()
+      require("nvim-treesitter.configs").setup {
+        ensure_installed = { "lua", "python", "json", "javascript", "c_sharp" }, -- Add other languages you need
+        highlight = { enable = true },
+        indent = { enable = true },
+        folds = { enabled = true, }
+      }
+    end,
+  },
+  {
     'Wansmer/treesj',
-    keys = { '<space>m', '<space>j', '<space>p' },
+    keys = { '<space>m', '<space>j', '<space>dp' },
     dependencies = { 'nvim-treesitter/nvim-treesitter' }, -- if you install parsers with `nvim-treesitter`
     config = function()
       require('treesj').setup({

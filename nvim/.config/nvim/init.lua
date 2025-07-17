@@ -24,7 +24,6 @@ local plugins = {
   require("plugins.neotree"),
   require("plugins.lualine"),
   require("plugins.lsp-config"),
-  require("plugins.priority"),
   require("plugins.completions"),
   require("plugins.gitsigns"),
   require("plugins.essentials"),

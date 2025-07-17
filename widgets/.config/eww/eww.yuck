@@ -1,27 +1,25 @@
 ;; ~/.config/eww/eww.yuck
 
-(defvar time
-  (formattime (sys:time) "%H:%M:%S" "Europe/London"))
+(defvar time-visible false)
 
-(defwidget datetime []
-  (box :class "datetime-widget"
+(defpoll time :interval "1s" "date +%H:%M:%S")
+
+(defwidget datetime-widget []
+  (box :class "datetime-widget"  ;; <--- ADDED THIS LINE!
        :orientation "v"
-       :space-evenly false
-    ;; Corrected line: Use EWW_DATE instead of EWW_DATE_FORMAT
-    (label :class "date-label" :text "${eww.day}d {eww.month}M {eww.day}D {eww.year}Y")
-    ;; Corrected line: Use EWW_DATE instead of EWW_DATE_FORMAT
-    (label :class "time-label" :text time)
+       :style "background-color: rgba(0, 0, 0, 0.0);"
+    (label :class "time-label" :text "Current time: ${time}") ;; Optional: give specific labels classes too
   )
 )
 
 (defwindow date-time-wallpaper
-  :monitor 0 ; Adjust to your desired monitor (0 for primary)
+  :monitor 1 ; Adjust to your desired monitor (0 for primary)
   :geometry (geometry :x "1%"
                       :y "1%"
                       :width "200px"
                       :height "100px"
-                      :anchor "top left")
+                      :anchor "top right")
   :stacking "bg" ; This is crucial to place it on the wallpaper layer
   :exclusive false ; Allows other windows to be on top
-  (datetime)
+  (datetime-widget)
 )

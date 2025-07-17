@@ -54,8 +54,8 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = "cs", -- Apply these settings only for C# files
   callback = function()
     vim.opt_local.foldenable = true
-    vim.opt_local.foldmethod = "manual"
-    vim.opt_local.foldlevel = 0 -- Start with all folds open (or 0 for all closed)
+    vim.opt_local.foldmethod = "indent"
+    vim.opt_local.foldlevel = 99 -- Start with all folds open (or 0 for all closed)
     vim.opt_local.shiftwidth = 4
   end,
 })
@@ -64,7 +64,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = "py", -- Apply these settings only for Py files
   callback = function()
     vim.opt_local.foldenable = true
-    vim.opt_local.foldmethod = "manual"
+    vim.opt_local.foldmethod = "indent"
     vim.opt_local.foldlevel = 99
     vim.opt_local.shiftwidth = 4
   end

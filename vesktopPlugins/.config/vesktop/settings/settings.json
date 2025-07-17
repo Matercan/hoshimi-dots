@@ -446,14 +446,15 @@
                         "id": "41bwcnj68u8",
                         "name": "irl",
                         "color": 10070709,
-                        "collapsed": false,
+                        "collapsed": true,
                         "channels": [
                             "1088903579236044802",
                             "1388884298022653952",
                             "1151559811566149674",
                             "1047905477889097759",
                             "1304500264518160426",
-                            "1317929759300259941"
+                            "1317929759300259941",
+                            "1152558799962517596"
                         ]
                     }
                 ],
@@ -603,7 +604,7 @@
             "receivedInput": "ja",
             "receivedOutput": "en",
             "sentInput": "auto",
-            "sentOutput": "ja"
+            "sentOutput": "nl"
         },
         "TypingIndicator": {
             "enabled": false
@@ -705,6 +706,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1752176910718
+        "settingsSyncVersion": 1752606542327
     }
 }

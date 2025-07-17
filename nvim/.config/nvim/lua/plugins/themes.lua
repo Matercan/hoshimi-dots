@@ -15,7 +15,8 @@ return {
           "cyberdream", "night-owl",
           "mellifluous", "miasma",
           "moonlight", "citruszest",
-          "aurora"
+          "aurora", "nightfox",
+          "onedark", "papercolor-theme" -- Doesn't work, ignore it
         },
 
         livePreview = true,
@@ -25,9 +26,11 @@ return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    priority = 999, -- priority is which plugins load first, just in case one fails
+    priority = 999,
     config = function()
       require("configs.themes.catppuccin")
+      -- If 'catppuccin' is in 'themery's loaders, REMOVE this:
+      -- vim.cmd("colorscheme catppuccin-mocha") -- Or your preferred variant
     end,
   },
   {
@@ -35,6 +38,8 @@ return {
     priority = 998,
     config = function()
       require('configs.themes.kanagawa')
+      -- If 'kanagawa' is in 'themery's loaders, REMOVE this:
+      -- vim.cmd("colorscheme kanagawa")
     end
   },
   {
@@ -42,6 +47,8 @@ return {
     priority = 997,
     config = function()
       require("configs.themes.gruvbox")
+      -- If 'gruvbox' is in 'themery's loaders, REMOVE this:
+      -- vim.cmd("colorscheme gruvbox")
     end,
   },
   {
@@ -49,6 +56,10 @@ return {
     lazy = false,
     priority = 999,
     opts = {},
+    config = function()
+      -- If 'tokyonight' is in 'themery's loaders, REMOVE this:
+      -- vim.cmd("colorscheme tokyonight-night") -- Or your preferred variant
+    end,
   },
   {
     "scottmckendry/cyberdream.nvim",
@@ -56,15 +67,16 @@ return {
     priority = 999,
     config = function()
       require("configs.themes.cyberdream")
+      -- If 'cyberdream' is in 'themery's loaders, REMOVE this:
+      -- vim.cmd("colorscheme cyberdream")
     end,
   },
   {
     "oxfist/night-owl.nvim",
-    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
-    priority = 1000, -- make sure to load this before all the other start plugins
+    lazy = false,
+    priority = 1000,
     config = function()
       local nightOwl = require("night-owl")
-
       nightOwl.setup({
         italics = true,
         bold = true,
@@ -72,16 +84,18 @@ return {
         undercurl = true,
         transparent_background = false,
       })
-      vim.cmd.colorscheme("night-owl")
+      -- If 'night-owl' is in 'themery's loaders, REMOVE this:
+      -- vim.cmd.colorscheme("night-owl")
     end,
   },
   {
     "ramojus/mellifluous.nvim",
     lazy = false,
     priority = 999,
-
     config = function()
       require("configs.themes.melliflous")
+      -- If 'mellifluous' is in 'themery's loaders, REMOVE this:
+      -- vim.cmd("colorscheme mellifluous")
     end
   },
   {
@@ -89,6 +103,7 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
+      -- If 'miasma' is in 'themery's loaders, REMOVE this:
       vim.cmd("colorscheme miasma")
     end,
   },
@@ -97,6 +112,7 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
+      -- If 'moonlight' is in 'themery's loaders, REMOVE this:
       vim.cmd("colorscheme moonlight")
     end
   },
@@ -106,6 +122,8 @@ return {
     priority = 999,
     config = function()
       require("configs.themes.citruszest")
+      -- If 'citruszest' is in 'themery's loaders, REMOVE this:
+      -- vim.cmd("colorscheme citruszest")
     end
   },
   {
@@ -116,9 +134,37 @@ return {
       vim.g.aurora_bold = 1
     end,
     config = function()
+      -- If 'aurora' is in 'themery's loaders, REMOVE this:
       vim.cmd.colorscheme "aurora"
-      -- override defaults
       vim.api.nvim_set_hl(0, '@number', { fg = '#e933e3' })
     end
+  },
+  {
+    "EdenEast/nightfox.nvim",
+    lazy = false,
+    priority = 999,
+    config = function()
+      require("configs.themes.nightfox")
+      -- If 'nightfox' is in 'themery's loaders, REMOVE this:
+      -- vim.cmd("colorscheme nightfox")
+    end
+  },
+  {
+    "olimorris/onedarkpro.nvim",
+    lazy = false,
+    priorty = 999,
+    config = function()
+      require("onedarkpro").setup({})
+      vim.cmd("colorscheme onedark_dark")
+    end
+  },
+  {
+    "NLKNguyen/papercolor-theme",
+    lazy = false,
+    priorty = 999,
+    config = function()
+      require("papercolor-theme").setup({})
+      vim.cmd("colorscheme papercolor-theme")
+    end,
   }
 }

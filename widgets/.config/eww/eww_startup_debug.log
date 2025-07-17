@@ -1,0 +1,19 @@
+error: unexpected argument '--log-level' found
+
+Usage: eww daemon [OPTIONS]
+
+For more information, try '--help'.
+ 2025-07-13T20:47:19.075Z WARN  eww > Failed to connect to daemon: Failed to connect to daemon
+ 2025-07-13T20:47:19.075Z INFO  eww > Initializing eww server. (/run/user/1000/eww-server_1ccb9f894dc4f557)
+Run `eww logs` to see any errors while editing your configuration.
+ 2025-07-13T20:47:19.075Z INFO  eww::server > Loading paths: config-dir: /home/Matercan/mater_dotfiles/widgets/.config/eww, ipc-socket: /run/user/1000/eww-server_1ccb9f894dc4f557, log-file: /home/Matercan/.cache/eww/eww_1ccb9f894dc4f557.log
+
+┏━━━━━━━━━━━━━━━━━━━━━━━┓
+┃Initializing eww daemon┃
+┗━━━━━━━━━━━━━━━━━━━━━━━┛
+    
+ 2025-07-13T20:47:19.231Z INFO  eww::ipc_server > IPC server initialized
+ 2025-07-13T20:47:19.231Z INFO  eww::app        > Opening window date-time-wallpaper as 'date-time-wallpaper'
+ 2025-07-13T20:47:56.640Z INFO  eww::app        > Received kill command, stopping server!
+ 2025-07-13T20:47:56.640Z INFO  eww::app        > Closing gtk window date-time-wallpaper
+ 2025-07-13T20:47:56.640Z INFO  eww::server     > main application thread finished

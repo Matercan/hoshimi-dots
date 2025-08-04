@@ -5,7 +5,7 @@
     "themeLinks": [],
     "eagerPatches": false,
     "enabledThemes": [
-        "DiscordPlus.theme.css"
+        "NotAnotherAnimeTheme.theme.css"
     ],
     "enableReactDevtools": false,
     "frameless": false,
@@ -706,6 +706,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1752606542327
+        "settingsSyncVersion": 1754312232386
     }
 }

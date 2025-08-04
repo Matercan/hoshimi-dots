@@ -7,12 +7,12 @@ lspconfig.lua_ls.setup({
   capabilities = nvlsp.capabilities
 })
 lspconfig.jsonls.setup({
-   on_attach = nvlsp.on_attach,
+  on_attach = nvlsp.on_attach,
   capabilities = nvlsp.capabilities
 
 })
 lspconfig.pylsp.setup({
-   on_attach = nvlsp.on_attach,
+  on_attach = nvlsp.on_attach,
   capabilities = nvlsp.capabilities,
 
   settings = {
@@ -44,16 +44,16 @@ lspconfig.pylsp.setup({
   },
 })
 lspconfig.ts_ls.setup({
-   on_attach = nvlsp.on_attach,
+  on_attach = nvlsp.on_attach,
   capabilities = nvlsp.capabilities
 
 })
 lspconfig.cssls.setup({
-   on_attach = nvlsp.on_attach,
+  on_attach = nvlsp.on_attach,
   capabilities = nvlsp.capabilities
 })
 lspconfig.postgres_lsp.setup({
-   on_attach = nvlsp.on_attach,
+  on_attach = nvlsp.on_attach,
   capabilities = nvlsp.capabilities
 })
 lspconfig.omnisharp.setup({
@@ -65,10 +65,15 @@ lspconfig.omnisharp.setup({
 
   root_dir = lspconfig.util.root_pattern("*.sln", ".git", "*.csproj", "omnisharp.json"),
 })
+lspconfig.clangd.setup({
+  on_attach = nvlsp.on_attach,
+  capabilities = nvlsp.capabilities
+})
+
 
 vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
-vim.keymap.set({'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, {})
+vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, {})
 
 local BORDER_STYLE = "rounded"
 

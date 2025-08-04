@@ -1,0 +1,37 @@
+Primary Colors:
+#fffefc
+#fefed8
+#fffaf4
+#183545
+#294455
+#0b1e2d
+
+Secondary Colors:
+#1b3654
+#f5f7ec
+#afc3db
+#0d2644
+#d8e5f6
+#f8f9cd
+
+Generated Palettes:
+Palette 1:
+#f7daa1
+#c19efa
+#9efaa6
+#fa9eb1
+#9eccfa
+
+Palette 2:
+#f3f396
+#dea1f7
+#9efac4
+#faaa9e
+#9eadfa
+
+Palette 3:
+#f7d0a1
+#b59efa
+#a2fa9e
+#fa9ebc
+#9ed7fa

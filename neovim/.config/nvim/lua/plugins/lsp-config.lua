@@ -27,6 +27,7 @@ return {
           "cssls",
           "postgres_lsp",
           "omnisharp",
+          "clangd",
         }
       })
     end

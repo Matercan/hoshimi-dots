@@ -16,7 +16,8 @@ return {
           "mellifluous", "miasma",
           "moonlight", "citruszest",
           "aurora", "nightfox",
-          "onedark", "papercolor" -- Doesn't work, ignore it
+          "onedark", "papercolor", -- Doesn't work, ignore it
+          "github-nvim-theme"
         },
 
         livePreview = true,
@@ -166,4 +167,14 @@ return {
       vim.cmd("colorscheme") -- The actual colorscheme name is typically 'papercolor'
     end,
   },
+  {
+    'projekt0n/github-nvim-theme',
+    config = function()
+      require('github-theme').setup({
+
+      })
+
+      vim.cmd('colorscheme github_dark')
+    end
+  }
 }

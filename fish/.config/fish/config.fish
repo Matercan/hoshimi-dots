@@ -1,7 +1,8 @@
 if status is-interactive
     starship init fish | source
     colorscript -e random
-    set fish_greeting
+    ~/.config/hypr/scripts/script.sh
+    set fish_greeting "おかえりなさい、マスター"
 end
 
 if test -f ~/.ssh/agent_env

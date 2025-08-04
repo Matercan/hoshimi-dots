@@ -1,6 +1,6 @@
+theme = wallpaper
 background-opacity = 0.8
-theme = catppuccin-macchiato 
-# Kanagawa will change the theme automatically when using it for neovim
+background-blur = 10
 shell-integration = fish
 font-family = "Fira Code iScript"
 font-size = 9

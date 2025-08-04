@@ -16,7 +16,12 @@ return {
           "mellifluous", "miasma",
           "moonlight", "citruszest",
           "aurora", "nightfox",
-          "onedark", "papercolor-theme" -- Doesn't work, ignore it
+<<<<<<< HEAD
+          "onedark", "papercolor", -- Doesn't work, ignore it
+          "github-nvim-theme"
+=======
+          "onedark", "papercolor" -- Doesn't work, ignore it
+>>>>>>> 5632dc3 (nvim has become neovim)
         },
 
         livePreview = true,
@@ -161,10 +166,22 @@ return {
   {
     "NLKNguyen/papercolor-theme",
     lazy = false,
-    priorty = 999,
+    priority = 999,
     config = function()
-      require("papercolor-theme").setup({})
-      vim.cmd("colorscheme papercolor-theme")
+      vim.cmd("colorscheme") -- The actual colorscheme name is typically 'papercolor'
     end,
+  },
+<<<<<<< HEAD
+  {
+    'projekt0n/github-nvim-theme',
+    config = function()
+      require('github-theme').setup({
+
+      })
+
+      vim.cmd('colorscheme github_dark')
+    end
   }
+=======
+>>>>>>> 5632dc3 (nvim has become neovim)
 }

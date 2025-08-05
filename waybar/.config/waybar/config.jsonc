@@ -8,7 +8,8 @@
     "tray",
     "custom/lock",
     "custom/reboot",
-    "custom/power"
+    "custom/power",
+    "custom/home"
   ],
   "modules-center": [
     "wlr/taskbar"
@@ -28,25 +29,45 @@
     "disable-scroll": false,
     "all-outputs": true,
     "format": "{icon}",
-    "on-click": "activate"
+    "on-click": "activate",
+    "persistent-workspaces": {
+      "*": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "format-icons": {
+      "1": "󰣇",
+      "2": "",
+      "3": "󰙯",
+      "4": "󰈹"
+    }
   },
   "custom/lock": {
     "format": "<span color='#00FFFF'>  </span>",
     "on-click": "hyprlock",
     "tooltip": true,
-    "tooltip-format": "锁屏"
+    "tooltip-format": "Lock?"
   },
   "custom/reboot": {
     "format": "<span color='#FFD700'>  </span>",
     "on-click": "systemctl reboot",
     "tooltip": true,
-    "tooltip-format": "重启"
+    "tooltip-format": "Reboot?"
   },
   "custom/power": {
     "format": "<span color='#FF4040'>  </span>",
     "on-click": "systemctl poweroff",
     "tooltip": true,
-    "tooltip-format": "关机"
+    "tooltip-format": "Power off?"
+  },
+  "custom/home": {
+    "format": "<span color='#FFFFFF'> </span>",
+    "on-click": "wofi --show drun",
+    "tooltip": true,
+    "tooltip-format": "Choose apps?"
   },
   "network": {
     "format-wifi": "<span color='#00FFFF'> 󰤨 </span>{essid} ",

@@ -1,3 +1,11 @@
 allow_images=true
 location=0
 key_expand=Tab
+width=25%
+height=40%
+x=125
+image_size=15
+columns=2
+prompt=Enter an app's name
+sort_order=alphabetical
+matching=fuzzy

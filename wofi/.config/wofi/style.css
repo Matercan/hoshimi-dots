@@ -60,7 +60,7 @@
 window {
   margin: 0px;
   padding: 10px;
-  border: 2px solid @mantle;
+  border: 2px solid @lavander;
   border-radius: 8px;
   background-color: @base;
 }
@@ -101,7 +101,7 @@ window {
 #input {
   margin: 5px 20px;
   padding: 10px;
-  border: 2px solid @mantle;
+  border: 2px solid @m;
   border-radius: 0.1em;
   color: @text;
   background-color: transparent;
@@ -125,19 +125,19 @@ window {
 }
 
 #entry {
-  margin: 0px;
-  border: 0px solid @mantle;
+  margin: 2px;
+  border: none;
   background-color: transparent;
 }
 
 #entry arrow {
-  border: none;
+  border: 2px solid @lavander;
   color: @mantle;
 }
 
 /* Selected Entry */
 #entry:selected {
-  border: 0.11em solid @lavender;
+  border: 2px solid @lavender;
   background-color: @transparent;
 }
 

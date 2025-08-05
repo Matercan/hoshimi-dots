@@ -1,5 +1,0 @@
-error: unexpected argument '--log-level' found
-
-Usage: eww daemon [OPTIONS]
-
-For more information, try '--help'.

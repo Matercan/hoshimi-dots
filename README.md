@@ -22,9 +22,10 @@ To pull back into the hyprland_dots folder, run ``./pull.sh``
 
 | Using Wallpaper 1  | Using Wallpaper 2 |
 | --- | --- |
-| <img width="1921" height="1080" alt="image" src="https://github.com/user-attachments/assets/64a0a824-d7c3-40b9-9153-a14f2d50b067" /> | | <img width="1929" height="1080" alt="image" src="https://github.com/user-attachments/assets/e567273e-1506-4fae-9fab-8e05af3c3d45" /> |
+| <img width="1921" height="1080" alt="image" src="https://github.com/user-attachments/assets/64a0a824-d7c3-40b9-9153-a14f2d50b067" /> | <img width="1929" height="1080" alt="image" src="https://github.com/user-attachments/assets/e567273e-1506-4fae-9fab-8e05af3c3d45" /> |
 
 ## Inspiration
 
 https://github.com/woioeow/hyprland-dotfiles.git
 https://github.com/typecraft-dev/dotfiles.git
+

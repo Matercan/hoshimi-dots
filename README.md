@@ -3,7 +3,7 @@ A very tame an basic configuration for the window tiling manager hyprland.
 Features include:
 - A full desktop environment
 - Using something me, myself, and I made - not you (make your own dotfiles)
-- A really small configuration
+- A really small [configuration](#showcase)
 - A really small [install script](#installation)
 - No fancy colorscheme generation (yet)
 
@@ -28,4 +28,5 @@ To pull back into the hyprland_dots folder, run ``./pull.sh``
 
 https://github.com/woioeow/hyprland-dotfiles.git
 https://github.com/typecraft-dev/dotfiles.git
+
 

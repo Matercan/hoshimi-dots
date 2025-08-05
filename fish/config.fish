@@ -16,6 +16,6 @@ end
 zoxide init --cmd cd fish | source
 alias ls="eza --icons"
 
-fish_add_path /usr/local/bin/ /usr/bin/
+fish_add_path /usr/bin/
 set -gx SUDO_EDITOR nvim
 set -gx EDITOR nvim

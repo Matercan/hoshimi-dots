@@ -2,7 +2,7 @@
   font-family: "CaskaydiaCove Nerd Font", "Font Awesome 6 Free", "Font Awesome 6 Free Solid";
   font-weight: bold;
   font-size: 15px;
-  color: #dcdfe1;
+  color: #ebc2a8;
 }
 
 #waybar {
@@ -86,19 +86,19 @@
 #custom-reboot:hover,
 #custom-power:hover,
 #taskbar #window:hover {
-  background-color: rgba(70, 75, 90, 0.9);
+  background-color: #221155;
 }
 
 #workspaces button:hover {
-  background-color: rgba(97, 175, 239, 0.2);
+  background-color: #221155;
   padding: 2px 8px;
   margin: 0 2px;
   border-radius: 10px;
 }
 
 #workspaces button.active {
-  background-color: #61afef;
-  color: #ffffff;
+  background-color: #3d0c11;
+  color: #ebc2a8;
   padding: 2px 8px;
   margin: 0 2px;
   border-radius: 10px;
@@ -107,7 +107,7 @@
 #workspaces button {
   background: transparent;
   border: none;
-  color: #888888;
+  color: #ebc2a8;
   padding: 2px 8px;
   margin: 0 2px;
   font-weight: bold;
@@ -129,23 +129,24 @@
 }
 
 #taskbar button {
+  background: transparent;
   border: none;
-  color: #888888;
+  color: #ebc2a8;
   padding: 2px 8px;
   margin: 2px;
   font-weight: bold;
 }
 
 #taskbar button.active {
-  background-color: rgba(70, 75, 150, 0.9);
-  color: rgba(97, 175, 239, 0.2);
+  background-color: #3d0c11;
+  color: #ebc2a8;
   padding: 2px 8px;
   margin: 2px;
   border-radius: 10px;
 }
 
 #taskbar button:hover {
-  background-color: rgba(97, 175, 239, 0.2);
+  background-color: #221155;
   padding: 2px 8px;
   margin: 2px;
   border-radius: 10px;

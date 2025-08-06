@@ -1,6 +1,7 @@
 if status is-interactive
     starship init fish | source
-    colorscript -e random
+    fastfetch
+    echo ""
     set fish_greeting "おかえりなさい、マスター"
 end
 

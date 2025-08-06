@@ -14,14 +14,17 @@
 #workspaces,
 #window,
 #tray {
-  background-color: rgba(11, 30, 45, 0.9);
-  border-color: rgba(216, 216, 254, 1);
+  background-color: rgba(15, 27, 53, 0.9);
   padding: 4px 6px;
+  /* 保持内部间距 */
   margin-top: 6px;
+  /* 外部间距增加 */
   margin-left: 6px;
+  /* 外部间距增加 */
   margin-right: 6px;
+  /* 外部间距增加 */
   border-radius: 10px;
-  border-width: 2px;
+  border-width: 0px;
 }
 
 #clock,
@@ -35,6 +38,7 @@
   border-width: 2px;
 }
 
+#network,
 #custom-lock {
   background-color: rgba(11, 30, 45, 0.9);
   border-color: rgba(216, 216, 254, 1);
@@ -53,13 +57,11 @@
 #backlight,
 #custom-temperature,
 #memory,
-#network,
 #cpu {
-  background-color: rgba(11, 30, 45, 0.9);
-  border-color: rgba(216, 216, 254, 1);
+  background-color: rgba(15, 27, 53, 0.9);
   margin-top: 6px;
   padding: 4px 2px;
-  border-width: 2px;
+  border-width: 0px;
 }
 
 #custpm-temperature.critical,
@@ -86,16 +88,16 @@
 
 #workspaces button:hover {
   background-color: rgba(97, 175, 239, 0.2);
-  padding: 0px 8px;
-  margin: 2px;
+  padding: 2px 8px;
+  margin: 0 2px;
   border-radius: 10px;
 }
 
 #workspaces button.active {
   background-color: #61afef;
   color: #ffffff;
-  padding: 0px 8px;
-  margin: 2px;
+  padding: 2px 8px;
+  margin: 0 2px;
   border-radius: 10px;
 }
 
@@ -103,8 +105,8 @@
   background: transparent;
   border: none;
   color: #888888;
-  padding: 0px 8px;
-  margin: 2px;
+  padding: 2px 8px;
+  margin: 0 2px;
   font-weight: bold;
 }
 
@@ -114,35 +116,11 @@
 }
 
 #taskbar {
-  background-color: rgba(11, 30, 45, 0.9);
-  border-color: rgba(216, 216, 254, 1);
+  background-color: rgba(15, 27, 53, 0.9);
   padding: 4px 6px;
   margin-top: 6px;
   margin-left: 6px;
   margin-right: 6px;
   border-radius: 10px;
-  border-width: 2px;
-}
-
-#taskbar button {
-  border: none;
-  color: #888888;
-  padding: 2px 8px;
-  margin: 2px;
-  font-weight: bold;
-}
-
-#taskbar button.active {
-  background-color: rgba(70, 75, 150, 0.9);
-  color: rgba(97, 175, 239, 0.2);
-  padding: 2px 8px;
-  margin: 2px;
-  border-radius: 10px;
-}
-
-#taskbar button:hover {
-  background-color: rgba(97, 175, 239, 0.2);
-  padding: 2px 8px;
-  margin: 2px;
-  border-radius: 10px;
+  border-width: 0px;
 }

@@ -133,8 +133,8 @@
 }
 
 #taskbar button.active {
-  background-color: #61afef;
-  color: #ffffff;
+  background-color: rgba(70, 75, 150, 0.9);
+  color: rgba(97, 175, 239, 0.2);
   padding: 2px 8px;
   margin: 2px;
   border-radius: 10px;

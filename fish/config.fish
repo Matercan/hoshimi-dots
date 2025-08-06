@@ -1,7 +1,7 @@
 if status is-interactive
     starship init fish | source
     colorscript -e random
-    ~/.config/hypr/scripts/script.sh
+    zoxide init --cmd cd fish | source
     set fish_greeting "おかえりなさい、マスター"
 end
 
@@ -13,7 +13,6 @@ function sacman
   sudo pacman $argv
 end
 
-zoxide init --cmd cd fish | source
 alias ls="eza --icons"
 
 fish_add_path /usr/bin/

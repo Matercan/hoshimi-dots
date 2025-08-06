@@ -71,13 +71,6 @@ done
 
 cp starship/starship.toml ~/.config/
 
-read -p "Remove special login? (y/n) " choice
-case "$choice" in 
-  y|Y) rm ~/.config/hypr/scripts/script.sh; echo "Removed.";;
-  n|N) echo "Ok weeb"; echo "Password: 大好きなのよ";;
-  * ) ;;
-esac
-
 hyprctl reload > /dev/null
 swww img ~/.config/hypr/pictures/wallpaper.png &
 echo "Reloaded."

@@ -5,7 +5,7 @@ DOTFILES_SOURCE="$(dirname "$(readlink -f "$0")")"
 # Use the correct XDG variable, defaulting to ~/.config
 USER_CONFIGS_DIRECTORY="${XDG_CONFIG_HOME:-$HOME/.config}"
 # Correct the array syntax by removing the commas and fixing vesktop
-DOTFILES=("fastfetch" "fish" "ghostty" "hypr" "gtk-4.0" "vesktop/themes" "vesktop/settings" "wofi" "waybar" "eww")
+DOTFILES=("fastfetch" "fish" "ghostty" "hypr" "gtk-4.0" "vesktop/themes" "vesktop/settings" "wofi" "waybar" "eww" "dunst")
 
 echo "This script will install all of the files into their respective config folders."
 echo "If you have any configurations you would like to keep, it is advised to back them up."

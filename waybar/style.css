@@ -14,23 +14,21 @@
 #workspaces,
 #window,
 #tray {
-  background-color: rgba(15, 27, 53, 0.9);
+  background-color: #100505;
   padding: 4px 6px;
-  /* 保持内部间距 */
   margin-top: 6px;
-  /* 外部间距增加 */
   margin-left: 6px;
-  /* 外部间距增加 */
   margin-right: 6px;
-  /* 外部间距增加 */
   border-radius: 10px;
-  border-width: 0px;
+  border: 2px solid #fce9ca;
 }
 
 #clock,
 #custom-home {
-  background-color: rgba(11, 30, 45, 0.9);
-  border-color: rgba(216, 216, 254, 1);
+  background-color: #100505;
+  border-top: 2px solid #fce9ca;
+  border-bottom: 2px solid #fce9ca;
+  border-right: 2px solid #fce9ca;
   margin-top: 6px;
   margin-right: 8px;
   padding: 4px 8px;
@@ -40,8 +38,10 @@
 
 #network,
 #custom-lock {
-  background-color: rgba(11, 30, 45, 0.9);
-  border-color: rgba(216, 216, 254, 1);
+  background-color: #100505;
+  border-top: 2px solid #fce9ca;
+  border-bottom: 2px solid #fce9ca;
+  border-left: 2px solid #fce9ca;
   margin-top: 6px;
   margin-left: 6px;
   padding: 4px 2px;
@@ -58,10 +58,13 @@
 #custom-temperature,
 #memory,
 #cpu {
-  background-color: rgba(15, 27, 53, 0.9);
+  background-color: #100505;
+  border-top: 2px solid #fce9ca;
+  /* Applies a 2px border to the top */
+  border-bottom: 2px solid #fce9ca;
+  /* Applies a 2px border to the bottom */
   margin-top: 6px;
   padding: 4px 2px;
-  border-width: 0px;
 }
 
 #custpm-temperature.critical,
@@ -116,11 +119,34 @@
 }
 
 #taskbar {
-  background-color: rgba(15, 27, 53, 0.9);
+  background-color: #100505;
+  border: 2px solid #fce9ca;
   padding: 4px 6px;
   margin-top: 6px;
   margin-left: 6px;
   margin-right: 6px;
   border-radius: 10px;
-  border-width: 0px;
+}
+
+#taskbar button {
+  border: none;
+  color: #888888;
+  padding: 2px 8px;
+  margin: 2px;
+  font-weight: bold;
+}
+
+#taskbar button.active {
+  background-color: rgba(70, 75, 150, 0.9);
+  color: rgba(97, 175, 239, 0.2);
+  padding: 2px 8px;
+  margin: 2px;
+  border-radius: 10px;
+}
+
+#taskbar button:hover {
+  background-color: rgba(97, 175, 239, 0.2);
+  padding: 2px 8px;
+  margin: 2px;
+  border-radius: 10px;
 }

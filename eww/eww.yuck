@@ -1,25 +1,41 @@
 ;; ~/.config/eww/eww.yuck
 
-(defvar time-visible false)
+(deflisten player_title
+  :initial "No song playing"
+  "playerctl metadata --format '{{ artist }} - {{ title }}' || echo 'No song playing'")
 
-(defpoll time :interval "1s" "date +%H:%M:%S")
+(defwidget player_info []
+  (box :spacing "3px"
+       :space-evenly true
+    (label :text "Now Playing:")
+    (label :class "song-title"
+           :text player_title)))
 
-(defwidget datetime-widget []
-  (box :class "datetime-widget"  ;; <--- ADDED THIS LINE!
+(defwidget buttons []
+  (box :spacing "3px"
+       :space-evenly true
+ 
+  (button :onclick "playerctl previous && notify-send 'previous song'" "")
+  (button :onclick "playerctl play-pause && notify-send 'song paused'" "󰐊/󰏤")
+  (button :onclick "playerctl next && notify-send 'playing next song'" "")))
+
+(defwidget container []
+  (box :spacing "3px"
+       :spacing-evenly true
        :orientation "v"
-       :style "background-color: rgba(0, 0, 0, 0.0);"
-    (label :class "time-label" :text "Current time: ${time}") ;; Optional: give specific labels classes too
-  )
-)
+  (player_info)
+  (buttons)
+    ))
 
-(defwindow date-time-wallpaper
-  :monitor 1 ; Adjust to your desired monitor (0 for primary)
-  :geometry (geometry :x "1%"
-                      :y "1%"
-                      :width "200px"
-                      :height "100px"
-                      :anchor "top right")
-  :stacking "bg" ; This is crucial to place it on the wallpaper layer
-  :exclusive false ; Allows other windows to be on top
-  (datetime-widget)
-)
+(defwindow player
+           :monitor 1
+           :geometry (geometry :x "6px"
+                               :y "1px"
+                               :width "20%"
+                               :height "8%"
+                               :anchor "top left")
+           :stacking "bottom"
+           :reserve (struts :distance "40px" :side "top")
+           :windowtype "dock"
+           :wm-ignore false
+     (container))

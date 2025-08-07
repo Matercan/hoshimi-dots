@@ -1,29 +1,55 @@
 /* ~/.config/eww/eww.scss */
 
-.datetime-widget {
-  background-color: rgba(0, 0, 0, 0);
-  /* <--- Explicit RGBA with 0 alpha, and !important */
-  border: none;
-  /* <--- Ensure no border */
-  box-shadow: none;
-  /* <--- Ensure no shadow */
+
+
+/* Corrected and combined styles for labels and containers */
+// Styling the main window
+.player {
+  background-color: #100505;
+  border: 2px solid #fce9ca;
+  border-radius: 8px;
+}
+
+
+.player_info label {
+  font-family: "Fira Code iScript", monospace;
+  font-size: 14px;
+  color: #fce9ca;
+  font-weight: bold;
+}
+
+.player_info,
+.buttons {
+  background-color: #100505;
+  border-radius: 5px;
   padding: 0px;
-  /* <--- Remove all padding temporarily */
   margin: 0px;
-  /* <--- Remove all margin temporarily */
-
-  color: white;
-  /* Make text clearly visible */
-  font-family: "JetBrains Mono Nerd Font", monospace;
-  font-size: 0.9em;
 }
 
-.time-label {
-  font-size: 1.2em;
-  /* Other text-specific styles if any */
+.buttons {
+  background-color: #100505;
+  border-radius: 5px;
+  padding: 0px;
+  margin: 0px;
 }
 
-/* If you have a .date-label, apply similar minimal styles */
-.date-label {
-  /* ... */
+/* Final attempt to override GTK styles */
+.buttons button {
+  all: unset;
+  border: none;
+  background-color: #100505;
+  color: #fce9ca;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+/* This is a more targeted approach for stubborn widgets */
+.buttons button * {
+  all: unset;
+}
+
+// You can add styles for the song title label using its class
+.song-title {
+  color: #fce9ca;
+  font-weight: bold;
 }

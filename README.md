@@ -7,16 +7,17 @@ Features include:
 - A really small [install script](#installation)
 - No fancy colorscheme generation (yet)
 
-## Installation
+## Usage
 ```
 git clone https://github.com/Matercan/hyprland-dots
 cd hyprland-dots
-./installation.sh
+./install-bin
+chmod +x pull.sh
 ```
-This works no matter the distro, unless you don't have bash :)
-WARNING: THIS WILL DELETE YOUR CURRENT CONFIGURATION OF THESE SOFTWARE
+If not on arch, build install.cpp with your favourite C++ compiler.
+The script will try and yay -S packages you don't have, on arch this will resault in an error.
 
-To pull back into the hyprland_dots folder, run ``./pull.sh`` 
+To pull back into the hyprland_dots folder, run ``./pull.sh``. This will collect all of the configurations from all of the programs within this repository and will replace all of those currently in the directory with them.
 
 ## Showcase
 
@@ -28,5 +29,6 @@ To pull back into the hyprland_dots folder, run ``./pull.sh``
 
 https://github.com/woioeow/hyprland-dotfiles.git
 https://github.com/typecraft-dev/dotfiles.git
+
 
 

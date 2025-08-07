@@ -1,5 +1,5 @@
 theme = rimuru
-background-opacity = 0.8
+background-opacity = 0.9
 background-blur = 10
 shell-integration = fish
 font-family = "Fira Code iScript"

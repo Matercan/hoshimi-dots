@@ -1,10 +1,7 @@
 allow_images=true
-location=1
 key_expand=Tab
 width=45%
 height=40%
-x=550
-y=250
 image_size=15
 columns=2
 prompt=Enter an app's name

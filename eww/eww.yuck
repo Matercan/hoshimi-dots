@@ -1,1 +1,14 @@
-(include "player/player.yuck")
+(include "player/eww.yuck")
+
+(defwindow player
+           :monitor 0
+           :geometry (geometry :x "6px"
+                               :y "1px"
+                               :width "20%"
+                               :height "8%"
+                               :anchor "top left")
+           :stacking "bottom"
+           :reserve (struts :distance "40px" :side "top")
+           :windowtype "dock"
+           :wm-ignore false
+     (container))

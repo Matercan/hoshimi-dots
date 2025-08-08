@@ -5,30 +5,32 @@
   "playerctl metadata --format '{{ artist }} - {{ title }}' || echo 'No song playing'")
 
 (defwidget player_info []
-  (box :spacing "3px"
-       :space-evenly true
-    (label :text "Now Playing:")
+  (box :spacing "1px"
+       :space-evenly false
+       :valign "center"
+       :halign "center"
+    (label :text " Now Playing:  "
+           :class "now-playing")
     (label :class "song-title"
            :text player_title)))
 
 (defwidget buttons []
   (box :spacing "3px"
        :space-evenly true
- 
-  (button :onclick "playerctl previous && notify-send 'previous song'" "")
-  (button :onclick "playerctl play-pause && notify-send 'song paused'" "󰐊/󰏤")
-  (button :onclick "playerctl next && notify-send 'playing next song'" "")))
+       :class "buttons"   
+       (button :onclick "playerctl previous && notify-send 'Playing previous song.'" "")
+       (button :onclick "playerctl play-pause && notify-send 'Current song played/paused'" "󰐊/󰏤")
+       (button :onclick "playerctl next && notify-send 'Playing next song'" "")))
 
 (defwidget container []
   (box :spacing "3px"
        :spacing-evenly true
        :orientation "v"
   (player_info)
-  (buttons)
-    ))
+  (buttons)))
 
 (defwindow player
-           :monitor 1
+           :monitor 0
            :geometry (geometry :x "6px"
                                :y "1px"
                                :width "20%"

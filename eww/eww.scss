@@ -1,55 +1,47 @@
 /* ~/.config/eww/eww.scss */
 
+$foreground: #fce9ca;
+$border: $foreground;
+$background: #100505;
+$hover: #8F8472;
 
-
-/* Corrected and combined styles for labels and containers */
-// Styling the main window
 .player {
-  background-color: #100505;
-  border: 2px solid #fce9ca;
+  background-color: $background;
+  border: 2px solid $border;
   border-radius: 8px;
 }
 
-
-.player_info label {
-  font-family: "Fira Code iScript", monospace;
-  font-size: 14px;
-  color: #fce9ca;
-  font-weight: bold;
-}
 
 .player_info,
 .buttons {
-  background-color: #100505;
-  border-radius: 5px;
-  padding: 0px;
-  margin: 0px;
-}
+  background-color: $background;
 
-.buttons {
-  background-color: #100505;
-  border-radius: 5px;
-  padding: 0px;
-  margin: 0px;
-}
+  button {
+    all: unset;
+    color: $foreground;
+    background-color: #201515;
 
-/* Final attempt to override GTK styles */
-.buttons button {
-  all: unset;
-  border: none;
-  background-color: #100505;
-  color: #fce9ca;
-  padding: 5px 10px;
-  border-radius: 8px;
-}
+    border: 1px solid $border;
+    border-radius: 4px;
 
-/* This is a more targeted approach for stubborn widgets */
-.buttons button * {
-  all: unset;
+    padding: 0px 1px;
+    margin: 0px 0px;
+
+  }
+
+  button:hover {
+    color: $hover;
+  }
+
 }
 
 // You can add styles for the song title label using its class
 .song-title {
   color: #fce9ca;
   font-weight: bold;
+}
+
+.now-playing {
+  margin: 4px;
+  color: $foreground;
 }

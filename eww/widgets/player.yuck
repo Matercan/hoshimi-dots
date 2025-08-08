@@ -28,5 +28,3 @@
        :orientation "v"
   (player_info)
   (buttons)))
-
-

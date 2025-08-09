@@ -12,9 +12,9 @@ namespace fs = std::filesystem;
 
 int main(int argc, char *argv[]) {
 
-  vector<string> totalPackages = {"dunst",  "fastfetch", "fish",
-                                  "eww",    "ghostty",   "vesktop",
-                                  "waybar", "wofi",      "hypr"};
+  vector<string> totalPackages = {"dunst",   "fastfetch", "fish",   "eww",
+                                  "ghostty", "vesktop",   "waybar", "wofi",
+                                  "hypr",    "catalyst"};
 
   cout << "Welcome to my dotfiles." << endl;
   cout << "List all of the packages you desire to install out of ";
@@ -67,6 +67,10 @@ int main(int argc, char *argv[]) {
       cout << "Installing " << trimmed_package << endl;
       if (stat(dir.c_str(), &sb) == 0) {
         cout << trimmed_package << " already installed" << endl;
+      } else if (trimmed_package == "catalyst") {
+        string cmd = "git clone https://github.com/Matercan/catalyst.git"
+                     " && makepkg -si";
+        system(cmd.c_str());
       } else {
         string cmd = "yay -S " + trimmed_package;
         system(cmd.c_str());

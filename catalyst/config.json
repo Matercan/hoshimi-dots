@@ -1,12 +1,28 @@
 {
-  "$schema": "/usr/bin/catalyst.schema.json",
-  "play": {
+  "$schema": "../catalyst.schema.json",
+  "back": {
     "key-sequence": [
       "CONTROL",
-      "SUPER",
-      "s"
+      "MAINMOD",
+      "left"
+    ],
+    "command": "playerctl previous"
+  },
+  "pause": {
+    "key-sequence": [
+      "CONTROL",
+      "MAINMOD",
+      "p"
     ],
     "command": "playerctl play-pause"
+  },
+  "next": {
+    "key-sequence": [
+      "CONTROL",
+      "MAINMOD",
+      "right"
+    ],
+    "command": "playerctl next"
   },
   "reload": {
     "key-sequence": [

@@ -1,13 +1,13 @@
 (include "widgets/player.yuck")
 
 (defwindow player
-   :monitor 0
+   :monitor 1
    :geometry (geometry :x "6px"
                        :y "1px"
                        :width "20%"
                        :height "8%"
                        :anchor "top left")
-   :stacking "fg"
+   :stacking "bottom"
    :reserve (struts :distance "40px" :side "top")
    :windowtype "dock"
    :wm-ignore false

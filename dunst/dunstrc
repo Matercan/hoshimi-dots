@@ -372,7 +372,6 @@
     # Make sure this 'appname' matches what 'dunst -d' shows for Vesktop notifications
     appname = "vesktop" # Or "discord" or whatever the actual appname is
 
-    script = ~/.config/hypr/scripts/focus_vesktop.sh
     # Override the middle-click behavior for notifications from this specific app.
     # This will execute our custom script and then close the notification.
 

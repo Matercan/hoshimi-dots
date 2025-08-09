@@ -1,0 +1,19 @@
+{
+  "$schema": "/usr/bin/catalyst.schema.json",
+  "play": {
+    "key-sequence": [
+      "CONTROL",
+      "SUPER",
+      "s"
+    ],
+    "command": "playerctl play-pause"
+  },
+  "reload": {
+    "key-sequence": [
+      "CONTROL",
+      "SUPER",
+      "E"
+    ],
+    "command": "eww reload"
+  }
+}

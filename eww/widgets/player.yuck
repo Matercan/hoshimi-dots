@@ -22,7 +22,7 @@
        (button :onclick "playerctl play-pause && notify-send 'Current song played/paused'" "󰐊/󰏤")
        (button :onclick "playerctl next && notify-send 'Playing next song'" "")))
 
-(defwidget container []
+(defwidget player_container []
   (box :spacing "3px"
        :spacing-evenly true
        :orientation "v"

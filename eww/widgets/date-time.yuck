@@ -1,0 +1,15 @@
+(defpoll date :interval "10s"
+              :initial "initial-date"
+  `date '+%A, %B %d, %Y'`)
+
+(defpoll time :interval "1s"
+              :initial "initial-time"
+  `date +%H:%M:%S`)
+
+(defwidget datetime_container []
+  (box :spacing "5px"
+       :space-evenly true
+       :orientation "v"
+       :class "datetime"
+    (label :text date :class "date-label")
+    (label :text time :class "time-label")))

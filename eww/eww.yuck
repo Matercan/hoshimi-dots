@@ -1,17 +1,5 @@
 (include "widgets/player.yuck")
-
-(defwindow player
-   :monitor 1
-   :geometry (geometry :x "6px"
-                       :y "1px"
-                       :width "20%"
-                       :height "8%"
-                       :anchor "top left")
-   :stacking "bottom"
-   :reserve (struts :distance "40px" :side "top")
-   :windowtype "dock"
-   :wm-ignore false
- (container))
+(include "widgets/home.yuck")
 
 (defwidget activate-linux []
   (box
@@ -21,8 +9,47 @@
     (label :xalign 0 :markup "<span font_size=\"large\">Activate Arch Linux</span>")
     (label :xalign 0 :text "Go to Settings to activate Arch")))
 
+(defwindow player
+   :monitor 1
+   :geometry (geometry :x "6px"
+                       :y "1px"
+                       :width "340px"
+                       :height "60px"
+                       :anchor "top left")
+   :stacking "bottom"
+   :reserve (struts :distance "40px" :side "top")
+   :windowtype "dock"
+   :wm-ignore false
+ (player_container))
+
+
+
 (defwindow activate-linux
-  :monitor 0
+  :monitor 1
   :stacking "fg"
   :geometry (geometry :x "8px" :y "32px" :width "250px" :anchor "bottom right")
   (activate-linux))
+
+(defwindow datetime
+   :monitor 1
+   :geometry (geometry :x "348"
+                       :y "1px"
+                       :width "150"
+                       :height "60px"
+                       :anchor "top left")
+   :stacking "bottom"
+   :windowtype "dock"
+   :wm-ignore false
+ (datetime_container))
+
+(defwindow home
+  :monitor 1
+  :geometry (geometry :x "0px"
+                      :y "0px"
+                      :width "400"
+                      :height "300"
+                      :anchor "center center")
+  :stacking "fg"
+  :windowtype "dock"
+  :wm-ignore false
+  (home_container))

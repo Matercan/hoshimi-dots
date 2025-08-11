@@ -7,6 +7,9 @@
 #include <sys/stat.h>
 #include <vector>
 
+#include "env.hpp"
+#include "palette.hpp"
+
 using namespace std;
 namespace fs = std::filesystem;
 
@@ -43,7 +46,7 @@ int main(int argc, char *argv[]) {
   }
 
   // Get source and destination paths
-  fs::path dotfilesSource = fs::current_path();
+  fs::path dotfilesSource = fs::current_path().parent_path() / "config";
   fs::path configfilesDest = fs::path(getenv("HOME")) / ".config";
 
   // Ensure the destination config directory exists

@@ -12,7 +12,7 @@ namespace fs = std::filesystem;
 class EnvManager {
 public:
   void setVariables(const std::string &wallpaperPath,
-                    const std::string &assetsDir, int theme) {
+                    const std::string &assetsDir, ThemeType theme) {
     // Create the "KEY=VALUE" string using std::string concatenation
     std::string *wallpaperEnv = new std::string;
     *wallpaperEnv = "WALLPAPER=" + wallpaperPath;
@@ -36,11 +36,11 @@ public:
 
     std::string *themeEnv = new std::string("HYPR_THEME=");
 
-    if (theme == DARK) {
+    if (theme == ThemeType::DARK) {
       *themeEnv += std::string("DARK");
-    } else if (theme == LIGHT) {
+    } else if (theme == ThemeType::LIGHT) {
       *themeEnv += std::string("LIGHT");
-    } else if (theme == WARM) {
+    } else if (theme == ThemeType::WARM) {
       *themeEnv += std::string("WARM");
     }
 
@@ -58,7 +58,7 @@ public:
 class FileManager {
 
   // Get source and destination paths
-  fs::path dotfilesSource = fs::current_path().parent_path() / "config";
+  fs::path dotfilesSource = fs::current_path() / "config";
   fs::path configfilesDest = fs::path(getenv("HOME")) / ".config";
 
 public:

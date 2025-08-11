@@ -14,6 +14,8 @@ const vector<string> TOTALPACKAGES = {"dunst",   "fastfetch", "fish",   "eww",
                                       "ghostty", "vesktop",   "waybar", "wofi",
                                       "hypr",    "catalyst"};
 
+const vector<string> TOTALTHEMES = {"dark", "warm", "light"};
+
 string setupPackage(const string &package_name,
                     const vector<string> totalPackages) {
   string trimmed_package = package_name;
@@ -51,9 +53,13 @@ string setupPackage(const string &package_name,
 
 int main(int argc, char *argv[]) {
 
-  const vector<string> vect = InputManager(TOTALPACKAGES).packageInput();
+  InputManager input(TOTALPACKAGES, TOTALTHEMES);
 
-  for (const string &package_name : vect) {
+  const vector<string> packageVect = input.packageInput();
+
+  const vector<string> themesVect = input.themeInput();
+
+  for (const string &package_name : packageVect) {
     // Find package and trim any leading/trailing whitespace
     string trimmed_package = setupPackage(package_name, TOTALPACKAGES);
 

@@ -6,5 +6,5 @@ __pycache__/
 *.swp
 *.swo
 
-install-bin
+*-bin
 backup*

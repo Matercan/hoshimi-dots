@@ -1,0 +1,168 @@
+/* ~/.config/eww/eww.scss */
+
+$foreground: #fce9ca;
+$border: $foreground;
+$background: #100505;
+$hover: #8F8472;
+
+.player {
+  background-color: $background;
+  border: 2px solid $border;
+  border-radius: 8px;
+}
+
+
+.buttons {
+  background-color: $background;
+
+  button {
+    all: unset;
+    color: $foreground;
+    background-color: #201515;
+
+    border: 1px solid $border;
+    border-radius: 4px;
+
+
+  }
+
+  button:hover {
+    color: $hover;
+  }
+
+}
+
+
+
+.song-title {
+  color: $foreground;
+  font-weight: bold;
+}
+
+.activate-linux {
+  color: rgba(250, 250, 250, 0.5);
+
+  &.background {
+    background: none;
+  }
+}
+
+.datetime {
+  background-color: $background;
+  border: 2px solid $border;
+  border-radius: 8px;
+  color: $foreground;
+}
+
+.date-label {
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.time-label {
+  font-weight: normal;
+  font-size: 28px;
+}
+
+$accent-hover: #4e1847;
+$accent-purple: #c9a9dd;
+$accent-green: #a3be8c;
+$accent-red: #bf616a;
+$accent-blue: #8b9dc3;
+$accent-orange: #d08770;
+
+.home {
+  background-color: transparent;
+  color: $foreground;
+
+
+  button {
+    all: unset;
+    background-color: $background;
+    margin: 15px;
+  }
+
+  button:hover {
+    color: $accent-hover;
+  }
+
+  .datetime {
+    all: unset;
+  }
+}
+
+
+
+.first-box {
+  background-color: $background;
+  margin: 15px;
+  border: 2px solid $accent-blue;
+  border-radius: 8px;
+}
+
+.second-box {
+  background-color: $background;
+  margin: 15px;
+  border: 2px solid $accent-green;
+  border-radius: 8px;
+}
+
+.top-bar {
+  background-color: $background;
+  margin: 15px;
+  font-size: 25px;
+  border: 2px solid $accent-purple;
+  border-radius: 8px;
+  color: $accent-orange;
+}
+
+.quick-info {
+  color: $accent-blue;
+  font-size: 17px;
+
+  button {
+    background-color: $background;
+  }
+}
+
+.weather-info {
+  background-color: $background;
+}
+
+.dev-buttons {
+  background-color: transparent;
+
+  button {
+    color: #1BD1DE;
+    background-color: $background;
+    font-size: 34px;
+    margin: 10px;
+    /* Larger margin for bigger spacing */
+  }
+}
+
+.system-info {
+  background-color: transparent;
+
+  label {
+    color: #660808;
+    background-color: $background;
+    font-size: 23px;
+    margin: 10px;
+    /* Add margin between system info labels */
+  }
+}
+
+.app-shortcuts {
+  background-color: transparent;
+
+
+  button {
+    color: #9B28DE;
+    background-color: $background;
+
+    font-size: 37px;
+    margin: 10px;
+    /* Add margin between app buttons */
+  }
+}

@@ -1,0 +1,153 @@
+* {
+  font-family: "CaskaydiaCove Nerd Font", "Font Awesome 6 Free", "Font Awesome 6 Free Solid";
+  font-weight: bold;
+  font-size: 15px;
+  color: #ebc2a8;
+}
+
+#waybar {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  box-shadow: none;
+}
+
+#workspaces,
+#window,
+#tray {
+  background-color: #100505;
+  padding: 4px 6px;
+  margin-top: 6px;
+  margin-left: 6px;
+  margin-right: 6px;
+  border-radius: 10px;
+  border: 2px solid #fce9ca;
+}
+
+#clock,
+#custom-home {
+  background-color: #100505;
+  border-top: 2px solid #fce9ca;
+  border-bottom: 2px solid #fce9ca;
+  border-right: 2px solid #fce9ca;
+  margin-top: 6px;
+  margin-right: 8px;
+  padding: 4px 8px;
+  border-radius: 0 10px 10px 0;
+  border-width: 2px;
+}
+
+#network,
+#custom-lock {
+  background-color: #100505;
+  border-top: 2px solid #fce9ca;
+  border-bottom: 2px solid #fce9ca;
+  border-left: 2px solid #fce9ca;
+  margin-top: 6px;
+  margin-left: 6px;
+  padding: 4px 2px;
+  border-radius: 10px 0 0 10px;
+  border-width: 2px;
+}
+
+#custom-power,
+#custom-reboot,
+#bluetooth,
+#battery,
+#pulseaudio,
+#backlight,
+#custom-temperature,
+#memory,
+#cpu {
+  background-color: #100505;
+  border-top: 2px solid #fce9ca;
+  /* Applies a 2px border to the top */
+  border-bottom: 2px solid #fce9ca;
+  /* Applies a 2px border to the bottom */
+  margin-top: 6px;
+  padding: 4px 2px;
+}
+
+#custpm-temperature.critical,
+#pulseaudio.muted {
+  color: #FF0000;
+  padding-top: 0;
+}
+
+#bluetooth:hover,
+#network:hover,
+#backlight:hover,
+#battery:hover,
+#pulseaudio:hover,
+#custom-temperature:hover,
+#memory:hover,
+#cpu:hover,
+#clock:hover,
+#custom-lock:hover,
+#custom-reboot:hover,
+#custom-power:hover,
+#taskbar #window:hover {
+  background-color: #221155;
+}
+
+#workspaces button:hover {
+  background-color: #221155;
+  padding: 2px 8px;
+  margin: 0 2px;
+  border-radius: 10px;
+}
+
+#workspaces button.active {
+  background-color: #3d0c11;
+  color: #ebc2a8;
+  padding: 2px 8px;
+  margin: 0 2px;
+  border-radius: 10px;
+}
+
+#workspaces button {
+  background: transparent;
+  border: none;
+  color: #ebc2a8;
+  padding: 2px 8px;
+  margin: 0 2px;
+  font-weight: bold;
+}
+
+#window {
+  font-weight: 500;
+  font-style: italic;
+}
+
+#taskbar {
+  background-color: #100505;
+  border: 2px solid #fce9ca;
+  padding: 4px 6px;
+  margin-top: 6px;
+  margin-left: 6px;
+  margin-right: 6px;
+  border-radius: 10px;
+}
+
+#taskbar button {
+  background: transparent;
+  border: none;
+  color: #ebc2a8;
+  padding: 2px 8px;
+  margin: 2px;
+  font-weight: bold;
+}
+
+#taskbar button.active {
+  background-color: #3d0c11;
+  color: #ebc2a8;
+  padding: 2px 8px;
+  margin: 2px;
+  border-radius: 10px;
+}
+
+#taskbar button:hover {
+  background-color: #221155;
+  padding: 2px 8px;
+  margin: 2px;
+  border-radius: 10px;
+}

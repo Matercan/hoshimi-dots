@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTFILES_SOURCE="$(dirname "$(readlink -f "$0")")"
+DOTFILES_SOURCE="$(dirname "$(readlink -f "$0")")/config"
 USER_CONFIGS_DIRECTORY="${XDG_CONFIG_HOME:-$HOME/.config}"
 DOTFILES=("fastfetch" "fish" "ghostty" "hypr" "gtk-4.0" "vesktop/settings" "vesktop/themes" "wofi" "waybar" "eww" "dunst" "catalyst")
 

@@ -1,0 +1,23 @@
+{
+  "plugins": {},
+  "customCspRules": {
+    "images.alphacoders.com": [
+      "connect-src",
+      "img-src",
+      "style-src",
+      "font-src"
+    ],
+    "images.gamebanana.com": [
+      "connect-src",
+      "img-src",
+      "style-src",
+      "font-src"
+    ],
+    "images3.alphacoders.com": [
+      "connect-src",
+      "img-src",
+      "style-src",
+      "font-src"
+    ]
+  }
+}

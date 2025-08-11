@@ -23,8 +23,6 @@ $hover: #8F8472;
     border: 1px solid $border;
     border-radius: 4px;
 
-    padding: 0px 1px;
-    margin: 0px 0px;
 
   }
 
@@ -34,8 +32,10 @@ $hover: #8F8472;
 
 }
 
+
+
 .song-title {
-  color: #fce9ca;
+  color: $foreground;
   font-weight: bold;
 }
 
@@ -64,37 +64,61 @@ $hover: #8F8472;
   font-size: 28px;
 }
 
+$accent-hover: #4e1847;
+$accent-purple: #c9a9dd;
+$accent-green: #a3be8c;
+$accent-red: #bf616a;
+$accent-blue: #8b9dc3;
+$accent-orange: #d08770;
+
 .home {
-  background-color: $background;
+  background-color: transparent;
   color: $foreground;
-  border-radius: 8px;
+
 
   button {
     all: unset;
     background-color: $background;
     margin: 15px;
-    border-radius: 10px;
   }
 
   button:hover {
-    color: $hover;
+    color: $accent-hover;
   }
 
   .datetime {
     all: unset;
-
-    border-top: 2px solid $border;
-    border-left: 2px solid $border;
-    border-top-left-radius: 10px;
   }
 }
 
+
+
+.first-box {
+  background-color: $background;
+  margin: 15px;
+  border: 2px solid $accent-blue;
+  border-radius: 8px;
+}
+
+.second-box {
+  background-color: $background;
+  margin: 15px;
+  border: 2px solid $accent-green;
+  border-radius: 8px;
+}
+
+.top-bar {
+  background-color: $background;
+  margin: 15px;
+  font-size: 25px;
+  border: 2px solid $accent-purple;
+  border-radius: 8px;
+  color: $accent-orange;
+}
+
 .quick-info {
-  border-left: 2px solid $border;
-  border-bottom: 2px solid $border;
-  border-right: 2px solid $border;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  color: $accent-blue;
+  font-size: 17px;
 
   button {
     background-color: $background;
@@ -107,11 +131,6 @@ $hover: #8F8472;
 
 .dev-buttons {
   background-color: transparent;
-  border-bottom: 1px solid $border;
-  border-right: 1px solid $border;
-  border-left: 1px solid $border;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
 
   button {
     color: #1BD1DE;
@@ -124,15 +143,11 @@ $hover: #8F8472;
 
 .system-info {
   background-color: transparent;
-  border-top: 2px solid $border;
-  border-top-right-radius: 10px;
-  border-right: 2px solid $border;
 
   label {
     color: #660808;
     background-color: $background;
-    border-radius: 10px;
-    font-size: 25px;
+    font-size: 23px;
     margin: 10px;
     /* Add margin between system info labels */
   }
@@ -140,11 +155,6 @@ $hover: #8F8472;
 
 .app-shortcuts {
   background-color: transparent;
-  border-top: 1px solid $border;
-  border-right: 1px solid $border;
-  border-left: 1px solid $border;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
 
 
   button {
@@ -154,16 +164,5 @@ $hover: #8F8472;
     font-size: 37px;
     margin: 10px;
     /* Add margin between app buttons */
-  }
-}
-
-.top-bar {
-  background-color: transparent;
-  border: 1px solid $border;
-  border-radius: 8px;
-  font-size: 25px;
-
-  button {
-    padding: 8px 8px;
   }
 }

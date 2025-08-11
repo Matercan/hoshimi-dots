@@ -5,8 +5,6 @@
 (defpoll memory_usage :interval "2s" `free | grep Mem | awk '{printf("%.0f", ($3/$2) * 100.0)}'`)
 (defpoll battery :interval "10s" `cat /sys/class/power_supply/BAT*/capacity 2>/dev/null | head -1 || echo "N/A"`)
 (defpoll volume :interval "1s" `pamixer --get-volume`)
-
-;; Weather (replace with your city)
 (defpoll weather :interval "300s" `curl -s 'wttr.in/Maastricht?format=%t' 2>/dev/null || echo "N/A"`)
 
 (defwidget home_container []
@@ -15,20 +13,26 @@
     :orientation "v"
     :space-evenly false
     :spacing "10px"
-    (box 
-      :orientation "h"
-      :space-evenly true
-      :class "top-bar"
-      (button :onclick "nohup ghostty -e nvim ~/.config/eww/widgets/home.yuck > /dev/null 2>&1 &" "󰒓")
-      (button :onclick "nohup ghostty -e nvim ~/.config/hypr/hyprland.conf > /dev/null 2>&1 &" "")
-      (button :onclick "eww close home" ""))
+    (top_bar)
     (box
-      :orientation "h"
-      (datetime_container)
-      (system_info))
-    (quick_info)
-    (app_shortcuts)
-    (dev-buttons))) 
+      :orientation "v"
+      :class "first-box"
+      (box (datetime_container)
+           (system_info))
+      (quick_info))
+    (box :orientation "v"
+         :class "second-box"
+         (app_shortcuts)
+         (dev-buttons))))
+    
+(defwidget top_bar []
+  (box 
+  :orientation "h"
+  :space-evenly true
+  :class "top-bar"
+  (button :onclick "nohup ghostty -e nvim ~/.config/eww/widgets/home.yuck > /dev/null 2>&1 &" "󰒓")
+  (button :onclick "nohup ghostty -e nvim ~/.config/hypr/hyprland.conf > /dev/null 2>&1 &" "")
+  (button :onclick "eww close home" "")))
 
 (defwidget system_info []
   (box
@@ -50,11 +54,11 @@
   (box
     :orientation "h"
     :class "dev-buttons"
-    (button :onclick "hyprctl dispatch exit" "󰩈")
-    (button :onclick "hyprlock" " ")
-    (button :onclick "reboot" " ")
-    (button :onclick "systemctl poweroff" " ")
-    (button :onclick "nohup wofi --show drun > /dev/null 2>&1 &" "󰀻") ;; Runs wofi in background
+    (button :onclick "hyprctl dispatch exit && eww close home" "󰩈")
+    (button :onclick "hyprlock && eww close home" " ")
+    (button :onclick "reboot && eww close home" " ")
+    (button :onclick "systemctl poweroff && eww close home" " ")
+    (button :onclick "nohup wofi --show drun > /dev/null 2>&1 & && eww close home" "󰀻")
     ))
 
 (defwidget app_shortcuts []
@@ -62,10 +66,10 @@
     :class "app-shortcuts"
     :orientation "h"
     :spacing "8px"
-    (button :onclick "nohup zen-browser > /dev/null 2>&1 &" "󰈹")
-    (button :onclick "nohup dolphin > /dev/null 2>&1 &" "󰉋")
-    (button :onclick "hyprctl dispatch focuswindow class:vesktop" "󰙯")
-    (button :onclick "nohup ghostty > /dev/null 2>&1 &" "󰆍")))
+    (button :onclick "eww close home && notify-send 'Launching zen.' && nohup zen-browser > /dev/null 2>&1 &" "󰈹")
+    (button :onclick "eww close home && notify-send 'Launching dolpin.' && nohup dolphin > /dev/null 2>&1 &" "󰉋")
+    (button :onclick "eww close home && notify-send 'Focusing vesktop.' && hyprctl dispatch focuswindow class:vesktop" "󰙯")
+    (button :onclick "eww close home && notify-send 'Launching ghostty.' && nohup ghostty > /dev/null 2>&1 &" "󰆍")))
 
 (defwidget quick_info []
   (box
@@ -73,5 +77,5 @@
     :orientation "h"
     :spacing "15px"
     (label :text "🌡️ ${weather}" :class "weather-info")
-    (button :onclick "nohup nm-connection-editor > /dev/null 2>&1" "󰖩 Network")
-    (button :onclick "nohup pavucontrol > /dev/null 2>&1" "󰕾 Audio")))
+    (button :onclick "eww close home && notify-send 'Opening internet settings.' && nohup nm-connection-editor > /dev/null 2>&1" "󰖩  Network")
+    (button :onclick "eww close home && notify-send 'Opening sound settings.' && nohup pavucontrol > /dev/null 2>&1" "󰕾  Audio")))

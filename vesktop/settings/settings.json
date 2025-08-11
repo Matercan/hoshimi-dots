@@ -159,8 +159,18 @@
         },
         "CustomRPC": {
             "enabled": true,
-            "type": 0,
-            "timestampMode": 0
+            "type": 5,
+            "timestampMode": 0,
+            "appID": "1",
+            "appName": "Arch btw",
+            "details": "The best linux distro",
+            "imageBig": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwiki.installgentoo.com%2Fimages%2Ff%2Ff9%2FArch-linux-logo.png&f=1&nofb=1&ipt=eb217ccf6ddc5db5a9708f55443194ef4bd04863ecde0e2a4655d6f41f6e744a",
+            "imageBigTooltip": "Arch btw",
+            "imageSmall": "",
+            "buttonOneText": "Download it",
+            "buttonOneURL": "https://mirror.adectra.com/archlinux/iso/2025.08.01/",
+            "buttonTwoText": "Install it",
+            "buttonTwoURL": "https://wiki.archlinux.org/title/Installation_guide"
         },
         "Dearrow": {
             "enabled": false
@@ -419,7 +429,7 @@
                         "id": "cvqltzpqn8g",
                         "name": "dougcord",
                         "color": 10070709,
-                        "collapsed": true,
+                        "collapsed": false,
                         "channels": [
                             "1377980688309030932",
                             "1391793342521676061",
@@ -706,6 +716,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1754663179795
+        "settingsSyncVersion": 1754855173198
     }
 }

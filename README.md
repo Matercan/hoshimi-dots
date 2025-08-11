@@ -11,6 +11,7 @@ Features include:
 ```
 git clone https://github.com/Matercan/hyprland-dots
 cd hyprland-dots
+g++ scripts/install.cpp -o install-bin
 ./install-bin
 chmod +x pull.sh
 ```
@@ -29,6 +30,7 @@ To pull back into the hyprland_dots folder, run ``./pull.sh``. This will collect
 
 https://github.com/woioeow/hyprland-dotfiles.git
 https://github.com/typecraft-dev/dotfiles.git
+
 
 
 

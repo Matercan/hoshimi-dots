@@ -25,7 +25,6 @@ private:
 public:
   struct Config {
     std::vector<std::string> packages;
-    std::string theme;
     std::string wallpaperPath;
     bool showHelp = false;
     bool listPackages = false;
@@ -45,7 +44,6 @@ public:
     std::cout << "Options:\n";
     std::cout << "  -p, --packages PKG1,PKG2  Install specific packages "
                  "(comma-separated)\n";
-    std::cout << "  -t, --theme THEME          Apply specified theme\n";
     std::cout << "  -w, --wallpaper PATH       Set wallpaper path\n";
     std::cout << "  -c, --colorscheme TYPE     Generate colorscheme from "
                  "wallpaper (dark/light/warm)\n";
@@ -57,8 +55,8 @@ public:
         << "  -a, --all                  Install all available packages\n\n";
     std::cout << "Examples:\n";
     std::cout << "  " << programName
-              << " -p vim,tmux,zsh -t dracula -w ~/wallpaper.png\n";
-    std::cout << "  " << programName << " -a -t gruvbox -w ~/bg.jpg -c dark\n";
+              << " -p hypr,waybar,wofi -w ~/wallpaper.png\n";
+    std::cout << "  " << programName << " -a -w ~/bg.jpg -c dark\n";
     std::cout << "  " << programName << " --interactive\n";
     std::cout << "  " << programName << " --list-packages\n";
   }
@@ -138,9 +136,6 @@ public:
       case 'p':
         config.packages = parsePackageList(optarg);
         break;
-      case 't':
-        config.theme = optarg;
-        break;
       case 'w':
         config.wallpaperPath = optarg;
         break;
@@ -183,13 +178,6 @@ public:
         std::cerr << "Use --list-packages to see available packages.\n";
         return false;
       }
-    }
-
-    // Validate theme
-    if (!config.theme.empty() && !validateTheme(config.theme)) {
-      std::cerr << "Error: Unknown theme '" << config.theme << "'\n";
-      std::cerr << "Use --list-themes to see available themes.\n";
-      return false;
     }
 
     // Validate wallpaper
@@ -281,10 +269,6 @@ public:
       }
     }
     std::cout << "\n\n";
-
-    std::cout << "Select theme: ";
-    std::cin >> config.theme;
-    std::cin.ignore(); // Clear newline
 
     std::cout << "Wallpaper path (or press enter to skip): ";
     std::getline(std::cin, config.wallpaperPath);

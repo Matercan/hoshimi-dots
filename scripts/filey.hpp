@@ -1,65 +1,20 @@
 #pragma once
 
-#include "palette.hpp"
 #include <filesystem>
 #include <iostream>
-#include <string.h>
 #include <string>
+#include <vector>
 
 using namespace std;
 namespace fs = std::filesystem;
-
-class EnvManager {
-public:
-  void setVariables(const std::string &wallpaperPath,
-                    const std::string &assetsDir, ThemeType theme) {
-    // Create the "KEY=VALUE" string using std::string concatenation
-    std::string *wallpaperEnv = new std::string;
-    *wallpaperEnv = "WALLPAPER=" + wallpaperPath;
-
-    char *envString = new char[wallpaperEnv->length() + 1];
-    strcpy(envString, wallpaperEnv->c_str());
-
-    // set the environment variable
-    putenv(envString);
-    delete wallpaperEnv;
-
-    std::string *assetsEnv = new std::string("ASSETS_DIR=" + assetsDir);
-
-    char *ptr = envString;
-    envString = new char[assetsEnv->length() + 1];
-    delete ptr;
-    strcpy(envString, assetsEnv->c_str());
-
-    putenv(envString);
-    delete assetsEnv;
-
-    std::string *themeEnv = new std::string("HYPR_THEME=");
-
-    if (theme == ThemeType::DARK) {
-      *themeEnv += std::string("DARK");
-    } else if (theme == ThemeType::LIGHT) {
-      *themeEnv += std::string("LIGHT");
-    } else if (theme == ThemeType::WARM) {
-      *themeEnv += std::string("WARM");
-    }
-
-    ptr = envString;
-    envString = new char[themeEnv->length() + 1];
-    delete ptr;
-    strcpy(envString, themeEnv->c_str());
-
-    putenv(envString);
-    delete themeEnv;
-    delete[] envString;
-  }
-};
 
 class FileManager {
 
   // Get source and destination paths
   fs::path dotfilesSource = fs::current_path() / "config";
   fs::path configfilesDest = fs::path(getenv("HOME")) / ".config";
+  fs::path assetsSource = fs::current_path() / "assets";
+  fs::path localPath = fs::path(getenv("HOME")) / ".local/share/hyprland-dots";
 
 public:
   FileManager() {
@@ -69,14 +24,72 @@ public:
     }
   }
 
+  void moveWallpaper(string &wallpaper) {
+    fs::copy_file(fs::path(wallpaper), localPath);
+    fs::rename(localPath / wallpaper, "wallpaper");
+  }
+
+  void setupLocalPath(vector<string> packages) {
+    if (!fs::exists(localPath)) {
+      fs::create_directory(localPath);
+    }
+
+    for (int i = 0; i < packages.size(); ++i) {
+      fs::path sourcePath = dotfilesSource / packages[i];
+      fs::path destPath = localPath / packages[i];
+
+      // Check if source exists
+      if (!fs::exists(sourcePath)) {
+        std::cerr << "Warning: Source path " << sourcePath
+                  << " doesn't exist, skipping.\n";
+        continue;
+      }
+
+      try {
+        if (fs::is_directory(sourcePath)) {
+          // Copy directory recursively
+          fs::copy(sourcePath, destPath,
+                   fs::copy_options::recursive |
+                       fs::copy_options::overwrite_existing);
+        } else {
+          // It's a file, copy normally
+          fs::create_directories(
+              destPath.parent_path()); // Ensure parent dir exists
+          fs::copy_file(sourcePath, destPath,
+                        fs::copy_options::overwrite_existing);
+        }
+      } catch (const fs::filesystem_error &e) {
+        std::cerr << "Error copying " << sourcePath << " to " << destPath
+                  << ": " << e.what() << std::endl;
+      }
+    }
+
+    // Copy assets directory
+    try {
+      if (fs::exists(assetsSource)) {
+        fs::copy(assetsSource, localPath / "assets",
+                 fs::copy_options::recursive |
+                     fs::copy_options::overwrite_existing);
+      }
+    } catch (const fs::filesystem_error &e) {
+      std::cerr << "Error copying assets: " << e.what() << std::endl;
+    }
+  }
+
+  fs::path getAssetsDir() { return localPath / "assets"; }
+
   void movePackage(string trimmed_package) {
     cout << "Moving config folders for " << trimmed_package << endl;
-    fs::path dotfilePath = dotfilesSource / trimmed_package;
+
+    if (trimmed_package == "hyprland") {
+      trimmed_package = "hypr";
+    }
+
+    fs::path dotfilePath = localPath / trimmed_package;
     fs::path configPath = configfilesDest / trimmed_package;
 
     // Check if the source directory exists before trying to copy
     if (fs::exists(dotfilePath)) {
-      // Move existing destination directory to avoid conflicts
       // Move existing destination directory to avoid conflicts
       if (fs::exists(configPath)) {
         fs::path backupPath =

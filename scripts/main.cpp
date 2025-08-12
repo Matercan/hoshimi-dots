@@ -7,6 +7,7 @@
 
 #include "filey.hpp"
 #include "input.hpp"
+#include "palette.hpp"
 
 using namespace std;
 
@@ -25,6 +26,10 @@ string setupPackage(const string &package_name,
   if (find(totalPackages.begin(), totalPackages.end(), trimmed_package) !=
       totalPackages.end()) {
 
+    if (trimmed_package == "hypr") {
+      trimmed_package = "hyprland";
+    }
+
     string dir = "/usr/bin/" + trimmed_package;
     struct stat sb;
 
@@ -36,7 +41,13 @@ string setupPackage(const string &package_name,
                    " && makepkg -si";
       system(cmd.c_str());
     } else {
-      string cmd = "yay -S " + trimmed_package;
+      string cmd;
+      if (trimmed_package != "hyprland") {
+        cmd = "yay -S " + trimmed_package;
+      } else {
+        cmd = "yay -S hyprland hyprlock hypridle";
+      }
+
       system(cmd.c_str());
     }
 
@@ -91,7 +102,6 @@ int main(int argc, char *argv[]) {
     InteractiveInputManager input(TOTALPACKAGES, TOTALTHEMES);
     config.packages = input.packageInput();
     auto themeConfig = input.themeInput();
-    config.theme = themeConfig.theme;
     config.wallpaperPath = themeConfig.wallpaperPath;
     config.generateColorScheme = themeConfig.generateColorScheme;
     config.colorSchemeTheme = themeConfig.colorSchemeTheme;
@@ -118,10 +128,6 @@ int main(int argc, char *argv[]) {
   }
   std::cout << "\n";
 
-  if (!config.theme.empty()) {
-    std::cout << "Theme: " << config.theme << "\n";
-  }
-
   if (!config.wallpaperPath.empty()) {
     std::cout << "Wallpaper: " << config.wallpaperPath << "\n";
   }
@@ -132,8 +138,8 @@ int main(int argc, char *argv[]) {
 
     // Here you'd integrate your ColorScheme generator
     try {
-      // generateColorSchemeFromPNG(config.wallpaperPath,
-      // config.colorSchemeTheme, "colorscheme.txt");
+      generateColorSchemeFromPNG(config.wallpaperPath, config.colorSchemeTheme,
+                                 "colorscheme.txt");
       std::cout << "Colorscheme generated successfully!\n";
     } catch (const std::exception &e) {
       std::cerr << "Failed to generate colorscheme: " << e.what() << "\n";
@@ -142,7 +148,20 @@ int main(int argc, char *argv[]) {
 
   std::cout << "\n=== Installing ===\n";
 
-  // Your existing installation logic
+  // Set up ~/.local/share/hyprland-dots
+  FileManager fm;
+  ThemeType theme;
+
+  if (config.colorSchemeTheme == "dark") {
+    theme = ThemeType::DARK;
+  } else if (config.colorSchemeTheme == "light") {
+    theme = ThemeType::LIGHT;
+  } else if (config.colorSchemeTheme == "warm") {
+    theme = ThemeType::WARM;
+  }
+
+  fm.setupLocalPath(config.packages);
+
   for (const std::string &package_name : config.packages) {
     std::string trimmed_package = setupPackage(package_name, TOTALPACKAGES);
 
@@ -152,7 +171,7 @@ int main(int argc, char *argv[]) {
     }
 
     std::cout << "Installing " << trimmed_package << "...\n";
-    FileManager().movePackage(trimmed_package);
+    fm.movePackage(trimmed_package);
   }
 
   std::cout << "\n=== Installation Complete ===\n";

@@ -78,9 +78,11 @@ makepkg -si
 
 ## Inspiration
 
-https://github.com/woioeow/hyprland-dotfiles.git
+[woieow's dotfiles](https://github.com/woioeow/hyprland-dotfiles.git)
 
-https://github.com/typecraft-dev/dotfiles.git
+[typecraft's dotfiles](https://github.com/typecraft-dev/dotfiles.git)
+
+[ml4 dotfiles](https://github.com/mylinuxforwork/dotfiles)
 
 
 

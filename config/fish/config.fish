@@ -15,7 +15,10 @@ end
 
 zoxide init --cmd cd fish | source
 alias ls="eza --icons"
+alias ga="git add"
+alias gcm="git commit -m"
+alias gp="git push"
+alias cdconf="cd ~/projects/hyprland-dots/"
 
-fish_add_path /usr/bin/
 set -gx SUDO_EDITOR nvim
 set -gx EDITOR nvim

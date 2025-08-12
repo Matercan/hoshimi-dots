@@ -1,16 +1,16 @@
 /* ~/.config/eww/eww.scss */
 
-$foreground: #faeff7;
+$foreground: #ebf7d1;
 $border: #edd6eb;
-$background: #050810;
-$hover: #2d2d2d;
+$background: #14082e;
+$hover: #b9575b;
 
-$accent-hover: #24070a;
-$accent-purple: #2d002d;
-$accent-green: #002d00;
-$accent-red: #2d0000;
-$accent-blue: #00002d;
-$accent-orange: #2d2d00;
+$accent-hover: #460b0c;
+$accent-purple: #a90048;
+$accent-green: #007200;
+$accent-red: #a90000;
+$accent-blue: #000048;
+$accent-orange: #a97200;
 
 .player {
   background-color: $background;
@@ -28,7 +28,6 @@ $accent-orange: #2d2d00;
     background-color: $accent-purple;
 
     border: 1px solid $border;
-    border-radius: 4px;
   }
 
   button:hover {

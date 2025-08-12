@@ -310,10 +310,28 @@ public:
     std::vector<Color> dominantColors;
     dominantColors.reserve(16);
 
-    size_t numColors = std::min(extractedColors.size(), size_t(16));
-    for (size_t i = 0; i < numColors; ++i) {
+    for (size_t i = 0; i < 16; ++i) {
+      auto defaultColors = generateDefaultPalette();
+      Color defaultColor = defaultColors[i];
+      Color bestMatch = defaultColor; // fallback
+      double minDistance = std::numeric_limits<double>::max();
 
-      dominantColors.push_back(adjustColorForTheme(extractedColors[i]));
+      // Find the most frequent color that's closest to this default color
+      for (const auto &extractedColor : extractedColors) {
+        double distance = defaultColor.distanceTo(extractedColor);
+
+        // We want colors that are both close AND frequent
+        // Weight the distance by inverse frequency to prefer frequent colors
+        double weightedDistance =
+            distance / std::log(extractedColor.frequency + 1);
+
+        if (weightedDistance < minDistance) {
+          minDistance = weightedDistance;
+          bestMatch = extractedColor;
+        }
+      }
+
+      dominantColors.push_back(adjustColorForTheme(bestMatch));
     }
 
     if (dominantColors.size() < 16) {

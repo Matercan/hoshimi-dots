@@ -1,0 +1,37 @@
+@define-color border #fce9ca;
+@define-color foreground #6e380e;
+@define-color background #100505;
+@define-color active #ebc2a8;
+
+* {
+  font-family: 'CaskaydiaCove Nerd Font', monospace;
+  font-size: 18px;
+}
+
+window {
+  border: 2px solid @border;
+  border-radius: 8px;
+  background-color: @background;
+}
+
+#input {
+  border: 2px solid @border;
+  border-radius: 8px;
+  color: @foreground;
+  background-color: transparent;
+}
+
+#text {
+  margin: 5px;
+  border: none;
+  color: @foreground;
+}
+
+#entry:selected {
+  border: 2px solid @border;
+  background-color: transparent;
+}
+
+#entry:selected #text {
+  color: @active;
+}

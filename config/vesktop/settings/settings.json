@@ -5,7 +5,7 @@
     "themeLinks": [],
     "eagerPatches": false,
     "enabledThemes": [
-        "NotAnotherAnimeTheme.theme.css"
+        "kaleidoscope.theme.css"
     ],
     "enableReactDevtools": false,
     "frameless": false,
@@ -716,6 +716,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1754855173198
+        "settingsSyncVersion": 1754935454046
     }
 }

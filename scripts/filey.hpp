@@ -19,6 +19,11 @@ private:
   std::vector<std::string> wofiColors = {"background", "border", "active",
                                          "foreground"};
 
+  std::vector<std::string> ewwColors = {
+      "foreground",   "background",    "hover",
+      "accent-hover", "accent-purple", "accent-green",
+      "accent-red",   "accent-blue",   "accent-orange"};
+
 public:
   bool updateWaybarColorsRegex(const std::string &cssFilePath,
                                const std::vector<std::string> &colors) {
@@ -125,6 +130,65 @@ public:
       std::cout << "Wofi colors updated successfully" << std::endl;
     } else {
       std::cout << "Failed to update wofi colours." << std::endl;
+    }
+
+    return success;
+  }
+
+  bool updateEwwColorsRegex(const std::string &scssFilePath,
+                            const std::vector<std::string> &colors) {
+    if (colors.size() < 9) {
+      std::cerr << "Error: Need at least 9 colors for eww theme" << std::endl;
+      return false;
+    }
+
+    // Read entire file content
+    std::string content = readFileContent(scssFilePath);
+    if (content.empty()) {
+      std::cerr << "Error: Could not read file or file is empty" << std::endl;
+      return false;
+    }
+
+    // Update each SCSS variable using regex
+    for (size_t i = 0; i < std::min(ewwColors.size(), colors.size()); ++i) {
+      // Pattern matches: $variable-name: #color;
+      std::string pattern = "\\$" + ewwColors[i] + ":\\s*[^;]+;";
+      std::string replacement = "$" + ewwColors[i] + ": " + colors[i] + ";";
+
+      std::regex colorRegex(pattern);
+      content = std::regex_replace(content, colorRegex, replacement);
+    }
+
+    // Handle the special case of $border: $foreground;
+    // Replace it with the actual foreground color
+    if (!colors.empty()) {
+      std::regex borderRegex("\\$border:\\s*\\$foreground;");
+      std::string borderReplacement = "$border: " + colors[0] + ";";
+      content = std::regex_replace(content, borderRegex, borderReplacement);
+    }
+
+    // Write back to file
+    return writeContentToFile(scssFilePath, content);
+  }
+
+  bool applyColorSchemeToEww(const std::string &ewwConfigDir,
+                             const std::vector<std::string> &colors) {
+    std::string scssPath = ewwConfigDir + "/eww.scss";
+
+    std::cout << "Updating eww colors in: " << scssPath << std::endl;
+
+    // Print what we're applying
+    for (size_t i = 0; i < std::min(ewwColors.size(), colors.size()); ++i) {
+      std::cout << "  $" << ewwColors[i] << ": " << colors[i] << std::endl;
+    }
+
+    // Use regex method for robustness
+    bool success = updateEwwColorsRegex(scssPath, colors);
+
+    if (success) {
+      std::cout << "EWW colors updated successfully!" << std::endl;
+    } else {
+      std::cout << "Failed to update EWW colors." << std::endl;
     }
 
     return success;
@@ -310,8 +374,16 @@ public:
       vector<string> wofiColors = {scheme.background, scheme.foreground,
                                    scheme.palette[4], scheme.foreground};
       updater.applyColorSchemeToWofi(localPath.string() + "/wofi", wofiColors);
-    } else {
-      cout << "Package " << package << " does not use colors.";
+    } else if (package == "eww") {
+      vector<string> ewwColors = {
+          scheme.foreground,          scheme.background, scheme.palette[8],
+          scheme.selectionBackground, scheme.palette[5], scheme.palette[2],
+          scheme.palette[1],          scheme.palette[4], scheme.palette[3]};
+      updater.applyColorSchemeToEww(localPath.string() + "/eww", ewwColors);
+    }
+
+    else {
+      cout << "Package " << package << " does not use colors." << endl;
     }
   }
 

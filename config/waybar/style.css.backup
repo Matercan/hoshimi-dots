@@ -1,8 +1,14 @@
+@define-color background #100505;
+@define-color border #fce9ca;
+@define-color hover #221155;
+@define-color active #3d0c11;
+@define-color foreground #ebc2a8;
+
 * {
   font-family: "CaskaydiaCove Nerd Font", "Font Awesome 6 Free", "Font Awesome 6 Free Solid";
   font-weight: bold;
   font-size: 15px;
-  color: #ebc2a8;
+  color: @foreground;
 }
 
 #waybar {
@@ -14,21 +20,21 @@
 #workspaces,
 #window,
 #tray {
-  background-color: #100505;
+  background-color: @background;
   padding: 4px 6px;
   margin-top: 6px;
   margin-left: 6px;
   margin-right: 6px;
   border-radius: 10px;
-  border: 2px solid #fce9ca;
+  border: 2px solid @border;
 }
 
 #clock,
 #custom-home {
-  background-color: #100505;
-  border-top: 2px solid #fce9ca;
-  border-bottom: 2px solid #fce9ca;
-  border-right: 2px solid #fce9ca;
+  background-color: @background;
+  border-top: 2px solid @border;
+  border-bottom: 2px solid @border;
+  border-right: 2px solid @border;
   margin-top: 6px;
   margin-right: 8px;
   padding: 4px 8px;
@@ -38,10 +44,10 @@
 
 #network,
 #custom-lock {
-  background-color: #100505;
-  border-top: 2px solid #fce9ca;
-  border-bottom: 2px solid #fce9ca;
-  border-left: 2px solid #fce9ca;
+  background-color: @background;
+  border-top: 2px solid @border;
+  border-bottom: 2px solid @border;
+  border-left: 2px solid @border;
   margin-top: 6px;
   margin-left: 6px;
   padding: 4px 2px;
@@ -58,10 +64,10 @@
 #custom-temperature,
 #memory,
 #cpu {
-  background-color: #100505;
-  border-top: 2px solid #fce9ca;
+  background-color: @background;
+  border-top: 2px solid @border;
   /* Applies a 2px border to the top */
-  border-bottom: 2px solid #fce9ca;
+  border-bottom: 2px solid @border;
   /* Applies a 2px border to the bottom */
   margin-top: 6px;
   padding: 4px 2px;
@@ -86,19 +92,19 @@
 #custom-reboot:hover,
 #custom-power:hover,
 #taskbar #window:hover {
-  background-color: #221155;
+  background-color: @hover;
 }
 
 #workspaces button:hover {
-  background-color: #221155;
+  background-color: @hover;
   padding: 2px 8px;
   margin: 0 2px;
   border-radius: 10px;
 }
 
 #workspaces button.active {
-  background-color: #3d0c11;
-  color: #ebc2a8;
+  background-color: @active;
+  color: @active;
   padding: 2px 8px;
   margin: 0 2px;
   border-radius: 10px;
@@ -107,7 +113,7 @@
 #workspaces button {
   background: transparent;
   border: none;
-  color: #ebc2a8;
+  color: @active;
   padding: 2px 8px;
   margin: 0 2px;
   font-weight: bold;
@@ -119,8 +125,8 @@
 }
 
 #taskbar {
-  background-color: #100505;
-  border: 2px solid #fce9ca;
+  background-color: @background;
+  border: 2px solid @border;
   padding: 4px 6px;
   margin-top: 6px;
   margin-left: 6px;
@@ -131,22 +137,22 @@
 #taskbar button {
   background: transparent;
   border: none;
-  color: #ebc2a8;
+  color: @active;
   padding: 2px 8px;
   margin: 2px;
   font-weight: bold;
 }
 
 #taskbar button.active {
-  background-color: #3d0c11;
-  color: #ebc2a8;
+  background-color: @active;
+  color: @active;
   padding: 2px 8px;
   margin: 2px;
   border-radius: 10px;
 }
 
 #taskbar button:hover {
-  background-color: #221155;
+  background-color: @hover;
   padding: 2px 8px;
   margin: 2px;
   border-radius: 10px;

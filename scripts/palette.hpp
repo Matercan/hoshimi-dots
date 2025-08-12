@@ -330,8 +330,11 @@ public:
           bestMatch = extractedColor;
         }
       }
-
-      dominantColors.push_back(adjustColorForTheme(bestMatch));
+      if (bestMatch.distanceTo(defaultColor) < 75) {
+        dominantColors.push_back(adjustColorForTheme(bestMatch));
+      } else {
+        dominantColors.push_back(adjustColorForTheme(defaultColor));
+      }
     }
 
     if (dominantColors.size() < 16) {

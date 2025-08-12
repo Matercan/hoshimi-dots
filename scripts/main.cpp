@@ -177,6 +177,9 @@ int main(int argc, char *argv[]) {
   }
 
   system("hyprctl reload > /dev/null &");
+  system("swww img ~/.local/share/hyprland-dots/wallpaper.png");
+  system("eww reload > /dev/null &");
+  system("killall waybar && waybar > /dev/null &");
   std::cout << "\n=== Installation Complete ===\n";
   return 0;
 }

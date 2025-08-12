@@ -10,3 +10,4 @@ __pycache__/
 *.txt
 *.png
 backup*
+build*

@@ -11,7 +11,7 @@ Features include:
 git clone https://github.com/Matercan/hyprland-dots
 cd hyprland-dots
 mkdir -p build && cd build
-cmake && make
+cmake .. && make
 ```
 
 Dependencies:
@@ -70,6 +70,7 @@ Integrate catppucin, gruvbox, dracula, and other popular themes into the install
 https://github.com/woioeow/hyprland-dotfiles.git
 
 https://github.com/typecraft-dev/dotfiles.git
+
 
 
 

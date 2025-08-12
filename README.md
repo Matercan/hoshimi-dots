@@ -63,7 +63,7 @@ makepkg -si
 | Wallpaper | Warm | Dark | Light |
 | --- | --- | --- | --- |
 | Wallpaper One | <img width="1918" height="1080" alt="image" src="https://github.com/user-attachments/assets/6ec3640b-f2bc-4573-b3bf-cea670512d58" /> | <img width="1918" height="1080" alt="image" src="https://github.com/user-attachments/assets/966a7a90-cfee-4c13-948a-d917e56a960c" /> |  <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/fc2b17c2-b79b-4cc6-b887-7fc428574589" /> |
-| Wallpaper Two |<img width="1918" height="1080" alt="image" src="https://github.com/user-attachments/assets/af0f2fd0-162e-4628-b9b4-a5538afbefbc" /> |  <img width="1911" height="1080" alt="image" src="https://github.com/user-attachments/assets/54c7219c-8bfb-4471-a71b-2cfd965ef984" /> | <img width="1921" height="1080" alt="image" src="https://github.com/user-attachments/assets/64d4dd04-75e0-4dd0-88fb-7543ecf1ba76" />  |
+| Wallpaper Two |<img width="1918" height="1080" alt="image" src="https://github.com/user-attachments/assets/af0f2fd0-162e-4628-b9b4-a5538afbefbc" /> |  <img width="1917" height="1080" alt="image" src="https://github.com/user-attachments/assets/edf0c419-9031-4f0f-840f-8ad5a534d21d" /> | <img width="1921" height="1080" alt="image" src="https://github.com/user-attachments/assets/64d4dd04-75e0-4dd0-88fb-7543ecf1ba76" />  |
 | Wallpaper Three | <img width="1920" height="1079" alt="image" src="https://github.com/user-attachments/assets/314db5d3-4607-4f09-a8ba-1e5e692c7944" /> | <img width="1919" height="1080" alt="image" src="https://github.com/user-attachments/assets/c4bf4f93-4b04-4516-b792-c20e153a84a9" /> | <img width="1916" height="1080" alt="image" src="https://github.com/user-attachments/assets/f02b3c92-1bb8-441f-8fd2-64b0aa232247" /> 
 
 
@@ -84,6 +84,7 @@ makepkg -si
 [typecraft's dotfiles](https://github.com/typecraft-dev/dotfiles.git)
 
 [ml4 dotfiles](https://github.com/mylinuxforwork/dotfiles)
+
 
 
 

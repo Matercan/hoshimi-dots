@@ -5,6 +5,13 @@ $border: $foreground;
 $background: #100505;
 $hover: #8F8472;
 
+$accent-hover: #4e1847;
+$accent-purple: #c9a9dd;
+$accent-green: #a3be8c;
+$accent-red: #bf616a;
+$accent-blue: #8b9dc3;
+$accent-orange: #d08770;
+
 .player {
   background-color: $background;
   border: 2px solid $border;
@@ -64,12 +71,7 @@ $hover: #8F8472;
   font-size: 28px;
 }
 
-$accent-hover: #4e1847;
-$accent-purple: #c9a9dd;
-$accent-green: #a3be8c;
-$accent-red: #bf616a;
-$accent-blue: #8b9dc3;
-$accent-orange: #d08770;
+
 
 .home {
   background-color: transparent;

@@ -33,9 +33,8 @@ string setupPackage(const string &package_name,
     string dir = "/usr/bin/" + trimmed_package;
     struct stat sb;
 
-    cout << "Installing " << trimmed_package << endl;
     if (stat(dir.c_str(), &sb) == 0) {
-      cout << trimmed_package << " already installed" << endl;
+      cout << trimmed_package << " already on system" << endl;
     } else if (trimmed_package == "catalyst") {
       string cmd = "git clone https://github.com/Matercan/catalyst.git"
                    " && makepkg -si";
@@ -130,16 +129,18 @@ int main(int argc, char *argv[]) {
 
   if (!config.wallpaperPath.empty()) {
     std::cout << "Wallpaper: " << config.wallpaperPath << "\n";
+  } else {
+    config.wallpaperPath = "assets/wallpaper.png";
   }
 
+  ColorScheme scheme;
   if (config.generateColorScheme) {
     std::cout << "Colorscheme: Generate " << config.colorSchemeTheme
               << " theme from wallpaper\n";
 
-    // Here you'd integrate your ColorScheme generator
     try {
-      generateColorSchemeFromPNG(config.wallpaperPath, config.colorSchemeTheme,
-                                 "colorscheme.txt");
+      scheme = generateColorSchemeFromPNG(
+          config.wallpaperPath, config.colorSchemeTheme, "colorscheme.txt");
       std::cout << "Colorscheme generated successfully!\n";
     } catch (const std::exception &e) {
       std::cerr << "Failed to generate colorscheme: " << e.what() << "\n";
@@ -171,9 +172,12 @@ int main(int argc, char *argv[]) {
     }
 
     std::cout << "Installing " << trimmed_package << "...\n";
+    fm.setupPackageColors(trimmed_package, scheme);
     fm.movePackage(trimmed_package);
+    cout << "\n";
   }
 
+  system("hyprctl reload");
   std::cout << "\n=== Installation Complete ===\n";
   return 0;
 }

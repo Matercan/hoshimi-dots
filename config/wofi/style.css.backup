@@ -1,7 +1,8 @@
 @define-color border #fce9ca;
-@define-color foreground #6e380e;
-@define-color background #100505;
-@define-color active #ebc2a8;
+@define-color text #6e380e;
+@define-color background-color #100505;
+@define-color transparent rgba(0, 0, 0, 0.0);
+@define-color mauve #ebc2a8;
 
 * {
   font-family: 'CaskaydiaCove Nerd Font', monospace;
@@ -11,27 +12,27 @@
 window {
   border: 2px solid @border;
   border-radius: 8px;
-  background-color: @background;
+  background-color: @background-color;
 }
 
 #input {
   border: 2px solid @border;
   border-radius: 8px;
-  color: @foreground;
+  color: @text;
   background-color: transparent;
 }
 
 #text {
   margin: 5px;
   border: none;
-  color: @foreground;
+  color: @text;
 }
 
 #entry:selected {
   border: 2px solid @border;
-  background-color: transparent;
+  background-color: @transparent;
 }
 
 #entry:selected #text {
-  color: @active;
+  color: @mauve;
 }

@@ -348,18 +348,37 @@ public:
 
     Color backgroundColor, foregroundColor;
 
+    Color domColor = extractedColors[0];
+    Color invertColor =
+        Color(255 - domColor.r, 255 - domColor.b, 255 - domColor.g);
+
+    bool dark = false;
+    if (domColor.distanceTo(Color(0, 0, 0)) >
+        domColor.distanceTo(Color(255, 255, 255))) {
+      dark = true;
+    }
+
+    if (!dark) {
+      Color rDomColor = domColor;
+      domColor = invertColor;
+      invertColor = rDomColor;
+    }
+
+    Color warmColor = Color(domColor.r + 15, domColor.g - 15, domColor.b + 30);
+
     switch (theme) {
     case ThemeType::DARK:
-      backgroundColor = Color(16, 5, 5);      // Very dark
-      foregroundColor = Color(252, 233, 202); // Light cream
+      backgroundColor = domColor;
+      foregroundColor = invertColor;
       break;
     case ThemeType::LIGHT:
-      backgroundColor = Color(248, 248, 242); // Very light
-      foregroundColor = Color(40, 40, 40);    // Dark gray
+      backgroundColor = invertColor;
+      foregroundColor = domColor;
       break;
     case ThemeType::WARM:
-      backgroundColor = Color(25, 15, 10);    // Warm dark
-      foregroundColor = Color(255, 240, 220); // Warm light
+      backgroundColor = warmColor;
+      foregroundColor =
+          Color(255 - warmColor.r, 255 - warmColor.g, 255 - warmColor.b);
       break;
     }
 

@@ -422,7 +422,8 @@
                         "channels": [
                             "1350863981421793292",
                             "1323229512045039627",
-                            "1391370586760151110"
+                            "1391370586760151110",
+                            "1265688491648352402"
                         ]
                     },
                     {
@@ -704,6 +705,9 @@
         },
         "WebContextMenus": {
             "enabled": true
+        },
+        "CopyStickerLinks": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -716,6 +720,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1754935454046
+        "settingsSyncVersion": 1755008097675
     }
 }

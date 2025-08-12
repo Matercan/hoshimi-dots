@@ -330,7 +330,8 @@ public:
           bestMatch = extractedColor;
         }
       }
-      if (bestMatch.distanceTo(defaultColor) < 75) {
+      if (bestMatch.distanceTo(defaultColor) <
+          75) { // Ensurees colors aren't too far away from default values
         dominantColors.push_back(adjustColorForTheme(bestMatch));
       } else {
         dominantColors.push_back(adjustColorForTheme(defaultColor));
@@ -361,24 +362,44 @@ public:
       Color rDomColor = domColor;
       domColor = invertColor;
       invertColor = rDomColor;
-    }
+    } // Makes sure domColor is always darer than inverColor
 
-    Color warmColor = Color(domColor.r - 15, domColor.g - 45, domColor.b);
+    Color warmColor = Color(domColor.r + 15, domColor.g, domColor.b + 30);
+    Color coldColor =
+        Color(255 - warmColor.r, 255 - warmColor.g, 255 - warmColor.b);
 
-    switch (theme) {
-    case ThemeType::DARK:
-      backgroundColor = domColor;
-      foregroundColor = invertColor;
-      break;
-    case ThemeType::LIGHT:
-      backgroundColor = invertColor;
-      foregroundColor = domColor;
-      break;
-    case ThemeType::WARM:
-      backgroundColor = warmColor;
-      foregroundColor =
-          Color(255 - warmColor.r, 255 - warmColor.g, 255 - warmColor.b);
-      break;
+    if (dark) {
+
+      switch (theme) {
+      case ThemeType::DARK:
+        backgroundColor = domColor;
+        foregroundColor = invertColor;
+        break;
+      case ThemeType::LIGHT:
+        backgroundColor = invertColor;
+        foregroundColor = domColor;
+        break;
+      case ThemeType::WARM:
+        backgroundColor = warmColor;
+        foregroundColor = coldColor;
+      }
+    } else {
+      switch (theme) {
+      case ThemeType::DARK:
+        backgroundColor = domColor;
+        foregroundColor = invertColor;
+        break;
+      case ThemeType::LIGHT:
+        // Background color is too close to palette color 0
+        domColor = Color(2 * backgroundColor.r, 2 * backgroundColor.g,
+                         2 * backgroundColor.b);
+        backgroundColor = invertColor;
+        foregroundColor = domColor;
+        break;
+      case ThemeType::WARM:
+        backgroundColor = warmColor;
+        foregroundColor = coldColor;
+      }
     }
 
     scheme.background = backgroundColor.toHex();

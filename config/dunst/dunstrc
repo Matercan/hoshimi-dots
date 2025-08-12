@@ -368,12 +368,6 @@
     # Icon for notifications with critical urgency
     default_icon = dialog-warning
 
-[vesktop_notifications]
-    # Make sure this 'appname' matches what 'dunst -d' shows for Vesktop notifications
-    appname = "vesktop" # Or "discord" or whatever the actual appname is
-
-    # Override the middle-click behavior for notifications from this specific app.
-    # This will execute our custom script and then close the notification.
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.

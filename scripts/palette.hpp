@@ -352,19 +352,15 @@ public:
     Color invertColor =
         Color(255 - domColor.r, 255 - domColor.b, 255 - domColor.g);
 
-    bool dark = false;
-    if (domColor.distanceTo(Color(0, 0, 0)) >
-        domColor.distanceTo(Color(255, 255, 255))) {
-      dark = true;
-    }
-
+    bool dark = domColor.distanceTo(Color(255, 255, 255)) >
+                invertColor.distanceTo(Color(255, 255, 255));
     if (!dark) {
       Color rDomColor = domColor;
       domColor = invertColor;
       invertColor = rDomColor;
     }
 
-    Color warmColor = Color(domColor.r + 15, domColor.g - 15, domColor.b + 30);
+    Color warmColor = Color(domColor.r - 15, domColor.g - 45, domColor.b);
 
     switch (theme) {
     case ThemeType::DARK:

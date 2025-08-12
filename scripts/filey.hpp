@@ -225,8 +225,10 @@ public:
   }
 
   void moveWallpaper(string &wallpaper) {
-    fs::copy_file(fs::path(wallpaper), localPath);
-    fs::rename(localPath / wallpaper, "wallpaper");
+    fs::path destinationPath = localPath / "wallpaper.png";
+
+    fs::copy(fs::path(wallpaper), destinationPath,
+             fs::copy_options::overwrite_existing);
   }
 
   void setupLocalPath(vector<string> packages) {

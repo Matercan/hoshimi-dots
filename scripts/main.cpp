@@ -129,8 +129,6 @@ int main(int argc, char *argv[]) {
 
   if (!config.wallpaperPath.empty()) {
     std::cout << "Wallpaper: " << config.wallpaperPath << "\n";
-  } else {
-    config.wallpaperPath = "assets/wallpaper.png";
   }
 
   ColorScheme scheme;
@@ -161,6 +159,7 @@ int main(int argc, char *argv[]) {
     theme = ThemeType::WARM;
   }
 
+  fm.moveWallpaper(config.wallpaperPath);
   fm.setupLocalPath(config.packages);
 
   for (const std::string &package_name : config.packages) {
@@ -177,7 +176,7 @@ int main(int argc, char *argv[]) {
     cout << "\n";
   }
 
-  system("hyprctl reload");
+  system("hyprctl reload > /dev/null &");
   std::cout << "\n=== Installation Complete ===\n";
   return 0;
 }

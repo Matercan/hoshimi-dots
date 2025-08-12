@@ -10,9 +10,13 @@ Features include:
 ```shell
 git clone https://github.com/Matercan/hyprland-dots
 cd hyprland-dots
-g++ scripts/install.cpp -o install-bin -lpng
-chmod +x pull.sh
+mkdir -p build && cd build
+cmake && make
 ```
+
+Dependencies:
+- libpng
+- pkgconf
 
 ## Usage
 ```
@@ -66,6 +70,7 @@ Integrate catppucin, gruvbox, dracula, and other popular themes into the install
 https://github.com/woioeow/hyprland-dotfiles.git
 
 https://github.com/typecraft-dev/dotfiles.git
+
 
 
 

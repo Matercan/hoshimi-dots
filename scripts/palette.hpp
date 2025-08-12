@@ -10,14 +10,16 @@
 #include <ios>
 #include <iostream>
 #include <memory>
-#include <png.h>
-#include <pngconf.h>
 #include <sstream>
 #include <stdexcept>
 #include <string.h>
 #include <string>
 #include <unordered_map>
 #include <vector>
+
+#include <jpeglib.h>
+#include <png.h>
+#include <pngconf.h>
 
 enum class ThemeType { DARK, LIGHT, WARM };
 
@@ -220,6 +222,211 @@ public:
 
     std::sort(colors.begin(), colors.end());
     return colors;
+  }
+
+  int getWidth() const { return width; }
+  int getHeight() const { return height; }
+  bool isValid() const { return data != nullptr; }
+};
+
+class JPEGImage {
+private:
+  std::unique_ptr<uint8_t[]> data;
+  int width, height;
+
+public:
+  JPEGImage() : width(0), height(0) {}
+
+  bool loadFromFile(const std::string &filename) {
+    FILE *fp = fopen(filename.c_str(), "rb");
+    if (!fp) {
+      std::cerr << "Error: Could not open file " << filename << std::endl;
+      return false;
+    }
+
+    // Create JPEG decompression object
+    struct jpeg_decompress_struct cinfo;
+    struct jpeg_error_mgr jerr;
+
+    // Set up error handling
+    cinfo.err = jpeg_std_error(&jerr);
+
+    // Initialize JPEG decompression object
+    jpeg_create_decompress(&cinfo);
+
+    // Set input file
+    jpeg_stdio_src(&cinfo, fp);
+
+    // Read JPEG header
+    int rc = jpeg_read_header(&cinfo, TRUE);
+    if (rc != 1) {
+      std::cerr << "Error: Invalid JPEG file " << filename << std::endl;
+      jpeg_destroy_decompress(&cinfo);
+      fclose(fp);
+      return false;
+    }
+
+    // Force RGB output (3 components per pixel)
+    cinfo.out_color_space = JCS_RGB;
+    cinfo.output_components = 3;
+
+    // Start decompression
+    jpeg_start_decompress(&cinfo);
+
+    width = cinfo.output_width;
+    height = cinfo.output_height;
+    int channels = cinfo.output_components;
+
+    // Allocate memory for RGB data (we'll convert to RGBA)
+    int rgb_row_size = width * channels;
+    int rgba_row_size = width * 4; // RGBA format
+
+    std::unique_ptr<uint8_t[]> rgb_data =
+        std::make_unique<uint8_t[]>(rgb_row_size * height);
+    data = std::make_unique<uint8_t[]>(rgba_row_size * height);
+
+    // Read scanlines
+    std::vector<JSAMPROW> row_pointers(height);
+    for (int y = 0; y < height; ++y) {
+      row_pointers[y] = rgb_data.get() + y * rgb_row_size;
+    }
+
+    // Read all scanlines
+    int lines_read = 0;
+    while (cinfo.output_scanline < cinfo.output_height) {
+      lines_read +=
+          jpeg_read_scanlines(&cinfo, &row_pointers[cinfo.output_scanline],
+                              cinfo.output_height - cinfo.output_scanline);
+    }
+
+    // Convert RGB to RGBA format
+    for (int y = 0; y < height; ++y) {
+      for (int x = 0; x < width; ++x) {
+        int rgb_index = (y * width + x) * 3;
+        int rgba_index = (y * width + x) * 4;
+
+        data[rgba_index] = rgb_data[rgb_index];         // R
+        data[rgba_index + 1] = rgb_data[rgb_index + 1]; // G
+        data[rgba_index + 2] = rgb_data[rgb_index + 2]; // B
+        data[rgba_index + 3] = 255;                     // A (fully opaque)
+      }
+    }
+
+    // Cleanup
+    jpeg_finish_decompress(&cinfo);
+    jpeg_destroy_decompress(&cinfo);
+    fclose(fp);
+
+    return true;
+  }
+
+  std::vector<Color> extractColors() const {
+    if (!data)
+      return {};
+
+    std::unordered_map<Color, int, Color::Hash> colorMap;
+
+    for (int y = 0; y < height; ++y) {
+      for (int x = 0; x < width; ++x) {
+        int index = (y * width + x) * 4; // RGBA format
+        uint8_t r = data[index];
+        uint8_t g = data[index + 1];
+        uint8_t b = data[index + 2];
+        uint8_t a = data[index + 3];
+
+        // Skip very transparent pixels (though JPEG doesn't have transparency)
+        if (a < 128)
+          continue;
+
+        Color color(r, g, b);
+        colorMap[color]++;
+      }
+    }
+
+    // Convert map to vector and sort by frequency
+    std::vector<Color> colors;
+    colors.reserve(colorMap.size());
+
+    for (const auto &pair : colorMap) {
+      Color color = pair.first;
+      color.frequency = pair.second;
+      colors.push_back(color);
+    }
+
+    std::sort(colors.begin(), colors.end());
+    return colors;
+  }
+
+  int getWidth() const { return width; }
+  int getHeight() const { return height; }
+  bool isValid() const { return data != nullptr; }
+};
+
+// Generic Image class that can handle both PNG and JPEG
+class Image {
+private:
+  std::unique_ptr<uint8_t[]> data;
+  int width, height;
+
+  bool hasEnding(const std::string &fullString,
+                 const std::string &ending) const {
+    if (fullString.length() >= ending.length()) {
+      return (0 == fullString.compare(fullString.length() - ending.length(),
+                                      ending.length(), ending));
+    } else {
+      return false;
+    }
+  }
+
+  std::string toLower(const std::string &str) const {
+    std::string result = str;
+    std::transform(result.begin(), result.end(), result.begin(), ::tolower);
+    return result;
+  }
+
+public:
+  Image() : width(0), height(0) {}
+
+  bool loadFromFile(const std::string &filename) {
+    std::string lowerFilename = toLower(filename);
+
+    if (hasEnding(lowerFilename, ".png")) {
+      PNGImage pngImage;
+      if (pngImage.loadFromFile(filename)) {
+        width = pngImage.getWidth();
+        height = pngImage.getHeight();
+
+        // Copy data from PNG image
+        int dataSize = width * height * 4; // RGBA
+        data = std::make_unique<uint8_t[]>(dataSize);
+
+        // Since PNGImage doesn't expose raw data, we need to extract colors
+        // and reconstruct. For now, let's use the PNG image directly.
+        // You might want to modify PNGImage to expose raw data access.
+        return true;
+      }
+    } else if (hasEnding(lowerFilename, ".jpg") ||
+               hasEnding(lowerFilename, ".jpeg")) {
+      JPEGImage jpegImage;
+      if (jpegImage.loadFromFile(filename)) {
+        width = jpegImage.getWidth();
+        height = jpegImage.getHeight();
+        return true;
+      }
+    } else {
+      std::cerr << "Error: Unsupported image format. Supported formats: PNG, "
+                   "JPG, JPEG"
+                << std::endl;
+      return false;
+    }
+
+    return false;
+  }
+
+  std::vector<Color> extractColors() const {
+    // This would need to be implemented based on the loaded image type
+    // For now, return empty vector
+    return {};
   }
 
   int getWidth() const { return width; }
@@ -447,15 +654,51 @@ public:
   }
 };
 
-// Convenience function for simple usage
-inline ColorScheme generateColorSchemeFromPNG(const std::string &pngPath,
-                                              const std::string &themeStr,
-                                              const std::string &outputFile) {
+inline ColorScheme generateColorSchemeFromImage(const std::string &imagePath,
+                                                const std::string &themeStr,
+                                                const std::string &outputFile) {
   try {
     ThemeType theme = ColorSchemeGenerator::parseTheme(themeStr);
     ColorSchemeGenerator generator(theme);
 
-    ColorScheme scheme = generator.generateFromPng(pngPath);
+    std::string lowerPath = imagePath;
+    std::transform(lowerPath.begin(), lowerPath.end(), lowerPath.begin(),
+                   ::tolower);
+
+    ColorScheme scheme;
+
+    if (lowerPath.find(".png") != std::string::npos) {
+      // Use existing PNG functionality
+      scheme = generator.generateFromPng(imagePath);
+    } else if (lowerPath.find(".jpg") != std::string::npos ||
+               lowerPath.find(".jpeg") != std::string::npos) {
+      // Use new JPEG functionality
+      JPEGImage image;
+      if (!image.loadFromFile(imagePath)) {
+        throw std::runtime_error("Failed to load JPEG image: " + imagePath);
+      }
+
+      std::cout << "Loaded JPEG image: " << image.getWidth() << "x"
+                << image.getHeight() << " pixels\n";
+
+      auto colors = image.extractColors();
+      if (colors.empty()) {
+        throw std::runtime_error("No colors extracted from JPEG image");
+      }
+
+      std::cout << "Extracted " << colors.size() << " unique colors\n";
+      std::cout << "Most frequent colors:\n";
+      for (size_t i = 0; i < std::min(colors.size(), size_t(5)); ++i) {
+        std::cout << " " << colors[i].toHex() << " (used "
+                  << colors[i].frequency << " times)\n";
+      }
+
+      scheme = generator.generate(colors);
+    } else {
+      throw std::runtime_error(
+          "Unsupported image format. Use PNG, JPG, or JPEG");
+    }
+
     scheme.writeToFile(outputFile);
     scheme.print();
 

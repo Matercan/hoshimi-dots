@@ -137,7 +137,7 @@ int main(int argc, char *argv[]) {
               << " theme from wallpaper\n";
 
     try {
-      scheme = generateColorSchemeFromPNG(
+      scheme = generateColorSchemeFromImage(
           config.wallpaperPath, config.colorSchemeTheme, "colorscheme.txt");
       std::cout << "Colorscheme generated successfully!\n";
     } catch (const std::exception &e) {

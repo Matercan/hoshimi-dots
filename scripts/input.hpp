@@ -109,7 +109,9 @@ public:
   }
 
   bool validateWallpaper(const std::string &path) {
-    return std::filesystem::exists(path) && hasEnding(path, ".png");
+    return std::filesystem::exists(path) &&
+           (hasEnding(path, ".png") || hasEnding(path, ".jpeg") ||
+            hasEnding(path, ".jpg"));
   }
 
   Config parse(int argc, char *argv[]) {

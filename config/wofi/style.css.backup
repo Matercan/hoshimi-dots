@@ -1,7 +1,7 @@
-@define-color border #fce9ca;
-@define-color foreground #6e380e;
-@define-color background #100505;
-@define-color active #ebc2a8;
+@define-color border #edd6eb;
+@define-color foreground #edd6eb;
+@define-color background #121429;
+@define-color active #0a0c1e;
 
 * {
   font-family: 'CaskaydiaCove Nerd Font', monospace;

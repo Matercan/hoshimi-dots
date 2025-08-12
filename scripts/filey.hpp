@@ -370,6 +370,7 @@ public:
 
       updater.applyColorSchemeToWaybar(localPath.string() + "/waybar",
                                        waybarColors);
+      system("killall waybar && waybar > /dev/null &");
     } else if (package == "wofi") {
       vector<string> wofiColors = {scheme.background, scheme.foreground,
                                    scheme.palette[4], scheme.foreground};
@@ -380,6 +381,8 @@ public:
           scheme.selectionBackground, scheme.palette[5], scheme.palette[2],
           scheme.palette[1],          scheme.palette[4], scheme.palette[3]};
       updater.applyColorSchemeToEww(localPath.string() + "/eww", ewwColors);
+      system("eww reload > /dev/null &");
+
     }
 
     else {

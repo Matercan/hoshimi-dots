@@ -52,25 +52,109 @@ string setupPackage(const string &package_name,
 }
 
 int main(int argc, char *argv[]) {
+  // Your available packages and themes
+  std::vector<std::string> TOTALPACKAGES = {
+      "ghostty", "hypr",    "fish",  "eww",      "waybar",
+      "wofi",    "vesktop", "dunst", "catalyst", "fastfetch"};
 
-  InputManager input(TOTALPACKAGES, TOTALTHEMES);
+  std::vector<std::string> TOTALTHEMES = {"dark", "light", "warm"};
 
-  const vector<string> packageVect = input.packageInput();
+  ArgumentParser parser(TOTALPACKAGES, TOTALTHEMES);
 
-  const vector<string> themesVect = input.themeInput();
+  // Handle no arguments - show help
+  if (argc == 1) {
+    std::cout << "No arguments provided. Use -h for help or -i for interactive "
+                 "mode.\n";
+    return 1;
+  }
 
-  for (const string &package_name : packageVect) {
-    // Find package and trim any leading/trailing whitespace
-    string trimmed_package = setupPackage(package_name, TOTALPACKAGES);
+  auto config = parser.parse(argc, argv);
 
-    if (trimmed_package == "Starship.") {
+  // Handle special flags first
+  if (config.showHelp) {
+    parser.printHelp(argv[0]);
+    return 0;
+  }
+
+  if (config.listPackages) {
+    parser.listPackages();
+    return 0;
+  }
+
+  if (config.listThemes) {
+    parser.listThemes();
+    return 0;
+  }
+
+  // Interactive mode
+  if (config.interactive) {
+    InteractiveInputManager input(TOTALPACKAGES, TOTALTHEMES);
+    config.packages = input.packageInput();
+    auto themeConfig = input.themeInput();
+    config.theme = themeConfig.theme;
+    config.wallpaperPath = themeConfig.wallpaperPath;
+    config.generateColorScheme = themeConfig.generateColorScheme;
+    config.colorSchemeTheme = themeConfig.colorSchemeTheme;
+  }
+
+  // Validate configuration
+  if (!parser.validateConfig(config)) {
+    return 1;
+  }
+
+  // Check if we have anything to do
+  if (config.packages.empty()) {
+    std::cerr << "Error: No packages specified. Use -p, -a, or -i.\n";
+    return 1;
+  }
+
+  // Print what we're going to do
+  std::cout << "\n=== Installation Plan ===\n";
+  std::cout << "Packages: ";
+  for (size_t i = 0; i < config.packages.size(); ++i) {
+    std::cout << config.packages[i];
+    if (i < config.packages.size() - 1)
+      std::cout << ", ";
+  }
+  std::cout << "\n";
+
+  if (!config.theme.empty()) {
+    std::cout << "Theme: " << config.theme << "\n";
+  }
+
+  if (!config.wallpaperPath.empty()) {
+    std::cout << "Wallpaper: " << config.wallpaperPath << "\n";
+  }
+
+  if (config.generateColorScheme) {
+    std::cout << "Colorscheme: Generate " << config.colorSchemeTheme
+              << " theme from wallpaper\n";
+
+    // Here you'd integrate your ColorScheme generator
+    try {
+      // generateColorSchemeFromPNG(config.wallpaperPath,
+      // config.colorSchemeTheme, "colorscheme.txt");
+      std::cout << "Colorscheme generated successfully!\n";
+    } catch (const std::exception &e) {
+      std::cerr << "Failed to generate colorscheme: " << e.what() << "\n";
+    }
+  }
+
+  std::cout << "\n=== Installing ===\n";
+
+  // Your existing installation logic
+  for (const std::string &package_name : config.packages) {
+    std::string trimmed_package = setupPackage(package_name, TOTALPACKAGES);
+
+    if (trimmed_package == "Not Found.") {
+      std::cout << "Package " << package_name << " not found; skipping.\n";
       continue;
-    } else if (trimmed_package == "Not Found.") {
-      cout << "Package" << package_name << "Not found; skipping." << endl;
     }
 
+    std::cout << "Installing " << trimmed_package << "...\n";
     FileManager().movePackage(trimmed_package);
   }
 
+  std::cout << "\n=== Installation Complete ===\n";
   return 0;
 }

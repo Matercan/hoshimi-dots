@@ -312,6 +312,7 @@ public:
 
     size_t numColors = std::min(extractedColors.size(), size_t(16));
     for (size_t i = 0; i < numColors; ++i) {
+
       dominantColors.push_back(adjustColorForTheme(extractedColors[i]));
     }
 

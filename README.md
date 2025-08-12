@@ -53,8 +53,6 @@ makepkg -si
 
 The warm color theme will generate really vibrant and weirid colors, I am working to fix that soon.
 
- The script only compules for C++ 12.
-
 ## Showcase
 
 | | | 
@@ -63,13 +61,17 @@ The warm color theme will generate really vibrant and weirid colors, I am workin
 | <img width="1921" height="1080" alt="image" src="https://github.com/user-attachments/assets/d0abf072-962d-42d9-84f7-ad3e9e81d198" /> | <img width="1921" height="1080" alt="image" src="https://github.com/user-attachments/assets/e049f0a9-62d9-4510-ba50-1300e9be0023" /> | 
 
 ## TO-DO:
-Integrate catppucin, gruvbox, dracula, and other popular themes into the installation
+- Integrate catppucin, gruvbox, dracula, and other popular themes into the installation
+- Eww scss integration
+- A lot more widgets
 
 ## Inspiration
 
 https://github.com/woioeow/hyprland-dotfiles.git
 
 https://github.com/typecraft-dev/dotfiles.git
+
+
 
 
 

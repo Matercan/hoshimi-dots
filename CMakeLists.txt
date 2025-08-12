@@ -20,32 +20,96 @@ find_package(PkgConfig REQUIRED)
 # Find libpng
 pkg_check_modules(PNG REQUIRED libpng)
 
-# Include directories
-include_directories(${PNG_INCLUDE_DIRS})
+# Find libjpeg
+pkg_check_modules(JPEG REQUIRED libjpeg)
 
-# Add executable
+# Try to find Qt6 for GUI support (optional)
+find_package(Qt6 QUIET COMPONENTS Core Widgets)
+
+# Add CLI executable (original)
 add_executable(hyprland-dots
-    scripts/main.cpp
+    scripts/main-cli.cpp
     scripts/filey.hpp
     scripts/input.hpp
     scripts/palette.hpp
 )
 
-# Link libraries
+# Include directories for CLI
+target_include_directories(hyprland-dots PRIVATE
+    ${PNG_INCLUDE_DIRS}
+    ${JPEG_INCLUDE_DIRS}
+)
+
+# Link libraries for CLI
 target_link_libraries(hyprland-dots 
     ${PNG_LIBRARIES}
+    ${JPEG_LIBRARIES}
     stdc++fs  # for std::filesystem (if using older compiler)
 )
 
-# Add compiler flags for PNG
-target_compile_options(hyprland-dots PRIVATE ${PNG_CFLAGS_OTHER})
+# Add compiler flags for CLI
+target_compile_options(hyprland-dots PRIVATE 
+    ${PNG_CFLAGS_OTHER}
+    ${JPEG_CFLAGS_OTHER}
+)
 
 # Set executable output directory
 set_target_properties(hyprland-dots PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
 )
 
-# Install target
+# Add GUI executable if Qt6 is found
+if(Qt6_FOUND)
+    message(STATUS "Qt6 found - Building GUI version")
+    
+    add_executable(hyprland-dots-gui
+        gui/main-gui.cpp
+        scripts/filey.hpp
+        scripts/input.hpp
+        scripts/palette.hpp
+    )
+
+    # Enable Qt6 MOC (Meta-Object Compiler)
+    set_target_properties(hyprland-dots-gui PROPERTIES
+        AUTOMOC ON
+        RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+    )
+
+    # Include directories for GUI
+    target_include_directories(hyprland-dots-gui PRIVATE
+        ${PNG_INCLUDE_DIRS}
+        ${JPEG_INCLUDE_DIRS}
+        ${CMAKE_CURRENT_SOURCE_DIR}/gui
+    )
+
+    # Link Qt6 libraries and other dependencies for GUI
+    target_link_libraries(hyprland-dots-gui
+        Qt6::Core
+        Qt6::Widgets
+        ${PNG_LIBRARIES}
+        ${JPEG_LIBRARIES}
+        stdc++fs
+    )
+
+    # Add compiler flags for GUI
+    target_compile_options(hyprland-dots-gui PRIVATE 
+        ${PNG_CFLAGS_OTHER}
+        ${JPEG_CFLAGS_OTHER}
+    )
+
+    # Install GUI target
+    install(TARGETS hyprland-dots-gui
+        RUNTIME DESTINATION bin
+    )
+    
+else()
+    message(STATUS "Qt6 not found - GUI version will not be built")
+    message(STATUS "To build GUI: sudo apt install qt6-base-dev (Ubuntu/Debian)")
+    message(STATUS "              sudo pacman -S qt6-base (Arch)")
+    message(STATUS "              sudo dnf install qt6-qtbase-devel (Fedora)")
+endif()
+
+# Install CLI target
 install(TARGETS hyprland-dots
     RUNTIME DESTINATION bin
 )
@@ -79,6 +143,15 @@ add_custom_target(debug
     COMMENT "Building with debug information"
 )
 
+# Custom target for building GUI in debug mode (if Qt6 available)
+if(Qt6_FOUND)
+    add_custom_target(debug-gui
+        COMMAND ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=Debug ${CMAKE_SOURCE_DIR}
+        COMMAND ${CMAKE_COMMAND} --build . --target hyprland-dots-gui
+        COMMENT "Building GUI with debug information"
+    )
+endif()
+
 # Custom target for installing dotfiles to user home
 add_custom_target(install-dotfiles
     COMMAND ./install.sh
@@ -95,6 +168,16 @@ message(STATUS "PNG found: ${PNG_FOUND}")
 if(PNG_FOUND)
     message(STATUS "PNG version: ${PNG_VERSION}")
     message(STATUS "PNG libraries: ${PNG_LIBRARIES}")
+endif()
+message(STATUS "JPEG found: ${JPEG_FOUND}")
+if(JPEG_FOUND)
+    message(STATUS "JPEG libraries: ${JPEG_LIBRARIES}")
+endif()
+if(Qt6_FOUND)
+    message(STATUS "Qt6 found: YES (GUI will be built)")
+    message(STATUS "Qt6 version: ${Qt6_VERSION}")
+else()
+    message(STATUS "Qt6 found: NO (only CLI will be built)")
 endif()
 message(STATUS "Install prefix: ${CMAKE_INSTALL_PREFIX}")
 message(STATUS "=============================")

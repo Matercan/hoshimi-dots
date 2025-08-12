@@ -75,6 +75,7 @@ makepkg -si
 ## TO-DO:
 - Integrate catppucin, gruvbox, dracula, and other popular themes into the installation
 - A lot more widgets for eww
+- Dunst theming
 
 ## Inspiration
 
@@ -83,6 +84,7 @@ makepkg -si
 [typecraft's dotfiles](https://github.com/typecraft-dev/dotfiles.git)
 
 [ml4 dotfiles](https://github.com/mylinuxforwork/dotfiles)
+
 
 
 

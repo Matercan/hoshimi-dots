@@ -13,7 +13,7 @@ using namespace std;
 
 const vector<string> TOTALPACKAGES = {"dunst",   "fastfetch", "fish",   "eww",
                                       "ghostty", "vesktop",   "waybar", "wofi",
-                                      "hypr",    "catalyst"};
+                                      "hypr",    "catalyst",  "cava"};
 
 const vector<string> TOTALTHEMES = {"dark", "warm", "light"};
 
@@ -62,12 +62,6 @@ string setupPackage(const string &package_name,
 }
 
 int main(int argc, char *argv[]) {
-  // Your available packages and themes
-  std::vector<std::string> TOTALPACKAGES = {
-      "ghostty", "hypr",    "fish",  "eww",      "waybar",
-      "wofi",    "vesktop", "dunst", "catalyst", "fastfetch"};
-
-  std::vector<std::string> TOTALTHEMES = {"dark", "light", "warm"};
 
   ArgumentParser parser(TOTALPACKAGES, TOTALTHEMES);
 

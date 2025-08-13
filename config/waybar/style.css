@@ -1,8 +1,8 @@
-@define-color background #271367;
-@define-color border #d8ec98;
-@define-color hover #191035;
-@define-color active #460b0c;
-@define-color foreground #d8ec98;
+@define-color background #240e2b;
+@define-color border #c7fbf2;
+@define-color hover #121636;
+@define-color active #000000;
+@define-color foreground #c7fbf2;
 
 * {
   font-family: "CaskaydiaCove Nerd Font", "Font Awesome 6 Free", "Font Awesome 6 Free Solid";

@@ -64,6 +64,7 @@ if(Qt6_FOUND)
     
     add_executable(hyprland-dots-gui
         gui/main-gui.cpp
+        gui/headers.hpp
         scripts/filey.hpp
         scripts/input.hpp
         scripts/palette.hpp

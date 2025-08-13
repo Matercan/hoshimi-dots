@@ -1,29 +1,4 @@
-#include <QApplication>
-#include <QCheckBox>
-#include <QComboBox>
-#include <QFileDialog>
-#include <QFrame>
-#include <QGridLayout>
-#include <QGroupBox>
-#include <QHBoxLayout>
-#include <QLabel>
-#include <QLineEdit>
-#include <QMainWindow>
-#include <QMessageBox>
-#include <QPalette>
-#include <QPixmap>
-#include <QProcess>
-#include <QProgressBar>
-#include <QPushButton>
-#include <QScrollArea>
-#include <QSplitter>
-#include <QStyle>
-#include <QStyleFactory>
-#include <QTextEdit>
-#include <QThread>
-#include <QTimer>
-#include <QVBoxLayout>
-#include <QtWidgets>
+#include "headers.hpp"
 
 // Standard C++ headers needed for operations
 #include <algorithm>
@@ -31,7 +6,7 @@
 #include <iostream>
 #include <sys/stat.h>
 
-// Include the existing headers from same directory
+// Include the existing headers from other directory
 #include "../scripts/filey.hpp"
 #include "../scripts/input.hpp"
 #include "../scripts/palette.hpp"
@@ -81,9 +56,10 @@ public slots:
         emit statusUpdate(QString("Installing %1...")
                               .arg(QString::fromStdString(package_name)));
 
-        std::string trimmed_package = setupPackage(
-            package_name, {"dunst", "fastfetch", "fish", "eww", "ghostty",
-                           "vesktop", "waybar", "wofi", "hypr", "catalyst"});
+        std::string trimmed_package =
+            setupPackage(package_name, {"dunst", "fastfetch", "fish", "eww",
+                                        "ghostty", "vesktop", "waybar", "wofi",
+                                        "hypr", "catalyst", "cava"});
 
         if (trimmed_package == "Not found.") {
           emit statusUpdate(QString("Package %1 not found; skipping.")
@@ -571,7 +547,7 @@ private:
   void applyDarkTheme() {
     setStyleSheet(R"(
             QMainWindow {
-                background-color: #2b2b2b;
+                background-color: rgba(0, 0, 0, 0);
                 color: #ffffff;
             }
             QWidget {

@@ -11,7 +11,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-class CSSColorUpdater {
+class DotfileColorUpdater {
 private:
   std::vector<std::string> waybarColors = {"background", "border", "hover",
                                            "active", "foreground"};
@@ -23,6 +23,20 @@ private:
       "foreground",   "background",    "hover",
       "accent-hover", "accent-purple", "accent-green",
       "accent-red",   "accent-blue",   "accent-orange"};
+
+  // Cava uses 7 gradient colors
+  std::vector<std::string> cavaGradientColors = {
+      "gradient_color_1", "gradient_color_2", "gradient_color_3",
+      "gradient_color_4", "gradient_color_5", "gradient_color_6",
+      "gradient_color_7"};
+
+  // Dunst color mappings - background, foreground, frame
+  struct DunstColors {
+    std::string background;
+    std::string foreground;
+    std::string frame;
+    std::string critical_frame;
+  };
 
 public:
   bool updateWaybarColorsRegex(const std::string &cssFilePath,
@@ -103,7 +117,7 @@ public:
       return false;
     }
 
-    for (size_t i = 0; i < std::min(waybarColors.size(), colors.size()); ++i) {
+    for (size_t i = 0; i < std::min(wofiColors.size(), colors.size()); ++i) {
       std::string pattern = "@define-color\\s+" + wofiColors[i] + "\\s+[^;]+;";
       std::string replacement =
           "@define-color " + wofiColors[i] + " " + colors[i] + ";";
@@ -120,8 +134,8 @@ public:
     std::string cssPath = wofiConfigDir + "/style.css";
     std::cout << "Updating wofi colors in: " << cssPath << std::endl;
 
-    for (size_t i = 0; i < std::min(waybarColors.size(), colors.size()); ++i) {
-      std::cout << "  " << waybarColors[i] << ": " << colors[i] << std::endl;
+    for (size_t i = 0; i < std::min(wofiColors.size(), colors.size()); ++i) {
+      std::cout << "  " << wofiColors[i] << ": " << colors[i] << std::endl;
     }
 
     bool success = updateWofiColorsRegex(cssPath, colors);
@@ -194,6 +208,228 @@ public:
     return success;
   }
 
+  // NEW: Update Cava colors
+  bool updateCavaColorsRegex(const std::string &configFilePath,
+                             const std::vector<std::string> &colors) {
+    if (colors.size() < 7) {
+      std::cerr << "Error: Need at least 7 colors for cava gradient theme"
+                << std::endl;
+      return false;
+    }
+
+    // Read entire file content
+    std::string content = readFileContent(configFilePath);
+    if (content.empty()) {
+      std::cerr << "Error: Could not read file or file is empty" << std::endl;
+      return false;
+    }
+
+    // Update each gradient color using regex
+    for (size_t i = 0; i < std::min(cavaGradientColors.size(), colors.size());
+         ++i) {
+      // Pattern matches: gradient_color_N = '#color'
+      std::string pattern = cavaGradientColors[i] + "\\s*=\\s*'[^']*'";
+      std::string replacement =
+          cavaGradientColors[i] + " = '" + colors[i] + "'";
+
+      std::regex colorRegex(pattern);
+      content = std::regex_replace(content, colorRegex, replacement);
+    }
+
+    // Write back to file
+    return writeContentToFile(configFilePath, content);
+  }
+
+  bool applyColorSchemeToCava(const std::string &cavaConfigPath,
+                              const std::vector<std::string> &colors) {
+    std::cout << "Updating cava colors in: " << cavaConfigPath << std::endl;
+
+    // Print what we're applying
+    for (size_t i = 0; i < std::min(cavaGradientColors.size(), colors.size());
+         ++i) {
+      std::cout << "  " << cavaGradientColors[i] << " = '" << colors[i] << "'"
+                << std::endl;
+    }
+
+    // Use regex method for robustness
+    bool success = updateCavaColorsRegex(cavaConfigPath + "config", colors);
+
+    if (success) {
+      std::cout << "Cava colors updated successfully!" << std::endl;
+    } else {
+      std::cout << "Failed to update cava colors." << std::endl;
+    }
+
+    return success;
+  }
+
+  // NEW: Update Dunst colors
+  bool updateDunstColorsRegex(const std::string &configFilePath,
+                              const DunstColors &colors) {
+    // Read entire file content
+    std::string content = readFileContent(configFilePath);
+    if (content.empty()) {
+      std::cerr << "Error: Could not read file or file is empty" << std::endl;
+      return false;
+    }
+
+    // Update global frame color
+    std::regex frameRegex("frame_color\\s*=\\s*\"[^\"]*\"");
+    std::string frameReplacement = "frame_color = \"" + colors.frame + "\"";
+    content = std::regex_replace(content, frameRegex, frameReplacement);
+
+    // Update urgency_low colors
+    std::regex lowBgRegex(
+        "(\\[urgency_low\\][^\\[]*background\\s*=\\s*)\"[^\"]*\"");
+    std::string lowBgReplacement = "$1\"" + colors.background + "\"";
+    content = std::regex_replace(content, lowBgRegex, lowBgReplacement);
+
+    std::regex lowFgRegex(
+        "(\\[urgency_low\\][^\\[]*foreground\\s*=\\s*)\"[^\"]*\"");
+    std::string lowFgReplacement = "$1\"" + colors.foreground + "\"";
+    content = std::regex_replace(content, lowFgRegex, lowFgReplacement);
+
+    // Update urgency_normal colors
+    std::regex normalBgRegex(
+        "(\\[urgency_normal\\][^\\[]*background\\s*=\\s*)\"[^\"]*\"");
+    std::string normalBgReplacement = "$1\"" + colors.background + "\"";
+    content = std::regex_replace(content, normalBgRegex, normalBgReplacement);
+
+    std::regex normalFgRegex(
+        "(\\[urgency_normal\\][^\\[]*foreground\\s*=\\s*)\"[^\"]*\"");
+    std::string normalFgReplacement = "$1\"" + colors.foreground + "\"";
+    content = std::regex_replace(content, normalFgRegex, normalFgReplacement);
+
+    // Update urgency_critical colors
+    std::regex criticalBgRegex(
+        "(\\[urgency_critical\\][^\\[]*background\\s*=\\s*)\"[^\"]*\"");
+    std::string criticalBgReplacement = "$1\"" + colors.background + "\"";
+    content =
+        std::regex_replace(content, criticalBgRegex, criticalBgReplacement);
+
+    std::regex criticalFgRegex(
+        "(\\[urgency_critical\\][^\\[]*foreground\\s*=\\s*)\"[^\"]*\"");
+    std::string criticalFgReplacement = "$1\"" + colors.foreground + "\"";
+    content =
+        std::regex_replace(content, criticalFgRegex, criticalFgReplacement);
+
+    std::regex criticalFrameRegex(
+        "(\\[urgency_critical\\][^\\[]*frame_color\\s*=\\s*)\"[^\"]*\"");
+    std::string criticalFrameReplacement =
+        "$1\"" + colors.critical_frame + "\"";
+    content = std::regex_replace(content, criticalFrameRegex,
+                                 criticalFrameReplacement);
+
+    // Write back to file
+    return writeContentToFile(configFilePath, content);
+  }
+
+  bool applyColorSchemeToDunst(const std::string &dunstConfigPath,
+                               const std::vector<std::string> &colors) {
+    if (colors.size() < 3) {
+      std::cerr << "Error: Need at least 3 colors for dunst theme (background, "
+                   "foreground, frame)"
+                << std::endl;
+      return false;
+    }
+
+    std::cout << "Updating dunst colors in: " << dunstConfigPath << std::endl;
+
+    // Create dunst color structure from provided colors
+    DunstColors dunstColors;
+    dunstColors.background = colors[0]; // Use first color as background
+    dunstColors.foreground = colors[1]; // Use second color as foreground
+    dunstColors.frame = colors[2];      // Use third color as frame
+
+    // Use a more vibrant color for critical notifications (red-ish)
+    if (colors.size() >= 4) {
+      dunstColors.critical_frame = colors[3]; // Use fourth color if available
+    } else {
+      dunstColors.critical_frame = "#ff0000"; // Fallback to red
+    }
+
+    // Print what we're applying
+    std::cout << "  Background: " << dunstColors.background << std::endl;
+    std::cout << "  Foreground: " << dunstColors.foreground << std::endl;
+    std::cout << "  Frame: " << dunstColors.frame << std::endl;
+    std::cout << "  Critical Frame: " << dunstColors.critical_frame
+              << std::endl;
+
+    // Use regex method for robustness
+    bool success = updateDunstColorsRegex(dunstConfigPath, dunstColors);
+
+    if (success) {
+      std::cout << "Dunst colors updated successfully!" << std::endl;
+    } else {
+      std::cout << "Failed to update dunst colors." << std::endl;
+    }
+
+    return success;
+  }
+
+  // NEW: Generate gradient colors from a color scheme
+  std::vector<std::string>
+  generateGradientColors(const std::vector<std::string> &baseColors,
+                         size_t count = 7) {
+    if (baseColors.empty()) {
+      return std::vector<std::string>(count, "#ffffff");
+    }
+
+    std::vector<std::string> gradient;
+    gradient.reserve(count);
+
+    // If we have enough colors, use them directly
+    if (baseColors.size() >= count) {
+      for (size_t i = 0; i < count; ++i) {
+        gradient.push_back(baseColors[i]);
+      }
+      return gradient;
+    }
+
+    // Generate gradient by interpolating between available colors
+    for (size_t i = 0; i < count; ++i) {
+      double ratio = static_cast<double>(i) / (count - 1);
+      size_t baseIndex = static_cast<size_t>(ratio * (baseColors.size() - 1));
+      gradient.push_back(baseColors[baseIndex]);
+    }
+
+    return gradient;
+  }
+
+  // NEW: Convenience method to apply colors to all supported applications
+  bool applyColorSchemeToAll(const std::string &configBaseDir,
+                             const std::vector<std::string> &colors) {
+    bool allSuccess = true;
+
+    // Apply to Waybar
+    if (!applyColorSchemeToWaybar(configBaseDir + "/waybar", colors)) {
+      allSuccess = false;
+    }
+
+    // Apply to Wofi
+    if (!applyColorSchemeToWofi(configBaseDir + "/wofi", colors)) {
+      allSuccess = false;
+    }
+
+    // Apply to EWW
+    if (!applyColorSchemeToEww(configBaseDir + "/eww", colors)) {
+      allSuccess = false;
+    }
+
+    // Apply to Cava (generate gradient from colors)
+    std::vector<std::string> gradientColors = generateGradientColors(colors, 7);
+    if (!applyColorSchemeToCava(configBaseDir + "/cava/", gradientColors)) {
+      allSuccess = false;
+    }
+
+    // Apply to Dunst
+    if (!applyColorSchemeToDunst(configBaseDir + "/dunst/dunstrc", colors)) {
+      allSuccess = false;
+    }
+
+    return allSuccess;
+  }
+
 private:
   std::string readFileContent(const std::string &filepath) {
     std::ifstream file(filepath);
@@ -209,9 +445,14 @@ private:
   bool writeContentToFile(const std::string &filepath,
                           const std::string &content) {
     // Create backup first
-    std::filesystem::copy_file(
-        filepath, filepath + ".backup",
-        std::filesystem::copy_options::overwrite_existing);
+    try {
+      std::filesystem::copy_file(
+          filepath, filepath + ".backup",
+          std::filesystem::copy_options::overwrite_existing);
+    } catch (const std::exception &e) {
+      std::cerr << "Warning: Could not create backup for " << filepath << ": "
+                << e.what() << std::endl;
+    }
 
     std::ofstream file(filepath);
     if (!file.is_open()) {
@@ -227,9 +468,14 @@ private:
   bool writeLinesToFile(const std::string &filepath,
                         const std::vector<std::string> &lines) {
     // Create backup first
-    std::filesystem::copy_file(
-        filepath, filepath + ".backup",
-        std::filesystem::copy_options::overwrite_existing);
+    try {
+      std::filesystem::copy_file(
+          filepath, filepath + ".backup",
+          std::filesystem::copy_options::overwrite_existing);
+    } catch (const std::exception &e) {
+      std::cerr << "Warning: Could not create backup for " << filepath << ": "
+                << e.what() << std::endl;
+    }
 
     std::ofstream file(filepath);
     if (!file.is_open()) {
@@ -356,7 +602,7 @@ public:
     fs::path colorscheme = localPath / "colorscheme.txt";
     vector<string> colors = getColors(colorscheme);
 
-    CSSColorUpdater updater;
+    DotfileColorUpdater updater;
 
     if (package == "ghostty") {
       fs::copy(colorscheme, localPath / "ghostty/themes/");
@@ -382,10 +628,21 @@ public:
           scheme.palette[1],          scheme.palette[4], scheme.palette[3]};
       updater.applyColorSchemeToEww(localPath.string() + "/eww", ewwColors);
       system("eww reload > /dev/null &");
-
-    }
-
-    else {
+    } else if (package == "cava") {
+      vector<string> cavaColors = {scheme.palette[13], scheme.palette[5],
+                                   scheme.palette[3],  scheme.palette[11],
+                                   scheme.cursorText,  scheme.palette[7],
+                                   scheme.palette[15]};
+      // Fixed: Pass directory path, the method handles adding "/config"
+      updater.applyColorSchemeToCava(localPath.string() + "/cava/", cavaColors);
+    } else if (package == "dunst") {
+      vector<string> dunstColors = {scheme.background, scheme.foreground,
+                                    scheme.foreground, scheme.palette[1]};
+      updater.applyColorSchemeToDunst(localPath.string() + "/dunst/dunstrc",
+                                      dunstColors);
+      // Restart dunst to apply changes
+      system("killall dunst && dunst > /dev/null 2>&1 &");
+    } else {
       cout << "Package " << package << " does not use colors." << endl;
     }
   }

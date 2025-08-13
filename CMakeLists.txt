@@ -53,10 +53,42 @@ target_compile_options(hyprland-dots PRIVATE
     ${JPEG_CFLAGS_OTHER}
 )
 
+add_executable(colorscheme-generator
+    scripts/colorscheme.cpp
+    scripts/palette.hpp
+)
+
 # Set executable output directory
-set_target_properties(hyprland-dots PROPERTIES
+set_target_properties(colorscheme-generator PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
 )
+
+
+
+# Include directories for colorscheme
+target_include_directories(colorscheme-generator PRIVATE
+    ${PNG_INCLUDE_DIRS}
+    ${JPEG_INCLUDE_DIRS}
+)
+
+# Link libraries for colorscheme
+target_link_libraries(colorscheme-generator
+    ${PNG_LIBRARIES}
+    ${JPEG_LIBRARIES}
+    stdc++fs  # for std::filesystem (if using older compiler)
+)
+
+# Add compiler flags for colorscheme
+target_compile_options(colorscheme-generator PRIVATE 
+    ${PNG_CFLAGS_OTHER}
+    ${JPEG_CFLAGS_OTHER}
+)
+
+# Set executable output directory
+set_target_properties(colorscheme-generator PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+)
+
 
 # Add GUI executable if Qt6 is found
 if(Qt6_FOUND)
@@ -183,9 +215,6 @@ endif()
 message(STATUS "Install prefix: ${CMAKE_INSTALL_PREFIX}")
 message(STATUS "=============================")
 
-# Optional: Add testing if you have tests
-# enable_testing()
-# add_subdirectory(tests)
 
 # Optional: Generate package config (only if template exists)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake.in")

@@ -358,8 +358,8 @@ private:
     auto *scrollLayout = new QVBoxLayout(scrollWidget);
 
     const std::vector<std::string> packages = {
-        "ghostty", "hypr",    "fish",  "eww",      "waybar",
-        "wofi",    "vesktop", "dunst", "catalyst", "fastfetch"};
+        "ghostty", "hypr",  "fish",     "eww",       "waybar", "wofi",
+        "vesktop", "dunst", "catalyst", "fastfetch", "cava"};
 
     for (const auto &pkg : packages) {
       auto *checkbox = new PackageCheckBox(QString::fromStdString(pkg));

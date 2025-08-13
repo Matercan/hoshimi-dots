@@ -47,7 +47,6 @@ Examples:
 You can also use `` build/bin/hyprland-dots-gui `` to launch a GUI menu if that is more your style
 
 
-
 To pull back into the hyprland_dots folder, run ``./pull.sh``. This will collect all of the configurations from all of the programs within this repository and will replace all of those currently in the directory with them.
 
 ## Issues
@@ -67,15 +66,9 @@ makepkg -si
 | Wallpaper Three | <img width="1920" height="1079" alt="image" src="https://github.com/user-attachments/assets/314db5d3-4607-4f09-a8ba-1e5e692c7944" /> | <img width="1919" height="1080" alt="image" src="https://github.com/user-attachments/assets/c4bf4f93-4b04-4516-b792-c20e153a84a9" /> | <img width="1916" height="1080" alt="image" src="https://github.com/user-attachments/assets/f02b3c92-1bb8-441f-8fd2-64b0aa232247" /> 
 
 
-
-
-
-
-
 ## TO-DO:
 - Integrate catppucin, gruvbox, dracula, and other popular themes into the installation
 - A lot more widgets for eww
-- Dunst theming
 
 ## Inspiration
 
@@ -84,6 +77,7 @@ makepkg -si
 [typecraft's dotfiles](https://github.com/typecraft-dev/dotfiles.git)
 
 [ml4 dotfiles](https://github.com/mylinuxforwork/dotfiles)
+
 
 
 

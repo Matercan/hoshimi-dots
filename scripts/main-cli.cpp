@@ -165,7 +165,8 @@ int main(int argc, char *argv[]) {
     }
 
     std::cout << "Installing " << trimmed_package << "...\n";
-    fm.setupPackageColors(trimmed_package, scheme);
+    if (config.generateColorScheme)
+      fm.setupPackageColors(trimmed_package, scheme);
     fm.movePackage(trimmed_package);
     cout << "\n";
   }

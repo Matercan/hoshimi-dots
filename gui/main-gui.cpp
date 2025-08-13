@@ -66,8 +66,8 @@ public slots:
                                 .arg(QString::fromStdString(package_name)));
           continue;
         }
-
-        fm.setupPackageColors(trimmed_package, scheme);
+        if (!wallpaperPath.empty())
+          fm.setupPackageColors(trimmed_package, scheme);
         fm.movePackage(trimmed_package);
 
         packagesProcessed++;

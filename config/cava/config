@@ -13,13 +13,13 @@ channels = stereo
 
 [color]
 gradient = 1
-gradient_color_1 = '#ff008f'
-gradient_color_2 = '#aa1f51'
-gradient_color_3 = '#a97200'
-gradient_color_4 = '#ffe500'
-gradient_color_5 = '#ffb87e'
-gradient_color_6 = '#fbae6d'
-gradient_color_7 = '#ffc897'
+gradient_color_1 = '#5b005b'
+gradient_color_2 = '#262134'
+gradient_color_3 = '#2d2d00'
+gradient_color_4 = '#5b5b00'
+gradient_color_5 = '#999940'
+gradient_color_6 = '#51445b'
+gradient_color_7 = '#51445b'
 
 [smoothing]
 integral = 100

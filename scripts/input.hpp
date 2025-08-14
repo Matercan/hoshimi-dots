@@ -12,6 +12,7 @@ class ArgumentParser {
 private:
   std::vector<std::string> availablePackages;
   std::vector<std::string> availableThemes;
+  std::vector<std::string> availableSchemes;
 
   bool hasEnding(std::string const &fullString, std::string const &ending) {
     if (fullString.length() >= ending.length()) {
@@ -29,14 +30,18 @@ public:
     bool showHelp = false;
     bool listPackages = false;
     bool listThemes = false;
+    bool listSchemes = false;
     bool interactive = false;
     bool generateColorScheme = false;
     std::string colorSchemeTheme = "dark";
+    std::string predefinedScheme = "";
   };
 
   ArgumentParser(const std::vector<std::string> &packages,
-                 const std::vector<std::string> &themes)
-      : availablePackages(packages), availableThemes(themes) {}
+                 const std::vector<std::string> &themes,
+                 const std::vector<std::string> &schemes)
+      : availablePackages(packages), availableThemes(themes),
+        availableSchemes(schemes) {}
 
   void printHelp(const char *programName) {
     std::cout << "Usage: " << programName << " [OPTIONS]\n\n";
@@ -45,20 +50,31 @@ public:
     std::cout << "  -p, --packages PKG1,PKG2  Install specific packages "
                  "(comma-separated)\n";
     std::cout << "  -w, --wallpaper PATH       Set wallpaper path\n";
-    std::cout << "  -c, --colorscheme TYPE     Generate colorscheme from "
-                 "wallpaper (dark/light/warm)\n";
+    std::cout
+        << "  -c, --colorscheme TYPE     Generate colorscheme from wallpaper\n";
+    std::cout
+        << "                             Available types: dark, light, warm\n";
+    std::cout << "  -s, --scheme NAME          Use predefined color scheme\n";
+    std::cout << "                             Available schemes: "
+                 "catppuccin-mocha,\n";
+    std::cout
+        << "                             catppuccin-latte, gruvbox-dark,\n";
+    std::cout << "                             gruvbox-light, dracula\n";
     std::cout << "  -i, --interactive          Run in interactive mode\n";
     std::cout << "  -l, --list-packages        List available packages\n";
-    std::cout << "  -L, --list-themes          List available themes\n";
+    std::cout
+        << "  -L, --list-themes          List available wallpaper themes\n";
+    std::cout
+        << "  -S, --list-schemes         List available predefined schemes\n";
     std::cout << "  -h, --help                 Show this help message\n";
     std::cout
         << "  -a, --all                  Install all available packages\n\n";
     std::cout << "Examples:\n";
-    std::cout << "  " << programName
-              << " -p hypr,waybar,wofi -w ~/wallpaper.png\n";
+    std::cout << "  " << programName << " -p hypr,waybar,wofi -s dracula\n";
     std::cout << "  " << programName << " -a -w ~/bg.jpg -c dark\n";
+    std::cout << "  " << programName << " -p dunst,fish -s catppuccin-mocha\n";
     std::cout << "  " << programName << " --interactive\n";
-    std::cout << "  " << programName << " --list-packages\n";
+    std::cout << "  " << programName << " --list-schemes\n";
   }
 
   void listPackages() {
@@ -72,10 +88,20 @@ public:
   }
 
   void listThemes() {
-    std::cout << "Available themes:\n";
+    std::cout << "Available wallpaper generation themes:\n";
     for (size_t i = 0; i < availableThemes.size(); ++i) {
       std::cout << "  " << availableThemes[i];
       if (i < availableThemes.size() - 1)
+        std::cout << "\n";
+    }
+    std::cout << std::endl;
+  }
+
+  void listSchemes() {
+    std::cout << "Available predefined color schemes:\n";
+    for (size_t i = 0; i < availableSchemes.size(); ++i) {
+      std::cout << "  " << availableSchemes[i];
+      if (i < availableSchemes.size() - 1)
         std::cout << "\n";
     }
     std::cout << std::endl;
@@ -108,6 +134,11 @@ public:
            availableThemes.end();
   }
 
+  bool validateScheme(const std::string &scheme) {
+    return std::find(availableSchemes.begin(), availableSchemes.end(),
+                     scheme) != availableSchemes.end();
+  }
+
   bool validateWallpaper(const std::string &path) {
     return std::filesystem::exists(path) &&
            (hasEnding(path, ".png") || hasEnding(path, ".jpeg") ||
@@ -122,9 +153,11 @@ public:
         {"theme", required_argument, 0, 't'},
         {"wallpaper", required_argument, 0, 'w'},
         {"colorscheme", required_argument, 0, 'c'},
+        {"scheme", required_argument, 0, 's'},
         {"interactive", no_argument, 0, 'i'},
         {"list-packages", no_argument, 0, 'l'},
         {"list-themes", no_argument, 0, 'L'},
+        {"list-schemes", no_argument, 0, 'S'},
         {"help", no_argument, 0, 'h'},
         {"all", no_argument, 0, 'a'},
         {0, 0, 0, 0}};
@@ -132,7 +165,7 @@ public:
     int option_index = 0;
     int c;
 
-    while ((c = getopt_long(argc, argv, "p:t:w:c:ilLha", long_options,
+    while ((c = getopt_long(argc, argv, "p:t:w:c:s:ilLSha", long_options,
                             &option_index)) != -1) {
       switch (c) {
       case 'p':
@@ -145,6 +178,9 @@ public:
         config.generateColorScheme = true;
         config.colorSchemeTheme = optarg;
         break;
+      case 's':
+        config.predefinedScheme = optarg;
+        break;
       case 'i':
         config.interactive = true;
         break;
@@ -153,6 +189,9 @@ public:
         return config;
       case 'L':
         config.listThemes = true;
+        return config;
+      case 'S':
+        config.listSchemes = true;
         return config;
       case 'h':
         config.showHelp = true;
@@ -191,14 +230,19 @@ public:
       return false;
     }
 
-    // Validate colorscheme theme
+    // Validate colorscheme theme (for wallpaper generation)
     if (config.generateColorScheme) {
-      if (config.colorSchemeTheme != "dark" &&
-          config.colorSchemeTheme != "light" &&
-          config.colorSchemeTheme != "warm") {
+      if (!validateTheme(config.colorSchemeTheme)) {
         std::cerr << "Error: Invalid colorscheme theme '"
                   << config.colorSchemeTheme << "'\n";
-        std::cerr << "Valid options: dark, light, warm\n";
+        std::cerr << "Valid wallpaper generation themes: ";
+        for (size_t i = 0; i < availableThemes.size(); ++i) {
+          std::cerr << availableThemes[i];
+          if (i < availableThemes.size() - 1) {
+            std::cerr << ", ";
+          }
+        }
+        std::cerr << "\n";
         return false;
       }
 
@@ -209,6 +253,29 @@ public:
       }
     }
 
+    // Validate predefined scheme
+    if (!config.predefinedScheme.empty() &&
+        !validateScheme(config.predefinedScheme)) {
+      std::cerr << "Error: Invalid predefined scheme '"
+                << config.predefinedScheme << "'\n";
+      std::cerr << "Valid predefined schemes: ";
+      for (size_t i = 0; i < availableSchemes.size(); ++i) {
+        std::cerr << availableSchemes[i];
+        if (i < availableSchemes.size() - 1) {
+          std::cerr << ", ";
+        }
+      }
+      std::cerr << "\n";
+      return false;
+    }
+
+    // Check for conflicting options
+    if (config.generateColorScheme && !config.predefinedScheme.empty()) {
+      std::cerr << "Error: Cannot use both wallpaper generation (-c) and "
+                   "predefined scheme (-s)\n";
+      return false;
+    }
+
     return true;
   }
 };
@@ -216,11 +283,13 @@ public:
 class InteractiveInputManager {
   std::vector<std::string> totalPackages;
   std::vector<std::string> totalThemes;
+  std::vector<std::string> totalSchemes;
 
 public:
   InteractiveInputManager(const std::vector<std::string> &packages,
-                          const std::vector<std::string> &themes)
-      : totalPackages(packages), totalThemes(themes) {}
+                          const std::vector<std::string> &themes,
+                          const std::vector<std::string> &schemes)
+      : totalPackages(packages), totalThemes(themes), totalSchemes(schemes) {}
 
   std::vector<std::string> packageInput() {
     std::cout << "\n=== Package Selection ===\n";
@@ -261,35 +330,66 @@ public:
   ArgumentParser::Config themeInput() {
     ArgumentParser::Config config;
 
-    std::cout << "\n=== Theme Selection ===\n";
-    std::cout << "Available themes: ";
+    std::cout << "\n=== Color Configuration ===\n";
+    std::cout << "Choose color configuration method:\n";
+    std::cout << "1. Use predefined color scheme\n";
+    std::cout << "2. Generate from wallpaper\n";
+    std::cout << "3. Skip (use default)\n";
+    std::cout << "Enter choice (1-3) [1]: ";
 
-    for (size_t i = 0; i < totalThemes.size(); i++) {
-      std::cout << totalThemes[i];
-      if (i < totalThemes.size() - 1) {
-        std::cout << ", ";
+    std::string choice;
+    std::getline(std::cin, choice);
+
+    if (choice.empty() || choice == "1") {
+      // Predefined scheme
+      std::cout << "\nAvailable predefined schemes: ";
+      for (size_t i = 0; i < totalSchemes.size(); i++) {
+        std::cout << totalSchemes[i];
+        if (i < totalSchemes.size() - 1) {
+          std::cout << ", ";
+        }
       }
-    }
-    std::cout << "\n\n";
+      std::cout << "\n\nSelect scheme [gruvbox-dark]: ";
+      std::getline(std::cin, config.predefinedScheme);
+      if (config.predefinedScheme.empty()) {
+        config.predefinedScheme = "gruvbox-dark";
+      }
+      std::cout << "Using predefined " << config.predefinedScheme
+                << " scheme.\n";
 
-    std::cout << "Wallpaper path (or press enter to skip): ";
-    std::getline(std::cin, config.wallpaperPath);
+    } else if (choice == "2") {
+      // Generate from wallpaper
+      std::cout << "Wallpaper path: ";
+      std::getline(std::cin, config.wallpaperPath);
 
-    if (!config.wallpaperPath.empty()) {
-      std::cout << "Generate colorscheme from wallpaper? (y/n): ";
-      char choice;
-      std::cin >> choice;
-      std::cin.ignore();
-
-      if (choice == 'y' || choice == 'Y') {
+      if (!config.wallpaperPath.empty()) {
+        std::cout << "\nAvailable generation themes: ";
+        for (size_t i = 0; i < totalThemes.size(); i++) {
+          std::cout << totalThemes[i];
+          if (i < totalThemes.size() - 1) {
+            std::cout << ", ";
+          }
+        }
+        std::cout << "\n\nGeneration theme [dark]: ";
+        std::getline(std::cin, config.colorSchemeTheme);
+        if (config.colorSchemeTheme.empty()) {
+          config.colorSchemeTheme = "dark";
+        }
         config.generateColorScheme = true;
-        std::cout << "Colorscheme type (dark/light/warm) [dark]: ";
-        std::string csTheme;
-        std::getline(std::cin, csTheme);
-        config.colorSchemeTheme = csTheme.empty() ? "dark" : csTheme;
+        std::cout << "Will generate " << config.colorSchemeTheme
+                  << " theme from wallpaper.\n";
+      } else {
+        std::cout << "No wallpaper provided, using default scheme.\n";
+        config.predefinedScheme = "gruvbox-dark";
       }
+
+    } else {
+      // Skip - use default
+      std::cout << "Using default gruvbox-dark scheme.\n";
+      config.predefinedScheme = "gruvbox-dark";
     }
 
     return config;
   }
 };
+;

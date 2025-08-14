@@ -17,6 +17,62 @@ const vector<string> TOTALPACKAGES = {"dunst",   "fastfetch", "fish",   "eww",
 
 const vector<string> TOTALTHEMES = {"dark", "warm", "light"};
 
+const vector<string> TOTALSCHEMES = {"catppuccin-mocha", "catppuccin-latte",
+                                     "gruvbox-dark", "gruvbox-light",
+                                     "dracula"};
+
+const ColorScheme CATPPUCCIN_MOCHA({"#45475a", "#f38ba8", "#a6e3a1", "#f9e2af",
+                                    "#89b4fa", "#f5c2e7", "#94e2d5", "#a6adc8",
+                                    "#585b70", "#f38ba8", "#a6e3a1", "#f9e2af",
+                                    "#89b4fa", "#f5c2e7", "#94e2d5", "#bac2de"},
+                                   {"#1e1e2e", "#cdd6f4", "#f5e0dc", "#1e1e2e",
+                                    "#353749", "#cdd6f4"});
+
+const ColorScheme CATPPUCCIN_LATTE({"#5c5f77", "#d20f39", "#40a02b", "#df8e1d",
+                                    "#1e66f5", "#ea76cb", "#179299", "#acb0be",
+                                    "#6c6f85", "#d20f39", "#40a02b", "#df8e1d",
+                                    "#1e66f5", "#ea76cb", "#179299", "#bcc0cc"},
+                                   {"#eff1f5", "#4c4f69", "#dc8a78", "#eff1f5",
+                                    "#d8dae1", "#4c4f69"});
+
+const ColorScheme GRUVBOX_DARK({"#1b1b1b", "#ea6962", "#a9b665", "#d8a657",
+                                "#7daea3", "#d3869b", "#89b482", "#d4be98",
+                                "#32302f", "#ea6962", "#a9b665", "#d8a657",
+                                "#7daea3", "#d3869b", "#89b482", "#d4be98"},
+                               {"#282828", "#d4be98", "#d4be98", "#282828",
+                                "#3c3836", "#d4be98"});
+
+const ColorScheme GRUVBOX_LIGHT({"#f2e5bc", "#c14a4a", "#6c782e", "#b47109",
+                                 "#45707a", "#945e80", "#4c7a5d", "#654735",
+                                 "#f3eac7", "#c14a4a", "#6c782e", "#b47109",
+                                 "#45707a", "#945e80", "#4c7a5d", "#654735"},
+                                {"#fbf1c7", "#654735", "#654735", "#fbf1c7",
+                                 "#f2e5bc", "#654735"});
+
+const ColorScheme DRACULA_DARK({"#21222c", "#ff5555", "#50fa7b", "#f1fa8c",
+                                "#bd93f9", "#ff79c6", "#8be9fd", "#f8f8f2",
+                                "#6272a4", "#ff6e6e", "#69ff94", "#ffffa5",
+                                "#d6acff", "#ff92df", "#a4ffff", "#ffffff"},
+                               {"#282a36", "#f8f8f2", "#f8f8f2", "#282a36",
+                                "#44475a", "#f8f8f2"});
+
+ColorScheme getColorSchemeByName(const string &schemeName) {
+  if (schemeName == "catppuccin-mocha") {
+    return CATPPUCCIN_MOCHA;
+  } else if (schemeName == "catppuccin-latte") {
+    return CATPPUCCIN_LATTE;
+  } else if (schemeName == "gruvbox-dark") {
+    return GRUVBOX_DARK;
+  } else if (schemeName == "gruvbox-light") {
+    return GRUVBOX_LIGHT;
+  } else if (schemeName == "dracula") {
+    return DRACULA_DARK;
+  }
+
+  // Fallback to dark theme
+  return GRUVBOX_DARK;
+}
+
 string setupPackage(const string &package_name,
                     const vector<string> totalPackages) {
   string trimmed_package = package_name;
@@ -50,8 +106,8 @@ string setupPackage(const string &package_name,
       system(cmd.c_str());
     }
 
-    if (trimmed_package == "starhip") {
-      cout << "starship not implimented yet" << endl;
+    if (trimmed_package == "starship") {
+      cout << "starship not implemented yet" << endl;
       return "Starship.";
     }
 
@@ -63,7 +119,7 @@ string setupPackage(const string &package_name,
 
 int main(int argc, char *argv[]) {
 
-  ArgumentParser parser(TOTALPACKAGES, TOTALTHEMES);
+  ArgumentParser parser(TOTALPACKAGES, TOTALTHEMES, TOTALSCHEMES);
 
   // Handle no arguments - show help
   if (argc == 1) {
@@ -90,14 +146,20 @@ int main(int argc, char *argv[]) {
     return 0;
   }
 
+  if (config.listSchemes) {
+    parser.listSchemes();
+    return 0;
+  }
+
   // Interactive mode
   if (config.interactive) {
-    InteractiveInputManager input(TOTALPACKAGES, TOTALTHEMES);
+    InteractiveInputManager input(TOTALPACKAGES, TOTALTHEMES, TOTALSCHEMES);
     config.packages = input.packageInput();
     auto themeConfig = input.themeInput();
     config.wallpaperPath = themeConfig.wallpaperPath;
     config.generateColorScheme = themeConfig.generateColorScheme;
     config.colorSchemeTheme = themeConfig.colorSchemeTheme;
+    config.predefinedScheme = themeConfig.predefinedScheme;
   }
 
   // Validate configuration
@@ -136,7 +198,15 @@ int main(int argc, char *argv[]) {
       std::cout << "Colorscheme generated successfully!\n";
     } catch (const std::exception &e) {
       std::cerr << "Failed to generate colorscheme: " << e.what() << "\n";
+      return 1;
     }
+  } else if (!config.predefinedScheme.empty()) {
+    std::cout << "Using predefined " << config.predefinedScheme
+              << " colorscheme\n";
+    scheme = getColorSchemeByName(config.predefinedScheme);
+  } else {
+    std::cout << "No colorscheme specified, using default gruvbox-dark\n";
+    scheme = GRUVBOX_DARK;
   }
 
   std::cout << "\n=== Installing ===\n";
@@ -151,28 +221,33 @@ int main(int argc, char *argv[]) {
     theme = ThemeType::LIGHT;
   } else if (config.colorSchemeTheme == "warm") {
     theme = ThemeType::WARM;
+  } else {
+    theme = ThemeType::DARK; // Default
   }
 
-  fm.moveWallpaper(config.wallpaperPath);
+  if (!config.wallpaperPath.empty()) {
+    fm.moveWallpaper(config.wallpaperPath);
+  }
   fm.setupLocalPath(config.packages);
 
   for (const std::string &package_name : config.packages) {
     std::string trimmed_package = setupPackage(package_name, TOTALPACKAGES);
 
-    if (trimmed_package == "Not Found.") {
+    if (trimmed_package == "Not found.") {
       std::cout << "Package " << package_name << " not found; skipping.\n";
       continue;
     }
 
     std::cout << "Installing " << trimmed_package << "...\n";
-    if (config.generateColorScheme)
-      fm.setupPackageColors(trimmed_package, scheme);
+    fm.setupPackageColors(trimmed_package, scheme);
     fm.movePackage(trimmed_package);
     cout << "\n";
   }
 
   system("hyprctl reload > /dev/null &");
-  system("swww img ~/.local/share/hyprland-dots/wallpaper.png");
+  if (!config.wallpaperPath.empty()) {
+    system("swww img ~/.local/share/hyprland-dots/wallpaper.png");
+  }
   std::cout << "\n=== Installation Complete ===\n";
   return 0;
 }

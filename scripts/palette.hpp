@@ -106,6 +106,18 @@ public:
       std::cout << "  " << i << ": " << palette[i] << "\n";
     }
   }
+
+  ColorScheme(std::vector<std::string> paletteColors,
+              std::vector<std::string> mainColors) {
+    background = mainColors[0];
+    foreground = mainColors[1];
+    cursorColor = mainColors[2];
+    cursorText = mainColors[3];
+    selectionBackground = mainColors[4];
+    selectionForeground = mainColors[5];
+
+    palette = paletteColors;
+  }
 };
 
 class PNGImage {

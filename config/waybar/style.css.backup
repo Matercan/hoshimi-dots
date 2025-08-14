@@ -1,7 +1,7 @@
 @define-color background #19162f;
 @define-color border #f0f0f0;
-@define-color hover #00002d;
-@define-color active #272534;
+@define-color hover #0000b7;
+@define-color active #4e4a68;
 @define-color foreground #f0f0f0;
 
 * {

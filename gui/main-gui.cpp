@@ -11,6 +11,41 @@
 #include "../scripts/input.hpp"
 #include "../scripts/palette.hpp"
 
+const ColorScheme CATPPUCCIN_MOCHA({"#45475a", "#f38ba8", "#a6e3a1", "#f9e2af",
+                                    "#89b4fa", "#f5c2e7", "#94e2d5", "#a6adc8",
+                                    "#585b70", "#f38ba8", "#a6e3a1", "#f9e2af",
+                                    "#89b4fa", "#f5c2e7", "#94e2d5", "#bac2de"},
+                                   {"#1e1e2e", "#cdd6f4", "#f5e0dc", "#1e1e2e",
+                                    "#353749", "#cdd6f4"});
+
+const ColorScheme CATPPUCCIN_LATTE({"#5c5f77", "#d20f39", "#40a02b", "#df8e1d",
+                                    "#1e66f5", "#ea76cb", "#179299", "#acb0be",
+                                    "#6c6f85", "#d20f39", "#40a02b", "#df8e1d",
+                                    "#1e66f5", "#ea76cb", "#179299", "#bcc0cc"},
+                                   {"#eff1f5", "#4c4f69", "#dc8a78", "#eff1f5",
+                                    "#d8dae1", "#4c4f69"});
+
+const ColorScheme GRUVBOX_DARK({"#1b1b1b", "#ea6962", "#a9b665", "#d8a657",
+                                "#7daea3", "#d3869b", "#89b482", "#d4be98",
+                                "#32302f", "#ea6962", "#a9b665", "#d8a657",
+                                "#7daea3", "#d3869b", "#89b482", "#d4be98"},
+                               {"#282828", "#d4be98", "#d4be98", "#282828",
+                                "#3c3836", "#d4be98"});
+
+const ColorScheme GRUVBOX_LIGHT({"#f2e5bc", "#c14a4a", "#6c782e", "#b47109",
+                                 "#45707a", "#945e80", "#4c7a5d", "#654735",
+                                 "#f3eac7", "#c14a4a", "#6c782e", "#b47109",
+                                 "#45707a", "#945e80", "#4c7a5d", "#654735"},
+                                {"#fbf1c7", "#654735", "#654735", "#fbf1c7",
+                                 "#f2e5bc", "#654735"});
+
+const ColorScheme DRACULA_DARk({"#21222c", "#ff5555", "#50fa7b", "#f1fa8c",
+                                "#bd93f9", "#ff79c6", "#8be9fd", "#f8f8f2",
+                                "#6272a4", "#ff6e6e", "#69ff94", "#ffffa5",
+                                "#d6acff", "#ff92df", "#a4ffff", "#ffffff"},
+                               {"#282a36", "#f8f8f2", "#f8f8f2", "#282a36",
+                                "#44475a", "#f8f8f2"});
+
 class InstallWorker : public QObject {
   Q_OBJECT
 

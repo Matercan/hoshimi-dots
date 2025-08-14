@@ -208,7 +208,6 @@ public:
     return success;
   }
 
-  // NEW: Update Cava colors
   bool updateCavaColorsRegex(const std::string &configFilePath,
                              const std::vector<std::string> &colors) {
     if (colors.size() < 7) {
@@ -263,7 +262,6 @@ public:
     return success;
   }
 
-  // NEW: Update Dunst colors
   bool updateDunstColorsRegex(const std::string &configFilePath,
                               const DunstColors &colors) {
     // Read entire file content
@@ -367,7 +365,6 @@ public:
     return success;
   }
 
-  // NEW: Generate gradient colors from a color scheme
   std::vector<std::string>
   generateGradientColors(const std::vector<std::string> &baseColors,
                          size_t count = 7) {
@@ -394,40 +391,6 @@ public:
     }
 
     return gradient;
-  }
-
-  // NEW: Convenience method to apply colors to all supported applications
-  bool applyColorSchemeToAll(const std::string &configBaseDir,
-                             const std::vector<std::string> &colors) {
-    bool allSuccess = true;
-
-    // Apply to Waybar
-    if (!applyColorSchemeToWaybar(configBaseDir + "/waybar", colors)) {
-      allSuccess = false;
-    }
-
-    // Apply to Wofi
-    if (!applyColorSchemeToWofi(configBaseDir + "/wofi", colors)) {
-      allSuccess = false;
-    }
-
-    // Apply to EWW
-    if (!applyColorSchemeToEww(configBaseDir + "/eww", colors)) {
-      allSuccess = false;
-    }
-
-    // Apply to Cava (generate gradient from colors)
-    std::vector<std::string> gradientColors = generateGradientColors(colors, 7);
-    if (!applyColorSchemeToCava(configBaseDir + "/cava/", gradientColors)) {
-      allSuccess = false;
-    }
-
-    // Apply to Dunst
-    if (!applyColorSchemeToDunst(configBaseDir + "/dunst/dunstrc", colors)) {
-      allSuccess = false;
-    }
-
-    return allSuccess;
   }
 
 private:

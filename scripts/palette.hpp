@@ -442,9 +442,9 @@ private:
     switch (theme) {
     case ThemeType::DARK:
       // Make colors darker and more muted
-      color.r = static_cast<uint8_t>(color.r * 0.6);
-      color.g = static_cast<uint8_t>(color.g * 0.6);
-      color.b = static_cast<uint8_t>(color.b * 0.6);
+      color.r = static_cast<uint8_t>(color.r * 1.2);
+      color.g = static_cast<uint8_t>(color.g * 1.2);
+      color.b = static_cast<uint8_t>(color.b * 1.2);
       break;
 
     case ThemeType::LIGHT:
@@ -532,7 +532,6 @@ private:
     return fallback;
   }
 
-  // NEW: Calculate relative luminance for contrast calculations
   double calculateLuminance(const Color &color) const {
     auto sRGB = [](double val) {
       val /= 255.0;
@@ -543,7 +542,6 @@ private:
            0.0722 * sRGB(color.b);
   }
 
-  // NEW: Calculate contrast ratio between two colors
   double calculateContrast(const Color &c1, const Color &c2) const {
     double l1 = calculateLuminance(c1);
     double l2 = calculateLuminance(c2);
@@ -553,7 +551,6 @@ private:
     return (l1 + 0.05) / (l2 + 0.05);
   }
 
-  // NEW: Ensure minimum contrast between colors
   Color ensureContrast(const Color &foreground, const Color &background,
                        double minContrast = 4.5) const {
     double currentContrast = calculateContrast(foreground, background);
@@ -566,7 +563,6 @@ private:
     double bgLuminance = calculateLuminance(background);
 
     // If background is dark, make foreground lighter
-    // If background is light, make foreground darker
     Color adjusted = foreground;
 
     if (bgLuminance < 0.5) {
@@ -665,7 +661,6 @@ private:
     scheme.foreground = foregroundColor.toHex();
   }
 
-  // NEW: Find high contrast color from available palette
   Color findHighContrastColor(const Color &background,
                               const std::vector<Color> &candidates,
                               bool preferLight) const {

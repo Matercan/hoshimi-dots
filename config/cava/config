@@ -8,18 +8,13 @@ bar_width = 2
 bar_spacing = 0
 
 [output]
-orientation = bottom
+orientation = top
 channels = stereo
 
 [color]
 gradient = 1
 gradient_color_1 = '#f5c2e7'
 gradient_color_2 = '#f5c2e7'
-gradient_color_3 = '#f9e2af'
-gradient_color_4 = '#f9e2af'
-gradient_color_5 = '#1e1e2e'
-gradient_color_6 = '#a6adc8'
-gradient_color_7 = '#bac2de'
 
 [smoothing]
 integral = 100

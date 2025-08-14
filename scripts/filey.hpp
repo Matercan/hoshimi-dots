@@ -25,10 +25,8 @@ private:
       "accent-red",   "accent-blue",   "accent-orange"};
 
   // Cava uses 7 gradient colors
-  std::vector<std::string> cavaGradientColors = {
-      "gradient_color_1", "gradient_color_2", "gradient_color_3",
-      "gradient_color_4", "gradient_color_5", "gradient_color_6",
-      "gradient_color_7"};
+  std::vector<std::string> cavaGradientColors = {"gradient_color_1",
+                                                 "gradient_color_2"};
 
   // Dunst color mappings - background, foreground, frame
   struct DunstColors {
@@ -210,7 +208,7 @@ public:
 
   bool updateCavaColorsRegex(const std::string &configFilePath,
                              const std::vector<std::string> &colors) {
-    if (colors.size() < 7) {
+    if (colors.size() < 2) {
       std::cerr << "Error: Need at least 7 colors for cava gradient theme"
                 << std::endl;
       return false;
@@ -592,10 +590,7 @@ public:
       updater.applyColorSchemeToEww(localPath.string() + "/eww", ewwColors);
       system("eww reload > /dev/null &");
     } else if (package == "cava") {
-      vector<string> cavaColors = {scheme.palette[13], scheme.palette[5],
-                                   scheme.palette[3],  scheme.palette[11],
-                                   scheme.cursorText,  scheme.palette[7],
-                                   scheme.palette[15]};
+      vector<string> cavaColors = {scheme.palette[4], scheme.palette[5]};
       // Fixed: Pass directory path, the method handles adding "/config"
       updater.applyColorSchemeToCava(localPath.string() + "/cava/", cavaColors);
     } else if (package == "dunst") {

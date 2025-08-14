@@ -50,12 +50,16 @@ You can also use `` build/bin/hyprland-dots-gui `` to launch a GUI menu if that 
 To pull back into the hyprland_dots folder, run ``./pull.sh``. This will collect all of the configurations from all of the programs within this repository and will replace all of those currently in the directory with them.
 
 ## Issues
-The script will try and use yay to install packages you don't have, if you don't have yay you may install it via
+- The script will try and use yay to install packages you don't have, if you don't have yay you may install it via
 ```
 git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin
 makepkg -si
 ```
+
+- cmake has decided not to compile my scripts anymore - you need to use g++
+- The gui version doesn't work
+Both of these problems were caused by the same bug that I am trying to fix
 
 ## Showcase
 
@@ -77,6 +81,7 @@ makepkg -si
 [typecraft's dotfiles](https://github.com/typecraft-dev/dotfiles.git)
 
 [ml4 dotfiles](https://github.com/mylinuxforwork/dotfiles)
+
 
 
 

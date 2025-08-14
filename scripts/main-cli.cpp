@@ -204,6 +204,7 @@ int main(int argc, char *argv[]) {
     std::cout << "Using predefined " << config.predefinedScheme
               << " colorscheme\n";
     scheme = getColorSchemeByName(config.predefinedScheme);
+    scheme.print();
   } else {
     std::cout << "No colorscheme specified, using default gruvbox-dark\n";
     scheme = GRUVBOX_DARK;
@@ -246,7 +247,8 @@ int main(int argc, char *argv[]) {
 
   system("hyprctl reload > /dev/null &");
   if (!config.wallpaperPath.empty()) {
-    system("swww img ~/.local/share/hyprland-dots/wallpaper.png");
+    system("swww img ~/.local/share/hyprland-dots/wallpaper.png -t wave "
+           "--transition-angle 30");
   }
   std::cout << "\n=== Installation Complete ===\n";
   return 0;

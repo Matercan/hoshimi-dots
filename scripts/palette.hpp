@@ -117,6 +117,7 @@ public:
     selectionForeground = mainColors[5];
 
     palette = paletteColors;
+    writeToFile("colorscheme.txt");
   }
 };
 

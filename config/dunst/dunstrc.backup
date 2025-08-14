@@ -52,7 +52,7 @@
 
     frame_width = 3
 
-    frame_color = "#f0f0f0"
+    frame_color = "#cdd6f4"
 
     gap_size = 0
 
@@ -141,22 +141,22 @@
 
 
 [urgency_low]
-    background = "#19162f"
-    foreground = "#f0f0f0"
+    background = "#1e1e2e"
+    foreground = "#cdd6f4"
     timeout = 5
     default_icon = dialog-information
 
 [urgency_normal]
-    background = "#19162f"
-    foreground = "#f0f0f0" 
+    background = "#1e1e2e"
+    foreground = "#cdd6f4" 
     timeout = 5
     override_pause_level = 30
     default_icon = dialog-information
 
 [urgency_critical]
-    background = "#19162f"
-    foreground = "#f0f0f0"
-    frame_color = "#b70000"
+    background = "#1e1e2e"
+    foreground = "#cdd6f4"
+    frame_color = "#f38ba8"
     timeout = 0
     override_pause_level = 60
     default_icon = dialog-warning

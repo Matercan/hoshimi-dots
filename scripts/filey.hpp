@@ -552,6 +552,7 @@ public:
   fs::path getAssetsDir() { return localPath / "assets"; }
 
   void setupPackageColors(string &package, ColorScheme scheme) {
+    scheme.writeToFile("colorscheme.txt");
     try {
       fs::copy(fs::current_path() / "colorscheme.txt", localPath,
                fs::copy_options::overwrite_existing);

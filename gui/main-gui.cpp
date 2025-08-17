@@ -39,12 +39,29 @@ const ColorScheme GRUVBOX_LIGHT({"#f2e5bc", "#c14a4a", "#6c782e", "#b47109",
                                 {"#fbf1c7", "#654735", "#654735", "#fbf1c7",
                                  "#f2e5bc", "#654735"});
 
-const ColorScheme DRACULA_DARk({"#21222c", "#ff5555", "#50fa7b", "#f1fa8c",
+const ColorScheme DRACULA_DARK({"#21222c", "#ff5555", "#50fa7b", "#f1fa8c",
                                 "#bd93f9", "#ff79c6", "#8be9fd", "#f8f8f2",
                                 "#6272a4", "#ff6e6e", "#69ff94", "#ffffa5",
                                 "#d6acff", "#ff92df", "#a4ffff", "#ffffff"},
                                {"#282a36", "#f8f8f2", "#f8f8f2", "#282a36",
                                 "#44475a", "#f8f8f2"});
+
+ColorScheme getColorSchemeByName(const std::string& schemeName) {
+  if (schemeName == "catppuccin-mocha") {
+    return CATPPUCCIN_MOCHA;
+  } else if (schemeName == "catppuccin-latte") {
+    return CATPPUCCIN_LATTE;
+  } else if (schemeName == "gruvbox-dark") {
+    return GRUVBOX_DARK;
+  } else if (schemeName == "gruvbox-light") {
+    return GRUVBOX_LIGHT;
+  } else if (schemeName == "dracula") {
+    return DRACULA_DARK;
+  }
+  
+  // Fallback to dark theme
+  return GRUVBOX_DARK;
+}
 
 class InstallWorker : public QObject {
   Q_OBJECT
@@ -53,6 +70,7 @@ public slots:
   void performInstallation(const std::vector<std::string> &packages,
                            const std::string &wallpaperPath,
                            const std::string &colorSchemeTheme,
+                           const std::string &predefinedScheme,
                            bool generateColorScheme) {
     try {
       emit statusUpdate("Setting up installation...");
@@ -66,6 +84,15 @@ public slots:
         scheme = generateColorSchemeFromImage(wallpaperPath, colorSchemeTheme,
                                               "colorscheme.txt");
         emit statusUpdate("Color scheme generated successfully!");
+        emit progressUpdate(40);
+      } else if (!predefinedScheme.empty()) {
+        emit statusUpdate(QString("Using predefined %1 color scheme...")
+                              .arg(QString::fromStdString(predefinedScheme)));
+        scheme = getColorSchemeByName(predefinedScheme);
+        emit progressUpdate(40);
+      } else {
+        emit statusUpdate("Using default gruvbox-dark color scheme...");
+        scheme = GRUVBOX_DARK;
         emit progressUpdate(40);
       }
 
@@ -101,8 +128,8 @@ public slots:
                                 .arg(QString::fromStdString(package_name)));
           continue;
         }
-        if (!wallpaperPath.empty())
-          fm.setupPackageColors(trimmed_package, scheme);
+        
+        fm.setupPackageColors(trimmed_package, scheme);
         fm.movePackage(trimmed_package);
 
         packagesProcessed++;
@@ -267,6 +294,7 @@ private slots:
 
       // Enable color scheme generation when wallpaper is selected
       generateColorScheme->setEnabled(true);
+      onColorModeChanged();
     }
   }
 
@@ -280,6 +308,18 @@ private slots:
     for (auto &checkbox : packageCheckboxes) {
       checkbox->setChecked(false);
     }
+  }
+
+  void onColorModeChanged() {
+    bool useWallpaper = generateColorScheme->isChecked() && 
+                       generateColorScheme->isEnabled();
+    bool usePredefined = !generateColorScheme->isChecked();
+    
+    // Show/hide relevant controls
+    themeCombo->setVisible(useWallpaper);
+    themeLabel->setVisible(useWallpaper);
+    schemeCombo->setVisible(usePredefined);
+    schemeLabel->setVisible(usePredefined);
   }
 
   void startInstallation() {
@@ -302,13 +342,21 @@ private slots:
     statusLabel->setText("Starting installation...");
     logOutput->clear();
 
+    // Determine color configuration
+    std::string wallpaperPathStr = wallpaperPath->text().toStdString();
+    std::string colorSchemeThemeStr = themeCombo->currentText().toStdString();
+    std::string predefinedSchemeStr = schemeCombo->currentText().toStdString();
+    bool generateColors = generateColorScheme->isChecked() && 
+                         generateColorScheme->isEnabled();
+
     // Start installation in worker thread
     QMetaObject::invokeMethod(
         worker, "performInstallation", Qt::QueuedConnection,
         Q_ARG(std::vector<std::string>, selectedPackages),
-        Q_ARG(std::string, wallpaperPath->text().toStdString()),
-        Q_ARG(std::string, themeCombo->currentText().toStdString()),
-        Q_ARG(bool, generateColorScheme->isChecked()));
+        Q_ARG(std::string, wallpaperPathStr),
+        Q_ARG(std::string, colorSchemeThemeStr),
+        Q_ARG(std::string, predefinedSchemeStr),
+        Q_ARG(bool, generateColors));
   }
 
   void onStatusUpdate(const QString &message) {
@@ -422,7 +470,7 @@ private:
 
     auto *wallpaperSelectLayout = new QHBoxLayout;
     wallpaperPath = new QLineEdit;
-    wallpaperPath->setPlaceholderText("Select a wallpaper image...");
+    wallpaperPath->setPlaceholderText("Select a wallpaper image (optional)...");
     wallpaperPath->setReadOnly(true);
     auto *browseBtn = new QPushButton("Browse");
     browseBtn->setStyleSheet("QPushButton { padding: 8px 20px; }");
@@ -439,28 +487,48 @@ private:
 
     layout->addWidget(wallpaperGroup);
 
-    // Theme section
-    auto *themeGroup = new QGroupBox("Theme Configuration");
-    themeGroup->setStyleSheet(
+    // Color scheme section
+    auto *colorGroup = new QGroupBox("Color Configuration");
+    colorGroup->setStyleSheet(
         "QGroupBox { font-weight: bold; margin-top: 10px; }");
-    auto *themeLayout = new QVBoxLayout(themeGroup);
+    auto *colorLayout = new QVBoxLayout(colorGroup);
 
-    generateColorScheme = new QCheckBox("Generate color scheme from wallpaper");
+    generateColorScheme = new QCheckBox("Generate colors from wallpaper");
     generateColorScheme->setEnabled(false);
     generateColorScheme->setStyleSheet(
         "QCheckBox { font-size: 14px; padding: 5px; }");
-    themeLayout->addWidget(generateColorScheme);
+    colorLayout->addWidget(generateColorScheme);
 
+    // Theme selection (for wallpaper generation)
     auto *themeSelectLayout = new QHBoxLayout;
-    themeSelectLayout->addWidget(new QLabel("Theme type:"));
+    themeLabel = new QLabel("Generation theme:");
     themeCombo = new QComboBox;
     themeCombo->addItems({"dark", "light", "warm"});
     themeCombo->setStyleSheet("QComboBox { padding: 5px; }");
+    themeSelectLayout->addWidget(themeLabel);
     themeSelectLayout->addWidget(themeCombo);
     themeSelectLayout->addStretch();
-    themeLayout->addLayout(themeSelectLayout);
+    colorLayout->addLayout(themeSelectLayout);
 
-    layout->addWidget(themeGroup);
+    // Predefined scheme selection
+    auto *schemeSelectLayout = new QHBoxLayout;
+    schemeLabel = new QLabel("Predefined scheme:");
+    schemeCombo = new QComboBox;
+    schemeCombo->addItems({"catppuccin-mocha", "catppuccin-latte", 
+                          "gruvbox-dark", "gruvbox-light", "dracula"});
+    schemeCombo->setStyleSheet("QComboBox { padding: 5px; }");
+    schemeSelectLayout->addWidget(schemeLabel);
+    schemeSelectLayout->addWidget(schemeCombo);
+    schemeSelectLayout->addStretch();
+    colorLayout->addLayout(schemeSelectLayout);
+
+    connect(generateColorScheme, &QCheckBox::toggled, this,
+            &DotfilesInstaller::onColorModeChanged);
+
+    layout->addWidget(colorGroup);
+
+    // Initialize visibility
+    onColorModeChanged();
 
     layout->addStretch();
 
@@ -577,6 +645,7 @@ private:
     generateColorScheme->setEnabled(enabled &&
                                     !wallpaperPath->text().isEmpty());
     themeCombo->setEnabled(enabled);
+    schemeCombo->setEnabled(enabled);
   }
 
   void applyDarkTheme() {
@@ -651,6 +720,9 @@ private:
   WallpaperPreview *wallpaperPreview;
   QCheckBox *generateColorScheme;
   QComboBox *themeCombo;
+  QLabel *themeLabel;
+  QComboBox *schemeCombo;
+  QLabel *schemeLabel;
   QPushButton *installBtn;
   QProgressBar *progressBar;
   QLabel *statusLabel;

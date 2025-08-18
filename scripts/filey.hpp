@@ -591,7 +591,7 @@ public:
       updater.applyColorSchemeToEww(localPath.string() + "/eww", ewwColors);
       system("eww reload > /dev/null &");
     } else if (package == "cava") {
-      vector<string> cavaColors = {scheme.palette[4], scheme.palette[5]};
+      vector<string> cavaColors = {scheme.palette[4], scheme.palette[7]};
       // Fixed: Pass directory path, the method handles adding "/config"
       updater.applyColorSchemeToCava(localPath.string() + "/cava/", cavaColors);
     } else if (package == "dunst") {

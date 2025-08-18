@@ -505,272 +505,6 @@ private:
     return defaults;
   }
 
-  // Helper function to check if a color is too similar to already used colors
-  bool isTooSimilarToUsed(const Color &candidate,
-                          const std::vector<Color> &usedColors,
-                          double threshold) const {
-    for (const auto &used : usedColors) {
-      if (candidate.distanceTo(used) < threshold) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  // Helper function to ensure a color is distinct from used colors
-  Color ensureDistinct(const Color &candidate,
-                       const std::vector<Color> &usedColors,
-                       const Color &fallback) const {
-    if (!isTooSimilarToUsed(candidate, usedColors, 30.0)) {
-      return candidate;
-    }
-
-    // Try to adjust the candidate to make it more distinct
-    std::vector<Color> adjustments = {
-        Color(std::min(255, candidate.r + 50), candidate.g, candidate.b),
-        Color(std::max(0, candidate.r - 50), candidate.g, candidate.b),
-        Color(candidate.r, std::min(255, candidate.g + 50), candidate.b),
-        Color(candidate.r, std::max(0, candidate.g - 50), candidate.b),
-        Color(candidate.r, candidate.g, std::min(255, candidate.b + 50)),
-        Color(candidate.r, candidate.g, std::max(0, candidate.b - 50))};
-
-    for (const auto &adjusted : adjustments) {
-      if (!isTooSimilarToUsed(adjusted, usedColors, 30.0) &&
-          adjusted.distanceTo(fallback) < 100.0) {
-        return adjusted;
-      }
-    }
-
-    // If all adjustments fail, return the fallback
-    return fallback;
-  }
-
-  double calculateLuminance(const Color &color) const {
-    auto sRGB = [](double val) {
-      val /= 255.0;
-      return val <= 0.03928 ? val / 12.92
-                            : std::pow((val + 0.055) / 1.055, 2.4);
-    };
-    return 0.2126 * sRGB(color.r) + 0.7152 * sRGB(color.g) +
-           0.0722 * sRGB(color.b);
-  }
-
-  double calculateContrast(const Color &c1, const Color &c2) const {
-    double l1 = calculateLuminance(c1);
-    double l2 = calculateLuminance(c2);
-
-    if (l1 < l2)
-      std::swap(l1, l2);
-    return (l1 + 0.05) / (l2 + 0.05);
-  }
-
-  Color ensureContrast(const Color &foreground, const Color &background,
-                       double minContrast = 4.5) const {
-    double currentContrast = calculateContrast(foreground, background);
-
-    if (currentContrast >= minContrast) {
-      return foreground;
-    }
-
-    // Try to adjust the foreground color to improve contrast
-    double bgLuminance = calculateLuminance(background);
-
-    // If background is dark, make foreground lighter
-    Color adjusted = foreground;
-
-    if (bgLuminance < 0.5) {
-      // Dark background - brighten foreground
-      int brighten = static_cast<int>(
-          std::min(255.0, 255 * (minContrast - currentContrast) / 10.0));
-      adjusted = Color(std::min(255, foreground.r + brighten),
-                       std::min(255, foreground.g + brighten),
-                       std::min(255, foreground.b + brighten));
-    } else {
-      // Light background - darken foreground
-      int darken = static_cast<int>(
-          std::min(255.0, 255 * (minContrast - currentContrast) / 10.0));
-      adjusted = Color(std::max(0, foreground.r - darken),
-                       std::max(0, foreground.g - darken),
-                       std::max(0, foreground.b - darken));
-    }
-
-    // If still not enough contrast, use high contrast fallbacks
-    if (calculateContrast(adjusted, background) < minContrast) {
-      if (bgLuminance < 0.5) {
-        return Color(240, 240, 240); // Light foreground for dark background
-      } else {
-        return Color(20, 20, 20); // Dark foreground for light background
-      }
-    }
-
-    return adjusted;
-  }
-
-  // IMPROVED: Background/foreground generation with contrast awareness
-  void generateContrastAwareBackgroundForeground(
-      ColorScheme &scheme, const std::vector<Color> &extractedColors,
-      const std::vector<Color> &dominantColors) const {
-    if (extractedColors.empty()) {
-      scheme.background = "#000000";
-      scheme.foreground = "#ffffff";
-      return;
-    }
-
-    Color domColor = extractedColors[0];
-    double luminance = calculateLuminance(domColor);
-    bool isDark = luminance < 0.4; // Adjusted threshold for better detection
-
-    Color backgroundColor, foregroundColor;
-
-    switch (theme) {
-    case ThemeType::DARK: {
-      if (isDark) {
-        backgroundColor = domColor;
-      } else {
-        // Force darker background for dark theme
-        backgroundColor = Color(static_cast<int>(domColor.r * 0.2),
-                                static_cast<int>(domColor.g * 0.2),
-                                static_cast<int>(domColor.b * 0.2));
-      }
-
-      // Find a high-contrast foreground from dominantColors or create one
-      foregroundColor =
-          findHighContrastColor(backgroundColor, dominantColors, true);
-      break;
-    }
-    case ThemeType::LIGHT: {
-      if (!isDark) {
-        // Use a lightened version of the dominant color
-        backgroundColor =
-            Color(std::min(255, static_cast<int>(domColor.r * 1.3 + 40)),
-                  std::min(255, static_cast<int>(domColor.g * 1.3 + 40)),
-                  std::min(255, static_cast<int>(domColor.b * 1.3 + 40)));
-      } else {
-        backgroundColor = Color(250, 250, 250);
-      }
-
-      // Find a high-contrast foreground
-      foregroundColor =
-          findHighContrastColor(backgroundColor, dominantColors, false);
-      break;
-    }
-    case ThemeType::WARM: {
-      // Create warm variations with good contrast
-      backgroundColor =
-          Color(std::min(255, std::max(20, domColor.r + 15)),
-                std::max(10, domColor.g - 5), std::max(5, domColor.b - 25));
-
-      foregroundColor =
-          findHighContrastColor(backgroundColor, dominantColors,
-                                calculateLuminance(backgroundColor) < 0.4);
-      break;
-    }
-    }
-
-    // Final contrast check and adjustment
-    foregroundColor = ensureContrast(foregroundColor, backgroundColor, 4.5);
-
-    scheme.background = backgroundColor.toHex();
-    scheme.foreground = foregroundColor.toHex();
-  }
-
-  Color findHighContrastColor(const Color &background,
-                              const std::vector<Color> &candidates,
-                              bool preferLight) const {
-    Color bestColor = preferLight ? Color(240, 240, 240) : Color(20, 20, 20);
-    double bestContrast = calculateContrast(bestColor, background);
-
-    // Look through candidates for better contrast
-    for (const auto &candidate : candidates) {
-      double contrast = calculateContrast(candidate, background);
-      if (contrast > bestContrast) {
-        bestContrast = contrast;
-        bestColor = candidate;
-      }
-    }
-
-    // Ensure minimum contrast
-    if (bestContrast < 4.5) {
-      bestColor = ensureContrast(bestColor, background, 4.5);
-    }
-
-    return bestColor;
-  }
-
-  // IMPROVED: Cursor and selection colors with contrast awareness
-  void
-  generateContrastAwareCursorAndSelection(ColorScheme &scheme,
-                                          const Color &primaryColor) const {
-    Color backgroundColor = hexToColor(scheme.background);
-
-    // Create cursor color that's distinct and visible
-    Color cursorColor;
-    if (theme == ThemeType::WARM) {
-      cursorColor = Color(255, 180, 120); // Warm cursor
-    } else {
-      // Use a complementary color approach
-      cursorColor = Color(255 - primaryColor.r / 2, 255 - primaryColor.g / 2,
-                          std::min(255, primaryColor.b + 100));
-    }
-
-    // Ensure cursor has good contrast with background
-    cursorColor = ensureContrast(cursorColor, backgroundColor,
-                                 3.0); // Lower threshold for cursor
-
-    // Selection background should be subtle but visible
-    Color selectionBg;
-    double bgLuminance = calculateLuminance(backgroundColor);
-
-    if (bgLuminance < 0.5) {
-      // Dark background - lighter selection
-      selectionBg = Color(std::min(255, backgroundColor.r + 40),
-                          std::min(255, backgroundColor.g + 40),
-                          std::min(255, backgroundColor.b + 40));
-    } else {
-      // Light background - darker selection
-      selectionBg = Color(std::max(0, backgroundColor.r - 30),
-                          std::max(0, backgroundColor.g - 30),
-                          std::max(0, backgroundColor.b - 30));
-    }
-
-    cursorColor = adjustColorForTheme(cursorColor);
-    selectionBg = adjustColorForTheme(selectionBg);
-
-    scheme.cursorColor = cursorColor.toHex();
-    scheme.cursorText = cursorColor.toHex();
-    scheme.selectionBackground = selectionBg.toHex();
-    scheme.selectionForeground = selectionBg.toHex();
-  }
-
-  Color hexToColor(std::string hex) const {
-    if (hex[0] == '#') {
-      hex.erase(0, 1);
-    }
-
-    while (hex.length() != 6) {
-      hex += "0";
-    }
-
-    int r;
-    int g;
-    int b;
-
-    for (int i = 0; i < hex.length(); i += 2) {
-      std::string hedec = {hex[i], hex[i + 1]};
-      int val = std::stoi(hedec, nullptr, 16);
-      switch (i) {
-      case 0:
-        r = val;
-      case 2:
-        g = val;
-      case 4:
-        b = val;
-      }
-    }
-
-    return Color(r, g, b);
-  }
-
 public:
   ColorSchemeGenerator(ThemeType themeType) : theme(themeType) {}
 
@@ -791,62 +525,46 @@ public:
 
   ColorScheme generate(const std::vector<Color> &extractedColors) const {
     ColorScheme scheme;
+
+    // Get the most dominant colors (up to 16)
     std::vector<Color> dominantColors;
     dominantColors.reserve(16);
 
-    auto defaultColors = generateDefaultPalette();
-
-    // Track used colors to ensure distinctness
-    std::vector<Color> usedColors;
-
     for (size_t i = 0; i < 16; ++i) {
+      auto defaultColors = generateDefaultPalette();
       Color defaultColor = defaultColors[i];
       Color bestMatch = defaultColor; // fallback
-      double bestScore = std::numeric_limits<double>::max();
+      double minDistance = std::numeric_limits<double>::max();
 
-      // Find the best matching extracted color
+      // Find the most frequent color that's closest to this default color
       for (const auto &extractedColor : extractedColors) {
-        // Skip if this color is too similar to already used colors
-        if (isTooSimilarToUsed(extractedColor, usedColors, 35.0)) {
-          continue;
-        }
+        double distance = defaultColor.distanceTo(extractedColor);
 
-        double defaultDistance = defaultColor.distanceTo(extractedColor);
+        // We want colors that are both close AND frequent
+        // Weight the distance by inverse frequency to prefer frequent colors
+        double weightedDistance =
+            distance / std::log(extractedColor.frequency + 1);
 
-        // Skip colors that are too far from the default (except for special
-        // positions)
-        double maxAllowedDistance = (i == 0 || i == 15) ? 120.0 : 80.0;
-        if (defaultDistance > maxAllowedDistance) {
-          continue;
-        }
-
-        // Calculate score: balance frequency and distance to default
-        // Lower score is better
-        double frequencyWeight = 1.0 / std::log(extractedColor.frequency + 2);
-        double score = defaultDistance * frequencyWeight;
-
-        if (score < bestScore) {
-          bestScore = score;
+        if (weightedDistance < minDistance) {
+          minDistance = weightedDistance;
           bestMatch = extractedColor;
         }
       }
-
-      // Ensure the selected color is distinct enough from previously used
-      // colors
-      Color finalColor = ensureDistinct(bestMatch, usedColors, defaultColor);
-      finalColor = adjustColorForTheme(finalColor);
-
-      dominantColors.push_back(finalColor);
-      usedColors.push_back(finalColor);
+      bool tooDistant =
+          (bestMatch.distanceTo(defaultColor) < 50) && (i != 0 && i != 15);
+      if (tooDistant) { // Ensurees colors aren't too far away from default
+                        // values
+        dominantColors.push_back(adjustColorForTheme(bestMatch));
+      } else {
+        dominantColors.push_back(adjustColorForTheme(defaultColor));
+      }
     }
 
-    // Fill remaining slots with defaults if needed
-    while (dominantColors.size() < 16) {
-      Color defaultColor = defaultColors[dominantColors.size()];
-      Color distinctColor =
-          ensureDistinct(defaultColor, usedColors, defaultColor);
-      dominantColors.push_back(adjustColorForTheme(distinctColor));
-      usedColors.push_back(distinctColor);
+    if (dominantColors.size() < 16) {
+      auto defaults = generateDefaultPalette();
+      for (size_t i = dominantColors.size(); i < 16; ++i) {
+        dominantColors.push_back(defaults[i]);
+      }
     }
 
     // Generate palette
@@ -854,12 +572,71 @@ public:
       scheme.palette[i] = dominantColors[i].toHex();
     }
 
-    // IMPROVED: Generate background/foreground with better contrast
-    generateContrastAwareBackgroundForeground(scheme, extractedColors,
-                                              dominantColors);
+    Color backgroundColor, foregroundColor;
 
-    // Enhanced cursor and selection colors with contrast awareness
-    generateContrastAwareCursorAndSelection(scheme, dominantColors[0]);
+    Color domColor = extractedColors[0];
+    Color invertColor =
+        Color(255 - domColor.r, 255 - domColor.b, 255 - domColor.g);
+
+    bool dark = domColor.distanceTo(Color(255, 255, 255)) >
+                invertColor.distanceTo(Color(255, 255, 255));
+    if (!dark) {
+      Color rDomColor = domColor;
+      domColor = invertColor;
+      invertColor = rDomColor;
+    } // Makes sure domColor is always darer than inverColor
+
+    Color warmColor = Color(domColor.r + 15, domColor.g, domColor.b + 30);
+    Color coldColor =
+        Color(255 - warmColor.r, 255 - warmColor.g, 255 - warmColor.b);
+
+    if (dark) {
+
+      switch (theme) {
+      case ThemeType::DARK:
+        backgroundColor = domColor;
+        foregroundColor = invertColor;
+        break;
+      case ThemeType::LIGHT:
+        backgroundColor = invertColor;
+        foregroundColor = domColor;
+        break;
+      case ThemeType::WARM:
+        backgroundColor = warmColor;
+        foregroundColor = coldColor;
+      }
+    } else {
+      switch (theme) {
+      case ThemeType::DARK:
+        backgroundColor = domColor;
+        foregroundColor = invertColor;
+        break;
+      case ThemeType::LIGHT:
+        // Background color is too close to palette color 0
+        domColor =
+            Color(backgroundColor.r, backgroundColor.g, backgroundColor.b);
+        backgroundColor = invertColor;
+        foregroundColor = domColor;
+        break;
+      case ThemeType::WARM:
+        backgroundColor = warmColor;
+        foregroundColor = coldColor;
+      }
+    }
+
+    scheme.background = backgroundColor.toHex();
+    scheme.foreground = foregroundColor.toHex();
+
+    Color cursorColor(235, 194, 168);
+    Color selectionBg(61, 12, 17);
+
+    cursorColor = adjustColorForTheme(cursorColor);
+    selectionBg = adjustColorForTheme(selectionBg);
+
+    scheme.cursorColor = cursorColor.toHex();
+    scheme.cursorText = cursorColor.toHex();
+    scheme.selectionBackground = selectionBg.toHex();
+    scheme.selectionForeground = selectionBg.toHex();
 
     return scheme;
   }

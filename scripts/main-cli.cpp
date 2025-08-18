@@ -205,7 +205,7 @@ int main(int argc, char *argv[]) {
               << " colorscheme\n";
     scheme = getColorSchemeByName(config.predefinedScheme);
     scheme.print();
-  } else {
+  } else if (!config.generateColorScheme) {
     std::cout << "No colorscheme specified, using default gruvbox-dark\n";
     scheme = GRUVBOX_DARK;
   }

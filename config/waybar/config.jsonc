@@ -15,9 +15,7 @@
     "wlr/taskbar"
   ],
   "modules-right": [
-    "network",
     "battery",
-    "bluetooth",
     "pulseaudio",
     "backlight",
     "custom/temperature",
@@ -68,15 +66,6 @@
     "on-click": "wofi --show drun",
     "tooltip": true,
     "tooltip-format": "Choose apps?"
-  },
-  "network": {
-    "format-wifi": "<span color='#00FFFF'> 󰤨 </span> {essid} ",
-    "format-ethernet": "<span color='#7FFF00'> </span> Wired ",
-    "tooltip-format": "<span color='#FF1493'> 󰅧 </span> {bandwidthUpBytes}  <span color='#00BFFF'> 󰅢 </span>{bandwidthDownBytes}",
-    "format-linked": "<span color='#FFA500'> 󱘖 </span> {ifname} (No IP) ",
-    "format-disconnected": "<span color='#FF4040'>  </span> Disconnected ",
-    "format-alt": "<span color='#00FFFF'> 󰤨 </span> {signalStrength}% ",
-    "interval": 1
   },
   "battery": {
     "states": {
@@ -154,15 +143,6 @@
       "<span color='#FFFF66'> 󰃟  </span>", // 亮 - 柠檬黄
       "<span color='#FFD700'> 󰃠  </span>" // 最亮 - 金色
     ]
-  },
-  "bluetooth": {
-    "format": "<span color='#00BFFF'>  </span>{status} ",
-    "format-connected": "<span color='#00BFFF'>  </span>{device_alias} ",
-    "format-connected-battery": "<span color='#00BFFF'>  </span>{device_alias}{device_battery_percentage}% ",
-    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
-    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
-    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
   },
   "wlr/taskbar": {
     "icon-size": 16,

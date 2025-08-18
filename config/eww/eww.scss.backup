@@ -1,16 +1,16 @@
 /* ~/.config/eww/eww.scss */
 
-$foreground: #cdd6f4;
+$foreground: #ffffff;
 $border: #edd6eb;
-$background: #1e1e2e;
-$hover: #585b70;
+$background: #000000;
+$hover: #bbb4b4;
 
-$accent-hover: #353749;
-$accent-purple: #f5c2e7;
-$accent-green: #a6e3a1;
-$accent-red: #f38ba8;
-$accent-blue: #89b4fa;
-$accent-orange: #f9e2af;
+$accent-hover: #490e14;
+$accent-purple: #b700b7;
+$accent-green: #00b700;
+$accent-red: #b70000;
+$accent-blue: #0000b7;
+$accent-orange: #b7b700;
 
 .player {
   background-color: $background;

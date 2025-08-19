@@ -2,7 +2,7 @@
 
 DOTFILES_SOURCE="$(dirname "$(readlink -f "$0")")/config"
 USER_CONFIGS_DIRECTORY="${XDG_CONFIG_HOME:-$HOME/.config}"
-DOTFILES=("fastfetch" "fish" "ghostty" "hypr" "gtk-4.0" "vesktop/settings" "vesktop/themes" "wofi" "waybar" "eww" "dunst" "catalyst" "cava")
+DOTFILES=("fastfetch" "fish" "ghostty" "hypr" "gtk-4.0" "vesktop/settings" "vesktop/themes" "wofi" "dunst" "catalyst" "cava", "quickshell")
 
 echo "This will delete all of the dotfiles here currently, and will replace the ones soruced with your dotfiles."
 

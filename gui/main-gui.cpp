@@ -46,7 +46,7 @@ const ColorScheme DRACULA_DARK({"#21222c", "#ff5555", "#50fa7b", "#f1fa8c",
                                {"#282a36", "#f8f8f2", "#f8f8f2", "#282a36",
                                 "#44475a", "#f8f8f2"});
 
-ColorScheme getColorSchemeByName(const std::string& schemeName) {
+ColorScheme getColorSchemeByName(const std::string &schemeName) {
   if (schemeName == "catppuccin-mocha") {
     return CATPPUCCIN_MOCHA;
   } else if (schemeName == "catppuccin-latte") {
@@ -58,7 +58,7 @@ ColorScheme getColorSchemeByName(const std::string& schemeName) {
   } else if (schemeName == "dracula") {
     return DRACULA_DARK;
   }
-  
+
   // Fallback to dark theme
   return GRUVBOX_DARK;
 }
@@ -118,17 +118,16 @@ public slots:
         emit statusUpdate(QString("Installing %1...")
                               .arg(QString::fromStdString(package_name)));
 
-        std::string trimmed_package =
-            setupPackage(package_name, {"dunst", "fastfetch", "fish", "eww",
-                                        "ghostty", "vesktop", "waybar", "wofi",
-                                        "hypr", "catalyst", "cava"});
+        std::string trimmed_package = setupPackage(
+            package_name, {"dunst", "fastfetch", "fish", "ghostty", "vesktop",
+                           "wofi", "hypr", "catalyst", "cava"});
 
         if (trimmed_package == "Not found.") {
           emit statusUpdate(QString("Package %1 not found; skipping.")
                                 .arg(QString::fromStdString(package_name)));
           continue;
         }
-        
+
         fm.setupPackageColors(trimmed_package, scheme);
         fm.movePackage(trimmed_package);
 
@@ -311,10 +310,10 @@ private slots:
   }
 
   void onColorModeChanged() {
-    bool useWallpaper = generateColorScheme->isChecked() && 
-                       generateColorScheme->isEnabled();
+    bool useWallpaper =
+        generateColorScheme->isChecked() && generateColorScheme->isEnabled();
     bool usePredefined = !generateColorScheme->isChecked();
-    
+
     // Show/hide relevant controls
     themeCombo->setVisible(useWallpaper);
     themeLabel->setVisible(useWallpaper);
@@ -346,8 +345,8 @@ private slots:
     std::string wallpaperPathStr = wallpaperPath->text().toStdString();
     std::string colorSchemeThemeStr = themeCombo->currentText().toStdString();
     std::string predefinedSchemeStr = schemeCombo->currentText().toStdString();
-    bool generateColors = generateColorScheme->isChecked() && 
-                         generateColorScheme->isEnabled();
+    bool generateColors =
+        generateColorScheme->isChecked() && generateColorScheme->isEnabled();
 
     // Start installation in worker thread
     QMetaObject::invokeMethod(
@@ -355,8 +354,7 @@ private slots:
         Q_ARG(std::vector<std::string>, selectedPackages),
         Q_ARG(std::string, wallpaperPathStr),
         Q_ARG(std::string, colorSchemeThemeStr),
-        Q_ARG(std::string, predefinedSchemeStr),
-        Q_ARG(bool, generateColors));
+        Q_ARG(std::string, predefinedSchemeStr), Q_ARG(bool, generateColors));
   }
 
   void onStatusUpdate(const QString &message) {
@@ -514,8 +512,8 @@ private:
     auto *schemeSelectLayout = new QHBoxLayout;
     schemeLabel = new QLabel("Predefined scheme:");
     schemeCombo = new QComboBox;
-    schemeCombo->addItems({"catppuccin-mocha", "catppuccin-latte", 
-                          "gruvbox-dark", "gruvbox-light", "dracula"});
+    schemeCombo->addItems({"catppuccin-mocha", "catppuccin-latte",
+                           "gruvbox-dark", "gruvbox-light", "dracula"});
     schemeCombo->setStyleSheet("QComboBox { padding: 5px; }");
     schemeSelectLayout->addWidget(schemeLabel);
     schemeSelectLayout->addWidget(schemeCombo);

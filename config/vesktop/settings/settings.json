@@ -167,9 +167,9 @@
             "imageBig": "",
             "imageBigTooltip": "peak",
             "imageSmall": "",
-            "buttonOneText": "",
-            "buttonOneURL": "https://open.spotify.com/track/1wTGjBMDL3jzRTvziovQAr?si=202b44febaf941b7",
-            "buttonTwoText": "listen",
+            "buttonOneText": "listen",
+            "buttonOneURL": "https://www.youtube.com/watch?v=zhPleX5m0Ps",
+            "buttonTwoText": "",
             "buttonTwoURL": ""
         },
         "Dearrow": {
@@ -721,6 +721,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1755615553614
+        "settingsSyncVersion": 1755616613862
     }
 }

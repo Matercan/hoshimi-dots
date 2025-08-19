@@ -47,7 +47,7 @@ Scope {
 
                 property real margin: 5
 
-                implicitWidth: right.implicitWidth + margin * 4
+                implicitWidth: 1080
                 implicitHeight: right.implicitHeight + margin * 2
 
                 // Right side of the bar
@@ -56,7 +56,7 @@ Scope {
 
                     property real margin: 20
 
-                    width: parent.width - parent.margin * 2
+                    width: 540
                     height: parent.height - parent.margin * 2
                     x: window.width - parent.margin - width
                     y: parent.margin
@@ -66,7 +66,7 @@ Scope {
                     // Background styling
                     color: window.backgroundColor          // Black background
                     border.color: window.borderColor    // White border
-                    border.width: 4
+                    border.width: 2
                     radius: 10   // Rounded corners
                     implicitHeight: 30 + border.width  // Increased height for better appearance
 
@@ -109,20 +109,20 @@ Scope {
                     color: window.backgroundColor
 
                     border.color: window.borderColor
-                    border.width: 4
+                    border.width: 2
                     radius: 10
                 }
 
                 TaskbarWidget {
                     id: taskbar
-                    x: window.width / 2
                     y: parent.margin
+                    x: parent.implicitWidth / 2
                     height: parent.height - parent.margin * 2
 
                     color: window.backgroundColor
 
                     border.color: window.borderColor
-                    border.width: 4
+                    border.width: 2
                     radius: 10
                 }
             }

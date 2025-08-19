@@ -1,0 +1,21 @@
+[general]
+mode = normal
+framerate = 65
+overshoot = 10
+sensitivity = 120
+bars = 0
+bar_width = 2
+bar_spacing = 0
+
+[output]
+orientation = top
+channels = stereo
+
+[color]
+gradient = 1
+gradient_color_1 = '#1e66f5'
+gradient_color_2 = '#acb0be'
+
+[smoothing]
+integral = 100
+gravity = 100

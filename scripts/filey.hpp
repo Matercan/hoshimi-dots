@@ -28,6 +28,10 @@ private:
   std::vector<std::string> cavaGradientColors = {"gradient_color_1",
                                                  "gradient_color_2"};
 
+  std::vector<std::string> quickshellColors = {"backgroundColor",
+                                               "foregroundColor", "borderColor",
+                                               "activeColor", "selectedColor"};
+
   // Dunst color mappings - background, foreground, frame
   struct DunstColors {
     std::string background;
@@ -37,69 +41,6 @@ private:
   };
 
 public:
-  bool updateWaybarColorsRegex(const std::string &cssFilePath,
-                               const std::vector<std::string> &colors) {
-    if (colors.size() < 5) {
-      std::cerr << "Error: Need at least 5 colors for waybar theme"
-                << std::endl;
-      return false;
-    }
-
-    // Read entire file content
-    std::string content = readFileContent(cssFilePath);
-    if (content.empty()) {
-      std::cerr << "Error: Could not read file or file is empty" << std::endl;
-      return false;
-    }
-
-    // Update each color definition using regex
-    for (size_t i = 0; i < std::min(waybarColors.size(), colors.size()); ++i) {
-      std::string pattern =
-          "@define-color\\s+" + waybarColors[i] + "\\s+[^;]+;";
-      std::string replacement =
-          "@define-color " + waybarColors[i] + " " + colors[i] + ";";
-
-      std::regex colorRegex(pattern);
-      content = std::regex_replace(content, colorRegex, replacement);
-    }
-
-    // Write back to file
-    return writeContentToFile(cssFilePath, content);
-  }
-
-  // Utility: Apply colorscheme to waybar
-  bool applyColorSchemeToWaybar(const std::string &waybarConfigDir,
-                                const std::vector<std::string> &colors) {
-    std::string cssPath = waybarConfigDir + "/style.css";
-
-    std::cout << "Updating waybar colors in: " << cssPath << std::endl;
-
-    // Print what we're applying
-    for (size_t i = 0; i < std::min(waybarColors.size(), colors.size()); ++i) {
-      std::cout << "  " << waybarColors[i] << ": " << colors[i] << std::endl;
-    }
-
-    // Use regex method for robustness
-    bool success = updateWaybarColorsRegex(cssPath, colors);
-
-    if (success) {
-      std::cout << "Waybar colors updated successfully!" << std::endl;
-    } else {
-      std::cout << "Failed to update waybar colors." << std::endl;
-    }
-
-    return success;
-  }
-
-  // Utility: Preview color scheme without applying
-  void previewColorScheme(const std::vector<std::string> &colors) {
-    std::cout << "Color scheme preview:" << std::endl;
-    for (size_t i = 0; i < std::min(waybarColors.size(), colors.size()); ++i) {
-      std::cout << "  @define-color " << waybarColors[i] << " " << colors[i]
-                << ";" << std::endl;
-    }
-  }
-
   bool updateWofiColorsRegex(const std::string &cssFilePath,
                              const std::vector<std::string> &colors) {
     if (colors.size() < 4) {
@@ -255,6 +196,84 @@ public:
       std::cout << "Cava colors updated successfully!" << std::endl;
     } else {
       std::cout << "Failed to update cava colors." << std::endl;
+    }
+
+    return success;
+  }
+
+  // Function to update QML colors using regex
+  bool updateQuickshellColorsRegex(const std::string &qmlFilePath,
+                                   const std::vector<std::string> &colors) {
+    if (colors.size() < 5) {
+      std::cerr << "Error: Need at least 5 colors for quickshell theme"
+                << std::endl;
+      return false;
+    }
+
+    // Read entire file content
+    std::string content = readFileContent(qmlFilePath);
+    if (content.empty()) {
+      std::cerr << "Error: Could not read file or file is empty" << std::endl;
+      return false;
+    }
+
+    // Update backgroundColor
+    std::regex bgRegex(
+        "(property\\s+string\\s+backgroundColor:\\s*)\"[^\"]*\"");
+    std::string bgReplacement = "$1\"" + colors[0] + "\"";
+    content = std::regex_replace(content, bgRegex, bgReplacement);
+
+    // Update foregroundColor
+    std::regex fgRegex(
+        "(property\\s+string\\s+foregroundColor:\\s*)\"[^\"]*\"");
+    std::string fgReplacement = "$1\"" + colors[1] + "\"";
+    content = std::regex_replace(content, fgRegex, fgReplacement);
+
+    // Update borderColor (note: it references foregroundColor by default, so we
+    // set it explicitly)
+    std::regex borderRegex(
+        "(property\\s+string\\s+borderColor:\\s*)(foregroundColor|\"[^\"]*\")");
+    std::string borderReplacement = "$1\"" + colors[2] + "\"";
+    content = std::regex_replace(content, borderRegex, borderReplacement);
+
+    // Update activeColor
+    std::regex activeRegex(
+        "(property\\s+string\\s+activeColor:\\s*)\"[^\"]*\"");
+    std::string activeReplacement = "$1\"" + colors[3] + "\"";
+    content = std::regex_replace(content, activeRegex, activeReplacement);
+
+    // Update selectedColor
+    std::regex selectedRegex(
+        "(property\\s+string\\s+selectedColor:\\s*)\"[^\"]*\"");
+    std::string selectedReplacement = "$1\"" + colors[4] + "\"";
+    content = std::regex_replace(content, selectedRegex, selectedReplacement);
+
+    // Write back to file
+    return writeContentToFile(qmlFilePath, content);
+  }
+
+  bool applyColorSchemeToQuickshell(const std::string &quickshellConfigDir,
+                                    const std::vector<std::string> &colors) {
+    std::string qmlPath = quickshellConfigDir + "/Bar.qml";
+
+    std::cout << "Updating quickshell colors in: " << qmlPath << std::endl;
+
+    // Print what we're applying
+    for (size_t i = 0; i < std::min(quickshellColors.size(), colors.size());
+         ++i) {
+      std::cout << "  " << quickshellColors[i] << ": " << colors[i]
+                << std::endl;
+    }
+
+    // Use regex method for robustness
+    bool success = updateQuickshellColorsRegex(qmlPath, colors);
+
+    if (success) {
+      std::cout << "Quickshell colors updated successfully!" << std::endl;
+      // Restart quickshell to apply changes
+      system("pkill quickshell && quickshell > /dev/null 2>&1 &");
+    } else {
+      std::cout << "Failed to update quickshell colors." << std::endl;
     }
 
     return success;
@@ -570,15 +589,6 @@ public:
       fs::copy(colorscheme, localPath / "ghostty/themes/");
       fs::rename(localPath / "ghostty/themes/colorscheme.txt",
                  localPath / "ghostty/themes/colorscheme");
-    } else if (package == "waybar") {
-      vector<string> waybarColors = {
-          scheme.background,          scheme.foreground, scheme.palette[4],
-          scheme.selectionBackground, scheme.foreground,
-      };
-
-      updater.applyColorSchemeToWaybar(localPath.string() + "/waybar",
-                                       waybarColors);
-      system("killall waybar && waybar > /dev/null &");
     } else if (package == "wofi") {
       vector<string> wofiColors = {scheme.background, scheme.foreground,
                                    scheme.palette[4], scheme.foreground};
@@ -601,6 +611,14 @@ public:
                                       dunstColors);
       // Restart dunst to apply changes
       system("killall dunst && dunst > /dev/null 2>&1 &");
+    } else if (package == "quickshell") {
+      vector<string> barColors = {scheme.background, scheme.foreground,
+                                  scheme.foreground, scheme.cursorColor,
+                                  scheme.selectionBackground};
+      updater.applyColorSchemeToQuickshell(
+          localPath.string() + "/quickshell/Bar", barColors);
+      system("killall quickshell && quickshell ~/.config/quickshell/Bar/ > "
+             "/dev/null 2>&1 &");
     } else {
       cout << "Package " << package << " does not use colors." << endl;
     }

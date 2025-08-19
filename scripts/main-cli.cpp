@@ -11,9 +11,9 @@
 
 using namespace std;
 
-const vector<string> TOTALPACKAGES = {"dunst",   "fastfetch", "fish",
-                                      "ghostty", "vesktop",   "wofi",
-                                      "hypr",    "catalyst",  "cava"};
+const vector<string> TOTALPACKAGES = {
+    "dunst", "fastfetch", "fish",     "ghostty", "vesktop",
+    "wofi",  "hypr",      "catalyst", "cava",    "quickshell"};
 
 const vector<string> TOTALTHEMES = {"dark", "warm", "light"};
 

@@ -70,7 +70,7 @@ public:
     std::cout
         << "  -a, --all                  Install all available packages\n\n";
     std::cout << "Examples:\n";
-    std::cout << "  " << programName << " -p hypr,waybar,wofi -s dracula\n";
+    std::cout << "  " << programName << " -p hypr,wofi -s dracula\n";
     std::cout << "  " << programName << " -a -w ~/bg.jpg -c dark\n";
     std::cout << "  " << programName << " -p dunst,fish -s catppuccin-mocha\n";
     std::cout << "  " << programName << " --interactive\n";

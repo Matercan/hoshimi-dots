@@ -38,7 +38,7 @@ Options:
   -a, --all                  Install all available packages
 
 Examples:
-  ./install-bin -p hypr,waybar,wofi -w ~/wallpaper.png
+  ./install-bin -p hypr,wofi -w ~/wallpaper.png
   ./install-bin -a -w ~/bg.jpg -c dark
   ./install-bin --interactive
   ./install-bin --list-packages

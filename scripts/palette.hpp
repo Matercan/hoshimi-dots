@@ -550,14 +550,7 @@ public:
           bestMatch = extractedColor;
         }
       }
-      bool tooDistant =
-          (bestMatch.distanceTo(defaultColor) < 50) && (i != 0 && i != 15);
-      if (tooDistant) { // Ensurees colors aren't too far away from default
-                        // values
-        dominantColors.push_back(adjustColorForTheme(bestMatch));
-      } else {
-        dominantColors.push_back(adjustColorForTheme(defaultColor));
-      }
+      dominantColors.push_back(adjustColorForTheme(bestMatch));
     }
 
     if (dominantColors.size() < 16) {

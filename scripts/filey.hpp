@@ -628,8 +628,8 @@ public:
       system("killall dunst && dunst > /dev/null 2>&1 &");
     } else if (package == "quickshell") {
       vector<string> barColors = {scheme.background, scheme.foreground,
-                                  scheme.foreground, scheme.cursorColor,
-                                  scheme.selectionBackground};
+                                  scheme.foreground, scheme.palette[1],
+                                  scheme.selectionForeground};
       updater.applyColorSchemeToQuickshell(
           localPath.string() + "/quickshell/Bar", barColors);
       system("killall quickshell && quickshell ~/.config/quickshell/Bar/ > "

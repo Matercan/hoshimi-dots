@@ -3,8 +3,11 @@ A very tame an basic configuration for the window tiling manager hyprland.
 Features include:
 - A full desktop environment
 - Colorscheme generation based on a wallpaper
+- Famous colorschemes like catppuccin
 - Nothing that requires sudo
-- An easy installation with a GUI, if you choise
+- An easy installation with a GUI, if you chose (very outdated)
+
+WARNING: the screenshots for colorscheme generation are outdated!
 
 ## Installation
 ```shell
@@ -23,28 +26,35 @@ Dependencies:
 
 ## Usage
 ```
-Usage: build/bin/hyprland-dots
+Usage: build/bin/hyprland-dots [OPTIONS]
 
 Install and configure dotfiles with custom themes
 
 Options:
   -p, --packages PKG1,PKG2  Install specific packages (comma-separated)
   -w, --wallpaper PATH       Set wallpaper path
-  -c, --colorscheme TYPE     Generate colorscheme from wallpaper (dark/light/warm)
+  -c, --colorscheme TYPE     Generate colorscheme from wallpaper
+                             Available types: dark, light, warm
+  -s, --scheme NAME          Use predefined color scheme
+                             Available schemes: catppuccin-mocha,
+                             catppuccin-latte, gruvbox-dark,
+                             gruvbox-light, dracula
   -i, --interactive          Run in interactive mode
   -l, --list-packages        List available packages
-  -L, --list-themes          List available themes
+  -L, --list-themes          List available wallpaper themes
+  -S, --list-schemes         List available predefined schemes
   -h, --help                 Show this help message
   -a, --all                  Install all available packages
 
 Examples:
-  ./install-bin -p hypr,wofi -w ~/wallpaper.png
-  ./install-bin -a -w ~/bg.jpg -c dark
-  ./install-bin --interactive
-  ./install-bin --list-packages
+  build/bin/hyprland-dots -p hypr,wofi -s dracula
+  build/bin/hyprland-dots -a -w ~/bg.jpg -c dark
+  build/bin/hyprland-dots -p dunst,fish -s catppuccin-mocha
+  build/bin/hyprland-dots --interactive
+  build/bin/hyprland-dots --list-schemes
 ```
 
-You can also use `` build/bin/hyprland-dots-gui `` to launch a GUI menu if that is more your style
+You can also use `` build/bin/hyprland-dots-gui `` to launch a GUI menu if that is more your style (though it is not fully updated yet)
 
 
 To pull back into the hyprland_dots folder, run ``./pull.sh``. This will collect all of the configurations from all of the programs within this repository and will replace all of those currently in the directory with them.
@@ -57,9 +67,6 @@ cd yay-bin
 makepkg -si
 ```
 
-- cmake has decided not to compile my scripts anymore - you need to use g++
-- The gui version doesn't work
-Both of these problems were caused by the same bug that I am trying to fix
 
 ## Showcase
 
@@ -69,10 +76,14 @@ Both of these problems were caused by the same bug that I am trying to fix
 | Wallpaper Two |<img width="1918" height="1080" alt="image" src="https://github.com/user-attachments/assets/af0f2fd0-162e-4628-b9b4-a5538afbefbc" /> |  <img width="1917" height="1080" alt="image" src="https://github.com/user-attachments/assets/edf0c419-9031-4f0f-840f-8ad5a534d21d" /> | <img width="1921" height="1080" alt="image" src="https://github.com/user-attachments/assets/64d4dd04-75e0-4dd0-88fb-7543ecf1ba76" />  |
 | Wallpaper Three | <img width="1920" height="1079" alt="image" src="https://github.com/user-attachments/assets/314db5d3-4607-4f09-a8ba-1e5e692c7944" /> | <img width="1919" height="1080" alt="image" src="https://github.com/user-attachments/assets/c4bf4f93-4b04-4516-b792-c20e153a84a9" /> | <img width="1916" height="1080" alt="image" src="https://github.com/user-attachments/assets/f02b3c92-1bb8-441f-8fd2-64b0aa232247" /> 
 
+| Colorscheme | Light | Dark
+| --- | --- | --- |
+Catppuccin | <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/e812dfe8-d932-4cc9-bb8e-f1986c76a279" /> | <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/edfbdbfe-4eca-413d-809c-18b029e6be83" /> |
+| gruvbox| <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/26e9e425-2c5b-4ecc-bb40-3a7884546653" />  | <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/92455d2e-43da-4dd9-bfa9-0b3b7e2ee9bf" /> |
+
 
 ## TO-DO:
-- Integrate catppucin, gruvbox, dracula, and other popular themes into the installation
-- A lot more widgets for eww
+- More quickshell
 
 ## Inspiration
 
@@ -80,7 +91,10 @@ Both of these problems were caused by the same bug that I am trying to fix
 
 [typecraft's dotfiles](https://github.com/typecraft-dev/dotfiles.git)
 
-[ml4 dotfiles](https://github.com/mylinuxforwork/dotfiles)
+[ml4w dotfiles](https://github.com/mylinuxforwork/dotfiles)
+
+[end4's dotfiles](https://github.com/end-4/dots-hyprland)
+
 
 
 

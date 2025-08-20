@@ -67,7 +67,7 @@ Rectangle {
                 if (isActive) {
                     return wkRect.activeColor;
                 } else if (mouseArea.containsMouse) {
-                    return wkRect.hoverColor;
+                    return wkRect.selectedColor;
                 } else {
                     return "transparent";
                 }

@@ -90,7 +90,7 @@ Rectangle {
                 if (isActive) {
                     return taskbarRect.activeColor;  // Active window color
                 } else if (mouseArea.containsMouse) {
-                    return taskbarRect.hoverColor;  // Hover color
+                    return taskbarRect.selectedColor;  // Hover color
                 } else {
                     return "transparent";  // Default
                 }

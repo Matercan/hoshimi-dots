@@ -4,7 +4,7 @@ Text {
     id: memoryText
     required property string usedMemory
     required property string totalMemory
-    color: "#ffff00"
+    color: "#ff8080"
     text: " " + usedMemory + "/" + totalMemory
 
     font.family: "CaskaydiaCove Nerd Font"

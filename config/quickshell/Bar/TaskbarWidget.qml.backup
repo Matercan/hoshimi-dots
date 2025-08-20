@@ -17,10 +17,6 @@ Rectangle {
     // Property to store the active window address
     property string activeWindowAddress: ""
 
-    property string foregroundColor: "#ffffff"
-    property string selectedColor: "#0000b7"
-    property string activeColor: "#490e14"
-
     function getWindowIcon(className) {
         // Map common application classes to icons
         switch (className.toLowerCase()) {
@@ -76,7 +72,6 @@ Rectangle {
     Component {
         id: windowDelegate
         Rectangle {
-            id: rect
             required property string address
             required property string title
             required property string className
@@ -88,9 +83,9 @@ Rectangle {
 
             color: {
                 if (isActive) {
-                    return taskbarRect.activeColor;  // Active window color
+                    return "#490e14";  // Active window color
                 } else if (mouseArea.containsMouse) {
-                    return taskbarRect.hoverColor;  // Hover color
+                    return "#0000b7";  // Hover color
                 } else {
                     return "transparent";  // Default
                 }
@@ -102,23 +97,10 @@ Rectangle {
                 spacing: 4
 
                 Text {
-                    text: taskbarRect.getWindowIcon(rect.className)
+                    text: taskbarRect.getWindowIcon(className)
                     font.family: "CaskaydiaCove Nerd Font"
                     font.pixelSize: 14
-                    color: rect.isActive ? taskbarRect.foregroundColor : taskbarRect.activeColor
-                }
-
-                Text {
-                    text: taskbarRect.truncateTitle(rect.title)
-                    font.family: "CaskaydiaCove Nerd Font"
-                    font.pixelSize: 12
-                    font.weight: Font.Medium
-                    font.italic: true
-                    color: rect.isActive ? taskbarRect.foregroundColor : taskbarRect.activeColor
-
-                    // Limit width to prevent overflow
-                    L.Layout.maximumWidth: 150
-                    elide: Text.ElideRight
+                    color: parent.parent.isActive ? "#ffffff" : "#555555"
                 }
             }
 

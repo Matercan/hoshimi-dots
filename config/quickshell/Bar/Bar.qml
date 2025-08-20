@@ -23,11 +23,11 @@ Scope {
 
         PanelWindow {
             id: window
-            property string backgroundColor: "#eff1f5"
-            property string foregroundColor: "#4c4f69"
-            property string borderColor: "#4c4f69"
-            property string activeColor: "#dc8a78"
-            property string selectedColor: "#d8dae1"
+            property string backgroundColor: "#fbf1c7"
+            property string foregroundColor: "#654735"
+            property string borderColor: "#654735"
+            property string activeColor: "#c14a4a"
+            property string selectedColor: "#654735"
 
             required property var modelData
             screen: modelData

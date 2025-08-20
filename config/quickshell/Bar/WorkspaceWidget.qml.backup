@@ -18,6 +18,10 @@ Rectangle {
     // Property to store the ID of the active workspace
     property int activeWorkspaceId: 0
 
+    property string foregroundColor: "#ffffff"
+    property string selectedColor: "#0000b7"
+    property string activeColor: "#490e14"
+
     function getWorkspaceIcon(ident) {
         switch (ident) {
         case 1:
@@ -61,9 +65,9 @@ Rectangle {
 
             color: {
                 if (isActive) {
-                    return "#490e14";
+                    return wkRect.activeColor;
                 } else if (mouseArea.containsMouse) {
-                    return "#0000b7";
+                    return wkRect.selectedColor;
                 } else {
                     return "transparent";
                 }
@@ -81,7 +85,7 @@ Rectangle {
                     font.family: "CaskaydiaCove Nerd Font"
                     font.pixelSize: 16
 
-                    color: parent.parent.isActive ? "#00ff00" : "#ffffff"
+                    color: rect.isActive ? wkRect.foregroundColor : wkRect.activeColor
                 }
             }
 

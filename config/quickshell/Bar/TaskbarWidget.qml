@@ -17,9 +17,9 @@ Rectangle {
     // Property to store the active window address
     property string activeWindowAddress: ""
 
-    property string foregroundColor: "#ffffff"
-    property string selectedColor: "#0000b7"
-    property string activeColor: "#490e14"
+    property string foregroundColor: "#654735"
+    property string selectedColor: "#654735"
+    property string activeColor: "#c14a4a"
 
     function getWindowIcon(className) {
         // Map common application classes to icons
@@ -53,7 +53,7 @@ Rectangle {
         }
     }
 
-    function truncateTitle(title, maxLength = 20) {
+    function truncateTitle(title, maxLength = 120 / windows.length) {
         if (title.length <= maxLength) {
             return title;
         }

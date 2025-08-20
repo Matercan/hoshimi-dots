@@ -2,6 +2,7 @@
 pragma ComponentBehavior: Bound
 import Quickshell
 import QtQuick
+import QtQuick.Layouts as L
 
 Scope {
     Time {
@@ -22,11 +23,11 @@ Scope {
 
         PanelWindow {
             id: window
-            property string backgroundColor: "#000000"
-            property string foregroundColor: "#ffffff"
-            property string borderColor: foregroundColor
-            property string activeColor: "#1ae8c9"
-            property string selectedColor: "#490e14"
+            property string backgroundColor: "#eff1f5"
+            property string foregroundColor: "#4c4f69"
+            property string borderColor: "#4c4f69"
+            property string activeColor: "#dc8a78"
+            property string selectedColor: "#d8dae1"
 
             required property var modelData
             screen: modelData
@@ -39,91 +40,71 @@ Scope {
                 right: true
             }
 
-            implicitHeight: container.implicitHeight
-            implicitWidth: container.implicitWidth
+            height: 42 // Fixed height instead of implicit
 
-            Item {
-                id: container
+            L.RowLayout {
+                id: mainLayout
+                anchors.fill: parent
+                anchors.margins: 6
+                spacing: 6
 
-                property real margin: 5
-
-                implicitWidth: 1080
-                implicitHeight: right.implicitHeight + margin * 2
-
-                // Right side of the bar
-                Rectangle {
-                    id: right
-
-                    property real margin: 20
-
-                    width: 540
-                    height: parent.height - parent.margin * 2
-                    x: window.width - parent.margin - width
-                    y: parent.margin
-
-                    implicitWidth: 540
-
-                    // Background styling
-                    color: window.backgroundColor          // Black background
-                    border.color: window.borderColor    // White border
-                    border.width: 2
-                    radius: 10   // Rounded corners
-                    implicitHeight: 30 + border.width  // Increased height for better appearance
-
-                    CpuWidget {
-                        id: cpu
-                        x: volume.x + parent.margin + volume.width
-                        y: parent.height / 4
-
-                        usage: cpuSource.cpuUsage
-                    }
-                    VolumeWidget {
-                        id: volume
-
-                        x: parent.margin
-                        y: cpu.y - parent.height / 3.25
-                        volume: volumeSource.volume
-                    }
-                    MemoryWidget {
-                        id: memory
-                        x: cpu.x + parent.margin + cpu.width
-                        y: parent.height / 4
-
-                        usedMemory: memorySource.memoryUsed
-                        totalMemory: "31.4Gi"
-                    }
-                    ClockWidget {
-                        id: clock
-                        x: memory.x + parent.margin + memory.width
-                        y: parent.height / 4
-
-                        time: timeSource.time
-                    }
-                }
+                // Left side - Workspaces
                 WorkspaceWidget {
                     id: workspaces
-                    x: parent.margin
-                    y: parent.margin
-                    height: parent.height - parent.margin * 2
+                    implicitHeight: 30
+                    L.Layout.alignment: Qt.AlignLeft
 
                     color: window.backgroundColor
-
                     border.color: window.borderColor
                     border.width: 2
                     radius: 10
                 }
 
+                // Center - Taskbar
                 TaskbarWidget {
                     id: taskbar
-                    y: parent.margin
-                    x: parent.implicitWidth / 2
-                    height: parent.height - parent.margin * 2
+                    L.Layout.fillWidth: true
+                    implicitHeight: 30
 
                     color: window.backgroundColor
-
                     border.color: window.borderColor
                     border.width: 2
                     radius: 10
+                }
+
+                // Right side - System info
+                Rectangle {
+                    id: rightPanel
+                    implicitWidth: rightLayout.implicitWidth + 20
+                    implicitHeight: 30
+
+                    color: window.backgroundColor
+                    border.color: window.borderColor
+                    border.width: 2
+                    radius: 10
+
+                    L.RowLayout {
+                        id: rightLayout
+                        anchors.centerIn: parent
+                        spacing: 15
+
+                        VolumeWidget {
+                            volume: volumeSource.volume
+                        }
+
+                        CpuWidget {
+                            usage: cpuSource.cpuUsage
+                        }
+
+                        MemoryWidget {
+                            usedMemory: memorySource.memoryUsed
+                            totalMemory: "31.4Gi"
+                        }
+
+                        ClockWidget {
+                            time: timeSource.time
+                        }
+                    }
                 }
             }
         }

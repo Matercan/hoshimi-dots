@@ -23,11 +23,11 @@ Scope {
 
         PanelWindow {
             id: window
-            property string backgroundColor: "#fbf1c7"
-            property string foregroundColor: "#654735"
-            property string borderColor: "#654735"
-            property string activeColor: "#c14a4a"
-            property string selectedColor: "#654735"
+            property string backgroundColor: "#1e1e2e"
+            property string foregroundColor: "#cdd6f4"
+            property string borderColor: "#cdd6f4"
+            property string activeColor: "#f38ba8"
+            property string selectedColor: "#cdd6f4"
 
             required property var modelData
             screen: modelData
@@ -40,17 +40,30 @@ Scope {
                 right: true
             }
 
-            height: 42 // Fixed height instead of implicit
+            height: 47
 
             L.RowLayout {
                 id: mainLayout
-                anchors.fill: parent
+                L.Layout.alignment: Qt.AlignTop
+                width: parent.width
+                implicitHeight: 25
                 anchors.margins: 6
                 spacing: 6
 
                 // Left side - Workspaces
                 WorkspaceWidget {
                     id: workspaces
+                    implicitHeight: 30
+                    L.Layout.alignment: Qt.AlignLeft
+
+                    color: window.backgroundColor
+                    border.color: window.borderColor
+                    border.width: 2
+                    radius: 10
+                }
+
+                TrayWidget {
+                    id: tray
                     implicitHeight: 30
                     L.Layout.alignment: Qt.AlignLeft
 

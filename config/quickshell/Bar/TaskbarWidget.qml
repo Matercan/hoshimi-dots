@@ -17,9 +17,9 @@ Rectangle {
     // Property to store the active window address
     property string activeWindowAddress: ""
 
-    property string foregroundColor: "#654735"
-    property string selectedColor: "#654735"
-    property string activeColor: "#c14a4a"
+    property string foregroundColor: "#cdd6f4"
+    property string selectedColor: "#cdd6f4"
+    property string activeColor: "#f38ba8"
 
     function getWindowIcon(className) {
         // Map common application classes to icons

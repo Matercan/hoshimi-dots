@@ -18,9 +18,9 @@ Rectangle {
     // Property to store the ID of the active workspace
     property int activeWorkspaceId: 0
 
-    property string foregroundColor: "#ffffff"
-    property string selectedColor: "#0000b7"
-    property string activeColor: "#490e14"
+    property string foregroundColor: "#654735"
+    property string selectedColor: "#654735"
+    property string activeColor: "#c14a4a"
 
     function getWorkspaceIcon(ident) {
         switch (ident) {

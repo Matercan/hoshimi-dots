@@ -22,5 +22,5 @@ Singleton {
     property string borderColor: "#cdd6f4"
     property string activeColor: "#f38ba8"
     property string selectedColor: "#cdd6f4"
-    property string iconColor: "#000fff"
+    property string iconColor: "#f9e2af"
 }

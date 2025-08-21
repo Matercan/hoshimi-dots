@@ -5,7 +5,7 @@
 add_newline = true
 
 format = """
-$cmd_duration $username$hostname $directory $git_branch $git_status
+$cmd_duration $username$hostname $directory$git_branch$git_status
 $character"""
 
 [character] 
@@ -17,7 +17,7 @@ style = "bg: cyan"
 symbol = "󰘬"
 truncation_length = 12
 truncation_symbol = ""
-format = "[](bold fg:cyan)[$symbol $branch(:$remote_branch)](fg:black bg:cyan)[](bold fg:cyan)"
+format = "[ ](bold fg:cyan)[$symbol $branch(:$remote_branch)](fg:black bg:cyan)[](bold fg:cyan)"
 
 [git_commit]
 commit_hash_length = 4
@@ -28,7 +28,7 @@ format = '[\($state( $progress_current of $progress_total)\)]($style) '
 cherry_pick = "[🍒 PICKING](bold red)"
 
 [git_status]
-format = "[](bold fg:blue)[($all_status)](fg:black bg:blue)[](bold fg:blue)"
+format = "[ ](bold fg:blue)[($all_status)](fg:black bg:blue)[](bold fg:blue)"
 conflicted = " 🏳 "
 ahead = " 🏎💨 "
 behind = " 😰 "
@@ -36,7 +36,7 @@ diverged = " 😵 "
 untracked = " 🤷 ‍"
 stashed = " 📦 "
 modified = " 📝 "
-staged = '[++\($count\)](green)'
+staged = '[++\($count\)](bg:blue fg:black)'
 renamed = " ✍️ "
 deleted = " 🗑 "
 

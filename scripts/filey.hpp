@@ -204,7 +204,7 @@ public:
   // Function to update QML colors using regex
   bool updateQuickshellColorsRegex(const std::string &qmlFilePath,
                                    const std::vector<std::string> &colors) {
-    if (colors.size() < 5) {
+    if (colors.size() < 6) {
       std::cerr << "Error: Need at least 5 colors for quickshell theme"
                 << std::endl;
       return false;
@@ -246,6 +246,11 @@ public:
     std::regex selectedRegex(
         "(property\\s+string\\s+selectedColor:\\s*)\"[^\"]*\"");
     std::string selectedReplacement = "$1\"" + colors[4] + "\"";
+    content = std::regex_replace(content, selectedRegex, selectedReplacement);
+
+    // Update iconColor
+    std::regex iconRegex("(property\\s+string\\s+iconColor:\\s*)\"[^\"]*\"");
+    std::string iconReplacement = "$1\"" + colors[5] + "\"";
     content = std::regex_replace(content, selectedRegex, selectedReplacement);
 
     // Write back to file
@@ -609,9 +614,9 @@ public:
       // Restart dunst to apply changes
       system("killall dunst && dunst > /dev/null 2>&1 &");
     } else if (package == "quickshell") {
-      vector<string> barColors = {scheme.background, scheme.foreground,
-                                  scheme.foreground, scheme.palette[1],
-                                  scheme.selectionForeground};
+      vector<string> barColors = {
+          scheme.background, scheme.foreground,          scheme.foreground,
+          scheme.palette[1], scheme.selectionForeground, scheme.palette[6]};
       updater.applyColorSchemeToQuickshell(localPath.string() + "/quickshell/",
                                            barColors);
       system("killall quickshell && quickshell > /dev/null 2&>1 &");

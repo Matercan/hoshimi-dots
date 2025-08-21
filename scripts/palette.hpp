@@ -5,15 +5,19 @@
 #include <cmath>
 #include <cstdint>
 #include <cstdio>
+#include <cstdlib>
+#include <exception>
 #include <fstream>
 #include <iomanip>
 #include <ios>
 #include <iostream>
 #include <memory>
+#include <ostream>
 #include <sstream>
 #include <stdexcept>
 #include <string.h>
 #include <string>
+#include <strings.h>
 #include <unordered_map>
 #include <vector>
 
@@ -22,6 +26,11 @@
 #include <pngconf.h>
 
 enum class ThemeType { DARK, LIGHT, WARM };
+
+struct EdgeResult {
+  std::vector<std::vector<int>> edgePoints;
+  double angle;
+};
 
 class Color {
 public:
@@ -63,6 +72,25 @@ public:
   // Comparison for sorting by frequency
   bool operator<(const Color &other) const {
     return frequency > other.frequency; // Descending order
+  }
+
+  double calculateLuminance(const Color &color) const {
+    auto sRGB = [](double val) {
+      val /= 255.0;
+      return val <= 0.03928 ? val / 12.92
+                            : std::pow((val + 0.055) / 1.055, 2.4);
+    };
+    return 0.2126 * sRGB(color.r) + 0.7152 * sRGB(color.g) +
+           0.0722 * sRGB(color.b);
+  }
+
+  double calculateContrast(const Color &c1, const Color &c2) const {
+    double l1 = calculateLuminance(c1);
+    double l2 = calculateLuminance(c2);
+
+    if (l1 < l2)
+      std::swap(l1, l2);
+    return (l1 + 0.05) / (l2 + 0.05);
   }
 };
 
@@ -130,6 +158,7 @@ public:
   PNGImage() : width(0), height(0) {}
 
   bool loadFromFile(const std ::string &filename) {
+    std::cout << "About to load" << std::endl;
     FILE *fp = fopen(filename.c_str(), "rb");
     if (!fp) {
       std::cerr << "Error: Could not open file " << filename << std::endl;
@@ -192,11 +221,14 @@ public:
       rowPointers[y] = data.get() + y * rowBytes;
     }
 
+    std::cout << "Basically done" << std::endl;
+
     png_read_image(png, rowPointers.data());
 
     png_destroy_read_struct(&png, &info, nullptr);
     fclose(fp);
 
+    std::cout << "Done" << std::endl;
     return true;
   }
 
@@ -236,6 +268,135 @@ public:
     std::sort(colors.begin(), colors.end());
     return colors;
   }
+
+  /**
+   * @brief Finds the two points on the image that form a long, high-contrast
+   * "edge" and calculates the angle of that edge.
+   *
+   * This updated implementation samples the brightest and darkest pixels in the
+   * image and finds the pair that maximizes the product of contrast and
+   * distance.
+   *
+   * @return An EdgeResult struct containing the coordinates of the two points
+   * and the angle of the edge in degrees, rounded to the nearest integer.
+   */
+  EdgeResult getLongestEdge() const {
+    if (!data) {
+      return {};
+    }
+
+    // Create a vector of all pixel luminances and their coordinates.
+    std::vector<std::tuple<double, int, int>> luminances;
+    luminances.reserve(width * height);
+
+    for (int y = 0; y < height; ++y) {
+      for (int x = 0; x < width; ++x) {
+        int index = (y * width + x) * 4; // RGBA format
+        uint8_t r = data[index];
+        uint8_t g = data[index + 1];
+        uint8_t b = data[index + 2];
+        Color currentColor(r, g, b);
+        luminances.emplace_back(currentColor.calculateLuminance(currentColor),
+                                x, y);
+      }
+    }
+
+    // Sort the vector to find the brightest and darkest points.
+    std::sort(luminances.begin(), luminances.end());
+
+    // Define the number of top/bottom candidates to sample.
+    const size_t sampleSize = 100;
+    std::vector<std::vector<int>> brightCandidates;
+    std::vector<std::vector<int>> darkCandidates;
+
+    // Get the top and bottom samples.
+    size_t numPoints = luminances.size();
+    for (size_t i = 0; i < std::min(sampleSize, numPoints); ++i) {
+      // Darkest points are at the beginning of the sorted vector.
+      darkCandidates.push_back(
+          {std::get<1>(luminances[i]), std::get<2>(luminances[i])});
+      // Brightest points are at the end.
+      brightCandidates.push_back({std::get<1>(luminances[numPoints - 1 - i]),
+                                  std::get<2>(luminances[numPoints - 1 - i])});
+    }
+
+    double maxScore = 0.0;
+    std::vector<int> p1 = {0, 0};
+    std::vector<int> p2 = {0, 0};
+
+    // Iterate through all pairs of candidates to find the best edge.
+    for (const auto &brightPoint : brightCandidates) {
+      for (const auto &darkPoint : darkCandidates) {
+        // Calculate the Euclidean distance.
+        double dx = static_cast<double>(brightPoint[0] - darkPoint[0]);
+        double dy = static_cast<double>(brightPoint[1] - darkPoint[1]);
+        double distance = std::sqrt(dx * dx + dy * dy);
+
+        // Calculate contrast (using the luminance values from the tuples).
+        int brightIdx = brightPoint[1] * width + brightPoint[0];
+        int darkIdx = darkPoint[1] * width + darkPoint[0];
+
+        Color brightColor(data[brightIdx * 4], data[brightIdx * 4 + 1],
+                          data[brightIdx * 4 + 2]);
+        Color darkColor(data[darkIdx * 4], data[darkIdx * 4 + 1],
+                        data[darkIdx * 4 + 2]);
+
+        double contrast = brightColor.calculateContrast(brightColor, darkColor);
+
+        // Score the edge based on a combination of distance and contrast.
+        double score = distance * contrast;
+
+        if (score > maxScore) {
+          maxScore = score;
+          p1 = darkPoint;
+          p2 = brightPoint;
+        }
+      }
+    }
+
+    // Calculate the angle of the best edge.
+    double deltaX = static_cast<double>(p2[0] - p1[0]);
+    double deltaY = static_cast<double>(p2[1] - p1[1]);
+
+    double edgeAngle = std::atan2(deltaY, deltaX) * 180.0 / M_PI;
+
+    // Round the angle to the nearest whole number.
+    edgeAngle = std::round(edgeAngle);
+
+    return {{p1, p2}, edgeAngle};
+  }
+
+  std::vector<int> indexToXy(int index) {
+    int pixelIndex = index / 4;
+    int y = pixelIndex / width;
+    int x = pixelIndex % width;
+
+    return {x, y};
+  }
+
+  struct ColorContrast {
+    std::vector<int> Position;
+    int Index;
+    Color rgb;
+    double Contrast;
+    int NormalDir;
+    int TangentDir;
+
+    // Pass 'position' by constant reference to avoid a costly copy.
+    ColorContrast(int index, Color color, double contrast, int normalDir,
+                  const std::vector<int> &position) {
+      std::cout << "Initializing colors" << std::endl;
+      if (normalDir > 180)
+        normalDir -= 180;
+
+      TangentDir = 90 + normalDir;
+      NormalDir = normalDir;
+      Index = index;
+      Position = position;
+      Contrast = contrast;
+      rgb = color;
+    }
+  };
 
   int getWidth() const { return width; }
   int getHeight() const { return height; }
@@ -370,6 +531,110 @@ public:
     return colors;
   }
 
+  /**
+   * @brief Finds the two points on the image that form a long, high-contrast
+   * "edge" and calculates the angle of that edge.
+   *
+   * This updated implementation samples the brightest and darkest pixels in the
+   * image and finds the pair that maximizes the product of contrast and
+   * distance.
+   *
+   * @return An EdgeResult struct containing the coordinates of the two points
+   * and the angle of the edge in degrees, rounded to the nearest integer.
+   */
+  EdgeResult getLongestEdge() const {
+    if (!data) {
+      return {};
+    }
+
+    // Create a vector of all pixel luminances and their coordinates.
+    std::vector<std::tuple<double, int, int>> luminances;
+    luminances.reserve(width * height);
+
+    for (int y = 0; y < height; ++y) {
+      for (int x = 0; x < width; ++x) {
+        int index = (y * width + x) * 4; // RGBA format
+        uint8_t r = data[index];
+        uint8_t g = data[index + 1];
+        uint8_t b = data[index + 2];
+        Color currentColor(r, g, b);
+        luminances.emplace_back(currentColor.calculateLuminance(currentColor),
+                                x, y);
+      }
+    }
+
+    // Sort the vector to find the brightest and darkest points.
+    std::sort(luminances.begin(), luminances.end());
+
+    // Define the number of top/bottom candidates to sample.
+    const size_t sampleSize = 100;
+    std::vector<std::vector<int>> brightCandidates;
+    std::vector<std::vector<int>> darkCandidates;
+
+    // Get the top and bottom samples.
+    size_t numPoints = luminances.size();
+    for (size_t i = 0; i < std::min(sampleSize, numPoints); ++i) {
+      // Darkest points are at the beginning of the sorted vector.
+      darkCandidates.push_back(
+          {std::get<1>(luminances[i]), std::get<2>(luminances[i])});
+      // Brightest points are at the end.
+      brightCandidates.push_back({std::get<1>(luminances[numPoints - 1 - i]),
+                                  std::get<2>(luminances[numPoints - 1 - i])});
+    }
+
+    double maxScore = 0.0;
+    std::vector<int> p1 = {0, 0};
+    std::vector<int> p2 = {0, 0};
+
+    // Iterate through all pairs of candidates to find the best edge.
+    for (const auto &brightPoint : brightCandidates) {
+      for (const auto &darkPoint : darkCandidates) {
+        // Calculate the Euclidean distance.
+        double dx = static_cast<double>(brightPoint[0] - darkPoint[0]);
+        double dy = static_cast<double>(brightPoint[1] - darkPoint[1]);
+        double distance = std::sqrt(dx * dx + dy * dy);
+
+        // Calculate contrast (using the luminance values from the tuples).
+        int brightIdx = brightPoint[1] * width + brightPoint[0];
+        int darkIdx = darkPoint[1] * width + darkPoint[0];
+
+        Color brightColor(data[brightIdx * 4], data[brightIdx * 4 + 1],
+                          data[brightIdx * 4 + 2]);
+        Color darkColor(data[darkIdx * 4], data[darkIdx * 4 + 1],
+                        data[darkIdx * 4 + 2]);
+
+        double contrast = brightColor.calculateContrast(brightColor, darkColor);
+
+        // Score the edge based on a combination of distance and contrast.
+        double score = distance * contrast;
+
+        if (score > maxScore) {
+          maxScore = score;
+          p1 = darkPoint;
+          p2 = brightPoint;
+        }
+      }
+    }
+
+    // Calculate the angle of the best edge.
+    double deltaX = static_cast<double>(p2[0] - p1[0]);
+    double deltaY = static_cast<double>(p2[1] - p1[1]);
+
+    double edgeAngle = std::atan2(deltaY, deltaX) * 180.0 / M_PI;
+
+    // Round the angle to the nearest whole number.
+    edgeAngle = std::round(edgeAngle);
+
+    return {{p1, p2}, edgeAngle};
+  }
+
+  std::vector<int> indexToXy(int index) {
+    int pixelIndex = index / 4;
+    int y = pixelIndex / width;
+    int x = pixelIndex % width;
+
+    return {x, y};
+  }
   int getWidth() const { return width; }
   int getHeight() const { return height; }
   bool isValid() const { return data != nullptr; }
@@ -434,12 +699,6 @@ public:
     }
 
     return false;
-  }
-
-  std::vector<Color> extractColors() const {
-    // This would need to be implemented based on the loaded image type
-    // For now, return empty vector
-    return {};
   }
 
   int getWidth() const { return width; }

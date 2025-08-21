@@ -251,47 +251,29 @@ public:
     // Write back to file
     return writeContentToFile(qmlFilePath, content);
   }
-  bool applyColorSchemeToQuickshell(const std::string &quickshellConfigDir,
+  bool applyColorSchemeToQuickshell(const std::string &quickshellConfigPath,
                                     const std::vector<std::string> &colors) {
-    bool allSuccess = true; // Initialize the variable
+    std::cout << "Updating quickshell colors in: " << quickshellConfigPath
+              << std::endl;
 
-    // Array of file names to update
-    std::vector<std::string> qmlFiles = {"Bar.qml", "WorkspaceWidget.qml",
-                                         "TaskbarWidget.qml"};
-
-    for (size_t i = 0; i < qmlFiles.size(); ++i) {
-      std::string qmlPath = quickshellConfigDir + "/" + qmlFiles[i];
-
-      std::cout << "Updating quickshell colors in: " << qmlPath << std::endl;
-
-      // Print what we're applying
-      for (size_t j = 0; j < std::min(quickshellColors.size(), colors.size());
-           ++j) {
-        std::cout << "  " << quickshellColors[j] << ": " << colors[j]
-                  << std::endl;
-      }
-
-      // Use regex method for robustness
-      bool success = updateQuickshellColorsRegex(qmlPath, colors);
-
-      if (success) {
-        std::cout << "Quickshell colors updated successfully in " << qmlFiles[i]
-                  << "!" << std::endl;
-      } else {
-        std::cout << "Failed to update quickshell colors in " << qmlFiles[i]
-                  << "." << std::endl;
-        allSuccess = false; // Mark as failed but continue with other files
-      }
+    // Print what we're applying
+    for (size_t i = 0; i < std::min(quickshellColors.size(), colors.size());
+         ++i) {
+      std::cout << "  " << quickshellColors[i] << " = '" << colors[i] << "'"
+                << std::endl;
     }
 
-    // Only restart quickshell once after all files are processed
-    if (allSuccess) {
-      std::cout << "Restarting quickshell..." << std::endl;
-      system("pkill quickshell && sleep 1 && quickshell --config "
-             "~/.config/quickshell/Bar/ > /dev/null 2>&1 &");
+    // Use regex method for robustness
+    bool success = updateQuickshellColorsRegex(
+        quickshellConfigPath + "functions/Colors.qml", colors);
+
+    if (success) {
+      std::cout << "Cava colors quickshell successfully!" << std::endl;
+    } else {
+      std::cout << "Failed to update quickshell colors." << std::endl;
     }
 
-    return allSuccess;
+    return success;
   }
 
   bool updateDunstColorsRegex(const std::string &configFilePath,
@@ -630,10 +612,9 @@ public:
       vector<string> barColors = {scheme.background, scheme.foreground,
                                   scheme.foreground, scheme.palette[1],
                                   scheme.selectionForeground};
-      updater.applyColorSchemeToQuickshell(
-          localPath.string() + "/quickshell/Bar", barColors);
-      system("killall quickshell && quickshell ~/.config/quickshell/Bar/ > "
-             "/dev/null 2>&1 &");
+      updater.applyColorSchemeToQuickshell(localPath.string() + "/quickshell/",
+                                           barColors);
+      system("killall quickshell && quickshell > /dev/null 2&>1 &");
     } else {
       cout << "Package " << package << " does not use colors." << endl;
     }

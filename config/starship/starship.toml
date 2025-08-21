@@ -74,6 +74,10 @@ format = '[](bold fg:green)[󰉋 $path]($style)[](bold fg:green)'
 "Pictures" = "  "
 "Videos" = "  "
 "GitHub" = " 󰊤 "
+"git" = " 󰊢 "
+".config" = "  "
+"hypr" = "  "
+"quickshell" = "󰓅 "
 
 [cmd_duration]
 min_time = 0

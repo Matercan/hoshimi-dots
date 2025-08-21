@@ -3,7 +3,7 @@ pragma ComponentBehavior: Bound
 import Quickshell
 import QtQuick
 import QtQuick.Layouts as L
-import "../functions/" as F
+import "../functions" as F
 import "../sources" as S
 
 Scope {
@@ -26,7 +26,7 @@ Scope {
                 right: true
             }
 
-            height: 47
+            implicitHeight: 30
 
             L.RowLayout {
                 id: mainLayout

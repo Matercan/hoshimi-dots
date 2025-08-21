@@ -21,10 +21,6 @@ Rectangle {
 
     property var cursorPos
 
-    property string foregroundColor: "#cdd6f4"
-    property string selectedColor: "#cdd6f4"
-    property string activeColor: "#f38ba8"
-
     function truncateTitle(title, maxLength = 120 / windows.length) {
         if (title.length <= maxLength) {
             return title;

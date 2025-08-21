@@ -1,5 +1,5 @@
 import "./bar/"
-import "./activatelinux/"
+import "./background/"
 import Quickshell
 
 Scope {

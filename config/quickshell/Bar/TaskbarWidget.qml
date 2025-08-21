@@ -40,14 +40,17 @@ Rectangle {
         case "thunar":
         case "nautilus":
         case "dolphin":
-            return "󰉋 "; // File manager icon
+        return "󰉋 "; // File manager icon
+        case "equibop":
         case "vesktop":
         case "discord":
             return " "; // Discord icon
         case "spotify":
             return " "; // Spotify icon
         case "steam":
-            return " "; // Steam icon
+        return " "; // Steam icon
+        case "anki": 
+        return " ";
         default:
             return "󰣆 "; // Default window icon
         }

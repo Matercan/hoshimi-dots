@@ -9,5 +9,5 @@ __pycache__/
 *-bin
 *.txt
 *.png
-backup*
+**backup*
 build*

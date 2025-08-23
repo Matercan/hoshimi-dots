@@ -6,6 +6,7 @@ import Quickshell.Io
 Singleton {
     id: root
     property bool locked: false
+    property string iconPath: "/usr/share/icons/"
 
     IpcHandler {
         target: "variables"

@@ -174,7 +174,6 @@ Rectangle {
 
             NumberAnimation {
                 id: textAnimation
-                running: root.inputBufferChanged
                 target: newChar
                 properties: "size"
                 duration: Glo.MaterialEasing.standardTime

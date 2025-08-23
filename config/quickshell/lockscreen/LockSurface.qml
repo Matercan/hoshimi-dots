@@ -81,58 +81,66 @@ Rectangle {
             top: parent.verticalCenter
         }
 
-        RowLayout {
-            TextField {
-                id: passwordBox
+        TextField {
+            id: passwordBox
 
-                focus: true
-                visible: false
-                enabled: !root.context.unlockInProgress
+            focus: true
+            visible: false
+            enabled: !root.context.unlockInProgress
 
-                onTextChanged: root.context.currentText = this.text
+            onTextChanged: root.context.currentText = this.text
 
-                onAccepted: root.context.tryUnlock()
+            onAccepted: root.context.tryUnlock()
 
-                Connections {
-                    id: connection
-                    target: root.context
-                    property string toBuffer: ""
+            Connections {
+                id: connection
+                target: root.context
+                property string toBuffer: ""
 
-                    function onCurrentTextChanged() {
-                        passwordBox.text = root.context.currentText;
-                        connection.toBuffer = "";
+                function onCurrentTextChanged() {
+                    passwordBox.text = root.context.currentText;
+                    connection.toBuffer = "";
 
-                        for (const ch of passwordBox.text) {
-                            connection.toBuffer += root.samurai[Math.floor(Math.random() * root.samurai.length)];
-                        }
-                        connection.toBuffer = connection.toBuffer.slice(0, -1);
-                        root.maskedBuffer = connection.toBuffer;
-                        // Set the new character (last character typed)
-                        if (root.context.currentText.length > 0) {
-                            root.inputBuffer = root.samurai[Math.floor(Math.random() * root.samurai.length)];
-                            root.inputBufferChanged = !root.inputBufferChanged; // Toggle to trigger animation
-                        } else {
-                            root.inputBuffer = "";
-                        }
+                    for (const ch of passwordBox.text) {
+                        connection.toBuffer += root.samurai[Math.floor(Math.random() * root.samurai.length)];
+                    }
+                    connection.toBuffer = connection.toBuffer.slice(0, -1);
+                    root.maskedBuffer = connection.toBuffer;
+                    // Set the new character (last character typed)
+                    if (root.context.currentText.length > 0) {
+                        root.inputBuffer = root.samurai[Math.floor(Math.random() * root.samurai.length)];
+                        root.inputBufferChanged = !root.inputBufferChanged; // Toggle to trigger animation
+                    } else {
+                        root.inputBuffer = "";
                     }
                 }
             }
         }
+    }
 
-        ColumnLayout {
-            visible: root.context.showFailure
+    ColumnLayout {
+        visible: root.context.showFailure
 
-            Label {
-                text: "失敗行いました"
-                font.pointSize: 30
-                color: F.Colors.errorColor
-            }
+        anchors {
+            verticalCenter: parent.verticalCenter
+            horizontalCenter: parent.horizontalCenter
+            margins: 20
+        }
 
-            Label {
-                font.pointSize: 30
-                text: "Incorrect password"
-                color: F.Colors.errorColor
-            }
+        Label {
+            text: "失敗行いました"
+            font.pointSize: 30
+            color: F.Colors.errorColor
+            font.family: "Shadow Whisper"
+            horizontalAlignment: Qt.AlignCenter
+        }
+
+        Label {
+            font.pointSize: 30
+            text: "Incorrect password"
+            color: F.Colors.errorColor
+            font.family: "Shadow Whisper"
+            horizontalAlignment: Qt.AlignCenter
         }
     }
 
@@ -163,16 +171,17 @@ Rectangle {
             color: F.Colors.transparentize(F.Colors.passwordColor, 0.3)
             property int size: 0
             font.pixelSize: size
-        }
 
-        NumberAnimation {
-            id: textAnimation
-            target: newChar
-            properties: "size"
-            duration: 200
-            from: 0
-            to: 300
-            easing.type: Easing.OutCubic
+            NumberAnimation {
+                id: textAnimation
+                running: root.inputBufferChanged
+                target: newChar
+                properties: "size"
+                duration: Glo.MaterialEasing.standardTime
+                from: 0
+                to: 300
+                easing.type: Easing.OutCubic
+            }
         }
 
         OpacityAnimator {

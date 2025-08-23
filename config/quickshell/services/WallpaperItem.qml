@@ -9,6 +9,7 @@ Variants {
 
     PanelWindow {
         id: w
+        WlrLayershell.namespace: "wallpaper"
 
         required property var modelData
         screen: modelData

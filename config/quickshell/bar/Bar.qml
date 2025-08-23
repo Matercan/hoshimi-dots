@@ -2,6 +2,8 @@
 pragma ComponentBehavior: Bound
 import Quickshell
 import QtQuick
+import Quickshell.Wayland
+
 import QtQuick.Layouts as L
 import qs.functions as F
 import qs.sources as S
@@ -14,6 +16,7 @@ Scope {
 
         PanelWindow {
             id: window
+            WlrLayershell.namespace: "Bar"
 
             required property var modelData
             screen: modelData

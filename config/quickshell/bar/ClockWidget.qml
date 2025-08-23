@@ -1,6 +1,6 @@
 import QtQuick
 
-import "../functions" as F
+import qs.functions as F
 
 Row {
     required property string time

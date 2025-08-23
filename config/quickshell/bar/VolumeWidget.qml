@@ -1,6 +1,6 @@
 import QtQuick
 
-import "../functions" as F
+import qs.functions as F
 
 Row {
     required property string volume
@@ -9,10 +9,10 @@ Row {
     spacing: 8
 
     Rectangle {
-        width: 26                                   // Set explicit width
-        height: 26                                   // Set explicit height
+        width: 26
+        height: 26
         anchors.verticalCenter: parent.verticalCenter
-        radius: 13                                   // Half of width/height for perfect circle
+        radius: 13
         color: parent.activeColor
 
         Text {

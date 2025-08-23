@@ -5,7 +5,7 @@ import Quickshell.Io
 import QtQuick.Layouts as L
 import Quickshell.Hyprland as H
 
-import "../functions" as F
+import qs.functions as F
 
 Rectangle {
     id: wkRect
@@ -89,7 +89,7 @@ Rectangle {
 
         stdout: StdioCollector {
             onStreamFinished: {
-                const coords = this.text.trim().split(',');
+                const coords = this.text.trim().split(', ');
                 wkRect.cursorPos = coords;
                 // Now the coordinates are clean numbers and the command will work
                 H.Hyprland.dispatch("movecursor " + wkRect.cursorPos[0] + " " + wkRect.cursorPos[1]);

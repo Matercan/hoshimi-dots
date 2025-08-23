@@ -3,8 +3,8 @@ pragma ComponentBehavior: Bound
 import Quickshell
 import QtQuick
 import QtQuick.Layouts as L
-import "../functions" as F
-import "../sources" as S
+import qs.functions as F
+import qs.sources as S
 
 Scope {
     id: root
@@ -33,8 +33,8 @@ Scope {
                 L.Layout.alignment: Qt.AlignTop
                 width: parent.width
                 implicitHeight: 25
-                anchors.margins: 6
-                spacing: 6
+                anchors.margins: 0
+                spacing: 0
 
                 // Left side - Workspaces
                 WorkspaceWidget {
@@ -51,7 +51,6 @@ Scope {
                 TrayWidget {
                     id: tray
                     implicitHeight: 30
-                    L.Layout.alignment: Qt.AlignLeft
 
                     color: F.Colors.transparentize(F.Colors.backgroundColor, 0.2)
                     border.color: F.Colors.borderColor
@@ -81,8 +80,8 @@ Scope {
                     border.color: F.Colors.borderColor
                     border.width: 2
                     radius: 10
+                    L.Layout.alignment: Qt.AlignRight
 
-                    // Option 1: Use Layout properties in your RowLayout
                     L.RowLayout {
                         id: rightLayout
                         anchors.centerIn: parent

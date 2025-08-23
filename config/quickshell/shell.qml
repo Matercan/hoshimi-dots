@@ -1,9 +1,15 @@
-import "./bar/"
-import "./background/"
+import qs.bar
+import qs.background
+import Quickshell
+import qs.services
+
 import Quickshell
 
-Scope {
+ShellRoot {
+    id: root
+
     Watermark {}
     Bar {}
-    Clock {}
+    LockItem {}
+    WallpaperItem {}
 }

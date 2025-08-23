@@ -5,12 +5,11 @@
 add_newline = true
 
 format = """
-$cmd_duration $username$hostname $directory$git_branch$git_status
-$character"""
+$directory$username $character"""
 
 [character] 
-success_symbol = '[➜](bold green)' 
-error_symbol = '[](bold red)'
+success_symbol = '[➜]($style)' 
+error_symbol = '[]($style)'
 
 [git_branch]
 style = "bg: cyan"
@@ -28,7 +27,7 @@ format = '[\($state( $progress_current of $progress_total)\)]($style) '
 cherry_pick = "[🍒 PICKING](bold red)"
 
 [git_status]
-format = "[ ](bold fg:blue)[($all_status)](fg:black bg:blue)[](bold fg:blue)"
+format = "[ ](bold fg:blue)[($all_status)](fg:black bg:blue)[](bold bg:blue)"
 conflicted = " 🏳 "
 ahead = " 🏎💨 "
 behind = " 😰 "
@@ -43,13 +42,13 @@ deleted = " 🗑 "
 [username]
 style_user = "bold bg:cyan fg:black"
 style_root = "red bold"
-format = "[](bold fg:cyan)[$user@]($style)"
+format = "[](bold fg:cyan)[$user]($style)[](bold fg:cyan)"
 disabled = false
 show_always = true
 
 [hostname]
 ssh_only = false
-format =  "[$hostname](bg:cyan bold fg:black)[](bold fg:cyan)"
+format =  "[$hostname](bg:cyan bold fg:black)"
 trim_at = ".companyname.com"
 disabled = false
 
@@ -62,7 +61,7 @@ time_format = "%T"
 home_symbol = "  "
 read_only = "  "
 style = "bg:green fg:black"
-truncation_length = 6
+truncation_length = 3
 truncation_symbol = " ••/"
 format = '[](bold fg:green)[󰉋 $path]($style)[](bold fg:green)'
 

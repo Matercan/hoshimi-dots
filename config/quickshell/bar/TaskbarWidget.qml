@@ -5,7 +5,7 @@ import Quickshell.Io
 import QtQuick.Layouts as L
 import Quickshell.Hyprland as H
 
-import "../functions" as F
+import qs.functions as F
 
 Rectangle {
     id: taskbarRect
@@ -111,7 +111,7 @@ Rectangle {
 
         stdout: StdioCollector {
             onStreamFinished: {
-                const coords = this.text.trim().split(',');
+                const coords = this.text.trim().split(', ');
                 taskbarRect.cursorPos = coords;
                 // Now the coordinates are clean numbers and the command will work
                 H.Hyprland.dispatch("movecursor " + taskbarRect.cursorPos[0] + " " + taskbarRect.cursorPos[1]);

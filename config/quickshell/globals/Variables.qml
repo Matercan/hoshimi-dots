@@ -11,7 +11,7 @@ Singleton {
     property int popupMenuOpenTime: 5000
     property string fontFamily: "CaskaydiaCove Nerd Font"
     property int barSize: 35
-    property int wrapSize: 15
+    property int wrapSize: 8
 
     IpcHandler {
         target: "variables"

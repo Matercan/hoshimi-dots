@@ -62,11 +62,13 @@ Scope {
                             spacing: 5
 
                             ClockWidget {
+                                barY: window.height - 3.5 * height
                                 L.Layout.fillWidth: true
                                 L.Layout.alignment: Qt.AlignHCenter
                             }
 
                             VolumeWidget {
+                                barY: window.height - 3 * height
                                 L.Layout.fillWidth: true
                                 L.Layout.alignment: Qt.AlignHCenter
                                 L.Layout.preferredHeight: implicitHeight || 20

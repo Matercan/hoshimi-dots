@@ -12,39 +12,109 @@ import qs.generics as Gen
 MouseArea {
     id: clockWidget
 
-    implicitWidth: Math.max(hoursText.implicitWidth, minutesText.implicitWidth) + 16
-    implicitHeight: timeLayout.implicitHeight + 12
+    implicitWidth: layout.width
+    implicitHeight: layout.height
 
     // Get current time and split it
     property string currentTime: S.Time.time
     property string hours: currentTime.split(":")[0]
     property string minutes: currentTime.split(":")[1]
 
+    property string currentDate: S.Time.date
+    property string day: currentDate.split(" ")[0]
+    property string month: currentDate.split(" ")[1]
+
     property bool showPopup
+    required property int barY
 
     L.ColumnLayout {
-        id: timeLayout
+        id: layout
         anchors.centerIn: parent
-        spacing: -2  // Bring rows closer together
+        spacing: 2
 
-        Text {
-            id: hoursText
-            text: clockWidget.hours
-            color: F.Colors.foregroundColor
-            font.family: G.Variables.fontFamily || "monospace"
-            font.pixelSize: 16
-            font.bold: true
-            L.Layout.alignment: Qt.AlignHCenter
+        // Date section with diagonal slash layout
+        Rectangle {
+            L.Layout.alignment: Qt.AlignTop
+            color: "transparent"
+            implicitWidth: 40
+            implicitHeight: 35
+
+            // Use Item for manual positioning instead of Layout
+            Item {
+                anchors.topMargin: 6
+                anchors.fill: parent
+                anchors.margins: 4
+
+                // Day (top-left)
+                Text {
+                    id: dayText
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+                    text: clockWidget.day
+                    color: F.Colors.foregroundColor
+                    font.family: G.Variables.fontFamily || "monospace"
+                    font.pixelSize: 12
+                    font.bold: true
+                }
+
+                // Slash (center)
+                Text {
+                    id: slashText
+                    anchors.centerIn: parent
+                    text: "/"
+                    color: F.Colors.foregroundColor
+                    font.family: G.Variables.fontFamily || "monospace"
+                    font.pixelSize: 14
+                    font.bold: true
+                    opacity: 1
+                }
+
+                // Month (bottom-right)
+                Text {
+                    id: monthText
+                    anchors.bottom: parent.bottom
+                    anchors.right: parent.right
+                    text: clockWidget.month
+                    color: F.Colors.foregroundColor
+                    font.family: G.Variables.fontFamily || "monospace"
+                    font.pixelSize: 10
+                    font.bold: true
+                }
+            }
         }
 
-        Text {
-            id: minutesText
-            text: clockWidget.minutes
-            color: F.Colors.foregroundColor
-            font.family: G.Variables.fontFamily || "monospace"
-            font.pixelSize: 16
-            font.bold: true
-            L.Layout.alignment: Qt.AlignHCenter
+        // Time section
+        Rectangle {
+            L.Layout.alignment: Qt.AlignCenter
+            implicitWidth: 40
+            implicitHeight: 45
+            color: "transparent"
+
+            L.ColumnLayout {
+                id: timeLayout
+                anchors.centerIn: parent
+                spacing: -2
+
+                Text {
+                    id: hoursText
+                    text: clockWidget.hours
+                    color: F.Colors.foregroundColor
+                    font.family: G.Variables.fontFamily || "monospace"
+                    font.pixelSize: 16
+                    font.bold: true
+                    L.Layout.alignment: Qt.AlignHCenter
+                }
+
+                Text {
+                    id: minutesText
+                    text: clockWidget.minutes
+                    color: F.Colors.foregroundColor
+                    font.family: G.Variables.fontFamily || "monospace"
+                    font.pixelSize: 16
+                    font.bold: true
+                    L.Layout.alignment: Qt.AlignHCenter
+                }
+            }
         }
     }
 
@@ -53,6 +123,7 @@ MouseArea {
     onEntered: {
         showPopup = true;
         popup.varShow = true;
+        autoCloseTimer.restart();
     }
 
     // Add visual feedback on hover/click
@@ -81,6 +152,15 @@ MouseArea {
         }
     }
 
+    Timer {
+        id: autoCloseTimer
+        running: false
+        repeat: false
+        interval: G.Variables.popupMenuOpenTime
+
+        onTriggered: popup.varShow = false
+    }
+
     PanelWindow {
         id: popup
         property bool varShow
@@ -103,11 +183,11 @@ MouseArea {
 
         anchors {
             left: true
-            bottom: true
+            top: true
         }
 
         margins {
-            bottom: 1080 / 2 + 30
+            top: clockWidget.barY / 2 - clockWidget.y / 2
         }
 
         color: "transparent"

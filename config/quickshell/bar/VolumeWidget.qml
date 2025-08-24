@@ -12,6 +12,7 @@ MouseArea {
     id: volumeWidget
 
     property bool showPopup
+    required property int barY
 
     // Set proper dimensions
     implicitWidth: volumeText.implicitWidth + 8  // Add some padding
@@ -55,12 +56,22 @@ MouseArea {
     onEntered: {
         showPopup = true;
         popup.varShow = true;
+        autoCloseTimer.restart();
     }
 
     Process {
         id: openControl
         command: ["pavucontrol"]
         running: false
+    }
+
+    Timer {
+        id: autoCloseTimer
+        running: false
+        repeat: false
+        interval: Glo.Variables.popupMenuOpenTime
+
+        onTriggered: popup.varShow = false
     }
 
     Timer {
@@ -97,12 +108,12 @@ MouseArea {
 
         anchors {
             left: true
-            bottom: true
+            top: true
         }
 
         margins {
             left: Glo.Variables.barSize
-            bottom: 1080 / 2
+            top: volumeWidget.barY / 2 - volumeWidget.y / 2
         }
 
         color: "transparent"

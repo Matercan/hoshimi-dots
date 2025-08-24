@@ -7,9 +7,10 @@ import qs.globals as G
 Rectangle {
     id: wkRect
 
+    implicitHeight: 30
     property int margin: 10
     property var cursorPos: []
-    implicitWidth: Math.max(mainItem.width + 2 * margin)
+    implicitWidth: G.Variables.barSize
     property bool showPopUp
 
     // Property to store all open workspaces
@@ -22,10 +23,11 @@ Rectangle {
         id: mainItem
         activeWorkspaceId: wkRect.activeWorkspaceId
         idNum: wkRect.activeWorkspaceId
+
         anchors.centerIn: parent
 
         onEntered: {
-            popupTimer.running = true;
+            popupTimer.restart();
             wkRect.showPopUp = true;
             popup.varShow = true;
             console.log(wkRect.showPopUp);
@@ -34,10 +36,7 @@ Rectangle {
 
         WorkspacePopup {
             id: popup
-            visible: wkRect.showPopUp
-            margins {
-                left: mainItem.width / 4
-            }
+
             openWorkspaces: wkRect.openWorkspaces
             activeWorkspaceId: wkRect.activeWorkspaceId
         }
@@ -45,12 +44,12 @@ Rectangle {
 
     Timer {
         id: popupTimer
-        interval: 5000
-        repeat: true
+        interval: G.Variables.popupMenuOpenTime
+        repeat: false
 
         onTriggered: {
             running = false;
-            closeTimer.running = true;
+            closeTimer.restart();
             popup.varShow = false;
         }
     }
@@ -58,12 +57,11 @@ Rectangle {
     Timer {
         id: closeTimer
         interval: G.MaterialEasing.emphasizedTime
-        repeat: true
+        repeat: false
 
         onTriggered: {
             running = false;
             wkRect.showPopUp = false;
-            popup.visible = false;
         }
     }
 

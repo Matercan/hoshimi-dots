@@ -2,11 +2,10 @@
 pragma ComponentBehavior: Bound
 import Quickshell
 import QtQuick
-import Quickshell.Wayland
 
 import QtQuick.Layouts as L
 import qs.functions as F
-import qs.sources as S
+import qs.globals as G
 
 Scope {
     id: root
@@ -16,99 +15,74 @@ Scope {
 
         PanelWindow {
             id: window
-            WlrLayershell.namespace: "Bar"
-
             required property var modelData
             screen: modelData
 
-            color: "transparent"
-
             anchors {
-                top: true
                 left: true
-                right: true
+                top: true
+                bottom: true
             }
 
-            implicitHeight: 30
+            color: "transparent"
+            implicitWidth: G.Variables.barSize
 
-            L.RowLayout {
-                id: mainLayout
-                L.Layout.alignment: Qt.AlignTop
-                width: parent.width
-                implicitHeight: 25
-                anchors.margins: 0
-                spacing: 0
+            Rectangle {
+                color: F.Colors.backgroundColor
+                implicitHeight: parent.height
+                implicitWidth: parent.width
 
-                // Left side - Workspaces
-                WorkspaceWidget {
-                    id: workspaces
-                    implicitHeight: 30
+                L.ColumnLayout {
+                    id: mainLayout
                     L.Layout.alignment: Qt.AlignLeft
+                    height: parent.height
+                    implicitWidth: parent.width
 
-                    color: F.Colors.transparentize(F.Colors.backgroundColor, 0.2)
-                    border.color: F.Colors.borderColor
-                    border.width: 2
-                    radius: 10
-                }
+                    WorkspaceWidget {
+                        id: workspaces
 
-                TrayWidget {
-                    id: tray
-                    implicitHeight: 30
+                        L.Layout.fillWidth: true
+                        L.Layout.alignment: Qt.AlignTop
+                        color: "transparent"
+                    }
 
-                    color: F.Colors.transparentize(F.Colors.backgroundColor, 0.2)
-                    border.color: F.Colors.borderColor
-                    border.width: 2
-                    radius: 10
-                }
+                    Rectangle {
+                        id: widgets
+                        implicitWidth: window.width
+                        implicitHeight: widgetLayout.implicitHeight + 16  // Add padding
+                        color: "transparent"
+                        border.color: F.Colors.borderColor
+                        border.width: 1
+                        radius: 8
 
-                // Center - Taskbar
-                TaskbarWidget {
-                    id: taskbar
-                    L.Layout.fillWidth: true
-                    implicitHeight: 30
+                        L.ColumnLayout {
+                            id: widgetLayout
+                            anchors.fill: parent
+                            anchors.margins: 8
+                            spacing: 5
 
-                    color: F.Colors.transparentize(F.Colors.backgroundColor, 0.2)
-                    border.color: F.Colors.borderColor
-                    border.width: 2
-                    radius: 10
-                }
+                            ClockWidget {
+                                L.Layout.fillWidth: true
+                                L.Layout.alignment: Qt.AlignHCenter
+                            }
 
-                // Right side - System info
-                Rectangle {
-                    id: rightPanel
-                    implicitWidth: rightLayout.implicitWidth + 20
-                    implicitHeight: 30
+                            VolumeWidget {
+                                L.Layout.fillWidth: true
+                                L.Layout.alignment: Qt.AlignHCenter
+                                L.Layout.preferredHeight: implicitHeight || 20
+                            }
 
-                    color: F.Colors.transparentize(F.Colors.backgroundColor, 0.2)
-                    border.color: F.Colors.borderColor
-                    border.width: 2
-                    radius: 10
-                    L.Layout.alignment: Qt.AlignRight
-
-                    L.RowLayout {
-                        id: rightLayout
-                        anchors.centerIn: parent
-                        implicitWidth: 700
-                        spacing: 12
-
-                        VolumeWidget {
-                            volume: S.Audio.volume
-                            L.Layout.fillHeight: true
-                            L.Layout.preferredWidth: implicitWidth
+                            // Add more widgets here as needed
                         }
+                    }
 
-                        MemoryWidget {
-                            usedMemory: S.Memory.memoryUsed
-                            totalMemory: "31.4Gi"
-                            L.Layout.fillHeight: true
-                            L.Layout.preferredWidth: implicitWidth
-                        }
+                    TrayWidget {
+                        id: tray
 
-                        ClockWidget {
-                            time: S.Time.datetime
-                            L.Layout.fillHeight: true
-                            L.Layout.preferredWidth: implicitWidth
-                        }
+                        implicitWidth: parent.width
+                        L.Layout.fillWidth: true
+                        L.Layout.alignment: Qt.AlignBottom
+                        color: "transparent"
                     }
                 }
             }

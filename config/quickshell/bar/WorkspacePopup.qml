@@ -3,8 +3,7 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts as L
 
-import qs.functions as F
-import qs.globals as G
+import qs.generics as Gen
 
 PanelWindow {
     id: root
@@ -17,20 +16,21 @@ PanelWindow {
     }
 
     implicitWidth: rect.width
-    implicitHeight: 0  // Start with 0 height
+    implicitHeight: rect.height  // Start with 0 height
     color: "transparent"
 
-    property bool varShow: visible
+    visible: true
+    property bool varShow: false
+    property bool fullyOpen: false
 
-    Rectangle {
+    Gen.PopupBox {
         id: rect
+        root: root
+        fullyOpen: root.fullyOpen
+        varShow: root.varShow
         implicitWidth: layout.width + 2
         implicitHeight: layout.height + 2
         radius: 10
-
-        border.color: F.Colors.borderColor
-        border.width: 2
-        color: F.Colors.transparentize(F.Colors.backgroundColor, 0.3)
 
         Rectangle {
             L.ColumnLayout {
@@ -38,36 +38,17 @@ PanelWindow {
 
                 Repeater {
                     model: root.openWorkspaces
+                    enabled: root.fullyOpen
                     delegate: WorkspaceItem {
                         required property var modelData
+                        opacity: {
+                            return rect.closedAnimRunning ? 0 : 1;
+                        }
                         activeWorkspaceId: root.activeWorkspaceId
                         idNum: modelData.id
                     }
                 }
             }
-        }
-    }
-
-    // Single animation that handles both open and close
-    NumberAnimation {
-        id: heightAnimation
-        target: root
-        property: "implicitHeight"
-        duration: root.varShow ? G.MaterialEasing.standardTime : G.MaterialEasing.emphasizedTime
-        easing.type: root.varShow ? Easing.OutCubic : Easing.InCubic
-
-        to: root.varShow ? rect.height : 0
-
-        running: false
-    }
-
-    Connections {
-        target: root
-
-        function onVarShowChanged() {
-            console.log("VAR SHOW CHANGEGD: " + root.varShow);
-            console.log("PLAYING ANIMATIOn");
-            heightAnimation.start();
         }
     }
 }

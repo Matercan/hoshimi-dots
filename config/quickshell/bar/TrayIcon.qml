@@ -1,13 +1,17 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell.Services.SystemTray
 import Quickshell
+
+import qs.generics as Gen
 import qs.functions as F
+import qs.globals as G
 
 Rectangle {
     id: root
 
     property var bar: root.QsWindow.window
-    required property SystemTrayItem modelData
+    required property var modelData
     property SystemTrayItem item: modelData
 
     width: 24
@@ -35,7 +39,7 @@ Rectangle {
             anchors.centerIn: parent
             text: "?"
             visible: trayIcon.status === Image.Error
-            font.family: "CaskaydiaCove Nerd Font"
+            font.family: G.Variables.fontFamily
             font.pixelSize: 12
             color: F.Colors.foregroundColor
         }
@@ -50,44 +54,75 @@ Rectangle {
         onClicked: event => {
             switch (event.button) {
             case Qt.LeftButton:
+                console.log(menuOpener.menu.objectName);
                 root.item.activate();
                 break;
             case Qt.RightButton:
-                if (root.item.hasMenu)
-                    menu.open();
+                menuOpener.open();
                 break;
             }
+
             event.accepted = true;
         }
     }
 
     QsMenuAnchor {
-        id: menu
-
+        id: menuOpener
         menu: root.item.menu
+
+        anchor.window: root.bar
+        anchor.rect.x: root.x
+        anchor.rect.y: 1080 - root.y
+        anchor.rect.height: root.height
+        anchor.rect.width: root.width
     }
 
     // Tooltip
-    Rectangle {
+    PanelWindow {
         id: tooltip
-        visible: mouseArea.containsMouse && root.item.title.length > 0
-        x: parent.width / 2 - width / 2
-        y: parent.height + 5
-        width: tooltipText.width + 8
-        height: tooltipText.height + 4
-        color: F.Colors.backgroundColor
-        border.color: F.Colors.foregroundColor
-        border.width: 1
-        radius: 4
-        z: 100
+        property bool varShow: false
+        property bool fullyOpen: false
+        visible: rect.varShow
 
-        Text {
-            id: tooltipText
-            anchors.centerIn: parent
-            text: root.item.title
-            color: F.Colors.foregroundColor
-            font.family: "CaskaydiaCove Nerd Font"
-            font.pixelSize: 10
+        anchors {
+            bottom: true
+            left: true
+        }
+
+        color: "transparent"
+
+        margins {
+            bottom: root.height / 2
+            left: 5
+        }
+
+        implicitWidth: rect.width
+        implicitHeight: rect.height
+
+        Gen.PopupBox {
+            id: rect
+            root: tooltip
+            fullyOpen: tooltip.fullyOpen
+            varShow: mouseArea.containsMouse && root.item.title.length > 0
+            radius: 10
+            implicitWidth: layout.width + 2
+            implicitHeight: layout.height + 2
+
+            Rectangle {
+                id: layout
+                implicitHeight: tooltipText.implicitHeight + 15
+                implicitWidth: tooltipText.implicitWidth + 5
+                color: "transparent"
+
+                Text {
+                    id: tooltipText
+                    anchors.centerIn: parent
+                    text: root.item.title
+                    color: F.Colors.foregroundColor
+                    font.family: G.Variables.fontFamily
+                    font.pixelSize: 10
+                }
+            }
         }
     }
 }

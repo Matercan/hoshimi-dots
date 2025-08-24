@@ -1,3 +1,5 @@
+//@ pragma UseQApplication
+
 import qs.bar
 import qs.background
 import Quickshell
@@ -12,4 +14,5 @@ ShellRoot {
     Bar {}
     LockItem {}
     WallpaperItem {}
+    ScreenWrap {}
 }

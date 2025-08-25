@@ -1,0 +1,69 @@
+import QtQuick
+import Quickshell
+import qs.functions as F
+import qs.globals as G
+
+Rectangle {
+    id: rect
+    radius: 10
+    required property PanelWindow root
+    required property bool fullyOpen
+    required property bool varShow
+
+    property bool closedAnimRunning: closeAnimation.running
+    property bool openAnimRunning: openAnimation.running
+
+    border.color: F.Colors.borderColor
+    border.width: 2
+    color: F.Colors.backgroundColor
+
+    SequentialAnimation {
+        id: openAnimation
+        running: rect.varShow && !rect.fullyOpen
+
+        NumberAnimation {
+            target: rect.root
+            property: "implicitHeight"
+            to: rect.height
+            duration: G.MaterialEasing.standardTime
+            easing.type: Easing.OutCubic
+        }
+
+        PropertyAction {
+            target: rect.root
+            property: "fullyOpen"
+            value: true
+        }
+    }
+
+    SequentialAnimation {
+        id: closeAnimation
+        running: !rect.varShow && rect.fullyOpen
+
+        PropertyAction {
+            target: rect.root
+            property: "fullyOpen"
+            value: false
+        }
+
+        NumberAnimation {
+            target: rect.root
+            property: "implicitHeight"
+            to: 0
+            duration: G.MaterialEasing.emphasizedTime
+            easing.type: Easing.InCubic
+        }
+    }
+    Connections {
+        target: rect.root
+
+        function onVarShowChanged() {
+            console.log("VAR SHOW CHANGEGD: " + rect.varShow);
+            console.log("PLAYING ANIMATIOn");
+            if (rect.varShow)
+                openAnimation.start();
+            else
+                closeAnimation.start();
+        }
+    }
+}

@@ -85,6 +85,13 @@ Catppuccin | <img width="1920" height="1080" alt="image" src="https://github.com
 ## TO-DO:
 - More quickshell
 
+## Thanks to
+- Soraname (celestia shell)
+- end-4 (end-4's dotfiles)
+- The rest of the hyprland discord server
+
+for helping me make thia rice and introducing me to my lord and saviour quickshell
+
 ## Inspiration
 
 [woieow's dotfiles](https://github.com/woioeow/hyprland-dotfiles.git)
@@ -93,7 +100,9 @@ Catppuccin | <img width="1920" height="1080" alt="image" src="https://github.com
 
 [ml4w dotfiles](https://github.com/mylinuxforwork/dotfiles)
 
-[end4's dotfiles](https://github.com/end-4/dots-hyprland)
+[end-4's dotfiles](https://github.com/end-4/dots-hyprland)
+
+[celaestia shell](https://github.com/caelestia-dots/shell/tree/main)
 
 
 

@@ -28,9 +28,9 @@ private:
   std::vector<std::string> cavaGradientColors = {"gradient_color_1",
                                                  "gradient_color_2"};
 
-  std::vector<std::string> quickshellColors = {"backgroundColor",
-                                               "foregroundColor", "borderColor",
-                                               "activeColor", "selectedColor"};
+  std::vector<std::string> quickshellColors = {
+      "backgroundColor", "foregroundColor", "borderColor",
+      "activeColor",     "selectedColor",   "iconColor"};
 
   // Dunst color mappings - background, foreground, frame
   struct DunstColors {
@@ -251,7 +251,7 @@ public:
     // Update iconColor
     std::regex iconRegex("(property\\s+string\\s+iconColor:\\s*)\"[^\"]*\"");
     std::string iconReplacement = "$1\"" + colors[5] + "\"";
-    content = std::regex_replace(content, selectedRegex, selectedReplacement);
+    content = std::regex_replace(content, iconRegex, iconReplacement);
 
     // Write back to file
     return writeContentToFile(qmlFilePath, content);
@@ -273,7 +273,7 @@ public:
         quickshellConfigPath + "functions/Colors.qml", colors);
 
     if (success) {
-      std::cout << "Cava colors quickshell successfully!" << std::endl;
+      std::cout << "Quickshell colors quickshell successfully!" << std::endl;
     } else {
       std::cout << "Failed to update quickshell colors." << std::endl;
     }
@@ -614,12 +614,11 @@ public:
       // Restart dunst to apply changes
       system("killall dunst && dunst > /dev/null 2>&1 &");
     } else if (package == "quickshell") {
-      vector<string> barColors = {
+      vector<string> quickshellColors = {
           scheme.background, scheme.foreground,          scheme.foreground,
-          scheme.palette[1], scheme.selectionForeground, scheme.palette[6]};
+          scheme.palette[1], scheme.selectionForeground, scheme.palette[11]};
       updater.applyColorSchemeToQuickshell(localPath.string() + "/quickshell/",
-                                           barColors);
-      system("killall quickshell && quickshell > /dev/null 2&>1 &");
+                                           quickshellColors);
     } else {
       cout << "Package " << package << " does not use colors." << endl;
     }

@@ -38,7 +38,7 @@ Singleton {
             return ""; // Terminal icon
         case "thunar":
         case "nautilus":
-        case "dolphin":
+        case "org.kde.dolphin":
             return "󰉋"; // File manager icon
         case "equibop":
         case "vesktop":

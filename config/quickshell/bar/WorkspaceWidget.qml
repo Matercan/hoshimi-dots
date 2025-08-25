@@ -2,17 +2,16 @@ pragma ComponentBehavior: Bound
 // WorkspaceWidget.qml
 import QtQuick
 import Quickshell.Io
-import QtQuick.Layouts as L
-import Quickshell.Hyprland as H
-
-import "../functions" as F
+import qs.globals as G
 
 Rectangle {
     id: wkRect
 
+    implicitHeight: 30
     property int margin: 10
     property var cursorPos: []
-    implicitWidth: Math.max(rowLayout.width + 2 * margin, 100)
+    implicitWidth: G.Variables.barSize
+    property bool showPopUp
 
     // Property to store all open workspaces
     property var openWorkspaces: []
@@ -20,80 +19,49 @@ Rectangle {
     // Property to store the ID of the active workspace
     property int activeWorkspaceId: 0
 
-    L.RowLayout {
-        id: rowLayout
+    WorkspaceItem {
+        id: mainItem
+        activeWorkspaceId: wkRect.activeWorkspaceId
+        idNum: wkRect.activeWorkspaceId
+
         anchors.centerIn: parent
-        spacing: 4
-        focus: true
 
-        // Spawns in the icons of the workspaces
-        Repeater {
-            model: wkRect.openWorkspaces
-            delegate: workspaceDelegate
+        onEntered: {
+            popupTimer.restart();
+            wkRect.showPopUp = true;
+            popup.varShow = true;
+            console.log(wkRect.showPopUp);
+            console.log(popup.varShow);
+        }
+
+        WorkspacePopup {
+            id: popup
+
+            openWorkspaces: wkRect.openWorkspaces
+            activeWorkspaceId: wkRect.activeWorkspaceId
         }
     }
 
-    Component {
-        id: workspaceDelegate
-        Rectangle {
-            id: rect
-            required property int id
-            property bool isActive: id === wkRect.activeWorkspaceId
+    Timer {
+        id: popupTimer
+        interval: G.Variables.popupMenuOpenTime
+        repeat: false
 
-            width: Math.max(windowContent.width + 16, 40)
-            height: 24
-            radius: 10
-
-            color: {
-                if (isActive) {
-                    return F.Colors.activeColor;
-                } else if (mouseArea.containsMouse) {
-                    return F.Colors.selectedColor;
-                } else {
-                    return "transparent";
-                }
-            }
-
-            L.RowLayout {
-                id: windowContent
-                anchors.centerIn: parent
-                spacing: 4
-
-                Text {
-                    text: F.Desktop.getWorkspaceIcon(rect.id)
-
-                    font.family: "CaskaydiaCove Nerd Font"
-                    font.pixelSize: 16
-
-                    color: rect.isActive ? F.Colors.foregroundColor : F.Colors.activeColor
-                }
-            }
-
-            MouseArea {
-                id: mouseArea
-                anchors.fill: parent
-                hoverEnabled: true
-
-                onClicked: {
-                    H.Hyprland.dispatch("workspace " + rect.id);
-                    getCursorPos.running = true;
-                }
-            }
+        onTriggered: {
+            running = false;
+            closeTimer.restart();
+            popup.varShow = false;
         }
     }
 
-    Process {
-        id: getCursorPos
-        command: ["hyprctl", "cursorpos"]
-        running: false
+    Timer {
+        id: closeTimer
+        interval: G.MaterialEasing.emphasizedTime
+        repeat: false
 
-        stdout: StdioCollector {
-            onStreamFinished: {
-                const coords = this.text.trim().split(',');
-                wkRect.cursorPos = coords;
-                // Now the coordinates are clean numbers and the command will work
-                H.Hyprland.dispatch("movecursor " + wkRect.cursorPos[0] + " " + wkRect.cursorPos[1]);
-            }
+        onTriggered: {
+            running = false;
+            wkRect.showPopUp = false;
         }
     }
 
@@ -163,6 +131,15 @@ Rectangle {
         onTriggered: {
             allWkProcs.running = true;
             activeWkProc.running = true;
+        }
+    }
+
+    Timer {
+        interval: 1
+        repeat: true
+        running: true
+        onTriggered: {
+            popup.visible = wkRect.showPopUp;
         }
     }
 }

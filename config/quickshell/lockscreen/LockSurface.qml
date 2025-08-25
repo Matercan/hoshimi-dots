@@ -62,7 +62,8 @@ Rectangle {
         }
 
         Text {
-            text: root.samuraiText.join("")
+          text: root.samuraiText.join("")
+            font.family: "Mutsuki"
             font.pointSize: 30
             color: F.Colors.iconColor
         }
@@ -131,7 +132,7 @@ Rectangle {
             text: "失敗行いました"
             font.pointSize: 30
             color: F.Colors.errorColor
-            font.family: "Shadow Whisper"
+            font.family: "Mutsuki"
             horizontalAlignment: Qt.AlignCenter
         }
 

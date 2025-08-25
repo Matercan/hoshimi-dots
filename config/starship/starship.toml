@@ -5,7 +5,7 @@
 add_newline = true
 
 format = """
-$directory$username $character"""
+$character"""
 
 [character] 
 success_symbol = '[➜]($style)' 

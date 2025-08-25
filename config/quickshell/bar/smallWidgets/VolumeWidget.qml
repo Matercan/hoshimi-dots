@@ -113,7 +113,7 @@ MouseArea {
 
         margins {
             left: Glo.Variables.barSize
-            top: volumeWidget.barY / 2 - volumeWidget.y / 2
+            top: volumeWidget.barY
         }
 
         color: "transparent"

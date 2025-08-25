@@ -3,6 +3,8 @@ pragma ComponentBehavior: Bound
 import Quickshell
 import QtQuick
 
+import "./smallWidgets"
+
 import QtQuick.Layouts as L
 import qs.functions as F
 import qs.globals as G
@@ -47,35 +49,9 @@ Scope {
                     }
 
                     Rectangle {
-                        id: widgets
-                        implicitWidth: window.width
-                        implicitHeight: widgetLayout.implicitHeight + 16  // Add padding
+                        id: spacer
+                        L.Layout.fillHeight: true
                         color: "transparent"
-                        border.color: F.Colors.borderColor
-                        border.width: 1
-                        radius: 8
-
-                        L.ColumnLayout {
-                            id: widgetLayout
-                            anchors.fill: parent
-                            anchors.margins: 8
-                            spacing: 5
-
-                            ClockWidget {
-                                barY: window.height - 3.5 * height
-                                L.Layout.fillWidth: true
-                                L.Layout.alignment: Qt.AlignHCenter
-                            }
-
-                            VolumeWidget {
-                                barY: window.height - 3 * height
-                                L.Layout.fillWidth: true
-                                L.Layout.alignment: Qt.AlignHCenter
-                                L.Layout.preferredHeight: implicitHeight || 20
-                            }
-
-                            // Add more widgets here as needed
-                        }
                     }
 
                     TrayWidget {
@@ -85,6 +61,41 @@ Scope {
                         L.Layout.fillWidth: true
                         L.Layout.alignment: Qt.AlignBottom
                         color: "transparent"
+                    }
+
+                    Rectangle {
+                        id: widgets
+                        implicitWidth: window.width - 2
+                        implicitHeight: widgetLayout.implicitHeight + 16  // Add padding
+                        color: "transparent"
+                        border.color: F.Colors.borderColor
+                        border.width: 1
+                        radius: 8
+                        L.Layout.alignment: Qt.AlignHCenter
+                        L.Layout.leftMargin: 1
+                        L.Layout.bottomMargin: 6
+
+                        L.ColumnLayout {
+                            id: widgetLayout
+                            anchors.fill: parent
+                            anchors.margins: 8
+                            spacing: 5
+
+                            ClockWidget {
+                                barY: widgets.y
+                                L.Layout.fillWidth: true
+                                L.Layout.alignment: Qt.AlignHCenter
+                            }
+
+                            VolumeWidget {
+                                barY: widgets.y
+                                L.Layout.fillWidth: true
+                                L.Layout.alignment: Qt.AlignHCenter
+                                L.Layout.preferredHeight: implicitHeight || 20
+                            }
+
+                            // Add more widgets here as needed
+                        }
                     }
                 }
             }

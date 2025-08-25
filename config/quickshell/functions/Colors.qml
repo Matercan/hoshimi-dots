@@ -17,11 +17,11 @@ Singleton {
     }
 
     // Colors used throuhgout the configuration
-    property string backgroundColor: "#1e1e2e"
-    property string foregroundColor: "#cdd6f4"
-    property string borderColor: "#cdd6f4"
-    property string activeColor: "#f38ba8"
-    property string selectedColor: "#cdd6f4"
+    property string backgroundColor: "#eff1f5"
+    property string foregroundColor: "#4c4f69"
+    property string borderColor: "#4c4f69"
+    property string activeColor: "#d20f39"
+    property string selectedColor: "#4c4f69"
     property string iconColor: "#f9e2af"
     property string errorColor: "#A0001E"
     property string passwordColor: "#191970"

@@ -5,7 +5,7 @@ import qs.globals as G
 
 Rectangle {
     id: rect
-    radius: 10
+    radius: G.Variables.wrapSize
     required property PanelWindow root
     required property bool fullyOpen
     required property bool varShow
@@ -13,8 +13,6 @@ Rectangle {
     property bool closedAnimRunning: closeAnimation.running
     property bool openAnimRunning: openAnimation.running
 
-    border.color: F.Colors.borderColor
-    border.width: 2
     color: F.Colors.backgroundColor
 
     SequentialAnimation {
@@ -23,8 +21,8 @@ Rectangle {
 
         NumberAnimation {
             target: rect.root
-            property: "implicitHeight"
-            to: rect.height
+            property: "implicitWidth"
+            to: rect.width
             duration: G.MaterialEasing.standardTime
             easing.type: Easing.OutCubic
         }
@@ -48,7 +46,7 @@ Rectangle {
 
         NumberAnimation {
             target: rect.root
-            property: "implicitHeight"
+            property: "implicitWidth"
             to: 0
             duration: G.MaterialEasing.emphasizedTime
             easing.type: Easing.InCubic

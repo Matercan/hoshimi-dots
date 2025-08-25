@@ -16,12 +16,7 @@ Singleton {
     IpcHandler {
         target: "variables"
 
-        function setLocked(locked: bool): void {
-            root.locked = locked;
-        }
-        function getLocked(): bool {
-            return root.locked;
-        }
+
         function setPopupTimer(time: int): void {
             root.popupMenuOpenTime = time;
         }

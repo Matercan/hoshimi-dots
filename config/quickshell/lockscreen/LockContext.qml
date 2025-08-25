@@ -2,6 +2,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Services.Pam
 import Quickshell.Hyprland as H
+import Quickshell.Io
 
 import qs.globals as G
 
@@ -66,6 +67,17 @@ Scope {
             G.Variables.locked = false;
             root.unlocked();
             root.timerInProgress = false;
+        }
+      }
+
+    IpcHandler {
+      target: "lock"
+
+        function toggle(): void {
+            G.Variables.locked = !G.Variables.locked;
+        }
+        function getLocked(): bool {
+            return G.Variables.locked;
         }
     }
 }

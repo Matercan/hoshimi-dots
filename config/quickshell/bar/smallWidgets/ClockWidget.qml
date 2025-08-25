@@ -45,16 +45,22 @@ MouseArea {
                 anchors.fill: parent
                 anchors.margins: 4
 
-                // Day (top-left)
-                Text {
-                    id: dayText
+                Rectangle {
                     anchors.top: parent.top
                     anchors.left: parent.left
-                    text: clockWidget.day
-                    color: F.Colors.foregroundColor
-                    font.family: G.Variables.fontFamily || "monospace"
-                    font.pixelSize: 12
-                    font.bold: true
+                    implicitWidth: dayText.width
+                    implicitHeight: dayText.height
+                    color: "transparent"
+
+                    Text {
+                        id: dayText
+                        anchors.centerIn: parent
+                        text: clockWidget.day
+                        color: F.Colors.foregroundColor
+                        font.family: G.Variables.fontFamily || "monospace"
+                        font.pixelSize: 12
+                        font.bold: true
+                    }
                 }
 
                 // Slash (center)
@@ -69,16 +75,23 @@ MouseArea {
                     opacity: 1
                 }
 
-                // Month (bottom-right)
-                Text {
-                    id: monthText
+                Rectangle {
                     anchors.bottom: parent.bottom
                     anchors.right: parent.right
-                    text: clockWidget.month
-                    color: F.Colors.foregroundColor
-                    font.family: G.Variables.fontFamily || "monospace"
-                    font.pixelSize: 10
-                    font.bold: true
+                    implicitWidth: monthText.width
+                    implicitHeight: monthText.height
+                    anchors.rightMargin: 6
+                    color: "transparent"
+
+                    Text {
+                        id: monthText
+                        anchors.centerIn: parent
+                        text: clockWidget.getMonthNum(clockWidget.month)
+                        color: F.Colors.foregroundColor
+                        font.family: G.Variables.fontFamily || "monospace"
+                        font.pixelSize: 14
+                        font.bold: true
+                    }
                 }
             }
         }
@@ -187,7 +200,7 @@ MouseArea {
         }
 
         margins {
-            top: clockWidget.barY / 2 - clockWidget.y / 2
+            top: clockWidget.barY
         }
 
         color: "transparent"
@@ -223,6 +236,37 @@ MouseArea {
                     font.family: G.Variables.fontFamily
                 }
             }
+        }
+    }
+
+    function getMonthNum(name: string): int {
+        switch (name.toLowerCase()) {
+        case "jan":
+            return 1;
+        case "feb":
+            return 2;
+        case "mar":
+            return 3;
+        case "apr":
+            return 4;
+        case "may":
+            return 5;
+        case "jun":
+            return 6;
+        case "jul":
+            return 7;
+        case "aug":
+            return 8;
+        case "sep":
+            return 9;
+        case "oct":
+            return 10;
+        case "nov":
+            return 11;
+        case "dec":
+            return 12;
+        default:
+            return 0;
         }
     }
 }

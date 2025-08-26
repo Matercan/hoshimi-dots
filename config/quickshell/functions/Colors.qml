@@ -1,8 +1,10 @@
 pragma Singleton
 
 import Quickshell
+import QtQuick
 
 Singleton {
+    id: root
 
     /**
     * Transparentizes a color by a given percentage.
@@ -41,6 +43,51 @@ Singleton {
     property string activeColor: paletteColor5
     property string selectedColor: paletteColor3
     property string iconColor: paletteColor13
-    property string errorColor: paletteColor1
+    property string errorColor: paletteColor2
     property string passwordColor: paletteColor4
+
+    /**
+     * Gets the palette color of a specified string
+     *
+     * @param {string} color - The color e.g. blue, red, white
+     * @return {Qt.color} The resulting color from the palette
+     */
+    function getPaletteColor(colorName: string): string {
+        switch (colorName) {
+        case "teal":
+            return paletteColor1;
+        case "red":
+            return paletteColor2;
+        case "green":
+            return paletteColor3;
+        case "orange":
+            return paletteColor4;
+        case "blue":
+            return paletteColor5;
+        case "pink":
+            return paletteColor6;
+        case "teal two":
+            return paletteColor7;
+        case "grey":
+            return paletteColor8;
+        case "dark grey":
+            return paletteColor9;
+        case "light red":
+            return paletteColor10;
+        case "light green":
+            return paletteColor11;
+        case "light orange":
+            return paletteColor12;
+        case "light blue":
+            return paletteColor13;
+        case "light pink":
+            return paletteColor14;
+        case "cyan":
+            return paletteColor15;
+        case "white":
+            return paletteColor16;
+        default:
+            return "#ff0000";
+        }
+    }
 }

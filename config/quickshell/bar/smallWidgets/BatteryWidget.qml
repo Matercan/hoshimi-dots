@@ -34,11 +34,30 @@ Rectangle {
                     return "";
                 }
             }
+            color: {
+                if (Battery.batteryAmount >= 70) {
+                    return Colors.getPaletteColor("green");
+                } else if (Battery.batteryAmount >= 40) {
+                    return Colors.getPaletteColor("orange");
+                } else {
+                    return Colors.getPaletteColor("red");
+                }
+            }
         }
 
         Text {
             Layout.alignment: Qt.AlignHCenter
             text: Battery.batteryText
+
+            color: {
+                if (Battery.batteryAmount >= 70) {
+                    return Colors.getPaletteColor("green");
+                } else if (Battery.batteryAmount >= 40) {
+                    return Colors.getPaletteColor("orange");
+                } else {
+                    return Colors.getPaletteColor("red");
+                }
+            }
         }
     }
 }

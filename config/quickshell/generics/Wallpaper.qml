@@ -20,16 +20,6 @@ Image {
         x: 100
         y: 900
 
-        FontLoader {
-            id: mastonRegular
-            source: Quickshell.env("HOME") + ".fonts/mrk_maston/M"
-        }
-
-        FontLoader {
-            id: mastonBold
-            source: Quickshell.env("HOME") + ".fonts/mrk_maston/MRKMaston-Bold.ttf"
-        }
-
         Text {
             text: S.Time.time || "No Time Data"
             color: F.Colors.transparentize(F.Colors.backgroundColor, 0.3) || "#ffffff"

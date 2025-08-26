@@ -1,7 +1,5 @@
 pragma Singleton
-pragma Singleton
 import Quickshell.Services.UPower
-import Quickshell
 import Quickshell
 
 Singleton {

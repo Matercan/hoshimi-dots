@@ -36,7 +36,7 @@ Scope {
 
                 ColumnLayout {
                     id: mainyout
-                    Layout.alignment: Qt.Alignft
+                    Layout.alignment: Qt.AlignLeft
                     height: parent.height
                     implicitWidth: parent.width
 
@@ -56,6 +56,7 @@ Scope {
 
                     Cava {
                         id: cava
+                        barY: y
 
                         Layout.fillWidth: true
                         implicitHeight: 75

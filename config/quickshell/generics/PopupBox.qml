@@ -23,7 +23,7 @@ Rectangle {
             target: rect.root
             property: "implicitWidth"
             to: rect.width
-            duration: G.MaterialEasing.standardTime
+            duration: G.MaterialEasing.standardTime * 0.3
             easing.type: Easing.OutCubic
         }
 
@@ -48,7 +48,7 @@ Rectangle {
             target: rect.root
             property: "implicitWidth"
             to: 0
-            duration: G.MaterialEasing.emphasizedTime
+            duration: G.MaterialEasing.emphasizedTime * 0.3
             easing.type: Easing.InCubic
         }
     }

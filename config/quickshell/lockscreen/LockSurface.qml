@@ -153,19 +153,22 @@ Rectangle {
         id: displayText
         anchors.centerIn: parent
         opacity: 1
+        spacing: root.maskedBuffer.length * 14
+        NumberAnimation on spacing {
+            duration: Glo.MaterialEasing.standardTime
+            easing.type: Easing.BezierSpline
+        }
 
-        Label {
-            id: mainText
-            text: root.maskedBuffer
-            font.family: "Libre Barcode 128"
-            color: F.Colors.passwordColor
-            property int size: 400
-            font.letterSpacing: text.length * 14
-            font.pixelSize: size
-
-            NumberAnimation on font.letterSpacing {
-                duration: Glo.MaterialEasing.standardTime
-                easing.type: Easing.OutCubic
+        Repeater {
+            model: root.maskedBuffer
+            delegate: Label {
+                id: mainText
+                required property var index
+                text: root.maskedBuffer[index]
+                font.family: "Libre Barcode 128"
+                color: F.Colors.passwordColor
+                property int size: Math.floor(Math.random() * 100) + 350
+                font.pixelSize: size
             }
         }
 

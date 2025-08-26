@@ -17,13 +17,12 @@ Image {
         id: content
 
         spacing: 2
-        x: 980
-        y: 230
-        rotation: 12
+        x: 100
+        y: 900
 
         FontLoader {
             id: mastonRegular
-            source: Quickshell.env("HOME") + ".fonts/mrk_maston/MRKMaston-Regular.ttf"
+            source: Quickshell.env("HOME") + ".fonts/mrk_maston/M"
         }
 
         FontLoader {
@@ -34,14 +33,14 @@ Image {
         Text {
             text: S.Time.time || "No Time Data"
             color: F.Colors.transparentize(F.Colors.backgroundColor, 0.3) || "#ffffff"
-            font.family: mastonRegular.name
+            font.family: "MRK Maston"
             font.pointSize: 50
         }
 
         Text {
             text: S.Time.date || "No Date Data"
             color: F.Colors.transparentize(F.Colors.backgroundColor, 0.3) || "#ffffff"
-            font.family: mastonBold.name
+            font.family: "MRK Maston"
             font.pointSize: 60
         }
     }

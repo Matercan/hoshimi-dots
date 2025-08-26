@@ -204,7 +204,7 @@ public:
   // Function to update QML colors using regex
   bool updateQuickshellColorsRegex(const std::string &qmlFilePath,
                                    const std::vector<std::string> &colors) {
-    if (colors.size() < 6) {
+    if (colors.size() < 19) {
       std::cerr << "Error: Need at least 5 colors for quickshell theme"
                 << std::endl;
       return false;
@@ -236,22 +236,117 @@ public:
     std::string borderReplacement = "$1\"" + colors[2] + "\"";
     content = std::regex_replace(content, borderRegex, borderReplacement);
 
-    // Update activeColor
-    std::regex activeRegex(
-        "(property\\s+string\\s+activeColor:\\s*)\"[^\"]*\"");
-    std::string activeReplacement = "$1\"" + colors[3] + "\"";
-    content = std::regex_replace(content, activeRegex, activeReplacement);
+    // Update paletteColor1
+    std::regex paletteColor1Regex(
+        "(property\\s+string\\s+paletteColor1:\\s*)\"[^\"]*\"");
+    std::string paletteColor1Replacement = "$1\"" + colors[3] + "\"";
+    content = std::regex_replace(content, paletteColor1Regex,
+                                 paletteColor1Replacement);
 
-    // Update selectedColor
-    std::regex selectedRegex(
-        "(property\\s+string\\s+selectedColor:\\s*)\"[^\"]*\"");
-    std::string selectedReplacement = "$1\"" + colors[4] + "\"";
-    content = std::regex_replace(content, selectedRegex, selectedReplacement);
+    // Update paletteColor2
+    std::regex paletteColor2Regex(
+        "(property\\s+string\\s+paletteColor2:\\s*)\"[^\"]*\"");
+    std::string paletteColor2Replacement = "$1\"" + colors[4] + "\"";
+    content = std::regex_replace(content, paletteColor2Regex,
+                                 paletteColor2Replacement);
 
-    // Update iconColor
-    std::regex iconRegex("(property\\s+string\\s+iconColor:\\s*)\"[^\"]*\"");
-    std::string iconReplacement = "$1\"" + colors[5] + "\"";
-    content = std::regex_replace(content, iconRegex, iconReplacement);
+    // Update paletteColor3
+    std::regex paletteColor3Regex(
+        "(property\\s+string\\s+paletteColor3:\\s*)\"[^\"]*\"");
+    std::string paletteColor3Replacement = "$1\"" + colors[5] + "\"";
+    content = std::regex_replace(content, paletteColor3Regex,
+                                 paletteColor3Replacement);
+
+    // Update paletteColor4
+    std::regex paletteColor4Regex(
+        "(property\\s+string\\s+paletteColor4:\\s*)\"[^\"]*\"");
+    std::string paletteColor4Replacement = "$1\"" + colors[6] + "\"";
+    content = std::regex_replace(content, paletteColor4Regex,
+                                 paletteColor4Replacement);
+
+    // Update paletteColor5
+    std::regex paletteColor5Regex(
+        "(property\\s+string\\s+paletteColor5:\\s*)\"[^\"]*\"");
+    std::string paletteColor5Replacement = "$1\"" + colors[7] + "\"";
+    content = std::regex_replace(content, paletteColor5Regex,
+                                 paletteColor5Replacement);
+
+    // Update paletteColor6
+    std::regex paletteColor6Regex(
+        "(property\\s+string\\s+paletteColor6:\\s*)\"[^\"]*\"");
+    std::string paletteColor6Replacement = "$1\"" + colors[8] + "\"";
+    content = std::regex_replace(content, paletteColor6Regex,
+                                 paletteColor6Replacement);
+
+    // Update paletteColor7
+    std::regex paletteColor7Regex(
+        "(property\\s+string\\s+paletteColor7:\\s*)\"[^\"]*\"");
+    std::string paletteColor7Replacement = "$1\"" + colors[9] + "\"";
+    content = std::regex_replace(content, paletteColor7Regex,
+                                 paletteColor7Replacement);
+
+    // Update paletteColor8
+    std::regex paletteColor8Regex(
+        "(property\\s+string\\s+paletteColor8:\\s*)\"[^\"]*\"");
+    std::string paletteColor8Replacement = "$1\"" + colors[10] + "\"";
+    content = std::regex_replace(content, paletteColor8Regex,
+                                 paletteColor8Replacement);
+
+    // Update paletteColor9
+    std::regex paletteColor9Regex(
+        "(property\\s+string\\s+paletteColor9:\\s*)\"[^\"]*\"");
+    std::string paletteColor9Replacement = "$1\"" + colors[11] + "\"";
+    content = std::regex_replace(content, paletteColor9Regex,
+                                 paletteColor9Replacement);
+
+    // Update paletteColor10
+    std::regex paletteColor10Regex(
+        "(property\\s+string\\s+paletteColor10:\\s*)\"[^\"]*\"");
+    std::string paletteColor10Replacement = "$1\"" + colors[12] + "\"";
+    content = std::regex_replace(content, paletteColor10Regex,
+                                 paletteColor10Replacement);
+
+    // Update paletteColor11
+    std::regex paletteColor11Regex(
+        "(property\\s+string\\s+paletteColor11:\\s*)\"[^\"]*\"");
+    std::string paletteColor11Replacement = "$1\"" + colors[13] + "\"";
+    content = std::regex_replace(content, paletteColor11Regex,
+                                 paletteColor11Replacement);
+
+    // Update paletteColor12
+    std::regex paletteColor12Regex(
+        "(property\\s+string\\s+paletteColor12:\\s*)\"[^\"]*\"");
+    std::string paletteColor12Replacement = "$1\"" + colors[14] + "\"";
+    content = std::regex_replace(content, paletteColor12Regex,
+                                 paletteColor12Replacement);
+
+    // Update paletteColor13
+    std::regex paletteColor13Regex(
+        "(property\\s+string\\s+paletteColor13:\\s*)\"[^\"]*\"");
+    std::string paletteColor13Replacement = "$1\"" + colors[15] + "\"";
+    content = std::regex_replace(content, paletteColor13Regex,
+                                 paletteColor13Replacement);
+
+    // Update paletteColor14
+    std::regex paletteColor14Regex(
+        "(property\\s+string\\s+paletteColor14:\\s*)\"[^\"]*\"");
+    std::string paletteColor14Replacement = "$1\"" + colors[16] + "\"";
+    content = std::regex_replace(content, paletteColor14Regex,
+                                 paletteColor14Replacement);
+
+    // Update paletteColor15
+    std::regex paletteColor15Regex(
+        "(property\\s+string\\s+paletteColor15:\\s*)\"[^\"]*\"");
+    std::string paletteColor15Replacement = "$1\"" + colors[17] + "\"";
+    content = std::regex_replace(content, paletteColor15Regex,
+                                 paletteColor15Replacement);
+
+    // Update paletteColor16
+    std::regex paletteColor16Regex(
+        "(property\\s+string\\s+paletteColor16:\\s*)\"[^\"]*\"");
+    std::string paletteColor16Replacement = "$1\"" + colors[18] + "\"";
+    content = std::regex_replace(content, paletteColor16Regex,
+                                 paletteColor16Replacement);
 
     // Write back to file
     return writeContentToFile(qmlFilePath, content);
@@ -614,9 +709,13 @@ public:
       // Restart dunst to apply changes
       system("killall dunst && dunst > /dev/null 2>&1 &");
     } else if (package == "quickshell") {
-      vector<string> quickshellColors = {
-          scheme.background, scheme.foreground,          scheme.foreground,
-          scheme.palette[1], scheme.selectionForeground, scheme.palette[11]};
+      vector<string> quickshellColors = {scheme.background, scheme.foreground,
+                                         scheme.foreground};
+
+      quickshellColors.reserve(22);
+      quickshellColors.insert(quickshellColors.end(), scheme.palette.begin(),
+                              scheme.palette.end());
+
       updater.applyColorSchemeToQuickshell(localPath.string() + "/quickshell/",
                                            quickshellColors);
     } else {

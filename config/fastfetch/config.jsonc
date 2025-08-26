@@ -44,13 +44,11 @@
       "key": " ",
       "keyColor": "blue"
     },
-    /*
-        {
-            "type": "packages",
-            "key": "󰏖 ",
-            "keyColor": "yellow"
-        },
-        */
+    {
+        "type": "packages",
+        "key": "󰏖 ",
+        "keyColor": "yellow"
+    },
     {
       "type": "memory",
       "key": "󰍛 ",

@@ -2,10 +2,10 @@
 pragma ComponentBehavior: Bound
 import Quickshell
 import QtQuick
+import QtQuick.Layouts
 
 import "./smallWidgets"
 
-import QtQuick.Layouts as L
 import qs.functions as F
 import qs.globals as G
 
@@ -34,32 +34,40 @@ Scope {
                 implicitHeight: parent.height
                 implicitWidth: parent.width
 
-                L.ColumnLayout {
-                    id: mainLayout
-                    L.Layout.alignment: Qt.AlignLeft
+                ColumnLayout {
+                    id: mainyout
+                    Layout.alignment: Qt.Alignft
                     height: parent.height
                     implicitWidth: parent.width
 
                     WorkspaceWidget {
                         id: workspaces
 
-                        L.Layout.fillWidth: true
-                        L.Layout.alignment: Qt.AlignTop
+                        Layout.fillWidth: true
+                        Layout.alignment: Qt.AlignTop
                         color: "transparent"
                     }
 
                     Rectangle {
                         id: spacer
-                        L.Layout.fillHeight: true
-                        color: "transparent"
+
+                        Layout.fillHeight: true
+                    }
+
+                    Cava {
+                        id: cava
+
+                        Layout.fillWidth: true
+                        implicitHeight: 75
                     }
 
                     TrayWidget {
                         id: tray
+                        rectY: y
 
                         implicitWidth: parent.width
-                        L.Layout.fillWidth: true
-                        L.Layout.alignment: Qt.AlignBottom
+                        Layout.fillWidth: true
+                        Layout.alignment: Qt.AlignBottom
                         color: "transparent"
                     }
 
@@ -71,30 +79,33 @@ Scope {
                         border.color: F.Colors.borderColor
                         border.width: 1
                         radius: 8
-                        L.Layout.alignment: Qt.AlignHCenter
-                        L.Layout.leftMargin: 1
-                        L.Layout.bottomMargin: 6
+                        Layout.alignment: Qt.AlignHCenter
+                        Layout.leftMargin: 1
+                        Layout.bottomMargin: 6
 
-                        L.ColumnLayout {
+                        ColumnLayout {
                             id: widgetLayout
                             anchors.fill: parent
                             anchors.margins: 8
                             spacing: 5
 
+                            BatteryWidget {
+                                Layout.fillWidth: true
+                                Layout.alignment: Qt.AlignHCenter
+                            }
+
                             ClockWidget {
                                 barY: widgets.y
-                                L.Layout.fillWidth: true
-                                L.Layout.alignment: Qt.AlignHCenter
+                                Layout.fillWidth: true
+                                Layout.alignment: Qt.AlignHCenter
                             }
 
                             VolumeWidget {
                                 barY: widgets.y
-                                L.Layout.fillWidth: true
-                                L.Layout.alignment: Qt.AlignHCenter
-                                L.Layout.preferredHeight: implicitHeight || 20
+                                Layout.fillWidth: true
+                                Layout.alignment: Qt.AlignHCenter
+                                Layout.preferredHeight: implicitHeight || 20
                             }
-
-                            // Add more widgets here as needed
                         }
                     }
                 }

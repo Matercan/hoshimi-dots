@@ -10,6 +10,8 @@ import qs.globals as G
 Rectangle {
     id: root
 
+    required property var popupY
+
     property var bar: root.QsWindow.window
     required property var modelData
     property SystemTrayItem item: modelData
@@ -71,8 +73,8 @@ Rectangle {
         menu: root.item.menu
 
         anchor.window: root.bar
-        anchor.rect.x: root.x
-        anchor.rect.y: 1080 - root.y
+        anchor.rect.x: G.Variables.barSize
+        anchor.rect.y: root.popupY
         anchor.rect.height: root.height
         anchor.rect.width: root.width
     }
@@ -85,14 +87,14 @@ Rectangle {
         visible: rect.varShow
 
         anchors {
-            bottom: true
+            top: true
             left: true
         }
 
         color: "transparent"
 
         margins {
-            bottom: root.height / 2
+            top: root.popupY
             left: 5
         }
 

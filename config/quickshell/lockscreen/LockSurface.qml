@@ -62,16 +62,19 @@ Rectangle {
         }
 
         Text {
-          text: root.samuraiText.join("")
+            text: root.samuraiText.join("")
             font.family: "Mutsuki"
             font.pointSize: 30
             color: F.Colors.iconColor
+            Layout.alignment: Qt.AlignHCenter
         }
 
         Text {
             text: root.englishText
             font.pointSize: 30
+            font.family: "Shadow Whisper"
             color: F.Colors.iconColor
+            Layout.alignment: Qt.AlignHCenter
         }
     }
 
@@ -134,6 +137,7 @@ Rectangle {
             color: F.Colors.errorColor
             font.family: "Mutsuki"
             horizontalAlignment: Qt.AlignCenter
+            verticalAlignment: Qt.AlignCenter
         }
 
         Label {

@@ -125,7 +125,7 @@ Rectangle {
     }
 
     Timer {
-        interval: 100
+        interval: G.Variables.timerProcInterval
         repeat: true
         running: true
         onTriggered: {

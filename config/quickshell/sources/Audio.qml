@@ -3,6 +3,8 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
+import qs.globals as G
+
 Singleton {
     id: scope
     property string volume
@@ -23,7 +25,7 @@ Singleton {
         }
     }
     Timer {
-        interval: 100
+        interval: G.Variables.timerProcInterval
         repeat: true
         running: true
         onTriggered: audioProc.running = true

@@ -139,15 +139,6 @@ MouseArea {
         autoCloseTimer.restart();
     }
 
-    // Add visual feedback on hover/click
-    Rectangle {
-        anchors.fill: parent
-        color: parent.containsMouse ? F.Colors.selectedColor : "transparent"
-        radius: 4
-        z: -1  // Behind the text
-        opacity: 0.3
-    }
-
     Process {
         id: openPeaclock
         command: ["ghostty", "-e", "peaclock"]

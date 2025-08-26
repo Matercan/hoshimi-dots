@@ -29,7 +29,7 @@ Item {
     }
 
     Timer {
-        interval: 100
+        interval: V.Variables.timerProcInterval
         repeat: true
         running: true
         onTriggered: {

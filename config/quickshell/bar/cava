@@ -1,0 +1,10 @@
+[general]
+bars = 128
+sleep_timer = 1
+
+[output]
+method = raw
+data_format = ascii
+ascii_max_range = 100
+bar_delimiter = 59  # semicolon
+frame_delimiter = 10  # newline

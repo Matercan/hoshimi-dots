@@ -9,6 +9,8 @@ import qs.functions as F
 Rectangle {
     id: trayRect
 
+    required property var rectY
+
     property int margin: 10
     implicitWidth: 25
     implicitHeight: rowLayout.height + 2 * margin
@@ -29,7 +31,9 @@ Rectangle {
         // Spawns tray icons using actual SystemTray
         Repeater {
             model: SystemTray.items
-            delegate: TrayIcon {}
+            delegate: TrayIcon {
+                popupY: trayRect.rectY + 32
+            }
         }
     }
 }

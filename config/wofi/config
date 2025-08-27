@@ -1,8 +1,0 @@
-allow_images=true
-key_expand=Tab
-width=45%
-height=40%
-image_size=15
-columns=2
-prompt=Enter an app's name
-matching=fuzzy

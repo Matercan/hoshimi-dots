@@ -21,7 +21,10 @@ Scope {
             }
 
             color: "transparent"
-            WlrLayershell.layer: WlrLayer.Bottom
+            WlrLayershell.layer: WlrLayer.Top
+            WlrLayershell.focusable: false
+            mask: Region {}
+            focusable: false
 
             Item {
                 anchors.fill: parent

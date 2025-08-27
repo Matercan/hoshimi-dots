@@ -3,7 +3,7 @@
 import qs.bar
 import qs.background
 import Quickshell
-import qs.services
+import qs.modules
 
 import Quickshell
 

@@ -7,9 +7,11 @@ import qs.sources as S
 
 Image {
     source: Quickshell.env("HOME") + "/.local/share/hyprland-dots/wallpaper.png"
-    antialiasing: true
+    antialiasing: false
     asynchronous: true
-    fillMode: Image.PreserveAspectCrop
+    width: 1980
+    height: 1080
+    mipmap: true
     retainWhileLoading: true
     smooth: true
 

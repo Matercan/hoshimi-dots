@@ -3,6 +3,7 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Shapes
 
 import qs.globals
 import qs.generics
@@ -158,6 +159,7 @@ MouseArea {
             id: rect
             root: popup
             fullyOpen: popup.fullyOpen
+            anchors.centerIn: parent
             varShow: popup.varShow
             implicitHeight: layout.height + 10
             implicitWidth: layout.width + 10
@@ -204,6 +206,7 @@ MouseArea {
                     source: Player.imageUrl
                     mipmap: true
                     smooth: true
+                    fillMode: Image.PreserveAspectFit
                     Layout.alignment: Qt.AlignHCenter
                     Layout.preferredWidth: track.width
                     Layout.preferredHeight: track.width

@@ -1,6 +1,7 @@
 pragma Singleton
 
 import Quickshell
+import qs.sources
 
 Singleton {
     function getWorkspaceIcon(ident) {

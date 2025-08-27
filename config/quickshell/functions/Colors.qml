@@ -6,18 +6,6 @@ import QtQuick
 Singleton {
     id: root
 
-    /**
-    * Transparentizes a color by a given percentage.
-    *
-    * @param {string} color - The color (any Qt.color-compatible string).
-    * @param {number} percentage - The amount to transparentize (0-1).
-    * @returns {Qt.rgba} The resulting color.
-    */
-    function transparentize(color, percentage = 1) {
-        var c = Qt.color(color);
-        return Qt.rgba(c.r, c.g, c.b, c.a * (1 - percentage));
-    }
-
     // Colors used throuhgout the configuration
     property string backgroundColor: "#eff1f5"
     property string foregroundColor: "#4c4f69"
@@ -45,6 +33,18 @@ Singleton {
     property string iconColor: paletteColor13
     property string errorColor: paletteColor2
     property string passwordColor: paletteColor4
+
+    /**
+    * Transparentizes a color by a given percentage.
+    *
+    * @param {string} color - The color (any Qt.color-compatible string).
+    * @param {number} percentage - The amount to transparentize (0-1).
+    * @returns {Qt.rgba} The resulting color.
+    */
+    function transparentize(color, percentage = 1) {
+        var c = Qt.color(color);
+        return Qt.rgba(c.r, c.g, c.b, c.a * (1 - percentage));
+    }
 
     /**
      * Gets the palette color of a specified string
@@ -89,5 +89,24 @@ Singleton {
         default:
             return "#ff0000";
         }
+    }
+
+    /**
+     * Interpelates between 2 colors depending on a percentage
+     *
+     * @param {string} color A - The starting color (Any Qt.Color)
+     * @param [string] color B - The end color (Any Qt.Color)
+     * @param {number} percentage - The percent B vs A
+     * @return {Qt.rba} The resulting color
+     */
+    function interpolate(colorA, colorB, percentage: real) {
+        var a = Qt.color(colorA);
+        var b = Qt.color(colorB);
+
+        var rTrack = (a.r * (1 - percentage) + b.r * percentage);
+        var gTrack = (a.g * (1 - percentage) + b.g * percentage);
+        var bTrack = (a.b * (1 - percentage) + b.b * percentage);
+
+        return Qt.rgba(rTrack, gTrack, bTrack);
     }
 }

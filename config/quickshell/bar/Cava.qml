@@ -147,7 +147,7 @@ MouseArea {
         }
 
         margins {
-            top: root.barY
+            top: root.barY - rect.height / 2
         }
 
         implicitWidth: rect.width + 50
@@ -201,34 +201,86 @@ MouseArea {
                 Image {
                     id: albumCover
                     source: Player.imageUrl
+                    mipmap: true
+                    smooth: true
                     Layout.alignment: Qt.AlignHCenter
                     Layout.preferredWidth: track.width
                     Layout.preferredHeight: track.width
                 }
-
                 Text {
                     id: track
                     Layout.alignment: Qt.AlignHCenter
+                    font.pixelSize: {
+                        if (Player.trackDisplay.length >= 15) {
+                            return 350 / Player.trackDisplay.length;
+                        } else {
+                            return 20;
+                        }
+                    }
                     text: Player.trackDisplay
                 }
-                Item {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: track.height / 2
 
-                    Rectangle {
-                        anchors.fill: parent
-                        radius: 10
-                        color: Colors.getPaletteColor("blue")
+                Item {
+                    id: timeDisplay
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: track.height / 4
+
+                    function formatTime(seconds) {
+                        var mins = Math.floor(seconds / 60);
+                        var secs = Math.floor(seconds % 60);
+                        return mins + ":" + (secs < 10 ? "0" : "") + secs;
                     }
 
-                    Rectangle {
-                        anchors.left: parent.left
-                        anchors.top: parent.top
-                        anchors.bottom: parent.bottom
-                        radius: 10
-                        implicitHeight: 10
-                        color: Colors.transparentize(Colors.getPaletteColor("light pink"), 0.5)
-                        implicitWidth: Player.songPosition / Player.songLength * parent.width
+                    Row {
+                        anchors.fill: parent
+                        spacing: 8
+
+                        // Current position text
+                        Text {
+                            id: currentTimeText
+                            anchors.verticalCenter: parent.verticalCenter
+                            font.pixelSize: 12
+                            color: Colors.selectedColor
+                            text: timeDisplay.formatTime(Player.songPosition)
+                            width: 35 // Fixed width to prevent jumping
+                        }
+
+                        // Progress bar container
+                        Item {
+                            anchors.verticalCenter: parent.verticalCenter
+                            width: parent.width - currentTimeText.width - totalTimeText.width - 16 // Account for spacing
+                            height: parent.height
+
+                            // Background bar
+                            Rectangle {
+                                id: progressBar
+                                anchors.centerIn: parent
+                                width: parent.width
+                                height: parent.height
+                                radius: 10
+                                color: Colors.getPaletteColor("blue")
+                            }
+
+                            // Progress fill
+                            Rectangle {
+                                anchors.left: progressBar.left
+                                anchors.verticalCenter: progressBar.verticalCenter
+                                height: progressBar.height
+                                width: Math.max(0, Math.min(progressBar.width, (Player.songPosition / Player.songLength) * progressBar.width))
+                                radius: 10
+                                color: Colors.transparentize(Colors.interpolate(Colors.getPaletteColor("light pink"), Colors.getPaletteColor("light red"), Player.songPosition / Player.songLength), 0.2)
+                            }
+                        }
+
+                        // Total time text
+                        Text {
+                            id: totalTimeText
+                            anchors.verticalCenter: parent.verticalCenter
+                            font.pixelSize: 12
+                            color: Colors.selectedColor
+                            text: timeDisplay.formatTime(Player.songLength)
+                            width: 35 // Fixed width to prevent jumping
+                        }
                     }
                 }
 
@@ -319,12 +371,6 @@ MouseArea {
                         onClicked: next.running = true
                     }
                 }
-            }
-
-            Rectangle {
-                implicitHeight: 15
-                implicitWidth: 15
-                color: "black"
             }
         }
     }

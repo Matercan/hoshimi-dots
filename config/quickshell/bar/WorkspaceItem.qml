@@ -8,7 +8,6 @@ MouseArea {
     required property int activeWorkspaceId
     required property int idNum
 
-    anchors.horizontalCenter: parent.horizontalCenter
     implicitWidth: G.Variables.barSize
     height: 24
 
@@ -44,6 +43,7 @@ MouseArea {
     }
 
     hoverEnabled: true
+    cursorShape: Qt.PointingHandCursor
 
     onClicked: {
         H.Hyprland.dispatch("workspace " + idNum);

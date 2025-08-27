@@ -4,7 +4,8 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 
-import "./smallWidgets"
+import qs.bar
+import qs.bar.widgets
 
 import qs.functions as F
 import qs.globals as G
@@ -48,10 +49,11 @@ Scope {
                         color: "transparent"
                     }
 
-                    Rectangle {
+                    Window {
                         id: spacer
 
                         Layout.fillHeight: true
+                        Layout.alignment: Qt.AlignHCenter
                     }
 
                     Cava {

@@ -1,10 +1,10 @@
 import QtQuick
 import Quickshell
-import QtQuick.Layouts as L
+import QtQuick.Layouts
 import Quickshell.Io
 import Quickshell.Wayland
 
-import qs.functions as F
+import qs.functions
 import qs.sources as S
 import qs.globals as G
 import qs.generics as Gen
@@ -27,14 +27,14 @@ MouseArea {
     property bool showPopup
     required property int barY
 
-    L.ColumnLayout {
+    ColumnLayout {
         id: layout
         anchors.centerIn: parent
         spacing: 2
 
         // Date section with diagonal slash layout
         Rectangle {
-            L.Layout.alignment: Qt.AlignTop
+            Layout.alignment: Qt.AlignTop
             color: "transparent"
             implicitWidth: 40
             implicitHeight: 35
@@ -56,9 +56,9 @@ MouseArea {
                         id: dayText
                         anchors.centerIn: parent
                         text: clockWidget.day
-                        color: F.Colors.foregroundColor
-                        font.family: G.Variables.fontFamily || "monospace"
-                        font.pixelSize: 12
+                        color: Colors.getPaletteColor("blue")
+                        font.family: "MRK Maston" || "monospace"
+                        font.pixelSize: 15
                         font.bold: true
                     }
                 }
@@ -68,9 +68,9 @@ MouseArea {
                     id: slashText
                     anchors.centerIn: parent
                     text: "/"
-                    color: F.Colors.foregroundColor
-                    font.family: G.Variables.fontFamily || "monospace"
-                    font.pixelSize: 14
+                    color: Colors.getPaletteColor("blue")
+                    font.family: "MRK Maston" || "monospace"
+                    font.pixelSize: 16
                     font.bold: true
                     opacity: 1
                 }
@@ -87,9 +87,9 @@ MouseArea {
                         id: monthText
                         anchors.centerIn: parent
                         text: clockWidget.getMonthNum(clockWidget.month)
-                        color: F.Colors.foregroundColor
-                        font.family: G.Variables.fontFamily || "monospace"
-                        font.pixelSize: 14
+                        color: Colors.getPaletteColor("blue")
+                        font.family: "MRK Maston" || "monospace"
+                        font.pixelSize: 16
                         font.bold: true
                     }
                 }
@@ -98,34 +98,34 @@ MouseArea {
 
         // Time section
         Rectangle {
-            L.Layout.alignment: Qt.AlignCenter
+            Layout.alignment: Qt.AlignCenter
             implicitWidth: 40
             implicitHeight: 45
             color: "transparent"
 
-            L.ColumnLayout {
-                id: timeLayout
+            ColumnLayout {
+                id: timeyout
                 anchors.centerIn: parent
                 spacing: -2
 
                 Text {
                     id: hoursText
                     text: clockWidget.hours
-                    color: F.Colors.foregroundColor
-                    font.family: G.Variables.fontFamily || "monospace"
-                    font.pixelSize: 16
+                    color: Colors.getPaletteColor("pink")
+                    font.family: "MRK Maston" || "monospace"
+                    font.pixelSize: 20
                     font.bold: true
-                    L.Layout.alignment: Qt.AlignHCenter
+                    Layout.alignment: Qt.AlignHCenter
                 }
 
                 Text {
                     id: minutesText
                     text: clockWidget.minutes
-                    color: F.Colors.foregroundColor
-                    font.family: G.Variables.fontFamily || "monospace"
-                    font.pixelSize: 16
+                    color: Colors.getPaletteColor("pink")
+                    font.family: "MRK Maston" || "monospace"
+                    font.pixelSize: 20
                     font.bold: true
-                    L.Layout.alignment: Qt.AlignHCenter
+                    Layout.alignment: Qt.AlignHCenter
                 }
             }
         }
@@ -208,23 +208,25 @@ MouseArea {
             implicitWidth: textDisplay.width + 10
             implicitHeight: textDisplay.height + 10
 
-            L.ColumnLayout {
+            ColumnLayout {
                 id: textDisplay
                 anchors.centerIn: parent
                 visible: !rect.closedAnimRunning
 
                 Text {
-                    L.Layout.alignment: Qt.AlignCenter
+                    Layout.alignment: Qt.AlignCenter
                     text: S.Time.time
-                    color: F.Colors.foregroundColor
-                    font.family: G.Variables.fontFamily
+                    color: Colors.foregroundColor
+                    font.family: "MRK Maston"
+                    font.pixelSize: 24
                 }
 
                 Text {
-                    L.Layout.alignment: Qt.AlignCenter
+                    Layout.alignment: Qt.AlignCenter
                     text: S.Time.date
-                    color: F.Colors.foregroundColor
-                    font.family: G.Variables.fontFamily
+                    color: Colors.foregroundColor
+                    font.family: "MRK Maston"
+                    font.pointSize: 20
                 }
             }
         }

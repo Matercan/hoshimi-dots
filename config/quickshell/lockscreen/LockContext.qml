@@ -68,13 +68,17 @@ Scope {
             root.unlocked();
             root.timerInProgress = false;
         }
-      }
+    }
 
     IpcHandler {
-      target: "lock"
+        target: "lock"
 
         function toggle(): void {
             G.Variables.locked = !G.Variables.locked;
+        }
+        function lock(): void {
+            G.Variables.locked = true;
+            console.log("Screen locked");
         }
         function getLocked(): bool {
             return G.Variables.locked;

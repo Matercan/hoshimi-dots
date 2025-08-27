@@ -4,8 +4,7 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 
-import qs.bar
-import qs.bar.widgets
+import "./smallWidgets"
 
 import qs.functions as F
 import qs.globals as G
@@ -37,7 +36,7 @@ Scope {
 
                 ColumnLayout {
                     id: mainyout
-                    Layout.alignment: Qt.AlignLeft
+                    Layout.alignment: Qt.Alignft
                     height: parent.height
                     implicitWidth: parent.width
 
@@ -49,16 +48,14 @@ Scope {
                         color: "transparent"
                     }
 
-                    Window {
+                    Rectangle {
                         id: spacer
 
                         Layout.fillHeight: true
-                        Layout.alignment: Qt.AlignHCenter
                     }
 
                     Cava {
                         id: cava
-                        barY: y
 
                         Layout.fillWidth: true
                         implicitHeight: 75
@@ -84,6 +81,7 @@ Scope {
                         radius: 8
                         Layout.alignment: Qt.AlignHCenter
                         Layout.leftMargin: 1
+                        Layout.bottomMargin: 6
 
                         ColumnLayout {
                             id: widgetLayout
@@ -103,18 +101,12 @@ Scope {
                             }
 
                             VolumeWidget {
+                                barY: widgets.y
                                 Layout.fillWidth: true
                                 Layout.alignment: Qt.AlignHCenter
                                 Layout.preferredHeight: implicitHeight || 20
                             }
                         }
-                    }
-
-                    DesktopButtons {
-                        implicitWidth: parent.width
-                        Layout.fillWidth: true
-                        Layout.alignment: Qt.AlignBottom
-                        Layout.bottomMargin: 6
                     }
                 }
             }

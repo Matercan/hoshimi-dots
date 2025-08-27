@@ -1,53 +1,121 @@
+pragma ComponentBehavior: Bound
 import QtQuick
-import Quickshell
+import QtQuick.Layouts
 import Quickshell.Io
-import Quickshell.Wayland
 
 import qs.functions as F
 import qs.sources as S
-import qs.generics as G
 import qs.globals as Glo
 
-MouseArea {
+Rectangle {
     id: volumeWidget
 
-    property bool showPopup
-    required property int barY
-
     // Set proper dimensions
-    implicitWidth: volumeText.implicitWidth + 8  // Add some padding
-    implicitHeight: volumeText.implicitHeight + 4
+    implicitWidth: layout.width + 8  // Add some padding
+    implicitHeight: layout.height + 4
 
     // Make it fill the available width from the layout
     width: implicitWidth
     height: 15
+    color: "transparent"
 
-    Text {
-        id: volumeText
-        anchors.centerIn: parent  // This is the key fix!
+    ColumnLayout {
+        id: layout
+        spacing: 0
 
-        color: F.Colors.foregroundColor  // Add proper color
-        font.pixelSize: 12
+        Repeater {
+            id: indicator
+            property list<bool> mouseBool: [false, false, false, false, false, false, false, false, false, false]
+            model: 100
+            delegate: Rectangle {
+                id: bar
+                Layout.alignment: Qt.AlignHCenter
+                required property var modelData
+                color: {
+                    var mouseBelow;
+                    for (let i = modelData; i >= 0; i--) {
+                        if (indicator.mouseBool[i] == true) {
+                            mouseBelow = true;
+                            break;
+                        }
+                    }
+                    if (area.containsMouse)
+                        mouseBelow = true;
+                    if (mouseBelow) {
+                        return F.Colors.selectedColor;
+                    } else if (indicator.model - 1 - modelData <= S.Audio.volumePercent * (indicator.model / 100)) {
+                        return F.Colors.getPaletteColor("blue");
+                    } else {
+                        return F.Colors.getPaletteColor("white");
+                    }
+                }
+                property int curveRadius: 20
+                implicitWidth: 10
+                implicitHeight: 100 / indicator.model
+                topRightRadius: modelData == 0 ? 5 : 0
+                topLeftRadius: modelData == 0 ? 5 : 0
+                bottomLeftRadius: modelData == indicator.model - 1 ? 5 : 0
+                bottomRightRadius: modelData == indicator.model - 1 ? 5 : 0
 
-        text: {
-            if (S.Audio.volume >= 66) {
-                return "🔊";
-            } else if (S.Audio.volume >= 33) {
-                return "🔉";
-            } else if (S.Audio.volume != 0) {
-                return "🔉";
-            } else {
-                return "🔇";
+                MouseArea {
+                    id: area
+                    hoverEnabled: true
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        console.log("Volume bar clicked, setting volume to:", ((indicator.model - 1 - bar.modelData) / indicator.model));
+                        setVolume.running = true;
+                    }
+
+                    Process {
+                        id: setVolume
+                        running: false
+                        command: ["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", ((indicator.model - 1 - bar.modelData) / indicator.model).toString()]
+
+                        onExited: {
+                            console.log("wpctl command finished with exit code:", exitCode);
+                            if (exitCode !== 0) {
+                                console.log("Volume setting failed");
+                            }
+                        }
+                    }
+
+                    Timer {
+                        interval: Glo.Variables.timerProcInterval
+                        running: true
+                        repeat: true
+                        onTriggered: {
+                            indicator.mouseBool[bar.modelData] = area.containsMouse;
+                        }
+                    }
+                }
             }
         }
-    }
 
-    hoverEnabled: true
-    onClicked: openControl.running = true
-    onEntered: {
-        showPopup = true;
-        popup.varShow = true;
-        autoCloseTimer.restart();
+        anchors.centerIn: parent
+        Text {
+            id: volumeText
+            Layout.alignment: Qt.AlignHCenter
+            Layout.topMargin: 10
+
+            color: F.Colors.foregroundColor
+            font.pixelSize: 12
+
+            rotation: 270
+            text: ""
+
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                onClicked: muteVolume.running = true
+
+                Process {
+                    id: muteVolume
+                    running: false
+                    command: ["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "0"]
+                }
+            }
+        }
     }
 
     Process {
@@ -73,62 +141,6 @@ MouseArea {
 
         onTriggered: {
             volumeWidget.showPopup = false;
-        }
-    }
-
-    PanelWindow {
-        id: popup
-        property bool varShow
-        property bool fullyOpen: false
-        visible: volumeWidget.showPopup
-        WlrLayershell.layer: WlrLayer.Top
-        exclusionMode: ExclusionMode.Ignore
-
-        MouseArea {
-            implicitHeight: parent.height + 50
-            implicitWidth: parent.width + 50
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.horizontalCenter: parent.left
-            hoverEnabled: true
-
-            onExited: {
-                popup.varShow = false;
-                closeTimer.restart();
-            }
-        }
-
-        anchors {
-            left: true
-            top: true
-        }
-
-        margins {
-            left: Glo.Variables.barSize
-            top: volumeWidget.barY
-        }
-
-        color: "transparent"
-
-        implicitWidth: rect.width + 50
-        implicitHeight: rect.height + 50
-
-        G.PopupBox {
-            id: rect
-            root: popup
-            fullyOpen: popup.fullyOpen
-            varShow: popup.varShow
-            radius: 10
-            implicitWidth: textDisplay.width + 10
-            implicitHeight: textDisplay.height + 10
-
-            Text {
-                id: textDisplay
-                visible: !rect.closedAnimRunning
-                anchors.centerIn: parent
-                text: "Volume: " + S.Audio.volume
-                color: F.Colors.foregroundColor
-                font.family: Glo.Variables.fontFamily
-            }
         }
     }
 }

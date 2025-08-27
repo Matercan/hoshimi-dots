@@ -23,24 +23,7 @@ Rectangle {
     ColumnLayout {
         id: layout
         anchors.centerIn: parent
-        Rectangle {
-            Layout.alignment: Qt.AlignCenter
-            Layout.fillWidth: true
-            Layout.rightMargin: 2
-            implicitWidth: icon.width + 10
-            implicitHeight: icon.height + 10
-            radius: implicitWidth / 2
-            color: F.Colors.transparentize(F.Colors.getPaletteColor("light pink"), 0.5)
 
-            Text {
-                id: icon
-                anchors.centerIn: parent
-                color: F.Colors.activeColor
-                font.pixelSize: 12
-                font.family: "Shadow Whisper"
-                text: Desktop.activeWindow.title == null ? "" : F.Desktop.getWindowIcon(Desktop.activeWindow.class)
-            }
-        }
         ColumnLayout {
             Layout.fillHeight: true
             Layout.fillWidth: true

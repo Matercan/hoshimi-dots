@@ -12,7 +12,7 @@ Singleton {
     property int barSize: 35
     property int wrapSize: 8
 
-    property int timerProcInterval: 100
+    property int timerProcInterval: 50
 
     IpcHandler {
         target: "variables"

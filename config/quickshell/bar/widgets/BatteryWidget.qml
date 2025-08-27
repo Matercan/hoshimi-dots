@@ -2,8 +2,8 @@ import qs.sources
 import qs.globals
 import qs.functions
 
+import Quickshell.Services.UPower
 import QtQuick
-import Quickshell
 import QtQuick.Layouts
 
 Rectangle {
@@ -11,6 +11,8 @@ Rectangle {
     implicitHeight: layout.height
     implicitWidth: layout.width
     color: "transparent"
+    visible: UPower.displayDevice.isLaptopBattery
+
     ColumnLayout {
         id: layout
         anchors.centerIn: parent
@@ -41,6 +43,7 @@ Rectangle {
         Text {
             Layout.alignment: Qt.AlignHCenter
             text: Battery.batteryText
+            font.pixelSize: 12
 
             color: Colors.interpolate(Colors.getPaletteColor("red"), Colors.getPaletteColor("green"), Battery.batteryAmount / 100)
         }

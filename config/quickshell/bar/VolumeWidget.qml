@@ -29,17 +29,7 @@ MouseArea {
         color: F.Colors.foregroundColor  // Add proper color
         font.pixelSize: 12
 
-        text: {
-            if (S.Audio.volume >= 66) {
-                return "🔊";
-            } else if (S.Audio.volume >= 33) {
-                return "🔉";
-            } else if (S.Audio.volume != 0) {
-                return "🔉";
-            } else {
-                return "🔇";
-            }
-        }
+        text: ""
     }
 
     // Add visual feedback on hover/click

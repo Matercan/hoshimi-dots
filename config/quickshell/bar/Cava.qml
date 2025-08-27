@@ -69,6 +69,7 @@ MouseArea {
     Rectangle {
         width: parent.width
         height: parent.height
+        anchors.centerIn: parent
         color: "transparent"
         clip: true
 
@@ -85,10 +86,10 @@ MouseArea {
 
                     height: 3
                     width: Math.max(1, (cavaProc.cavaValues[Math.floor(index * cavaProc.cavaValues.length / 20)] || 0) * 0.5)
-                    color: Qt.hsla((index / 20) * 0.7, 0.8, 0.6, 1.0)
+                    color: Colors.getPaletteColor("light pink")
                     radius: 1
 
-                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.left: parent.left
 
                     Behavior on height {
                         NumberAnimation {
@@ -256,7 +257,7 @@ MouseArea {
                                 id: progressBar
                                 anchors.centerIn: parent
                                 width: parent.width
-                                height: parent.height
+                                height: currentTimeText.height / 4
                                 radius: 10
                                 color: Colors.getPaletteColor("blue")
                             }

@@ -8,6 +8,7 @@ import qs.globals as G
 Singleton {
     id: scope
     property string volume
+    property real volumePercent
 
     Process {
         id: audioProc
@@ -17,6 +18,7 @@ Singleton {
         stdout: StdioCollector {
             onStreamFinished: {
                 try {
+                    scope.volumePercent = parseFloat(this.text) * 100;
                     scope.volume = (parseFloat(this.text) * 100).toString() + "%";
                 } catch (e) {
                     console.log("failed to parse volume", e);

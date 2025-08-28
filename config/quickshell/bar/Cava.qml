@@ -16,7 +16,7 @@ MouseArea {
     Process {
         id: cavaProc
         running: true
-        command: ["cava", "-p", "/home/matercan/.config/quickshell/bar/cava"] // replace matercan with your actual username
+        command: ["cava", "-p", Quickshell.env("HOME") + "/.config/quickshell/bar/cava"] // replace matercan with your actual username
 
         property var cavaValues: []
 

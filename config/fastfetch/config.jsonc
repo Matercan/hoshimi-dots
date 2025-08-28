@@ -18,7 +18,7 @@
     {
       "type": "title",
       "keyWidth": 10,
-      "format": "         {6}{7}{8}"
+      "format": "      {6}{7}{8}"
     },
     {
       "type": "custom",
@@ -45,9 +45,9 @@
       "keyColor": "blue"
     },
     {
-        "type": "packages",
-        "key": "󰏖 ",
-        "keyColor": "yellow"
+      "type": "packages",
+      "key": "󰏖 ",
+      "keyColor": "yellow"
     },
     {
       "type": "memory",

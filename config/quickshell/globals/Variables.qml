@@ -11,6 +11,7 @@ Singleton {
     property string fontFamily: "CaskaydiaCove Nerd Font"
     property int barSize: 35
     property int wrapSize: 8
+    property string iconDirectory: "/usr/share/icons/candy-icons/apps/scalable/"
 
     property int timerProcInterval: 100
 

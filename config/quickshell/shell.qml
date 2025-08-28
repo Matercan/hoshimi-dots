@@ -10,7 +10,6 @@ import Quickshell
 ShellRoot {
     id: root
 
-    Watermark {}
     Bar {}
     LockItem {}
     WallpaperItem {}

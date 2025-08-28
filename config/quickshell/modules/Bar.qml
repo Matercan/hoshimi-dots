@@ -52,7 +52,12 @@ Scope {
                     Window {
                         id: spacer
 
-                        Layout.fillHeight: true
+                        implicitHeight: 200
+                        Layout.alignment: Qt.AlignHCenter
+                    }
+
+                    Windows {
+                        Layout.bottomMargin: 10
                         Layout.alignment: Qt.AlignHCenter
                     }
 
@@ -61,6 +66,7 @@ Scope {
                         barY: y
 
                         Layout.fillWidth: true
+                        Layout.alignment: Qt.AlignBottom
                         implicitHeight: 75
                     }
 

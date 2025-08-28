@@ -235,6 +235,7 @@ MouseArea {
                             return 20;
                         }
                     }
+                    color: Colors.selectedColor
                     text: Player.trackDisplay
                 }
 
@@ -281,7 +282,7 @@ MouseArea {
 
                                     GradientStop {
                                         position: Player.songPosition / Player.songLength
-                                        color: Colors.backgroundColor
+                                        color: Colors.interpolate(Colors.getPaletteColor("red"), Colors.getPaletteColor("blue"), Player.songPosition / Player.songLength)
                                     }
                                     GradientStop {
                                         position: 1

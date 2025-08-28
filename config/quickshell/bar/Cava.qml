@@ -222,7 +222,7 @@ MouseArea {
                     smooth: true
                     fillMode: Image.PreserveAspectFit
                     Layout.alignment: Qt.AlignHCenter
-                    Layout.preferredHeight: track.width
+                    Layout.preferredHeight: track.width * (sourceSize.height / sourceSize.width)
                     Layout.preferredWidth: track.width
                 }
                 Text {
@@ -235,6 +235,7 @@ MouseArea {
                             return 20;
                         }
                     }
+                    font.family: Variables.fontFamily
                     color: Colors.selectedColor
                     text: Player.trackDisplay
                 }

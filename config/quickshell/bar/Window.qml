@@ -1,6 +1,4 @@
 pragma ComponentBehavior: Bound
-import Quickshell
-import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
 
@@ -13,7 +11,7 @@ Rectangle {
     implicitHeight: layout.height
     color: "transparent"
 
-    function truncateTitle(title, maxLength = Math.floor(root.height / 12)) {
+    function truncateTitle(title, maxLength = Math.floor(root.height / 6)) {
         if (title.length <= maxLength) {
             return title;
         }
@@ -34,7 +32,7 @@ Rectangle {
                 model: {
                     if (Desktop.activeWindow.title == null)
                         return "Admiring the Desktop";
-                    else if (Desktop.activeWindow.title.length >= root.height / 12) {
+                    else if (Desktop.activeWindow.title.length >= root.height / 6) {
                         return root.truncateTitle(Desktop.activeWindow.title);
                     } else {
                         return Desktop.activeWindow.title;

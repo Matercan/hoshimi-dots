@@ -77,11 +77,11 @@ Rectangle {
                             if (area.containsMouse)
                                 mouseBelow = true;
                             if (mouseBelow) {
-                                return F.Colors.selectedColor;
+                                return F.Colors.interpolate(F.Colors.selectedColor, F.Colors.interpolate(F.Colors.getPaletteColor("red"), F.Colors.getPaletteColor("blue"), modelData / S.Audio.volumePercent), 0.5);
                             } else if (indicator.model - 1 - modelData <= S.Audio.volumePercent * (indicator.model / 100)) {
-                                return F.Colors.getPaletteColor("blue");
+                                return F.Colors.interpolate(F.Colors.getPaletteColor("red"), F.Colors.getPaletteColor("blue"), modelData / S.Audio.volumePercent);
                             } else {
-                                return F.Colors.getPaletteColor("red");
+                                return F.Colors.foregroundColor;
                             }
                         }
                         property int curveRadius: 20

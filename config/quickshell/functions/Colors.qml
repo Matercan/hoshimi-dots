@@ -107,6 +107,6 @@ Singleton {
         var gTrack = (a.g * (1 - percentage) + b.g * percentage);
         var bTrack = (a.b * (1 - percentage) + b.b * percentage);
 
-        return Qt.rgba(rTrack, gTrack, bTrack);
+        return Qt.rgba(rTrack, gTrack, bTrack, 1);
     }
 }

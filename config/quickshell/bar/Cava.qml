@@ -87,7 +87,21 @@ MouseArea {
 
                     height: 3
                     width: Math.max(1, (cavaProc.cavaValues[Math.floor(index * cavaProc.cavaValues.length / 20)] || 0) * 0.5)
-                    color: Colors.getPaletteColor("light pink")
+                    gradient: Gradient {
+                        orientation: Gradient.Horizontal
+                        GradientStop {
+                            position: 0.0
+                            color: Colors.getPaletteColor("light pink")
+                        }
+                        GradientStop {
+                            position: 0.33
+                            color: Colors.getPaletteColor("light blue")
+                        }
+                        GradientStop {
+                            position: 1.0
+                            color: Colors.getPaletteColor("yellow")
+                        }
+                    }
                     radius: 1
 
                     anchors.left: parent.left
@@ -262,7 +276,18 @@ MouseArea {
                                 width: parent.width
                                 height: currentTimeText.height / 4
                                 radius: 10
-                                color: Colors.foregroundColor
+                                gradient: Gradient {
+                                    orientation: Gradient.Horizontal
+
+                                    GradientStop {
+                                        position: Player.songPosition / Player.songLength
+                                        color: Colors.backgroundColor
+                                    }
+                                    GradientStop {
+                                        position: 1
+                                        color: Colors.getPaletteColor("blue")
+                                    }
+                                }
                             }
 
                             Rectangle {
@@ -282,7 +307,18 @@ MouseArea {
                                 height: progressBar.height
                                 width: Math.max(0, Math.min(progressBar.width, (Player.songPosition / Player.songLength) * progressBar.width))
                                 radius: 0
-                                color: Colors.transparentize(Colors.interpolate(Colors.getPaletteColor("light blue"), Colors.getPaletteColor("light green"), Player.songPosition / Player.songLength), 0.2)
+                                gradient: Gradient {
+                                    orientation: Gradient.Horizontal
+
+                                    GradientStop {
+                                        position: 0
+                                        color: Colors.transparentize(Colors.interpolate(Colors.getPaletteColor("light blue"), Colors.getPaletteColor("light green"), Player.songPosition / Player.songLength), 0.2)
+                                    }
+                                    GradientStop {
+                                        position: Player.songPosition / Player.songLength
+                                        color: Colors.transparentize(Colors.interpolate(Colors.getPaletteColor("red"), Colors.getPaletteColor("blue"), Player.songPosition / Player.songLength), 0.2)
+                                    }
+                                }
                             }
                         }
 

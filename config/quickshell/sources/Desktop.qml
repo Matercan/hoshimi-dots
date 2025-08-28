@@ -99,7 +99,7 @@ Singleton {
     }
 
     Timer {
-        interval: Variables.timerProcInterval
+        interval: Variables.timerProcInterval * 5
         running: true
         repeat: true
 

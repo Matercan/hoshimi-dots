@@ -55,70 +55,74 @@ Rectangle {
                 }
             }
 
-            Repeater {
-                id: indicator
-                property list<bool> mouseBool: [false, false, false, false, false, false, false, false, false, false]
-                model: 100
-                delegate: Rectangle {
-                    id: bar
-                    Layout.alignment: Qt.AlignHCenter
-                    required property var modelData
-                    color: {
-                        var mouseBelow;
-                        for (let i = modelData; i >= 0; i--) {
-                            if (indicator.mouseBool[i] == true) {
-                                mouseBelow = true;
-                                break;
-                            }
-                        }
-                        if (area.containsMouse)
-                            mouseBelow = true;
-                        if (mouseBelow) {
-                            return F.Colors.selectedColor;
-                        } else if (indicator.model - 1 - modelData <= S.Audio.volumePercent * (indicator.model / 100)) {
-                            return F.Colors.getPaletteColor("blue");
-                        } else {
-                            return F.Colors.getPaletteColor("red");
-                        }
-                    }
-                    property int curveRadius: 20
-                    implicitWidth: 10
-                    implicitHeight: 100 / indicator.model
-                    y: implicitHeight * modelData
-                    topRightRadius: modelData == 0 ? 5 : 0
-                    topLeftRadius: modelData == 0 ? 5 : 0
-                    bottomLeftRadius: modelData == indicator.model - 1 ? 5 : 0
-                    bottomRightRadius: modelData == indicator.model - 1 ? 5 : 0
-
-                    MouseArea {
-                        id: area
-                        hoverEnabled: true
-                        anchors.fill: parent
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: {
-                            console.log("Volume bar clicked, setting volume to:", ((indicator.model - 1 - bar.modelData) / indicator.model));
-                            setVolume.running = true;
-                        }
-
-                        Process {
-                            id: setVolume
-                            running: false
-                            command: ["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", ((indicator.model - 1 - bar.modelData) / indicator.model).toString()]
-
-                            onExited: {
-                                console.log("wpctl command finished with exit code:", exitCode);
-                                if (exitCode !== 0) {
-                                    console.log("Volume setting failed");
+            ColumnLayout {
+                id: column
+                spacing: 0
+                Repeater {
+                    id: indicator
+                    property list<bool> mouseBool: [false, false, false, false, false, false, false, false, false, false]
+                    model: 100
+                    delegate: Rectangle {
+                        id: bar
+                        Layout.alignment: Qt.AlignHCenter
+                        required property var modelData
+                        color: {
+                            var mouseBelow;
+                            for (let i = modelData; i >= 0; i--) {
+                                if (indicator.mouseBool[i] == true) {
+                                    mouseBelow = true;
+                                    break;
                                 }
                             }
+                            if (area.containsMouse)
+                                mouseBelow = true;
+                            if (mouseBelow) {
+                                return F.Colors.selectedColor;
+                            } else if (indicator.model - 1 - modelData <= S.Audio.volumePercent * (indicator.model / 100)) {
+                                return F.Colors.getPaletteColor("blue");
+                            } else {
+                                return F.Colors.getPaletteColor("red");
+                            }
                         }
+                        property int curveRadius: 20
+                        implicitWidth: 10
+                        implicitHeight: 100 / indicator.model
+                        y: implicitHeight * modelData
+                        topRightRadius: modelData == 0 ? 5 : 0
+                        topLeftRadius: modelData == 0 ? 5 : 0
+                        bottomLeftRadius: modelData == indicator.model - 1 ? 5 : 0
+                        bottomRightRadius: modelData == indicator.model - 1 ? 5 : 0
 
-                        Timer {
-                            interval: Glo.Variables.timerProcInterval
-                            running: true
-                            repeat: true
-                            onTriggered: {
-                                indicator.mouseBool[bar.modelData] = area.containsMouse;
+                        MouseArea {
+                            id: area
+                            hoverEnabled: true
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: {
+                                console.log("Volume bar clicked, setting volume to:", ((indicator.model - 1 - bar.modelData) / indicator.model));
+                                setVolume.running = true;
+                            }
+
+                            Process {
+                                id: setVolume
+                                running: false
+                                command: ["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", ((indicator.model - 1 - bar.modelData) / indicator.model).toString()]
+
+                                onExited: {
+                                    console.log("wpctl command finished with exit code:", exitCode);
+                                    if (exitCode !== 0) {
+                                        console.log("Volume setting failed");
+                                    }
+                                }
+                            }
+
+                            Timer {
+                                interval: Glo.Variables.timerProcInterval
+                                running: true
+                                repeat: true
+                                onTriggered: {
+                                    indicator.mouseBool[bar.modelData] = area.containsMouse;
+                                }
                             }
                         }
                     }
@@ -136,7 +140,7 @@ Rectangle {
             font.pixelSize: 12
 
             rotation: 270
-            text: ""
+            text: S.Audio.volumePercent == 0 ? "" : ""
 
             MouseArea {
                 id: speakerButton
@@ -147,8 +151,7 @@ Rectangle {
                     console.log(beforeMute);
                     console.log(S.Audio.volume);
                     if (S.Audio.volume != "0%") {
-                        beforeMute = parseFloat(S.Audio.volume.split(0, -1)) / 100;
-                        console.log("HAII");
+                        beforeMute = S.Audio.volumePercent / 100;
                         muteVolume.running = true;
                     } else {
                         undoMute.running = true;

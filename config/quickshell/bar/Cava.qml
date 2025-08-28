@@ -130,7 +130,7 @@ MouseArea {
         id: closeTimer
         running: false
         repeat: false
-        interval: Variables.popupMenuOpenTime
+        interval: MaterialEasing.emphasizedTime * 0.3
 
         onTriggered: root.showPopup = false
     }
@@ -208,15 +208,15 @@ MouseArea {
                     smooth: true
                     fillMode: Image.PreserveAspectFit
                     Layout.alignment: Qt.AlignHCenter
-                    Layout.preferredWidth: track.width
                     Layout.preferredHeight: track.width
+                    Layout.preferredWidth: track.width
                 }
                 Text {
                     id: track
                     Layout.alignment: Qt.AlignHCenter
                     font.pixelSize: {
                         if (Player.trackDisplay.length >= 15) {
-                            return 350 / Player.trackDisplay.length;
+                            return 490 / Player.trackDisplay.length;
                         } else {
                             return 20;
                         }
@@ -262,7 +262,17 @@ MouseArea {
                                 width: parent.width
                                 height: currentTimeText.height / 4
                                 radius: 10
-                                color: Colors.getPaletteColor("blue")
+                                color: Colors.foregroundColor
+                            }
+
+                            Rectangle {
+                                id: separator
+                                anchors.verticalCenter: parent.verticalCenter
+                                x: parent.width * (Player.songPosition / Player.songLength)
+                                radius: 5
+                                height: currentTimeText.height / 2
+                                width: 5
+                                color: Colors.selectedColor
                             }
 
                             // Progress fill
@@ -271,8 +281,8 @@ MouseArea {
                                 anchors.verticalCenter: progressBar.verticalCenter
                                 height: progressBar.height
                                 width: Math.max(0, Math.min(progressBar.width, (Player.songPosition / Player.songLength) * progressBar.width))
-                                radius: 10
-                                color: Colors.transparentize(Colors.interpolate(Colors.getPaletteColor("light pink"), Colors.getPaletteColor("light red"), Player.songPosition / Player.songLength), 0.2)
+                                radius: 0
+                                color: Colors.transparentize(Colors.interpolate(Colors.getPaletteColor("light blue"), Colors.getPaletteColor("light green"), Player.songPosition / Player.songLength), 0.2)
                             }
                         }
 
@@ -291,15 +301,13 @@ MouseArea {
                 RowLayout {
                     id: buttons
                     spacing: 6
-                    Layout.preferredWidth: track.width
 
                     Layout.alignment: Qt.AlignHCenter
                     property var hoverColor: Colors.transparentize(Colors.getPaletteColor("blue"), 0.7)
                     property var normalColor: Colors.transparentize(Colors.getPaletteColor("light pink"), 0.7)
 
                     MouseArea {
-                        Layout.leftMargin: 6
-                        Layout.alignment: Qt.AlignLeft
+                        Layout.alignment: Qt.AlignCenter
                         implicitWidth: track.width / 4
                         implicitHeight: leftArrow.height
                         cursorShape: Qt.PointingHandCursor
@@ -319,7 +327,7 @@ MouseArea {
                         Process {
                             id: previous
                             running: false
-                            command: ["playerctl", "previous"]
+                            command: ["playerctl", "previous", "--player=" + Player.activeSource]
                         }
                         onClicked: previous.running = true
                     }
@@ -327,7 +335,7 @@ MouseArea {
                         hoverEnabled: true
                         implicitWidth: track.width / 4
                         implicitHeight: playPause.height
-                        Layout.alignment: Qt.AlignHCenter
+                        Layout.alignment: Qt.AlignCenter
                         cursorShape: Qt.PointingHandCursor
 
                         Text {
@@ -344,14 +352,13 @@ MouseArea {
                         Process {
                             id: plapau
                             running: false
-                            command: ["playerctl", "play-pause"]
+                            command: ["playerctl", "play-pause", "--player=" + Player.activeSource]
                         }
                         onClicked: plapau.running = true
                     }
                     MouseArea {
+                        Layout.alignment: Qt.AlignCenter
                         hoverEnabled: true
-                        Layout.alignment: Qt.AlignRight
-                        Layout.rightMargin: 6
                         implicitHeight: rightArrow.height
                         implicitWidth: track.width / 4
                         cursorShape: Qt.PointingHandCursor
@@ -370,7 +377,7 @@ MouseArea {
                         Process {
                             id: next
                             running: false
-                            command: ["playerctl", "next"]
+                            command: ["playerctl", "next", "--player=" + Player.activeSource]
                         }
                         onClicked: next.running = true
                     }

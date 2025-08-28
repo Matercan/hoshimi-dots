@@ -31,6 +31,7 @@ Rectangle {
         Repeater {
             model: Desktop.windows
             delegate: Image {
+                id: icon
                 required property var modelData
                 source: Variables.iconDirectory + layout.appropriate(modelData.className) + ".svg"
                 mipmap: true
@@ -44,14 +45,14 @@ Rectangle {
                     implicitWidth: parent.width + 4
                     radius: 8
                     color: area.containsMouse ? F.Colors.transparentize(F.Colors.selectedColor, 0.8) : "transparent"
-                }
 
-                MouseArea {
-                    id: area
-                    hoverEnabled: true
-                    anchors.fill: parent
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: Hyprland.dispatch("focuswindow class:" + parent.modelData.className)
+                    MouseArea {
+                        id: area
+                        hoverEnabled: true
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: Hyprland.dispatch("focuswindow class:" + icon.modelData.className)
+                    }
                 }
             }
         }

@@ -28,7 +28,7 @@ Singleton {
                     allClients.forEach(client => {
                         // Only include windows that are:
                         // 1. Not hidden or minimized
-                        // 1. Not special windows (like overlays)
+                        // 2. Not special windows (like overlays)
                         if (!client.hidden && client.mapped && !client.floating || client.floating) {
                             currentWorkspaceWindows.push({
                                 address: client.address,
@@ -37,6 +37,16 @@ Singleton {
                                 workspace: client.workspace.id
                             });
                         }
+                    });
+
+                    // Sort windows by workspace ID
+                    currentWorkspaceWindows.sort((a, b) => {
+                        // First sort by workspace ID
+                        if (a.workspace !== b.workspace) {
+                            return a.workspace - b.workspace;
+                        }
+                        // Then sort by title within the same workspace (optional)
+                        return a.title.localeCompare(b.title);
                     });
 
                     root.windows = currentWorkspaceWindows;

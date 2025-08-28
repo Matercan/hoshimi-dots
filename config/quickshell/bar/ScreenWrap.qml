@@ -34,7 +34,7 @@ Scope {
                     shadowEnabled: true
                     blurMax: 10
                     shadowScale: 1
-                    shadowColor: F.Colors.transparentize(F.Colors.getPaletteColor("red"), 0.0)
+                    shadowColor: F.Colors.transparentize(F.Colors.backgroundColor, 0.0)
                 }
 
                 Item {

@@ -24,14 +24,14 @@ Image {
 
         Text {
             text: S.Time.time || "No Time Data"
-            color: F.Colors.transparentize(F.Colors.backgroundColor, 0.3) || "#ffffff"
+            color: F.Colors.transparentize(F.Colors.foregroundColor, 0.3) || "#ffffff"
             font.family: "MRK Maston"
             font.pointSize: 50
         }
 
         Text {
             text: S.Time.date || "No Date Data"
-            color: F.Colors.transparentize(F.Colors.backgroundColor, 0.3) || "#ffffff"
+            color: F.Colors.transparentize(F.Colors.foregroundColor, 0.3) || "#ffffff"
             font.family: "MRK Maston"
             font.pointSize: 60
         }

@@ -13,6 +13,7 @@ AnimatedImage {
     height: 1080
     mipmap: true
     retainWhileLoading: true
+    cache: false
     smooth: true
 
     ColumnLayout {

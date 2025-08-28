@@ -10,6 +10,7 @@ Scope {
     Variants {
         model: Quickshell.screens
         PanelWindow {
+            visible: !G.Variables.locked
             required property var modelData
             screen: modelData
 

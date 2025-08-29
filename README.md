@@ -1,13 +1,15 @@
 # 【 Mataercan's hyprland dotfiles 】
 A very tame an basic configuration for the window tiling manager hyprland.
 Features include:
-- A full desktop environment
+- A complete environment (except notifications)
+- Most popular apps' configurations
 - Colorscheme generation based on a wallpaper
 - Famous colorschemes like catppuccin
-- Nothing that requires sudo
-- An easy installation with a GUI, if you chose (very outdated)
 
-WARNING: the screenshots for colorscheme generation are outdated!
+![image)](https://github.com/user-attachments/assets/08925f45-ac6a-47b9-a3b0-b1dc36cc1290)
+
+WARNING: the screenshots are outdated!
+
 
 ## Installation
 ```shell
@@ -23,6 +25,17 @@ Dependencies:
 - qt6-base
 - qt6-tools
 - pkgconf
+
+For best user experience:
+- playerctl
+- candy-icons
+- cava
+- pipewire-pulse
+- sweet gtk/kvantum themes
+- shadow whisper font
+- MRK Maston font
+- Mutsuki font
+- Any japanese font
 
 ## Usage
 ```
@@ -67,8 +80,9 @@ cd yay-bin
 makepkg -si
 ```
 
+A lot of issues with file management
 
-## Showcase
+## Showcase (LEGACY)
 
 | Wallpaper | Warm | Dark | Light |
 | --- | --- | --- | --- |
@@ -82,8 +96,6 @@ Catppuccin | <img width="1920" height="1080" alt="image" src="https://github.com
 | gruvbox| <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/26e9e425-2c5b-4ecc-bb40-3a7884546653" />  | <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/92455d2e-43da-4dd9-bfa9-0b3b7e2ee9bf" /> |
 
 
-## TO-DO:
-- More quickshell
 
 ## Thanks to
 - Soraname (celestia shell)
@@ -103,6 +115,7 @@ for helping me make thia rice and introducing me to my lord and saviour quickshe
 [end-4's dotfiles](https://github.com/end-4/dots-hyprland)
 
 [celaestia shell](https://github.com/caelestia-dots/shell/tree/main)
+
 
 
 

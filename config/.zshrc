@@ -2,6 +2,8 @@
 
 fastfetch
 echo "おかえりなさ～いマスター"
+echo "\n"
+
 
 ZINIT_HOME="{XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -19,16 +21,31 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
+# Snippets
+zinit snippet OMZP::git
+zinit snippet OMZP::sudo
+zinit snippet OMZP::archlinux
+zinit snippet OMZP::aws
+zinit snippet OMZP::kubectl
+zinit snippet OMZP::kubectx
+zinit snippet OMZP::command-not-found
+
 # Completions
-autoload -U compinit && compinit
+autoload -Uz compinit && compinit 
+zinit cdreplay -q
+
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
 # Keybinds
 bindkey -e # Emacs keybinds
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
+
+# Smol cursor
+echo -ne '\e[5 q'
 
 # History
 HISTSIZE=5000

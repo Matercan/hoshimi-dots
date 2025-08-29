@@ -1,6 +1,6 @@
 theme = colorscheme
 background-opacity = 0.9
-background-blur = 10
 shell-integration = zsh
+background-blur = 10
 font-family = "Fira Code iScript"
 font-size = 9

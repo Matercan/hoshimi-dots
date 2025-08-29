@@ -1,7 +1,6 @@
 pragma Singleton
 
 import Quickshell
-import qs.sources
 
 Singleton {
     function getWorkspaceIcon(ident) {
@@ -54,5 +53,30 @@ Singleton {
         default:
             return "󰣆"; // Default window icon
         }
+    }
+
+    function appropriate(window: string): string {
+        switch (window) {
+        case "equibop":
+            return "vesktop";
+        case "Proton Mail":
+            return "protonmail";
+        case "protonvpn-app":
+            return "protonvpn-gui";
+        default:
+            return window;
+        }
+    }
+
+    function removeNotifications(window: string): string {
+        return window.replace(/^\(\d+\)\s*/, '');
+    }
+
+    function getNotifications(window: string): int {
+        var match = window.match(/\((\d+)\)/);
+        if (match) {
+            return parseInt(match[1], 10);
+        }
+        return 0; // No notifications found
     }
 }

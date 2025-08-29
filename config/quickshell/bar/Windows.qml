@@ -1,7 +1,6 @@
 pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
-import Quickshell
 import Quickshell.Hyprland
 
 import qs.sources
@@ -19,25 +18,35 @@ Rectangle {
         anchors.centerIn: parent
         spacing: 10
 
-        function appropriate(window: string): string {
-            switch (window) {
-            case "equibop":
-                return "vesktop";
-            default:
-                return window;
-            }
-        }
-
         Repeater {
             model: Desktop.windows
             delegate: Image {
                 id: icon
                 required property var modelData
-                source: Variables.iconDirectory + layout.appropriate(modelData.className) + ".svg"
+                source: Variables.iconDirectory + F.Desktop.appropriate(modelData.className) + ".svg"
                 mipmap: true
                 smooth: true
-                Layout.preferredHeight: 16
-                Layout.preferredWidth: 16
+                Layout.preferredHeight: 20
+                Layout.preferredWidth: 20
+
+                Rectangle {
+                    property bool hasNotification: F.Desktop.getNotifications(icon.modelData.title) != 0
+                    anchors.left: parent.left
+                    anchors.top: parent.top
+                    implicitHeight: 14
+                    implicitWidth: 14
+                    radius: 7
+                    color: hasNotification ? F.Colors.backgroundColor : "transparent"
+                    border.width: 1
+                    border.color: hasNotification ? F.Colors.borderColor : "transparent"
+
+                    Text {
+                        anchors.centerIn: parent
+                        text: F.Desktop.getNotifications(icon.modelData.title)
+                        font.pixelSize: 10
+                        color: parent.hasNotification ? F.Colors.getPaletteColor("blue") : "transparent"
+                    }
+                }
 
                 Rectangle {
                     anchors.centerIn: parent

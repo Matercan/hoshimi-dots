@@ -4,7 +4,7 @@
 # Inserts a blank line between shell prompts
 add_newline = true
 
-format = """$directory
+format = """$directory                                                                                                                                                                                                                                                            $cmd_duration
 $character"""
 
 [character] 
@@ -66,22 +66,22 @@ truncation_symbol = " ••/"
 format = '[$path](fg:green)'
 
 [directory.substitutions]
-"Desktop" = "  "
-"Documents" = "  "
-"Downloads" = "  "
-"Music" = " 󰎈 "
-"Pictures" = "  "
-"Videos" = "  "
-"GitHub" = " 󰊤 "
-"git" = " 󰊢 "
-".config" = "  "
-"hyprland-dots" = " "
-"hypr" = "  "
-"quickshell" = "󰓅 "
+"Desktop" = ""
+"Documents" = ""
+"Downloads" = ""
+"Music" = "󰎈"
+"Pictures" = ""
+"Videos" = ""
+"GitHub" = "󰊤"
+"git" = "󰊢"
+".config" = ""
+"hyprland-dots" = ""
+"hypr" = ""
+"quickshell" = "󰓅"
 
 [cmd_duration]
 min_time = 0
-format = '[](bold fg:yellow)[󰪢 $duration](bold bg:yellow fg:black)[](bold fg:yellow)'
+format = '[󰪢 $duration](bold)'
 
 [cpp]
 disabled = false

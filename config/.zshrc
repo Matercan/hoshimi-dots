@@ -25,10 +25,15 @@ zinit light Aloxaf/fzf-tab
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::archlinux
-zinit snippet OMZP::aws
-zinit snippet OMZP::kubectl
-zinit snippet OMZP::kubectx
 zinit snippet OMZP::command-not-found
+zinit snippet OMZP::cp 
+
+# eza
+zstyle ':omz:plugins:eza' 'dirs-first' yes
+zstyle ':omz:plugins:eza' 'git-status' yes
+zstyle ':omz:plugins:eza' 'icons' yes
+zstyle ':omz:plugins:eza' 'color-scale' age
+zinit snippet OMZP::eza
 
 # Completions
 autoload -Uz compinit && compinit 
@@ -37,14 +42,41 @@ zinit cdreplay -q
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --icons --color=always $realpath'
+zstyle ':fzf-tab:complete:eza:*' fzf-preview 'eza --icons --color=always $realpath'
 
 # Keybinds
 bindkey -e # Emacs keybinds
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 
-# Smol cursor
+# Cursor
+function zle-keymap-select {
+    if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
+        # Normal/block cursor for command mode
+        echo -ne '\e[1 q'
+    elif [[ ${KEYMAP} == main ]] || [[ ${KEYMAP} == viins ]] || [[ ${KEYMAP} == '' ]] || [[ $1 = 'beam' ]]; then
+        # Beam cursor for insert mode
+        echo -ne '\e[5 q'
+    fi
+}
+
+function zle-line-init {
+    # Start with beam cursor when entering command input
+    echo -ne '\e[5 q'
+}
+
+function zle-line-finish {
+    # Return to normal cursor when command finishes
+    echo -ne '\e[1 q'
+}
+
+# Register the functions as ZLE widgets
+zle -N zle-keymap-select
+zle -N zle-line-init
+zle -N zle-line-finish
+
+# Set initial cursor to beam
 echo -ne '\e[5 q'
 
 # History
@@ -62,7 +94,6 @@ setopt hist_find_no_dups
 
 # Aliases
 
-alias ls='eza --icons'
 alias ga="git add"
 alias gcm="git commit -m"
 alias gp="git push"

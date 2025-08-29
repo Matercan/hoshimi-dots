@@ -11,7 +11,7 @@ Rectangle {
     implicitHeight: layout.height
     color: "transparent"
 
-    function truncateTitle(title, maxLength = Math.floor(root.height / 9)) {
+    function truncateTitle(title, maxLength = Math.floor(root.height / 7)) {
         if (title.length <= maxLength) {
             return title;
         }
@@ -30,12 +30,17 @@ Rectangle {
 
             Repeater {
                 model: {
-                    if (Desktop.activeWindow.title == null)
+                    var properTitle = Desktop.activeWindow.title;
+                    if (properTitle[0] == '(') {
+                        properTitle = F.Desktop.removeNotifications(properTitle);
+                        console.log(properTitle);
+                    }
+                    if (properTitle == null)
                         return "Admiring the Desktop";
-                    else if (Desktop.activeWindow.title.length >= root.height / 9) {
-                        return root.truncateTitle(Desktop.activeWindow.title);
+                    else if (properTitle.length >= root.height / 7) {
+                        return root.truncateTitle(properTitle);
                     } else {
-                        return Desktop.activeWindow.title;
+                        return properTitle;
                     }
                 }
                 delegate: Text {

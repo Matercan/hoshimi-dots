@@ -49,16 +49,17 @@ Scope {
                         color: "transparent"
                     }
 
-                    Window {
+                    /* Window {
                         id: spacer
 
                         implicitHeight: 200
                         Layout.alignment: Qt.AlignHCenter
-                    }
+                    } */
 
                     Windows {
                         Layout.bottomMargin: 10
-                        Layout.alignment: Qt.AlignHCenter
+                        Layout.alignment: Qt.AlignTop
+                        Layout.fillHeight: true
                     }
 
                     Cava {
@@ -88,7 +89,7 @@ Scope {
                         border.color: F.Colors.borderColor
                         border.width: 1
                         radius: 8
-                        Layout.alignment: Qt.AlignHCenter
+                        Layout.alignment: Qt.AlignBottom
                         Layout.leftMargin: 1
 
                         ColumnLayout {

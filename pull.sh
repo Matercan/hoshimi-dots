@@ -32,7 +32,8 @@ fi
   cp -r "${USER_CONFIGS_DIRECTORY}/${dotfile}" "${DOTFILES_SOURCE}"
 done
 
-# Handle starship separately as it's a file, not a directory
-rm -rf "${DOTFILES_SOURCE}/starship/"
-mkdir "$DOTFILES_SOURCE/starship/"
-cp "${USER_CONFIGS_DIRECTORY}/starship.toml" "${DOTFILES_SOURCE}/starship/"
+# Handle starship and zshrc separately as it's a file, not a directory
+rm -rf "${DOTFILES_SOURCE}/starship.toml"
+cp "${USER_CONFIGS_DIRECTORY}/starship.toml" "${DOTFILES_SOURCE}"
+
+cp "${HOME}/.zshrc" "${DOTFILES_SOURCE}"

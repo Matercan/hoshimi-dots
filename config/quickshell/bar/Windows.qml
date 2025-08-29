@@ -23,7 +23,7 @@ Rectangle {
             delegate: Image {
                 id: icon
                 required property var modelData
-                source: Variables.iconDirectory + F.Desktop.appropriate(modelData.className) + ".svg"
+                source: Variables.iconDirectory + F.Desktop.appropriate(modelData.className, modelData.title) + ".svg"
                 mipmap: true
                 smooth: true
                 Layout.preferredHeight: 20

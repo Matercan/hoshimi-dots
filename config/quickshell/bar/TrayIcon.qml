@@ -33,6 +33,8 @@ Rectangle {
         anchors.centerIn: parent
         width: 20
         height: 20
+        sourceSize.width: 20
+        sourceSize.height: 20
         source: root.item.icon
         fillMode: Image.PreserveAspectFit
 

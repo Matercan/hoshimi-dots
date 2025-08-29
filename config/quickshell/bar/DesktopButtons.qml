@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 import Quickshell
 import Quickshell.Io
+import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
 
@@ -36,7 +37,7 @@ MouseArea {
         id: text
         anchors.centerIn: parent
         text: ""
-        color: Colors.getPaletteColor("orange")
+        color: Colors.getPaletteColor("red")
     }
 
     Process {
@@ -148,6 +149,7 @@ MouseArea {
                         id: lockText
                         anchors.centerIn: parent
                         text: ""
+                        color: Colors.getPaletteColor("yellow")
                     }
                 }
                 MouseArea {
@@ -168,6 +170,7 @@ MouseArea {
                     Text {
                         id: rebootText
                         text: "󰜉"
+                        color: Colors.getPaletteColor("orange")
                     }
                     Process {
                         id: rebootProc
@@ -180,7 +183,7 @@ MouseArea {
                     implicitHeight: exitText.height
                     implicitWidth: exitText.width
                     hoverEnabled: true
-                    onClicked: exitProc.running = true
+                    onClicked: Hyprland.dispatch("exit")
                     cursorShape: Qt.PointingHandCursor
 
                     Rectangle {
@@ -193,11 +196,7 @@ MouseArea {
                     Text {
                         id: exitText
                         text: "󰩈"
-                    }
-                    Process {
-                        id: exitProc
-                        running: false
-                        command: ["hyprctl", "dispatch", "exit"]
+                        color: Colors.getPaletteColor("blue")
                     }
                 }
                 MouseArea {
@@ -218,6 +217,7 @@ MouseArea {
                     Text {
                         id: closeText
                         text: ""
+                        color: Colors.getPaletteColor("orange")
                     }
                     Process {
                         id: closeProc

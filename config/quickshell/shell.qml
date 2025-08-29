@@ -1,17 +1,18 @@
 //@ pragma UseQApplication
 
 import qs.bar
-import qs.background
-import Quickshell
+import qs.notifications
 import qs.modules
+import Quickshell
 
 import Quickshell
 
 ShellRoot {
     id: root
 
-    Bar {}
-    LockItem {}
     WallpaperItem {}
     ScreenWrap {}
+    Notifications {}
+    LockItem {}
+    Bar {}
 }

@@ -32,7 +32,7 @@ Scope {
 
                 layer.enabled: true
                 layer.effect: MultiEffect {
-                    shadowEnabled: true
+                    // shadowEnabled: true
                     blurMax: 10
                     shadowScale: 1
                     shadowColor: F.Colors.transparentize(F.Colors.backgroundColor, 0.0)

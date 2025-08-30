@@ -41,34 +41,54 @@ Scope {
                     height: parent.height
                     implicitWidth: parent.width
 
-                    WorkspaceWidget {
-                        id: workspaces
+                    Loader {
+                        active: true
+                        sourceComponent: WorkspaceWidget {
+                            id: workspaces
 
-                        Layout.fillWidth: true
-                        Layout.alignment: Qt.AlignTop
-                        color: "transparent"
+                            Layout.fillWidth: true
+                            Layout.alignment: Qt.AlignTop
+                            color: "transparent"
+                        }
                     }
 
-                    /* Window {
-                        id: spacer
+                    /* Loader {
+                        asyncrhonous: true
+                        Window {
 
-                        implicitHeight: 200
-                        Layout.alignment: Qt.AlignHCenter
+                            id: spacer
+
+                            implicitHeight: 200
+                            Layout.alignment: Qt.AlignHCenter
+                        }
                     } */
 
-                    Windows {
-                        Layout.bottomMargin: 10
+                    Loader {
+                        active: true
                         Layout.alignment: Qt.AlignTop
                         Layout.fillHeight: true
+                        Layout.leftMargin: 7
+
+                        sourceComponent: Windows {
+
+                            Layout.bottomMargin: 10
+                            Layout.fillHeight: true
+                        }
                     }
 
-                    Cava {
-                        id: cava
-                        barY: y
-
+                    Loader {
+                        active: true
                         Layout.fillWidth: true
                         Layout.alignment: Qt.AlignBottom
-                        implicitHeight: 75
+
+                        sourceComponent: Cava {
+                            id: cava
+                            barY: y
+
+                            Layout.fillWidth: true
+                            Layout.alignment: Qt.AlignBottom
+                            implicitHeight: 75
+                        }
                     }
 
                     TrayWidget {
@@ -81,38 +101,55 @@ Scope {
                         color: "transparent"
                     }
 
-                    Rectangle {
-                        id: widgets
-                        implicitWidth: window.width - 2
-                        implicitHeight: widgetLayout.implicitHeight + 16  // Add padding
-                        color: "transparent"
-                        border.color: F.Colors.borderColor
-                        border.width: 1
-                        radius: 8
+                    Loader {
+                        active: true
                         Layout.alignment: Qt.AlignBottom
-                        Layout.leftMargin: 1
 
-                        ColumnLayout {
-                            id: widgetLayout
-                            anchors.fill: parent
-                            anchors.margins: 8
-                            spacing: 5
+                        sourceComponent: Rectangle {
+                            id: widgets
+                            implicitWidth: 35
+                            implicitHeight: widgetLayout.implicitHeight + 16  // Add padding
+                            color: "transparent"
+                            border.color: F.Colors.borderColor
+                            border.width: 1
+                            radius: 8
+                            Layout.fillWidth: true
+                            Layout.alignment: Qt.AlignBottom
+                            Layout.leftMargin: 1
 
-                            BatteryWidget {
-                                Layout.fillWidth: true
-                                Layout.alignment: Qt.AlignHCenter
-                            }
+                            ColumnLayout {
+                                id: widgetLayout
+                                anchors.fill: parent
+                                anchors.margins: 8
+                                spacing: 5
 
-                            ClockWidget {
-                                barY: widgets.y
-                                Layout.fillWidth: true
-                                Layout.alignment: Qt.AlignHCenter
-                            }
+                                Loader {
+                                    active: true
+                                    Layout.fillWidth: true
+                                    Layout.alignment: Qt.AlignHCenter
 
-                            VolumeWidget {
-                                Layout.fillWidth: true
-                                Layout.alignment: Qt.AlignHCenter
-                                Layout.preferredHeight: implicitHeight || 20
+                                    sourceComponent: BatteryWidget {
+                                        Layout.fillWidth: true
+                                        Layout.alignment: Qt.AlignHCenter
+                                    }
+                                }
+
+                                ClockWidget {
+                                    barY: widgets.y
+                                    Layout.fillWidth: true
+                                    Layout.alignment: Qt.AlignHCenter
+                                }
+
+                                Loader {
+                                    active: true
+                                    Layout.fillWidth: true
+                                    Layout.alignment: Qt.AlignHCenter
+                                    sourceComponent: VolumeWidget {
+                                        Layout.fillWidth: true
+                                        Layout.alignment: Qt.AlignHCenter
+                                        Layout.preferredHeight: implicitHeight || 20
+                                    }
+                                }
                             }
                         }
                     }

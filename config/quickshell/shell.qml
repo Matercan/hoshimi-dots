@@ -4,15 +4,35 @@ import qs.bar
 import qs.notifications
 import qs.modules
 import Quickshell
-
-import Quickshell
+import QtQuick
 
 ShellRoot {
     id: root
 
-    WallpaperItem {}
-    ScreenWrap {}
-    Notifications {}
-    LockItem {}
-    Bar {}
+    Loader {
+        active: true
+        sourceComponent: WallpaperItem {}
+    }
+    Loader {
+        active: true
+        sourceComponent: ScreenWrap {}
+    }
+    Loader {
+        active: true
+        sourceComponent: Notifications {}
+    }
+    Loader {
+        active: true
+        sourceComponent: LockItem {}
+    }
+    Loader {
+        active: true
+
+        sourceComponent: Bar {}
+    }
+    Loader {
+        active: true
+
+        sourceComponent: Content {}
+    }
 }

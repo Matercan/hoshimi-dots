@@ -15,8 +15,9 @@ Rectangle {
 
     ColumnLayout {
         id: layout
-        anchors.centerIn: parent
-        spacing: 10
+        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
+        spacing: 20
 
         Repeater {
             model: Desktop.windows
@@ -60,7 +61,7 @@ Rectangle {
                         hoverEnabled: true
                         anchors.fill: parent
                         cursorShape: Qt.PointingHandCursor
-                        onClicked: Hyprland.dispatch("focuswindow class:" + icon.modelData.className)
+                        onClicked: Hyprland.dispatch("focuswindow title:" + icon.modelData.title)
                     }
                 }
             }

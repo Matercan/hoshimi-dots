@@ -107,6 +107,10 @@ alias gcm="git commit -m"
 alias gp="git push"
 alias clear="clear && fastfetch"
 
+# environemnt variables
+SUDO_EDITOR=nvim
+EDITOR=nvim
+
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(starship init zsh)"

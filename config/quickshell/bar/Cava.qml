@@ -163,7 +163,7 @@ MouseArea {
         }
 
         margins {
-            top: root.barY - rect.height / 2
+            top: 500
         }
 
         implicitWidth: rect.width + 50

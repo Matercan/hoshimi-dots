@@ -34,8 +34,7 @@ Item {
         running: true
         onTriggered: {
             if (V.Variables.locked)
-                console.log("LOCKED");
-            lock.locked = V.Variables.locked;
+                lock.locked = V.Variables.locked;
         }
     }
 }

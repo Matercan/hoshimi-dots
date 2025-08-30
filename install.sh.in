@@ -1,3 +1,0 @@
-#!/bin/bash
-cp -r @CMAKE_INSTALL_PREFIX@/share/hyprland-dots/config/* ~/.config/
-cp -r @CMAKE_INSTALL_PREFIX@/share/hyprland-dots/assets/* ~/.local/share/

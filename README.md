@@ -13,18 +13,13 @@ WARNING: the screenshots are outdated!
 
 ## Installation
 ```shell
-git clone https://github.com/Matercan/hyprland-dots
-cd hyprland-dots
-mkdir -p build && cd build
-cmake .. && make && cd ..
+wget https://github.com/Matercan/hoshimi-cli/blob/main/main.cpp
+g++ main.cpp -o hoshimi.out
+./hoshimi.out install
 ```
 
 Dependencies:
-- libpng
-- libjpg
-- qt6-base
-- qt6-tools
-- pkgconf
+gcc
 
 For best user experience:
 - playerctl
@@ -115,6 +110,7 @@ for helping me make thia rice and introducing me to my lord and saviour quickshe
 [end-4's dotfiles](https://github.com/end-4/dots-hyprland)
 
 [celaestia shell](https://github.com/caelestia-dots/shell/tree/main)
+
 
 
 

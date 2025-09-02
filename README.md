@@ -1,10 +1,7 @@
 # 【 Matercan's hoshimi dotfiles 】
 A minimal starry configuration for the window tiling manager hyprland and building blocks for your desktop quickshell.
 Features include:
-- A complete environment (except notifications)
-- Most popular apps' configurations
-- Colorscheme generation based on a wallpaper
-- Famous colorschemes like catppuccin
+- A complete shell
 
 ![image)](https://github.com/user-attachments/assets/08925f45-ac6a-47b9-a3b0-b1dc36cc1290)
 
@@ -33,49 +30,48 @@ For best user experience:
 - Any japanese font
 
 ## Usage
+
 ```
-Usage: build/bin/hyprland-dots [OPTIONS]
+Hoshimi - Hyprland Dotfiles Manager
+===================================
 
-Install and configure dotfiles with custom themes
+USAGE:
+    ./hoshimi.out <command> [options]
 
-Options:
-  -p, --packages PKG1,PKG2  Install specific packages (comma-separated)
-  -w, --wallpaper PATH       Set wallpaper path
-  -c, --colorscheme TYPE     Generate colorscheme from wallpaper
-                             Available types: dark, light, warm
-  -s, --scheme NAME          Use predefined color scheme
-                             Available schemes: catppuccin-mocha,
-                             catppuccin-latte, gruvbox-dark,
-                             gruvbox-light, dracula
-  -i, --interactive          Run in interactive mode
-  -l, --list-packages        List available packages
-  -L, --list-themes          List available wallpaper themes
-  -S, --list-schemes         List available predefined schemes
-  -h, --help                 Show this help message
-  -a, --all                  Install all available packages
+COMMANDS:
+    install     Install dotfiles by cloning repository and creating symlinks
+    update      Update dotfiles by pulling the repository
+    help        Show this help message
 
-Examples:
-  build/bin/hyprland-dots -p hypr,wofi -s dracula
-  build/bin/hyprland-dots -a -w ~/bg.jpg -c dark
-  build/bin/hyprland-dots -p dunst,fish -s catppuccin-mocha
-  build/bin/hyprland-dots --interactive
-  build/bin/hyprland-dots --list-schemes
-```
+OPTIONS:
+    -v, --verbose    Enable verbose output (show detailed operations)
+    -f, --force    Force overwrite existing files without backup
+    -h, --help    Show this help message
 
-You can also use `` build/bin/hyprland-dots-gui `` to launch a GUI menu if that is more your style (though it is not fully updated yet)
+EXAMPLES:
+    ./hoshimi.out install           # Install dotfiles silently
+    ./hoshimi.out install -v        # Install with Enable
+    ./hoshimi.out install -f        # Install with Force
+    ./hoshimi.out install -h        # Install with Show
+    ./hoshimi.out help              # Show this help
 
+DESCRIPTION:
+    Hoshimi manages Hyprland dotfiles by:
+    1. Cloning the dotfiles repository to ~/.local/share/hoshimi
+    2. Backing up existing dotfiles to ./backup/
+    3. Creating symlinks from the repository to your home directory
 
-To pull back into the hyprland_dots folder, run ``./pull.sh``. This will collect all of the configurations from all of the programs within this repository and will replace all of those currently in the directory with them.
-
-## Issues
-- The script will try and use yay to install packages you don't have, if you don't have yay you may install it via
-```
-git clone https://aur.archlinux.org/yay-bin.git
-cd yay-bin
-makepkg -si
+PATHS:
+    Repository:     ~/.local/share/hoshimi (or $XDG_DATA_HOME/hoshimi)
+    Backup:         ./backup/
+    Source:         https://github.com/Matercan/hoshimi.git
 ```
 
-A lot of issues with file management
+## TODO:
+
+Creating and sourcing from a config
+Pywal integraton for generating colorschemes
+
 
 ## Showcase (LEGACY)
 
@@ -110,6 +106,7 @@ for helping me make thia rice and introducing me to my lord and saviour quickshe
 [end-4's dotfiles](https://github.com/end-4/dots-hyprland)
 
 [celaestia shell](https://github.com/caelestia-dots/shell/tree/main)
+
 
 
 

@@ -27,12 +27,10 @@ ShellRoot {
     }
     Loader {
         active: true
-
         sourceComponent: Bar {}
     }
     Loader {
         active: true
-
         sourceComponent: Content {}
     }
 }

@@ -47,7 +47,7 @@ Scope {
                             id: workspaces
 
                             Layout.fillWidth: true
-                            Layout.alignment: Qt.AlignTop
+                            Layout.alignment: Qt.AlignHCenter
                             color: "transparent"
                         }
                     }

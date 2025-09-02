@@ -6,6 +6,7 @@ import Quickshell.Services.SystemTray
 
 Rectangle {
     id: trayRect
+    color: "transparent"
 
     required property var rectY
 
@@ -23,7 +24,8 @@ Rectangle {
         Repeater {
             model: SystemTray.items
             delegate: TrayIcon {
-                popupY: trayRect.rectY + 32
+                required property int index
+                popupY: trayRect.rectY + 32 * index
             }
         }
     }

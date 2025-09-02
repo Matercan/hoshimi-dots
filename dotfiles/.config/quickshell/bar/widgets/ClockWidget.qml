@@ -50,6 +50,8 @@ MouseArea {
                     anchors.left: parent.left
                     implicitWidth: dayText.width
                     implicitHeight: dayText.height
+                    width: 15
+                    height: 15
                     color: "transparent"
 
                     Text {

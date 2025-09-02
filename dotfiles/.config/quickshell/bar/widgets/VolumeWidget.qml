@@ -131,16 +131,28 @@ Rectangle {
         }
 
         anchors.centerIn: parent
-        Text {
+        Image {
             id: volumeText
             Layout.alignment: Qt.AlignHCenter
             Layout.topMargin: 10
 
-            color: F.Colors.foregroundColor
-            font.pixelSize: 12
-
-            rotation: 270
-            text: S.Audio.volumePercent == 0 ? "" : ""
+            source: {
+                function getAudio() {
+                    var iconDirectory = Glo.Variables.statusDirectory;
+                    if (S.Audio.volumePercent >= 70) {
+                        return iconDirectory + "audio-volume-high-symbolic.svg";
+                    } else if (S.Audio.volumePercent >= 40) {
+                        return iconDirectory + "audio-volume-medium-symbolic.svg";
+                    } else if (S.Audio.volumePercenit >= 0) {
+                        return iconDirectory + "audio-volume-low-symbolic.svg";
+                    } else {
+                        return iconDirectory + "audio-volume-muted-symbolic.svg";
+                    }
+                }
+                return getAudio() || "/usr/share/icons/Adwaita/symbolic/status/audio-volume-high-symbolic-rtl.svg";
+            }
+            Layout.preferredWidth: 15
+            Layout.preferredHeight: 15
 
             MouseArea {
                 id: speakerButton

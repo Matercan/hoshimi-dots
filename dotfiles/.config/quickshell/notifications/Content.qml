@@ -27,39 +27,10 @@ PanelWindow {
 
     Rectangle {
         id: rectangle
-        implicitWidth: layout.width + 50
+        implicitWidth: layout.width + 25
         implicitHeight: layout.height + 50
         bottomLeftRadius: 50
         color: Colors.backgroundColor
-        layer.enabled: true
-        layer.effect: MultiEffect {
-            maskSource: {
-                console.log(mask);
-                mask;
-            }
-            maskEnabled: true
-            maskSpreadAtMin: 1
-            maskThresholdMin: 0.5
-            maskInverted: true
-        }
-
-        Item {
-            id: mask
-            anchors.fill: parent
-            layer.enabled: true
-            visible: true
-
-            Rectangle {
-                color: "white"
-                anchors.right: parent.left
-                anchors.top: parent.top
-                anchors.rightMargin: -40
-                implicitHeight: parent.height + 50
-                implicitWidth: 500
-                radius: 50
-                layer.enabled: true
-            }
-        }
 
         ColumnLayout {
             id: layout

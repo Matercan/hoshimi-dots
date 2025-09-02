@@ -24,6 +24,12 @@ Singleton {
         if (title.includes("nvim")) {
             return "nvim";
         }
+        if (window.toLowerCase().includes("minecraft")) {
+            return "minecraft";
+        }
+        if (window.toLowerCase().includes("qt")) {
+            return "qt";
+        }
 
         switch (window) {
         case "equibop":
@@ -32,6 +38,8 @@ Singleton {
             return "protonmail";
         case "protonvpn-app":
             return "protonvpn-gui";
+        case "Aseprite":
+            return window.toLowerCase();
         default:
             return window;
         }

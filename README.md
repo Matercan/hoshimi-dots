@@ -1,4 +1,4 @@
-# 【 Mataercan's hoshimi dotfiles 】
+# 【 Matercan's hoshimi dotfiles 】
 A minimal starry configuration for the window tiling manager hyprland and building blocks for your desktop quickshell.
 Features include:
 - A complete environment (except notifications)
@@ -115,6 +115,7 @@ for helping me make thia rice and introducing me to my lord and saviour quickshe
 [end-4's dotfiles](https://github.com/end-4/dots-hyprland)
 
 [celaestia shell](https://github.com/caelestia-dots/shell/tree/main)
+
 
 
 

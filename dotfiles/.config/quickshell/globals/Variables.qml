@@ -14,7 +14,7 @@ Singleton {
     property string iconDirectory: "/usr/share/icons/candy-icons/apps/scalable/"
     property string statusDirectory: "/usr/share/icons/candy-icons/status/scalable/"
 
-    property int timerProcInterval: 100
+    property int timerProcInterval: 400
 
     IpcHandler {
         target: "variables"

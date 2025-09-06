@@ -100,6 +100,13 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
+# lf
+lfcd () {
+    # `command` is needed in case `lfcd` is aliased to `lf`
+    cd "$(command lf -print-last-dir "$@")"
+}
+alias lf='lfcd'
+
 # Aliases
 
 alias ga="git add"
@@ -108,8 +115,8 @@ alias gp="git push"
 alias clear="clear && fastfetch"
 
 # environemnt variables
-SUDO_EDITOR=nvim
-EDITOR=nvim
+export SUDO_EDITOR=nvim
+export EDITOR=nvim
 
 # Shell integrations
 eval "$(fzf --zsh)"

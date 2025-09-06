@@ -125,5 +125,18 @@ eval "$(zoxide init  --cmd cd zsh)"
 
 source "${ZINIT_HOME}/../plugins/romkatv---powerlevel10k/powerlevel10k.zsh-theme"
 
+# Screensaver
+zinit light z-shell/zsh-morpho
+zstyle ":morpho" screen-saver "asciiquarium"
+zstyle ":morpho" arguments "-t"
+zstyle ":morpho" delay "290"
+zstyle ":morpho" check-interval "60"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+PATH="/home/matercan/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/matercan/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/matercan/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/matercan/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/matercan/perl5"; export PERL_MM_OPT;

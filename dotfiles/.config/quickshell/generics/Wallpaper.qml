@@ -6,7 +6,7 @@ import qs.functions as F
 import qs.sources as S
 
 AnimatedImage {
-    source: Quickshell.env("HOME") + "/.local/share/hyprland-dots/assets/nord_car_live.gif"
+    source: Quickshell.env("HOME") + "/.local/share/hoshimi/assets/nord_car_live.gif"
     antialiasing: false
     asynchronous: true
     width: 1980

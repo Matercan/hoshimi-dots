@@ -1,0 +1,155 @@
+# lf icons configuration
+# Format: extension icon_character
+
+# Archives/Compressed files
+*.tar   📦
+*.tgz   📦
+*.arc   📦
+*.arj   📦
+*.taz   📦
+*.lha   📦
+*.lz4   📦
+*.lzh   📦
+*.lzma  📦
+*.tlz   📦
+*.txz   📦
+*.tzo   📦
+*.t7z   📦
+*.zip   📦
+*.z     📦
+*.dz    📦
+*.gz    📦
+*.lrz   📦
+*.lz    📦
+*.lzo   📦
+*.xz    📦
+*.zst   📦
+*.tzst  📦
+*.bz2   📦
+*.bz    📦
+*.tbz   📦
+*.tbz2  📦
+*.tz    📦
+*.deb   📦
+*.rpm   📦
+*.jar   📦
+*.war   📦
+*.ear   📦
+*.sar   📦
+*.rar   📦
+*.alz   📦
+*.ace   📦
+*.zoo   📦
+*.cpio  📦
+*.7z    📦
+*.rz    📦
+*.cab   📦
+*.wim   📦
+*.swm   📦
+*.dwm   📦
+*.esd   📦
+
+# Image formats
+*.jpg   🖼️
+*.jpeg  🖼️
+*.mjpg  🖼️
+*.mjpeg 🖼️
+*.gif   🖼️
+*.bmp   🖼️
+*.pbm   🖼️
+*.pgm   🖼️
+*.ppm   🖼️
+*.tga   🖼️
+*.xbm   🖼️
+*.xpm   🖼️
+*.tif   🖼️
+*.tiff  🖼️
+*.png   🖼️
+*.svg   🖼️
+*.svgz  🖼️
+*.mng   🖼️
+*.pcx   🖼️
+*.xcf   🖼️
+*.xwd   🖼️
+*.yuv   🖼️
+*.cgm   🖼️
+*.emf   🖼️
+
+# Video formats
+*.mov   🎬
+*.mpg   🎬
+*.mpeg  🎬
+*.m2v   🎬
+*.mkv   🎬
+*.webm  🎬
+*.ogm   🎬
+*.mp4   🎬
+*.m4v   🎬
+*.mp4v  🎬
+*.vob   🎬
+*.qt    🎬
+*.nuv   🎬
+*.wmv   🎬
+*.asf   🎬
+*.rm    🎬
+*.rmvb  🎬
+*.flc   🎬
+*.avi   🎬
+*.fli   🎬
+*.flv   🎬
+*.gl    🎬
+*.dl    🎬
+*.ogv   🎬
+*.ogx   🎬
+
+# Audio formats
+*.aac   🎵
+*.au    🎵
+*.flac  🎵
+*.m4a   🎵
+*.mid   🎵
+*.midi  🎵
+*.mka   🎵
+*.mp3   🎵
+*.mpc   🎵
+*.ogg   🎵
+*.ra    🎵
+*.wav   🎵
+*.oga   🎵
+*.opus  🎵
+*.spx   🎵
+*.xspf  🎵
+
+# Additional common file types
+*.pdf   📄
+*.doc   📄
+*.docx  📄
+*.txt   📄
+*.md    📄
+*.py    🐍
+*.js    📜
+*.html  🌐
+*.css   🎨
+*.json  📋
+*.xml   📋
+*.yml   📋
+*.yaml  📋
+*.conf  ⚙️
+*.cfg   ⚙️
+*.ini   ⚙️
+
+# Directories and special files
+ln      🔗
+or      ❌
+tw      📁
+ow      📁
+st      📁
+di      📁
+pi      🔧
+so      📚
+bd      💾
+cd      💿
+su      👑
+sg      👥
+ca      🔐
+ex      ⚡

@@ -112,8 +112,8 @@ qsr () {
   prime-run qs > qs.log \
     2>&1 &
   tail -f qs.log
-  rm qs.log
 }
+alias qs="qsr"
 
 # Aliases
 

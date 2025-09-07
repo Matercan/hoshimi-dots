@@ -25,6 +25,7 @@ Rectangle {
         spacing: 0
 
         Rectangle {
+            id: fullRect
             radius: 10
             implicitHeight: 100
             implicitWidth: 10
@@ -55,77 +56,68 @@ Rectangle {
                 }
             }
 
-            ColumnLayout {
-                id: column
-                spacing: 0
-                Repeater {
-                    id: indicator
-                    property list<bool> mouseBool: [false, false, false, false, false, false, false, false, false, false]
-                    model: 100
-                    delegate: Rectangle {
-                        id: bar
-                        Layout.alignment: Qt.AlignHCenter
-                        required property var modelData
-                        color: {
-                            var mouseBelow;
-                            for (let i = modelData; i >= 0; i--) {
-                                if (indicator.mouseBool[i] == true) {
-                                    mouseBelow = true;
-                                    break;
-                                }
-                            }
-                            if (area.containsMouse)
-                                mouseBelow = true;
-                            if (mouseBelow) {
-                                return F.Colors.interpolate(F.Colors.selectedColor, F.Colors.interpolate(F.Colors.getPaletteColor("red"), F.Colors.getPaletteColor("blue"), modelData / S.Audio.volumePercent), 0.5);
-                            } else if (indicator.model - 1 - modelData <= S.Audio.volumePercent * (indicator.model / 100)) {
-                                return F.Colors.interpolate(F.Colors.getPaletteColor("red"), F.Colors.getPaletteColor("blue"), modelData / S.Audio.volumePercent);
-                            } else {
-                                return F.Colors.foregroundColor;
-                            }
+            Rectangle {
+                id: recto
+                anchors.fill: parent
+                property real volumeHeight: S.Audio.volumePercent / 100
+                color: F.Colors.foregroundColor
+
+                Rectangle {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.bottom: parent.bottom
+                    height: parent.height * recto.volumeHeight
+                    width: parent.width
+
+                    gradient: Gradient {
+                        orientation: Gradient.Vertical
+
+                        GradientStop {
+                            color: F.Colors.getPaletteColor("red")
+                            position: 1
                         }
-                        property int curveRadius: 20
-                        implicitWidth: 10
-                        implicitHeight: 100 / indicator.model
-                        y: implicitHeight * modelData
-                        topRightRadius: modelData == 0 ? 5 : 0
-                        topLeftRadius: modelData == 0 ? 5 : 0
-                        bottomLeftRadius: modelData == indicator.model - 1 ? 5 : 0
-                        bottomRightRadius: modelData == indicator.model - 1 ? 5 : 0
-
-                        MouseArea {
-                            id: area
-                            hoverEnabled: true
-                            anchors.fill: parent
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: {
-                                console.log("Volume bar clicked, setting volume to:", ((indicator.model - 1 - bar.modelData) / indicator.model));
-                                setVolume.running = true;
-                            }
-
-                            Process {
-                                id: setVolume
-                                running: false
-                                command: ["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", ((indicator.model - 1 - bar.modelData) / indicator.model).toString()]
-
-                                onExited: {
-                                    console.log("wpctl command finished with exit code:", exitCode);
-                                    if (exitCode !== 0) {
-                                        console.log("Volume setting failed");
-                                    }
-                                }
-                            }
-
-                            Timer {
-                                interval: Glo.Variables.timerProcInterval
-                                running: true
-                                repeat: true
-                                onTriggered: {
-                                    indicator.mouseBool[bar.modelData] = area.containsMouse;
-                                }
-                            }
+                        GradientStop {
+                            color: F.Colors.getPaletteColor("blue")
+                            position: 1 - recto.volumeHeight
                         }
                     }
+                }
+
+                Rectangle {
+                    visible: area.containsMouse
+
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.bottom: parent.bottom
+                    height: parent.height * area.volumeSet
+                    width: parent.width
+
+                    gradient: Gradient {
+                        orientation: Gradient.Vertical
+
+                        GradientStop {
+                            color: F.Colors.interpolate(F.Colors.getPaletteColor("red"), F.Colors.selectedColor, 0.5)
+                            position: 1
+                        }
+                        GradientStop {
+                            color: F.Colors.interpolate(F.Colors.getPaletteColor("blue"), F.Colors.selectedColor, 0.5)
+                            position: 1 - recto.volumeHeight
+                        }
+                    }
+                }
+
+                Process {
+                    id: volumeProc
+                    running: false
+                    command: ["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", area.volumeSet]
+                }
+
+                MouseArea {
+                    id: area
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    hoverEnabled: true
+                    property real volumeSet: 1 - (mouseY / height)
+
+                    onClicked: volumeProc.running = true
                 }
             }
         }

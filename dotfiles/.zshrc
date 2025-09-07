@@ -107,6 +107,14 @@ lfcd () {
 }
 alias lf='lfcd'
 
+# qucikshell 
+qsr () {
+  prime-run qs > qs.log \
+    2>&1 &
+  tail -f qs.log
+  rm qs.log
+}
+
 # Aliases
 
 alias ga="git add"

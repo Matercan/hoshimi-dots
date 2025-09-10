@@ -16,8 +16,8 @@ Rectangle {
     required property var modelData
     property SystemTrayItem item: modelData
 
-    width: 24
-    height: 24
+    width: trayIcon.width + 4
+    height: trayIcon.height + 4
     radius: 4
 
     color: {
@@ -31,10 +31,10 @@ Rectangle {
     Image {
         id: trayIcon
         anchors.centerIn: parent
-        width: 20
-        height: 20
-        sourceSize.width: 20
-        sourceSize.height: 20
+        width: 15
+        height: 15
+        sourceSize.width: 15
+        sourceSize.height: 15
         source: root.item.icon
         fillMode: Image.PreserveAspectFit
 

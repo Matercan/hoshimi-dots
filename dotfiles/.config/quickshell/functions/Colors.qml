@@ -9,7 +9,6 @@ Singleton {
     // Colors used throuhgout the configuration
     property string backgroundColor: "#1e1e2e"
     property string foregroundColor: "#cdd6f4"
-    property string borderColor: "#cdd6f4"
 
     property string paletteColor1: "#45475a"
     property string paletteColor2: "#f38ba8"
@@ -33,6 +32,7 @@ Singleton {
     property string iconColor: paletteColor13
     property string errorColor: paletteColor2
     property string passwordColor: paletteColor4
+    property string borderColor: paletteColor7
 
     /**
     * Transparentizes a color by a given percentage.

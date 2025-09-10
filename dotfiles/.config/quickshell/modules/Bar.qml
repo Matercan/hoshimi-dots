@@ -41,15 +41,25 @@ Scope {
                     height: parent.height
                     implicitWidth: parent.width
 
+                    Text {
+                        Layout.margins: 5
+                        text: ""
+                        font.family: G.Variables.fontFamily
+                        Layout.alignment: Qt.AlignCenter
+                        color: F.Colors.foregroundColor
+                    }
+
                     Loader {
                         active: true
                         sourceComponent: WorkspaceWidget {
                             id: workspaces
 
                             Layout.fillWidth: true
-                            Layout.alignment: Qt.AlignHCenter
+                            Layout.alignment: Qt.AlignTop
                             color: "transparent"
                         }
+                        Layout.fillHeight: true
+                        Layout.alignment: Qt.AlignTop
                     }
 
                     /* Loader {
@@ -62,19 +72,6 @@ Scope {
                             Layout.alignment: Qt.AlignHCenter
                         }
                     } */
-
-                    Loader {
-                        active: true
-                        Layout.alignment: Qt.AlignTop
-                        Layout.fillHeight: true
-                        Layout.leftMargin: 7
-
-                        sourceComponent: Windows {
-
-                            Layout.bottomMargin: 10
-                            Layout.fillHeight: true
-                        }
-                    }
 
                     Loader {
                         active: true

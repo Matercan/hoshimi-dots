@@ -9,10 +9,10 @@ Singleton {
     id: root
     property var activeWindow
     property var activeWorkspace
-    property var windows
-    property var workspaces
+    property var windows: []
+    property var workspaces: []
 
-    // Process to get all windows in the current workspace
+    // Process to get all windows in all workspaces
     Process {
         id: windowsProc
         command: ["hyprctl", "clients", "-j"]
@@ -66,6 +66,9 @@ Singleton {
             onStreamFinished: {
                 try {
                     const allWorkspaces = JSON.parse(this.text.trim());
+                    allWorkspaces.sort((a, b) => {
+                        return a.id - b.id;
+                    });
                     root.workspaces = allWorkspaces;
                 } catch (e) {
                     console.log("failed to parse workspaces:", e);

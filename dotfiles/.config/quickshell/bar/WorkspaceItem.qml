@@ -13,7 +13,7 @@ MouseArea {
 
     Rectangle {
         property int id: workspaceDelegate.idNum
-        property bool isActive: id === workspaceDelegate.activeWorkspaceId
+        property bool isActive: id == workspaceDelegate.activeWorkspaceId
 
         anchors.verticalCenter: parent.verticalCenter
         width: Math.max(windowContent.width + 16, 40)
@@ -28,17 +28,26 @@ MouseArea {
             anchors.centerIn: parent
             text: F.Desktop.getWorkspaceIcon(parent.id)
 
-            font.family: "CaskaydiaCove Nerd Font"
+            font.family: G.Variables.fontFamily
             font.pixelSize: 16
 
             color: {
                 if (parent.isActive)
-                    return F.Colors.foregroundColor;
+                    return F.Colors.activeColor;
                 else if (workspaceDelegate.containsMouse)
                     return F.Colors.selectedColor;
                 else
-                    return F.Colors.activeColor;
+                    return F.Colors.foregroundColor;
             }
+        }
+
+        WindowItem {
+            width: 10
+            height: 10
+            modelData: F.Desktop.getWindowsInWorkspace(workspaceDelegate.idNum)[0]
+            anchors.bottom: parent.bottom
+            anchors.right: parent.right
+            anchors.margins: 5
         }
     }
 

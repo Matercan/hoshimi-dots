@@ -3,6 +3,8 @@
 import qs.bar
 import qs.notifications
 import qs.modules
+import qs.workspaceman
+
 import Quickshell
 import QtQuick
 
@@ -32,5 +34,10 @@ ShellRoot {
     Loader {
         active: true
         sourceComponent: Content {}
+    }
+    Loader {
+        active: true
+
+        sourceComponent: AltTAB {}
     }
 }

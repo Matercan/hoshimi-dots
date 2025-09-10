@@ -109,9 +109,9 @@ alias lf='lfcd'
 
 # qucikshell 
 qsr () {
-  prime-run qs > qs.log \
+  prime-run qs > ~/Documents/qs.log \
     2>&1 &
-  tail -f qs.log
+  tail -f ~/Documents/qs.log; rm -f ~/Documents/qs.log
 }
 alias qs="qsr"
 

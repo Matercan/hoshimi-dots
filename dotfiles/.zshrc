@@ -113,7 +113,6 @@ qsr () {
     2>&1 &
   tail -f ~/Documents/qs.log; rm -f ~/Documents/qs.log
 }
-alias qs="qsr"
 
 # Aliases
 
@@ -121,6 +120,7 @@ alias ga="git add"
 alias gcm="git commit -m"
 alias gp="git push"
 alias clear="clear && fastfetch"
+alias svim="sudo -e"
 
 # environemnt variables
 export SUDO_EDITOR=nvim

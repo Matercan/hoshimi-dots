@@ -1,0 +1,1 @@
+/home/matercan/.local/share/hoshimi/dotfiles/.config/quickshell/globals/Variables.qml

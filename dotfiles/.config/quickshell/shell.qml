@@ -3,7 +3,6 @@
 import qs.bar
 import qs.notifications
 import qs.modules
-import qs.workspaceman
 
 import Quickshell
 import QtQuick

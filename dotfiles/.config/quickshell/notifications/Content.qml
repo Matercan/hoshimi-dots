@@ -41,6 +41,7 @@ PanelWindow {
             Repeater {
                 model: {
                     notifs.popups;
+                    popups: notifs.popups;
                 }
                 delegate: Notification {
                     Layout.fillWidth: true

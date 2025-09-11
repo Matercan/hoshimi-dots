@@ -9,6 +9,8 @@ import QtQuick
 Rectangle {
     id: root
     required property var modelData
+    required property int index
+    required property var popups
     implicitHeight: layout.height
     implicitWidth: layout.width
     readonly property date time: new Date()

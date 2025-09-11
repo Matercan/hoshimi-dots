@@ -1,1 +1,0 @@
-/home/matercan/.local/share/hoshimi/dotfiles/.config/quickshell/modules/Bar.qml

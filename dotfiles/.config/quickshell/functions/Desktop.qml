@@ -77,7 +77,8 @@ Singleton {
             var str = parseInt(match[1], 10);
             if (str >= 9)
                 return 9;
-            return str;
+            else
+                return str;
         }
         return 0; // No notifications found
     }

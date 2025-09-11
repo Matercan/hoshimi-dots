@@ -5,6 +5,7 @@ import QtQuick.Layouts
 import QtQuick.Effects
 import Quickshell.Hyprland
 import Quickshell.Io
+import Qt5Compat.GraphicalEffects
 
 import qs.sources
 import qs.functions as F
@@ -53,12 +54,22 @@ PanelWindow {
                     required property var modelData
 
                     // Set explicit size for workspace container
-                    Layout.preferredWidth: 200
-                    Layout.preferredHeight: 100
-                    color: "transparent"
+                    Layout.preferredWidth: 400
+                    Layout.preferredHeight: 300
+                    gradient: Gradient {
+                        orientation: Gradient.Horizontal
+                        GradientStop {
+                            position: 0
+                            color: F.Colors.transparentize(F.Colors.errorColor, 0.95)
+                        }
+                        GradientStop {
+                            position: 1
+                            color: F.Colors.transparentize(F.Colors.passwordColor, 0.95)
+                        }
+                    }
                     border.color: F.Colors.borderColor
-                    border.width: 1
-                    radius: 4
+                    border.width: 2
+                    radius: 10
 
                     layer.enabled: true
                     layer.effect: MultiEffect {
@@ -82,8 +93,9 @@ PanelWindow {
                                 required property var modelData
 
                                 // Set explicit size for window container
-                                Layout.preferredWidth: workspace.width / 5
+                                Layout.preferredWidth: workspace.width / 3
                                 Layout.preferredHeight: width
+
                                 color: "transparent"
                                 Layout.alignment: Qt.AlignHCenter
 
@@ -92,6 +104,8 @@ PanelWindow {
                                     source: Variables.iconDirectory + F.Desktop.appropriate(window.modelData.className, window.modelData.title) + ".svg"
                                     Layout.alignment: Qt.AlignHCenter
 
+                                    sourceSize.width: parent.width
+                                    sourceSize.height: parent.height
                                     anchors.fill: parent
                                     fillMode: Image.PreserveAspectFit
                                     mipmap: true
@@ -103,8 +117,23 @@ PanelWindow {
                                     anchors.fill: parent
                                     cursorShape: Qt.PointingHandCursor
 
+                                    hoverEnabled: true
                                     onClicked: {
                                         Hyprland.dispatch("workspace " + window.modelData.workspace);
+                                    }
+                                }
+
+                                ColorOverlay {
+                                    anchors.fill: icon
+                                    source: icon
+                                    color: F.Colors.transparentize(F.Colors.selectedColor, 0.7)
+                                    visible: area.containsMouse
+
+                                    Behavior on opacity {
+                                        NumberAnimation {
+                                            duration: MaterialEasing.emphasizedTime
+                                            easing.type: Easing.OutQuart
+                                        }
                                     }
                                 }
                             }

@@ -81,7 +81,16 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { ".cpp", ".hpp", ".c", ".h" },
+  pattern = ".hpp",
+  callback = function()
+    vim.opt_local.foldenable = true
+    vim.opt_local.foldmethod = "indent"
+    vim.opt_local.foldlevel = 99
+  end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = ".cpp",
   callback = function()
     vim.opt_local.foldenable = true
     vim.opt_local.foldmethod = "indent"

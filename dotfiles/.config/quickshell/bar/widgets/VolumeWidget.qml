@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Effects
+import Qt5Compat.GraphicalEffects
 import Quickshell.Io
 
 import qs.functions as F
@@ -172,6 +173,12 @@ Rectangle {
                     running: false
                     command: ["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", speakerButton.beforeMute.toString()]
                 }
+            }
+
+            ColorOverlay {
+                source: volumeText
+                color: F.Colors.transparentize(F.Colors.foregroundColor, 0.3)
+                anchors.fill: parent
             }
         }
     }

@@ -343,7 +343,8 @@
             "enabled": true,
             "hideRepliesToBlockedMessages": false,
             "disableNotifications": false,
-            "alsoHideIgnoredUsers": true
+            "alsoHideIgnoredUsers": true,
+            "hideBlockedUserReplies": false
         },
         "NoDevtoolsWarning": {
             "enabled": false
@@ -479,7 +480,7 @@
                         "id": "z2xh4o8d6mr",
                         "name": "eternal suffering",
                         "color": 10070709,
-                        "collapsed": false,
+                        "collapsed": true,
                         "channels": [
                             "1321917122561052672",
                             "1288386038481420300",
@@ -1338,6 +1339,9 @@
         },
         "ShowMessageEmbeds": {
             "enabled": false
+        },
+        "ToneIndicators": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -1350,7 +1354,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1757761038423
+        "settingsSyncVersion": 1757774974653
     },
     "enabledThemeLinks": [],
     "ignoreResetWarning": false,

@@ -54,6 +54,7 @@
   "trouble.nvim": { "branch": "main", "commit": "85bedb7eb7fa331a2ccbecb9202d8abba64d37b3" },
   "vim-anyfold": { "branch": "master", "commit": "3ed5d8ccbf0f5031f7c7d2be05aa7ddb4550dc5c" },
   "vim-fugitive": { "branch": "master", "commit": "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4" },
+  "vim-wakatime": { "branch": "master", "commit": "d7973b157a632d1edeff01818f18d67e584eeaff" },
   "yuck.vim": { "branch": "master", "commit": "9b5e0370f70cc30383e1dabd6c215475915fe5c3" },
   "zoxide.vim": { "branch": "master", "commit": "520d1abeb71ba42989a842251f8ba5c46be89aab" }
 }

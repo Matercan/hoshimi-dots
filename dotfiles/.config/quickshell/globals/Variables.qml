@@ -1,3 +1,5 @@
+// Managed by Hoshimi
+
 pragma Singleton
 
 import Quickshell

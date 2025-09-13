@@ -5,6 +5,7 @@ import qs.functions
 import Quickshell.Services.UPower
 import QtQuick
 import QtQuick.Layouts
+import Qt5Compat.GraphicalEffects
 
 Rectangle {
     id: batteryWidget
@@ -46,6 +47,12 @@ Rectangle {
             rotation: 90
             mipmap: true
             smooth: true
+
+            ColorOverlay {
+                anchors.fill: parent
+                source: parent
+                color: Colors.transparentize(Colors.foregroundColor, 0.5)
+            }
         }
 
         Text {

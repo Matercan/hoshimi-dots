@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell.Services.SystemTray
 import Quickshell
+import Qt5Compat.GraphicalEffects
 
 import qs.generics as Gen
 import qs.functions as F
@@ -46,6 +47,12 @@ Rectangle {
             font.family: G.Variables.fontFamily
             font.pixelSize: 12
             color: F.Colors.foregroundColor
+        }
+
+        ColorOverlay {
+            anchors.fill: parent
+            source: parent
+            color: F.Colors.transparentize(F.Colors.getPaletteColor("blue"), 0.9)
         }
     }
 

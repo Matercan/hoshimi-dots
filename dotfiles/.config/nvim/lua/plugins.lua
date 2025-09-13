@@ -62,5 +62,8 @@ return {
   },
   {
     'nanotee/zoxide.vim'
+  },
+  {
+    'wakatime/vim-wakatime'
   }
 }

@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Hyprland
+import Qt5Compat.GraphicalEffects
 
 import qs.functions as F
 import qs.globals
@@ -54,5 +55,11 @@ Image {
             cursorShape: Qt.PointingHandCursor
             onClicked: Hyprland.dispatch("focuswindow class:" + icon.modelData.className)
         }
+    }
+
+    ColorOverlay {
+        anchors.fill: icon
+        source: icon
+        color: F.Colors.transparentize(F.Colors.foregroundColor, 0.7) // make things more readable
     }
 }

@@ -1,0 +1,27 @@
+# Managed by Hoshimi
+
+background = #1e1e1e
+foreground = #cdd6d6
+cursor-color = #89b4b4
+cursor-text = #89b4b4
+selection-background= #f5c2c2
+selection-foreground= #f5c2c2
+
+palette = 0=#454747
+palette = 1=#f38b8b
+palette = 2=#a6e3e3
+palette = 3=#f9e2e2
+palette = 4=#89b4b4
+
+palette = 5=#f5c2c2
+palette = 6=#94e2e2
+palette = 7=#a6adad
+palette = 8=#585b5b
+palette = 9=#f38b8b
+
+palette = 10=#a6e3e3
+palette = 11=#f9e2e2
+palette = 12=#89b4b4
+palette = 13=#f5c2c2
+palette = 14=#94e2e2
+palette = 15=#bac2c2

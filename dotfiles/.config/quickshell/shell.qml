@@ -1,3 +1,4 @@
+// Managed by Hoshimi
 //@ pragma UseQApplication
 
 import qs.bar

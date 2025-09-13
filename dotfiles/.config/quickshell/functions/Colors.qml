@@ -1,3 +1,5 @@
+// Managed by Hoshimi
+
 pragma Singleton
 
 import Quickshell
@@ -7,25 +9,25 @@ Singleton {
     id: root
 
     // Colors used throuhgout the configuration
-    property string backgroundColor: "#1e1e2e"
-    property string foregroundColor: "#cdd6f4"
+    property string backgroundColor: "#1e1e1e"
+    property string foregroundColor: "#cdd6d6"
 
-    property string paletteColor1: "#45475a"
-    property string paletteColor2: "#f38ba8"
-    property string paletteColor3: "#a6e3a1"
-    property string paletteColor4: "#f9e2af"
-    property string paletteColor5: "#89b4fa"
-    property string paletteColor6: "#f5c2e7"
-    property string paletteColor7: "#94e2d5"
-    property string paletteColor8: "#a6adc8"
-    property string paletteColor9: "#585b70"
-    property string paletteColor10: "#f38ba8"
-    property string paletteColor11: "#a6e3a1"
-    property string paletteColor12: "#f9e2af"
-    property string paletteColor13: "#89b4fa"
-    property string paletteColor14: "#f5c2e7"
-    property string paletteColor15: "#94e2d5"
-    property string paletteColor16: "#bac2de"
+    property string paletteColor1: "#454747"
+    property string paletteColor2: "#f38b8b"
+    property string paletteColor3: "#a6e3e3"
+    property string paletteColor4: "#f9e2e2"
+    property string paletteColor5: "#89b4b4"
+    property string paletteColor6: "#f5c2c2"
+    property string paletteColor7: "#94e2e2"
+    property string paletteColor8: "#a6adad"
+    property string paletteColor9: "#585b5b"
+    property string paletteColor10: "#f38b8b"
+    property string paletteColor11: "#a6e3e3"
+    property string paletteColor12: "#f9e2e2"
+    property string paletteColor13: "#89b4b4"
+    property string paletteColor14: "#f5c2c2"
+    property string paletteColor15: "#94e2e2"
+    property string paletteColor16: "#bac2c2"
 
     property string activeColor: paletteColor5
     property string selectedColor: paletteColor3

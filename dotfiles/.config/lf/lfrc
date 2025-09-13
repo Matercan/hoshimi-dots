@@ -8,13 +8,16 @@ set preview true
 set previewer ~/.config/lf/preview.sh
 set cleaner ~/.config/lf/cleaner.sh
 
+# maps
 map <delete> delete
 map q quit
 map N $editor $pwid
+map a push %mkdir<space>
 
 map f $$EDITOR $(fzf)
-cmd fzf $$EDITOR $(find . -name "$1" | fzf)
 map f push :fzf<space>
+
+cmd fzf $$EDITOR $(find . -name "$1" | fzf)
 cmd fzf_jump ${{
     #res="$(find * | fzf --header='Jump to location')"
     res="$(fzf --walker=file,dir,follow,hidden --walker-skip=.git,node_modules,.Trash)"

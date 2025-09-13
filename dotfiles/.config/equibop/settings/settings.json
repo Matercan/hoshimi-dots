@@ -341,9 +341,9 @@
         },
         "NoBlockedMessages": {
             "enabled": true,
-            "ignoreMessages": false,
-            "applyToIgnoredUsers": true,
-            "hideRepliesToBlockedMessages": false
+            "hideRepliesToBlockedMessages": false,
+            "disableNotifications": false,
+            "alsoHideIgnoredUsers": true
         },
         "NoDevtoolsWarning": {
             "enabled": false
@@ -1350,7 +1350,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1757346050963
+        "settingsSyncVersion": 1757761038423
     },
     "enabledThemeLinks": [],
     "ignoreResetWarning": false,

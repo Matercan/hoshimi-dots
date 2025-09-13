@@ -67,7 +67,7 @@ lspconfig.omnisharp.setup({
 })
 lspconfig.clangd.setup({
   on_attach = nvlsp.on_attach,
-  capabilities = nvlsp.capabilities
+  capabilities = nvlsp.capabilities,
 })
 lspconfig.qmlls.setup({
   on_attach = nvlsp.on_attach,

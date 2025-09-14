@@ -15,16 +15,15 @@ require("gruvbox").setup({
   invert_selection = false,
   invert_signs = false,
   invert_tabline = false,
-  inverse = true, -- invert background for search, diffs, statuslines and errors
-  contrast = "", -- can be "hard", "soft" or empty string
+  inverse = true,    -- invert background for search, diffs, statuslines and errors
+  contrast = "hard", -- can be "hard", "soft" or empty string
   palette_overrides = {
     -- Put in your custom colors here
   },
   overrides = {
-    -- Change which attributes have different colors 
+    -- Change which attributes have different colors
   },
   dim_inactive = false,
-  transparent_mode = false,
+  transparent_mode = true,
 })
 vim.cmd("colorscheme gruvbox")
-

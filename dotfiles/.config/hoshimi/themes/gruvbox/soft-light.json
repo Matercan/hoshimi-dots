@@ -1,0 +1,77 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Matercan/hoshimi-cli/refs/heads/main/schema/theme_schema.json",
+  "wallpaper": "The-Wind_Rises.jpg",
+  "bar": {
+    "globals": {
+      "visible": true,
+      "position": "left"
+    },
+    "WorkspaceWidget": {
+      "position": 1,
+      "visible": true,
+      "location": "center"
+    },
+    "WindowTitle": {
+      "position": 0,
+      "visible": false,
+      "location": "center"
+    },
+    "Cava": {
+      "position": 2,
+      "visible": true,
+      "location": "bottom"
+    },
+    "Taskbar": {
+      "position": 0,
+      "location": "center",
+      "visible": false
+    },
+    "Widgets": {
+      "positon": 5,
+      "location": "center",
+      "visible": true,
+      "ClockWidget": {
+        "visible": true,
+        "location": "center"
+      },
+      "BatteryWidget": {
+        "visible": true,
+        "location": "top"
+      },
+      "VolumeWidget": {
+        "visible": true,
+        "location": "bottom"
+      }
+    },
+    "TrayWidget": {
+      "position": 4,
+      "visible": true,
+      "location": "bottom"
+    },
+    "DevButtons": {
+      "position": 6,
+      "visible": true,
+      "location": "bottom"
+    }
+  },
+  "colors": {
+    "backgroundColor": "f2e5bc",
+    "foregroundColor": "654735",
+    "paletteColor1": "ebdbb2",
+    "paletteColor2": "c14a4a",
+    "paletteColor3": "6c782e",
+    "paletteColor4": "b47109",
+    "paletteColor5": "45707a",
+    "paletteColor6": "945e80",
+    "paletteColor7": "4c7a5d",
+    "paletteColor8": "654735",
+    "paletteColor9": "f3eac7",
+    "paletteColor10": "c14a4a",
+    "paletteColor11": "6c782e",
+    "paletteColor12": "b47109",
+    "paletteColor13": "45707a",
+    "paletteColor14": "945e80",
+    "paletteColor15": "4c7a5d",
+    "paletteColor16": "654735"
+  }
+}

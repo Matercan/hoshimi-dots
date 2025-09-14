@@ -1,3 +1,9 @@
+// For testing, you could replace the uniforms with constants:
+float iTimeCursorChange = 0.0;
+vec4 iCurrentCursor = vec4(0.0, 0.0, 20.0, 30.0);  // x, y, width, height
+vec4 iPreviousCursor = vec4(100.0, 100.0, 20.0, 30.0);
+vec4 iCurrentCursorColor = vec4(1.0, 1.0, 1.0, 1.0);
+
 float getSdfRectangle(in vec2 p, in vec2 xy, in vec2 b)
 {
     vec2 d = abs(p - xy) - b;
@@ -64,7 +70,7 @@ vec4 saturate(vec4 color, float factor) {
     return mix(vec4(gray), color, factor);
 }
 
-vec4 TRAIL_COLOR = iCurrentCursorColor;
+vec4 TRAIL_COLOR = vec4(1.0, 0.5, 0.0, 1.0); // Orange color, for example
 const float OPACITY = 0.6;
 const float DURATION = 0.3; //IN SECONDS
 

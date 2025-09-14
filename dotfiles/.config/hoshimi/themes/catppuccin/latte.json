@@ -1,5 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/Matercan/hoshimi-cli/refs/heads/main/schema/theme_schema.json",
+  "wallpaper": "akiyama-mizuki.jpg",
   "bar": {
     "globals": {
       "visible": true,

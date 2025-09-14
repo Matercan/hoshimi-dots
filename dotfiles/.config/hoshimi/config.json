@@ -4,5 +4,5 @@
     "wallpaperDirectory": "~/Pictures/wallpapers/",
     "iconDirectory": "/usr/share/icons/candy-icons/"
   },
-  "config": "catppuccin/frappe"
+  "config": "gruvbox/medium-dark"
 }

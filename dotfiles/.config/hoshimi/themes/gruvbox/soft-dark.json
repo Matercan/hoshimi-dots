@@ -1,0 +1,77 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Matercan/hoshimi-cli/refs/heads/main/schema/theme_schema.json",
+  "wallpaper": "tanjiro-kamado-gruv.jpg",
+  "bar": {
+    "globals": {
+      "visible": true,
+      "position": "left"
+    },
+    "WorkspaceWidget": {
+      "position": 1,
+      "visible": true,
+      "location": "center"
+    },
+    "WindowTitle": {
+      "position": 0,
+      "visible": false,
+      "location": "center"
+    },
+    "Cava": {
+      "position": 2,
+      "visible": true,
+      "location": "bottom"
+    },
+    "Taskbar": {
+      "position": 0,
+      "location": "center",
+      "visible": false
+    },
+    "Widgets": {
+      "positon": 5,
+      "location": "center",
+      "visible": true,
+      "ClockWidget": {
+        "visible": true,
+        "location": "center"
+      },
+      "BatteryWidget": {
+        "visible": true,
+        "location": "top"
+      },
+      "VolumeWidget": {
+        "visible": true,
+        "location": "bottom"
+      }
+    },
+    "TrayWidget": {
+      "position": 4,
+      "visible": true,
+      "location": "bottom"
+    },
+    "DevButtons": {
+      "position": 6,
+      "visible": true,
+      "location": "bottom"
+    }
+  },
+  "colors": {
+    "backgroundColor": "32302f",
+    "foregroundColor": "d4be98",
+    "paletteColor1": "252423",
+    "paletteColor2": "ea6962",
+    "paletteColor3": "a9b665",
+    "paletteColor4": "d8a657",
+    "paletteColor5": "7daea3",
+    "paletteColor6": "d3869b",
+    "paletteColor7": "89b482",
+    "paletteColor8": "d4be98",
+    "paletteColor9": "32302f",
+    "paletteColor10": "ea6962",
+    "paletteColor11": "a9b665",
+    "paletteColor12": "d8a657",
+    "paletteColor13": "7daea3",
+    "paletteColor14": "d3869b",
+    "paletteColor15": "89b482",
+    "paletteColor16": "d4be98"
+  }
+}

@@ -4,9 +4,7 @@ set ifs "\n"
 set icons true
 
 # Preview settings
-set preview true
-set previewer ~/.config/lf/preview.sh
-set cleaner ~/.config/lf/cleaner.sh
+set previewer '~/.config/lf/preview.sh'
 
 # maps
 map <delete> delete

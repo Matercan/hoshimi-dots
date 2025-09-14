@@ -4,3 +4,5 @@ shell-integration = zsh
 background-blur = 10
 font-family = "Fira Code iScript"
 font-size = 9
+
+custom-shader = shaders/cursor-smear.glsl

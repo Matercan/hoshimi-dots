@@ -1,0 +1,76 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Matercan/hoshimi-cli/refs/heads/main/schema/theme_schema.json",
+  "bar": {
+    "globals": {
+      "visible": true,
+      "position": "left"
+    },
+    "WorkspaceWidget": {
+      "position": 1,
+      "visible": true,
+      "location": "center"
+    },
+    "WindowTitle": {
+      "position": 0,
+      "visible": false,
+      "location": "center"
+    },
+    "Cava": {
+      "position": 2,
+      "visible": true,
+      "location": "bottom"
+    },
+    "Taskbar": {
+      "position": 0,
+      "location": "center",
+      "visible": false
+    },
+    "Widgets": {
+      "positon": 5,
+      "location": "center",
+      "visible": true,
+      "ClockWidget": {
+        "visible": true,
+        "location": "center"
+      },
+      "BatteryWidget": {
+        "visible": true,
+        "location": "top"
+      },
+      "VolumeWidget": {
+        "visible": true,
+        "location": "bottom"
+      }
+    },
+    "TrayWidget": {
+      "position": 4,
+      "visible": true,
+      "location": "bottom"
+    },
+    "DevButtons": {
+      "position": 6,
+      "visible": true,
+      "location": "bottom"
+    }
+  },
+  "colors": {
+    "backgroundColor": "#eff1f5",
+    "foregroundColor": "#4c4f69",
+    "paletteColor1": "#5c5f77",
+    "paletteColor2": "#d20f39",
+    "paletteColor3": "#40a02b",
+    "paletteColor4": "#df8e1d",
+    "paletteColor5": "#1e66f5",
+    "paletteColor6": "#ea76cb",
+    "paletteColor7": "#179299",
+    "paletteColor8": "#acb0be",
+    "paletteColor9": "#6c6f85",
+    "paletteColor10": "#d20f39",
+    "paletteColor11": "40a02b",
+    "paletteColor12": "#1e66f5",
+    "paletteColor13": "#1e66f5",
+    "paletteColor14": "#ea76cb",
+    "paletteColor15": "#179299",
+    "paletteColor16": "#bcc0cc"
+  }
+}

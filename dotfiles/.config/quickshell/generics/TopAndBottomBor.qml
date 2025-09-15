@@ -1,5 +1,4 @@
 import QtQuick
-import qs.functions as F
 
 Rectangle {
     id: reusableBorderRect

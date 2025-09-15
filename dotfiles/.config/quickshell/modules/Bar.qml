@@ -104,9 +104,9 @@ Scope {
 
                         sourceComponent: Rectangle {
                             id: widgets
-                            implicitWidth: 35
+                            implicitWidth: G.Variables.barSize
                             implicitHeight: widgetLayout.implicitHeight + 16  // Add padding
-                            color: "transparent"
+                            color: F.Colors.getPaletteColor("black")
                             border.color: F.Colors.borderColor
                             border.width: 1
                             radius: 8
@@ -118,44 +118,44 @@ Scope {
                                 id: widgetLayout
                                 anchors.fill: parent
                                 anchors.margins: 8
-                                spacing: 5
+                                spacing: 4
 
                                 Loader {
                                     active: true
                                     Layout.fillWidth: true
                                     Layout.alignment: Qt.AlignHCenter
+                                    Layout.preferredWidth: status.width
+                                    Layout.preferredHeight: status.height
 
-                                    sourceComponent: BatteryWidget {
-                                        Layout.fillWidth: true
-                                        Layout.alignment: Qt.AlignHCenter
+                                    SystemStatus {
+                                        id: status
+                                        anchors.centerIn: parent
+                                        topLevel: window
+                                        widgetLayoutY: widgets.parent.y + widgetLayout.anchors.margins
                                     }
                                 }
-
-                                ClockWidget {
-                                    barY: widgets.y
-                                    Layout.fillWidth: true
-                                    Layout.alignment: Qt.AlignHCenter
-                                }
-
                                 Loader {
                                     active: true
                                     Layout.fillWidth: true
                                     Layout.alignment: Qt.AlignHCenter
-                                    sourceComponent: VolumeWidget {
-                                        Layout.fillWidth: true
-                                        Layout.alignment: Qt.AlignHCenter
-                                        Layout.preferredHeight: implicitHeight || 20
-                                    }
+                                }
+                                Loader {
+                                    active: true
+                                    Layout.fillWidth: true
+                                    Layout.alignment: Qt.AlignHCenter
+                                }
+                                Loader {
+                                    active: true
+                                    Layout.fillWidth: true
+                                    Layout.alignment: Qt.AlignHCenter
+                                }
+                                Loader {
+                                    active: true
+                                    Layout.fillWidth: true
+                                    Layout.alignment: Qt.AlignHCenter
                                 }
                             }
                         }
-                    }
-
-                    DesktopButtons {
-                        implicitWidth: parent.width
-                        Layout.fillWidth: true
-                        Layout.alignment: Qt.AlignBottom
-                        Layout.bottomMargin: 6
                     }
                 }
             }

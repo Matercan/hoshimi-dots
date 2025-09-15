@@ -56,35 +56,35 @@ Singleton {
      */
     function getPaletteColor(colorName: string): string {
         switch (colorName) {
-        case "teal":
+        case "black":
             return paletteColor1;
-        case "red":
+        case "maroon":
             return paletteColor2;
         case "green":
             return paletteColor3;
-        case "orange":
+        case "olive":
             return paletteColor4;
-        case "blue":
+        case "navy":
             return paletteColor5;
-        case "pink":
+        case "purple":
             return paletteColor6;
-        case "teal two":
+        case "teal":
             return paletteColor7;
-        case "grey":
+        case "silver":
             return paletteColor8;
-        case "dark grey":
+        case "grey":
             return paletteColor9;
-        case "light red":
+        case "red":
             return paletteColor10;
-        case "light green":
+        case "lime":
             return paletteColor11;
-        case "light orange":
+        case "yellow":
             return paletteColor12;
-        case "light blue":
+        case "blue":
             return paletteColor13;
-        case "light pink":
+        case "fuchsia":
             return paletteColor14;
-        case "cyan":
+        case "aqua":
             return paletteColor15;
         case "white":
             return paletteColor16;

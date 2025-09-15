@@ -10,8 +10,10 @@ AnimatedImage {
     source: Variables.wallpaper
     antialiasing: false
     asynchronous: true
-    width: 1980
-    height: 1080
+    width: Quickshell.screens[0].width - Variables.barSize
+    height: Quickshell.screens[0].height
+    anchors.bottom: parent.bottom
+    anchors.right: parent.right
     mipmap: true
     retainWhileLoading: true
     cache: false

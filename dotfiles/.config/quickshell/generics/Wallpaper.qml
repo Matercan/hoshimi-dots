@@ -10,7 +10,7 @@ AnimatedImage {
     source: Variables.wallpaper
     antialiasing: false
     asynchronous: true
-    width: Quickshell.screens[0].width - Variables.barSize
+    width: Quickshell.screens[0].width
     height: Quickshell.screens[0].height
     anchors.bottom: parent.bottom
     anchors.right: parent.right

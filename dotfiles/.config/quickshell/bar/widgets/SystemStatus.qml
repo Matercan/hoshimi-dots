@@ -2,7 +2,6 @@ pragma ComponentBehavior: Bound
 
 import Quickshell
 import QtQuick
-import QtQuick.Shapes
 import QtQuick.Layouts
 import QtQuick.Effects
 
@@ -35,8 +34,15 @@ Item {
             height: width
 
             fillColor: Colors.interpolate(Colors.getPaletteColor("navy"), Colors.getPaletteColor("red"), System.percentMemory)
-            underlyingColor: Colors.transparentize(Colors.getPaletteColor("teal"), 0.7)
+            underlyingColor: Colors.transparentize(Colors.getPaletteColor("silver"), 0.7)
             percent: System.percentMemory
+
+            Behavior on percent {
+                NumberAnimation {
+                    duration: MaterialEasing.standardTime
+                    easing.type: Easing.OutCubic
+                }
+            }
         }
 
         layer.enabled: true
@@ -72,8 +78,8 @@ Item {
 
         Rectangle {
             id: rect
-            height: 160
-            width: popupArea.containsMouse || area.containsMouse ? 280 : 0
+            height: systemInfoCard.height
+            width: popupArea.containsMouse || area.containsMouse ? systemInfoCard.width : 0
 
             Behavior on width {
                 NumberAnimation {
@@ -91,10 +97,11 @@ Item {
 
             Rectangle {
                 id: systemInfoCard
-                width: 280
-                height: 160
+                width: systemInfoContent.width + margins * 2
+                height: systemInfoContent.height + header.height + 3 * margins
                 color: Colors.backgroundColor  // Surface container
-                radius: 16  // M3 uses larger radius (12-16px)
+                radius: 16
+                property real margins: 12
 
                 // Subtle elevation shadow
                 layer.enabled: true
@@ -102,11 +109,12 @@ Item {
                 // Header section with accent
                 Rectangle {
                     id: header
+                    anchors.horizontalCenter: parent.horizontalCenter
                     width: parent.width
                     height: 24
                     color: Colors.getPaletteColor("teal")
                     radius: 16
-                    opacity: 0.12  // M3 surface tint
+                    opacity: 0.12
 
                     Rectangle {
                         anchors.left: parent.left
@@ -118,9 +126,93 @@ Item {
                     }
                 }
 
+                Text {
+                    text: "System Information"
+                    color: Colors.foregroundColor
+                    anchors.centerIn: header
+                    font.pixelSize: 10
+                }
+
                 // Content container
-                ColumnLayout {
-                    Rectangle {}
+                GridLayout {
+                    id: systemInfoContent
+                    y: systemInfoCard.height - height - systemInfoCard.margins
+                    anchors.horizontalCenter: parent.horizontalCenter
+
+                    columns: 2
+                    rows: 2
+
+                    ProgressRing {
+                        Layout.preferredWidth: 60
+                        Layout.preferredHeight: 60
+
+                        fillColor: Colors.interpolate(Colors.getPaletteColor("navy"), Colors.getPaletteColor("red"), System.percentMemory)
+                        underlyingColor: Colors.transparentize(Colors.getPaletteColor("silver"), 0.7)
+                        percent: System.percentMemory
+                        showText: true
+                        text: "RAM:"
+
+                        Behavior on percent {
+                            NumberAnimation {
+                                duration: MaterialEasing.standardTime
+                                easing.type: Easing.OutCubic
+                            }
+                        }
+                    }
+
+                    ProgressRing {
+                        Layout.preferredWidth: 60
+                        Layout.preferredHeight: 60
+
+                        fillColor: Colors.interpolate(Colors.getPaletteColor("navy"), Colors.getPaletteColor("red"), System.load)
+                        underlyingColor: Colors.transparentize(Colors.getPaletteColor("silver"), 0.7)
+                        percent: System.load
+                        showText: true
+                        text: "CPU:"
+
+                        Behavior on percent {
+                            NumberAnimation {
+                                duration: MaterialEasing.standardTime
+                                easing.type: Easing.OutCubic
+                            }
+                        }
+                    }
+
+                    ProgressRing {
+                        Layout.preferredWidth: 60
+                        Layout.preferredHeight: 60
+
+                        fillColor: Colors.interpolate(Colors.getPaletteColor("navy"), Colors.getPaletteColor("red"), System.percentSwap)
+                        underlyingColor: Colors.transparentize(Colors.getPaletteColor("silver"), 0.7)
+                        percent: System.percentSwap
+                        showText: true
+                        text: "Swap:"
+
+                        Behavior on percent {
+                            NumberAnimation {
+                                duration: MaterialEasing.standardTime
+                                easing.type: Easing.OutCubic
+                            }
+                        }
+                    }
+
+                    ProgressRing {
+                        Layout.preferredWidth: 60
+                        Layout.preferredHeight: 60
+
+                        fillColor: Colors.interpolate(Colors.getPaletteColor("navy"), Colors.getPaletteColor("red"), System.temperature / 100)
+                        underlyingColor: Colors.transparentize(Colors.getPaletteColor("silver"), 0.7)
+                        percent: System.temperature / 100
+                        showText: true
+                        text: "Temp:"
+
+                        Behavior on percent {
+                            NumberAnimation {
+                                duration: MaterialEasing.standardTime
+                                easing.type: Easing.OutCubic
+                            }
+                        }
+                    }
                 }
             }
         }

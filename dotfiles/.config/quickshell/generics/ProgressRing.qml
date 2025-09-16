@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Shapes
+import QtQuick.Layouts
 
 Rectangle {
     id: root
@@ -11,6 +12,8 @@ Rectangle {
     property real strokeWidth: 4
     property real startAngle: -90  // Start at top (12 o'clock)
 
+    property bool showText: false
+    property string text: ""
     color: "transparent"
 
     // Helper function for progress coordinates
@@ -77,5 +80,40 @@ Rectangle {
                 direction: PathArc.Clockwise
             }
         }
+    }
+
+    ColumnLayout {
+
+        visible: root.showText
+        anchors.centerIn: parent
+        implicitWidth: iconText.width
+        implicitHeight: iconText.height + percentText.height + spacing
+        spacing: 2
+
+        Text {
+            id: iconText
+            Layout.alignment: Qt.AlignCenter
+
+            text: root.text
+            font.pixelSize: Math.min(root.width, root.height) * 0.15
+            font.weight: Font.Medium
+            color: root.fillColor
+            visible: root.showText
+        }
+
+        Text {
+            id: percentText
+            Layout.alignment: Qt.AlignCenter
+
+            text: Math.round(root.percent * 100) + "%"
+            font.pixelSize: Math.min(root.width, root.height) * 0.15
+            font.weight: Font.Medium
+            color: root.fillColor
+            visible: root.showText
+        }
+    }
+
+    Rectangle {
+        anchors.centerIn: parent
     }
 }

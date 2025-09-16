@@ -2,13 +2,14 @@ pragma ComponentBehavior: Bound
 
 import Quickshell
 import QtQuick
-import QtQuick.Layouts
 import QtQuick.Shapes
+import QtQuick.Layouts
 import QtQuick.Effects
 
 import qs.globals
 import qs.functions
 import qs.sources
+import qs.generics
 
 Item {
     id: root
@@ -27,30 +28,15 @@ Item {
         radius: 8
         color: Colors.getPaletteColor("grey")
 
-        Shape {
-            width: widget.width
-            height: widget.height
+        ProgressRing {
             anchors.centerIn: parent
-            anchors.bottomMargin: parent.height / 2
-            preferredRendererType: Shape.CurveRenderer
 
-            ShapePath {
-                id: ramRing
-                strokeWidth: 4
-                strokeStyle: ShapePath.SolidLine
-                strokeColor: Colors.interpolate(Colors.getPaletteColor("navy"), Colors.getPaletteColor("red"), parseFloat(Memory.memoryUsed) / parseFloat(Memory.totalMemory))
-                fillColor: "transparent"
-                startX: widget.width / 2
-                startY: (widget.height / 4)  // Start at top of circle
+            width: 0.6 * parent.width
+            height: width
 
-                PathArc {
-                    radiusX: widget.width / 4
-                    radiusY: widget.height / 4
-                    x: Maths.getProgressCoords(parseFloat(Memory.memoryUsed) / parseFloat(Memory.totalMemory), widget.width / 4, widget.width / 2, widget.height / 2)[0]
-                    y: Maths.getProgressCoords(parseFloat(Memory.memoryUsed) / parseFloat(Memory.totalMemory), widget.width / 4, widget.width / 2, widget.height / 2)[1]
-                    useLargeArc: parseFloat(Memory.memoryUsed) / parseFloat(Memory.totalMemory) > 0.5
-                }
-            }
+            fillColor: Colors.interpolate(Colors.getPaletteColor("navy"), Colors.getPaletteColor("red"), System.percentMemory)
+            underlyingColor: Colors.transparentize(Colors.getPaletteColor("teal"), 0.7)
+            percent: System.percentMemory
         }
 
         layer.enabled: true
@@ -58,7 +44,7 @@ Item {
             shadowColor: Colors.getPaletteColor("teal")
             shadowEnabled: true
             blurMax: 10
-            shadowScale: area.containsMouse || popupArea.containsMouse ? 1 : 0
+            shadowScale: area.containsMouse ? 1 : 0
 
             Behavior on shadowScale {
                 NumberAnimation {
@@ -79,17 +65,15 @@ Item {
         anchor.window: root.topLevel
         anchor.rect.x: Variables.barSize - 8
         anchor.rect.y: root.y + root.widgetLayoutY
-        width: rect.width + 8
-        height: rect.height + 8
+        implicitWidth: rect.width + 8
+        implicitHeight: rect.height + 8
         visible: true
         color: "transparent"
 
-        property bool showContent: false
-
         Rectangle {
             id: rect
-            height: 200
-            width: popupArea.containsMouse || area.containsMouse ? 200 : 0
+            height: 160
+            width: popupArea.containsMouse || area.containsMouse ? 280 : 0
 
             Behavior on width {
                 NumberAnimation {
@@ -104,6 +88,41 @@ Item {
 
             color: Colors.backgroundColor
             radius: 8
+
+            Rectangle {
+                id: systemInfoCard
+                width: 280
+                height: 160
+                color: Colors.backgroundColor  // Surface container
+                radius: 16  // M3 uses larger radius (12-16px)
+
+                // Subtle elevation shadow
+                layer.enabled: true
+
+                // Header section with accent
+                Rectangle {
+                    id: header
+                    width: parent.width
+                    height: 24
+                    color: Colors.getPaletteColor("teal")
+                    radius: 16
+                    opacity: 0.12  // M3 surface tint
+
+                    Rectangle {
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        anchors.bottom: parent.bottom
+                        height: parent.height / 2
+                        color: parent.color
+                        opacity: parent.opacity
+                    }
+                }
+
+                // Content container
+                ColumnLayout {
+                    Rectangle {}
+                }
+            }
         }
 
         MouseArea {

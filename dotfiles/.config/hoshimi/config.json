@@ -1,8 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/Matercan/hoshimi-cli/refs/heads/main/schema/json_schema.json",
   "globals": {
-    "wallpaperDirectory": "~/Pictures/wallpapers/",
-    "iconDirectory": "/usr/share/icons/candy-icons/"
+    "iconDirectory": "/usr/share/icons/candy-icons/",
+    "wallpaperDirectory": "/home/matercan/Pictures/wallpapers"
+  },
+  "gloabls": {
+    "wallpaperDirectory": "hehe it worked"
   },
   "config": "gruvbox/medium-dark"
 }

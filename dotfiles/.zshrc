@@ -1,6 +1,4 @@
-fastfetch
-echo "おかえりなさ～いマスター"
-echo "\n"
+echo "おかえりなさ～いマスター\n"
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -9,7 +7,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Created by newuser for 5.9
+
 
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -125,6 +123,8 @@ alias svim="sudo -e"
 # environemnt variables
 export SUDO_EDITOR=nvim
 export EDITOR=nvim
+export HOSHIMI_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/hoshimi"
+
 
 # Shell integrations
 eval "$(fzf --zsh)"
@@ -148,3 +148,4 @@ PERL5LIB="/home/matercan/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5
 PERL_LOCAL_LIB_ROOT="/home/matercan/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/matercan/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/matercan/perl5"; export PERL_MM_OPT;
+

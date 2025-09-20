@@ -143,8 +143,8 @@ Item {
                     rows: 2
 
                     ProgressRing {
-                        Layout.preferredWidth: 60
-                        Layout.preferredHeight: 60
+                        Layout.preferredWidth: 100
+                        Layout.preferredHeight: 100
 
                         fillColor: Colors.interpolate(Colors.getPaletteColor("navy"), Colors.getPaletteColor("red"), System.percentMemory)
                         underlyingColor: Colors.transparentize(Colors.getPaletteColor("silver"), 0.7)
@@ -161,8 +161,8 @@ Item {
                     }
 
                     ProgressRing {
-                        Layout.preferredWidth: 60
-                        Layout.preferredHeight: 60
+                        Layout.preferredWidth: 100
+                        Layout.preferredHeight: 100
 
                         fillColor: Colors.interpolate(Colors.getPaletteColor("navy"), Colors.getPaletteColor("red"), System.load)
                         underlyingColor: Colors.transparentize(Colors.getPaletteColor("silver"), 0.7)
@@ -179,8 +179,8 @@ Item {
                     }
 
                     ProgressRing {
-                        Layout.preferredWidth: 60
-                        Layout.preferredHeight: 60
+                        Layout.preferredWidth: 100
+                        Layout.preferredHeight: 100
 
                         fillColor: Colors.interpolate(Colors.getPaletteColor("navy"), Colors.getPaletteColor("red"), System.percentSwap)
                         underlyingColor: Colors.transparentize(Colors.getPaletteColor("silver"), 0.7)
@@ -197,14 +197,43 @@ Item {
                     }
 
                     ProgressRing {
-                        Layout.preferredWidth: 60
-                        Layout.preferredHeight: 60
+                        id: tempRing
+                        Layout.preferredWidth: 100
+                        Layout.preferredHeight: 100
 
                         fillColor: Colors.interpolate(Colors.getPaletteColor("navy"), Colors.getPaletteColor("red"), System.temperature / 100)
                         underlyingColor: Colors.transparentize(Colors.getPaletteColor("silver"), 0.7)
                         percent: System.temperature / 100
-                        showText: true
+                        showText: false
                         text: "Temp:"
+
+                        ColumnLayout {
+
+                            anchors.centerIn: parent
+                            implicitWidth: iconText.width
+                            implicitHeight: iconText.height + percentText.height + spacing
+                            spacing: 2
+
+                            Text {
+                                id: iconText
+                                Layout.alignment: Qt.AlignCenter
+
+                                text: "temp"
+                                font.pixelSize: Math.min(tempRing.width, tempRing.height) * 0.15
+                                font.weight: Font.Medium
+                                color: tempRing.fillColor
+                            }
+
+                            Text {
+                                id: percentText
+                                Layout.alignment: Qt.AlignCenter
+
+                                text: Math.round(tempRing.percent * 100) + "°C"
+                                font.pixelSize: Math.min(tempRing.width, tempRing.height) * 0.15
+                                font.weight: Font.Medium
+                                color: tempRing.fillColor
+                            }
+                        }
 
                         Behavior on percent {
                             NumberAnimation {

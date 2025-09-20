@@ -1019,9 +1019,6 @@
         "JellyfinRichPresence": {
             "enabled": false
         },
-        "JumpToStart": {
-            "enabled": false
-        },
         "Jumpscare": {
             "enabled": false
         },
@@ -1342,6 +1339,9 @@
         },
         "ToneIndicators": {
             "enabled": false
+        },
+        "JumpTo": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -1354,7 +1354,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1757774974653
+        "settingsSyncVersion": 1758383980714
     },
     "enabledThemeLinks": [],
     "ignoreResetWarning": false,

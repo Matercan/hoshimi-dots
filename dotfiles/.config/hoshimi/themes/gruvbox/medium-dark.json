@@ -1,6 +1,5 @@
 {
   "$schema": "https://raw.githubusercontent.com/Matercan/hoshimi-cli/refs/heads/main/schema/theme_schema.json",
-  "wallpaper": "my-neighbor-totoro-sunflowers.png",
   "bar": {
     "globals": {
       "visible": true,
@@ -73,5 +72,6 @@
     "paletteColor14": "d3869b",
     "paletteColor15": "89b482",
     "paletteColor16": "d4be98"
-  }
+  },
+  "wallpaper": "chill.gif"
 }

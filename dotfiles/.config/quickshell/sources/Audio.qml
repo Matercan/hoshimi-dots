@@ -1,35 +1,75 @@
 pragma Singleton
-import Quickshell
-import Quickshell.Io
-import QtQuick
 
-import qs.globals as G
+import Quickshell
+import Quickshell.Services.Pipewire
 
 Singleton {
-    id: scope
-    property string volume
-    property real volumePercent
+    id: root
 
-    Process {
-        id: audioProc
-        command: ["sh", "-c", "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2}'"]
-        running: true
+    readonly property var nodes: Pipewire.nodes.values.reduce((acc, node) => {
+        if (!node.isStream) {
+            if (node.isSink)
+                acc.sinks.push(node);
+            else if (node.audio)
+                acc.sources.push(node);
+        }
+        return acc;
+    }, {
+        sources: [],
+        sinks: []
+    })
 
-        stdout: StdioCollector {
-            onStreamFinished: {
-                try {
-                    scope.volumePercent = parseFloat(this.text) * 100;
-                    scope.volume = (parseFloat(this.text) * 100).toString() + "%";
-                } catch (e) {
-                    console.log("failed to parse volume", e);
-                }
-            }
+    readonly property list<PwNode> sinks: nodes.sinks
+    readonly property list<PwNode> sources: nodes.sources
+
+    readonly property PwNode sink: Pipewire.defaultAudioSink
+    readonly property PwNode source: Pipewire.defaultAudioSource
+
+    readonly property bool muted: !!sink?.audio?.muted
+    readonly property real volume: sink?.audio?.volume ?? 0
+
+    readonly property bool sourceMuted: !!source?.audio?.muted
+    readonly property real sourceVolume: source?.audio?.volume ?? 0
+
+    function setVolume(newVolume: real): void {
+        if (sink?.ready && sink?.audio) {
+            sink.audio.muted = false;
+            sink.audio.volume = Math.max(0, Math.min(1, newVolume));
         }
     }
-    Timer {
-        interval: G.Variables.timerProcInterval
-        repeat: true
-        running: true
-        onTriggered: audioProc.running = true
+
+    function incrementVolume(amount: real): void {
+        setVolume(volume + (amount || 0.05));
+    }
+
+    function decrementVolume(amount: real): void {
+        setVolume(volume - (amount || 0.05));
+    }
+
+    function setSourceVolume(newVolume: real): void {
+        if (source?.ready && source?.audio) {
+            source.audio.muted = false;
+            source.audio.volume = Math.max(0, Math.min(1, newVolume));
+        }
+    }
+
+    function incrementSourceVolume(amount: real): void {
+        setSourceVolume(sourceVolume + (amount || 0.05));
+    }
+
+    function decrementSourceVolume(amount: real): void {
+        setSourceVolume(sourceVolume - (amount || 0.05));
+    }
+
+    function setAudioSink(newSink: PwNode): void {
+        Pipewire.preferredDefaultAudioSink = newSink;
+    }
+
+    function setAudioSource(newSource: PwNode): void {
+        Pipewire.preferredDefaultAudioSource = newSource;
+    }
+
+    PwObjectTracker {
+        objects: [...root.sinks, ...root.sources]
     }
 }

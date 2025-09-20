@@ -124,10 +124,9 @@ Scope {
                                     active: true
                                     Layout.fillWidth: true
                                     Layout.alignment: Qt.AlignHCenter
-                                    Layout.preferredWidth: status.width
-                                    Layout.preferredHeight: status.height
+                                    Layout.preferredHeight: width
 
-                                    SystemStatus {
+                                    sourceComponent: SystemStatus {
                                         id: status
                                         anchors.centerIn: parent
                                         topLevel: window
@@ -138,6 +137,13 @@ Scope {
                                     active: true
                                     Layout.fillWidth: true
                                     Layout.alignment: Qt.AlignHCenter
+                                    Layout.preferredHeight: width
+
+                                    sourceComponent: Volume {
+                                        id: volume
+                                        anchors.centerIn: parent
+                                        topLevel: window
+                                    }
                                 }
                                 Loader {
                                     active: true

@@ -133,6 +133,9 @@ eval "$(zoxide init  --cmd cd zsh)"
 
 source "${ZINIT_HOME}/../plugins/romkatv---powerlevel10k/powerlevel10k.zsh-theme"
 
+
+PATH="${HOME}/.local/bin${PATH:+:${PATH}}"; export PATH;
+
 # Screensaver
 zinit light z-shell/zsh-morpho
 zstyle ":morpho" screen-saver "asciiquarium"

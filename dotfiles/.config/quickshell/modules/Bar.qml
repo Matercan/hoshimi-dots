@@ -7,8 +7,8 @@ import QtQuick.Layouts
 import qs.bar
 import qs.bar.widgets
 
-import qs.functions as F
-import qs.globals as G
+import qs.functions
+import qs.globals
 
 Scope {
     id: root
@@ -28,10 +28,10 @@ Scope {
             }
 
             color: "transparent"
-            implicitWidth: G.Variables.barSize
+            implicitWidth: Variables.barSize
 
             Rectangle {
-                color: F.Colors.palette.m3background
+                color: Colors.palette.m3background
                 implicitHeight: parent.height
                 implicitWidth: parent.width
 
@@ -42,15 +42,15 @@ Scope {
                     implicitWidth: parent.width
 
                     Text {
-                        Layout.margins: 5
+                        Layout.margins: Config.padding
                         text: ""
-                        font.family: G.Variables.fontFamily
+                        font.family: Variables.fontFamily
                         Layout.alignment: Qt.AlignCenter
-                        color: F.Colors.palette.m3onBackground
+                        color: Colors.palette.m3onBackground
                     }
 
                     Loader {
-                        active: true
+                        active: false
                         sourceComponent: WorkspaceWidget {
                             id: workspaces
 
@@ -74,7 +74,7 @@ Scope {
                     } */
 
                     Loader {
-                        active: true
+                        active: false
                         Layout.fillWidth: true
                         Layout.alignment: Qt.AlignBottom
 
@@ -104,12 +104,12 @@ Scope {
 
                         sourceComponent: Rectangle {
                             id: widgets
-                            implicitWidth: G.Variables.barSize
-                            implicitHeight: widgetLayout.implicitHeight + 16  // Add padding
-                            color: F.Colors.palette.m3surface
-                            border.color: F.Colors.palette.m3outlineVariant
+                            implicitWidth: Variables.barSize
+                            implicitHeight: widgetLayout.implicitHeight + 2 * Config.padding  // Add padding
+                            color: Colors.palette.m3surface
+                            border.color: Colors.palette.m3outlineVariant
                             border.width: 1
-                            radius: 8
+                            radius: Config.radius
                             Layout.fillWidth: true
                             Layout.alignment: Qt.AlignBottom
                             Layout.leftMargin: 1
@@ -117,8 +117,8 @@ Scope {
                             ColumnLayout {
                                 id: widgetLayout
                                 anchors.fill: parent
-                                anchors.margins: 8
-                                spacing: 4
+                                anchors.margins: Config.padding
+                                spacing: Config.spacing
 
                                 Loader {
                                     active: true

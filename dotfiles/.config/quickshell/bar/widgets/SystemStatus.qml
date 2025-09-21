@@ -13,7 +13,7 @@ import qs.generics
 
 Item {
     id: root
-    width: 0.9 * parent.width
+    width: Config.ratios[0] * parent.width
     height: width
 
     property real widgetLayoutY
@@ -25,13 +25,13 @@ Item {
         anchors.centerIn: parent
         width: parent.width
         height: parent.height
-        radius: 8
+        radius: Config.radius
         color: Colors.palette.m3background
 
         ProgressRing {
             anchors.centerIn: parent
 
-            width: 0.6 * parent.width
+            width: Config.ratios[1] * parent.width
             height: width
 
             fillColor: Colors.blend(Colors.palette.success, Colors.palette.warning, System.percentMemory)
@@ -72,10 +72,10 @@ Item {
 
     PopupWindow {
         anchor.window: root.topLevel
-        anchor.rect.x: Variables.barSize - 8
+        anchor.rect.x: Variables.barSize - Config.padding
         anchor.rect.y: root.y + root.widgetLayoutY
-        implicitWidth: rect.width + 8
-        implicitHeight: rect.height + 8
+        implicitWidth: rect.width + Config.padding
+        implicitHeight: rect.height + Config.padding
         visible: true
         color: "transparent"
 
@@ -106,19 +106,19 @@ Item {
             }
 
             anchors.top: parent.top
-            anchors.leftMargin: 8
+            anchors.leftMargin: Config.padding
             anchors.left: parent.left
 
             color: Colors.backgroundColor
-            radius: 8
+            radius: Config.radius
 
             Rectangle {
                 id: systemInfoCard
                 width: systemInfoContent.width + margins * 2
                 height: systemInfoContent.height + header.height + 3 * margins
                 color: Colors.backgroundColor  // Surface container
-                radius: 16
-                property real margins: 12
+                radius: 2 * Config.radius
+                property real margins: Config.padding * 3 / 2
 
                 // Subtle elevation shadow
                 layer.enabled: true
@@ -130,7 +130,7 @@ Item {
                     width: parent.width
                     height: 24
                     color: Colors.getPaletteColor("teal")
-                    radius: 16
+                    radius: 2 * Config.radius
                     opacity: 0.12
 
                     Rectangle {

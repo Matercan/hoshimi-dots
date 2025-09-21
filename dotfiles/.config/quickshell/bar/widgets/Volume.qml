@@ -9,7 +9,6 @@ import Qt5Compat.GraphicalEffects
 import qs.globals
 import qs.functions
 import qs.sources
-import qs.generics
 
 Item {
     id: root
@@ -25,7 +24,7 @@ Item {
         anchors.centerIn: parent
         width: parent.width
         height: parent.height
-        radius: 8
+        radius: Config.radius
         color: Colors.palette.m3background
 
         Image {
@@ -67,10 +66,10 @@ Item {
 
         PopupWindow {
             anchor.window: root.topLevel
-            anchor.rect.x: Variables.barSize - 8
+            anchor.rect.x: Variables.barSize - Config.padding
             anchor.rect.y: root.y + root.widgetLayoutY
-            implicitWidth: 500 + 8
-            implicitHeight: 500 + 8
+            implicitWidth: 500 + Config.padding
+            implicitHeight: 500 + Config.padding
             visible: true
             color: "transparent"
         }

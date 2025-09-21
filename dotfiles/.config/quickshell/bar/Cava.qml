@@ -109,7 +109,8 @@ MouseArea {
                     Behavior on height {
                         NumberAnimation {
                             duration: MaterialEasing.standardAccel * 0.1
-                            easing.type: Easing.OutQuad
+                            easing.type: Easing.Bezier
+                            easing.bezierCurve: MaterialEasing.standardAccel
                         }
                     }
                 }

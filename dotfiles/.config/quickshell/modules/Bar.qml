@@ -31,7 +31,7 @@ Scope {
             implicitWidth: G.Variables.barSize
 
             Rectangle {
-                color: F.Colors.backgroundColor
+                color: F.Colors.palette.m3background
                 implicitHeight: parent.height
                 implicitWidth: parent.width
 
@@ -46,7 +46,7 @@ Scope {
                         text: ""
                         font.family: G.Variables.fontFamily
                         Layout.alignment: Qt.AlignCenter
-                        color: F.Colors.foregroundColor
+                        color: F.Colors.palette.m3onBackground
                     }
 
                     Loader {
@@ -106,8 +106,8 @@ Scope {
                             id: widgets
                             implicitWidth: G.Variables.barSize
                             implicitHeight: widgetLayout.implicitHeight + 16  // Add padding
-                            color: F.Colors.getPaletteColor("black")
-                            border.color: F.Colors.borderColor
+                            color: F.Colors.palette.m3surface
+                            border.color: F.Colors.palette.m3outlineVariant
                             border.width: 1
                             radius: 8
                             Layout.fillWidth: true
@@ -143,6 +143,7 @@ Scope {
                                         id: volume
                                         anchors.centerIn: parent
                                         topLevel: window
+                                        widgetLayoutY: widgets.parent.y + widgetLayout.anchors.margins
                                     }
                                 }
                                 Loader {

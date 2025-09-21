@@ -24,7 +24,8 @@ Rectangle {
             property: "implicitWidth"
             to: rect.width
             duration: G.MaterialEasing.standardTime * 0.3
-            easing.type: Easing.OutCubic
+            easing.type: Easing.Bezier
+            easing.bezierCurve: G.MaterialEasing.standard
         }
 
         PropertyAction {
@@ -49,7 +50,8 @@ Rectangle {
             property: "implicitWidth"
             to: 0
             duration: G.MaterialEasing.emphasizedTime * 0.3
-            easing.type: Easing.InCubic
+            easing.type: Easing.Bezier
+            easing.bezierCurve: G.MaterialEasing.standard
         }
     }
     Connections {

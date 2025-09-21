@@ -10,25 +10,25 @@ Singleton {
     id: root
 
     // Colors used throuhgout the configuration
-    property string backgroundColor: "#1e1e1e"
-    property string foregroundColor: "#cdd6d6"
+    property string backgroundColor: "#282828"
+    property string foregroundColor: "#d4be98"
 
-    property string paletteColor1: "#454747"
-    property string paletteColor2: "#f38b8b"
-    property string paletteColor3: "#a6e3e3"
-    property string paletteColor4: "#f9e2e2"
-    property string paletteColor5: "#89b4b4"
-    property string paletteColor6: "#f5c2c2"
-    property string paletteColor7: "#94e2e2"
-    property string paletteColor8: "#a6adad"
-    property string paletteColor9: "#585b5b"
-    property string paletteColor10: "#f38b8b"
-    property string paletteColor11: "#a6e3e3"
-    property string paletteColor12: "#f9e2e2"
-    property string paletteColor13: "#89b4b4"
-    property string paletteColor14: "#f5c2c2"
-    property string paletteColor15: "#94e2e2"
-    property string paletteColor16: "#bac2c2"
+    property string paletteColor1: "#1b1b1b"
+    property string paletteColor2: "#ea6962"
+    property string paletteColor3: "#a9b665"
+    property string paletteColor4: "#d8a657"
+    property string paletteColor5: "#7daea3"
+    property string paletteColor6: "#d3869b"
+    property string paletteColor7: "#89b482"
+    property string paletteColor8: "#d4be98"
+    property string paletteColor9: "#32302f"
+    property string paletteColor10: "#ea6962"
+    property string paletteColor11: "#a9b665"
+    property string paletteColor12: "#d8a657"
+    property string paletteColor13: "#7daea3"
+    property string paletteColor14: "#d3869b"
+    property string paletteColor15: "#89b482"
+    property string paletteColor16: "#d4be98"
 
     property string activeColor: paletteColor5
     property string selectedColor: paletteColor3
@@ -145,7 +145,7 @@ Singleton {
         property color m3neutral_variant_paletteKeyColor: root.paletteColor9
 
         // Surface Colors (backgrounds)
-        property color m3background: root.paletteColor1
+        property color m3background: root.backgroundColor
         property color m3onBackground: root.paletteColor16
         property color m3surface: root.paletteColor1
         property color m3surfaceDim: root.paletteColor1
@@ -221,4 +221,6 @@ Singleton {
         property color info: root.paletteColor7
         property color onInfo: root.darken(root.paletteColor1, 0.1)
     }
+    // Instantiate the palette
+    property M3Palette palette: M3Palette {}
 }

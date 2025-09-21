@@ -1,4 +1,5 @@
 import qs.sources as S
+import qs.globals
 import qs.functions
 
 import QtQuick
@@ -19,6 +20,7 @@ Rectangle {
 
     NumberAnimation on y {
         easing.type: Easing.Bezier
+        easing.bezierCurve: MaterialEasing.expressiveEffects
     }
 
     ColumnLayout {

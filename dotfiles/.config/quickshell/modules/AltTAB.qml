@@ -60,11 +60,11 @@ PanelWindow {
                         orientation: Gradient.Horizontal
                         GradientStop {
                             position: 0
-                            color: F.Colors.transparentize(F.Colors.errorColor, 0.95)
+                            color: F.Colors.transparentize(F.Colors.palette.m3tertiary, 0.95)
                         }
                         GradientStop {
                             position: 1
-                            color: F.Colors.transparentize(F.Colors.passwordColor, 0.95)
+                            color: F.Colors.transparentize(F.Colors.palette.m3secondary, 0.95)
                         }
                     }
                     border.color: F.Colors.borderColor
@@ -132,7 +132,8 @@ PanelWindow {
                                     Behavior on opacity {
                                         NumberAnimation {
                                             duration: MaterialEasing.emphasizedTime
-                                            easing.type: Easing.OutQuart
+                                            easing.type: Easing.Bezier
+                                            easing.bezierCurve: MaterialEasing.emphasized
                                         }
                                     }
                                 }

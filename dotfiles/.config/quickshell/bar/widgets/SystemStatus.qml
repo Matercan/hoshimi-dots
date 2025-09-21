@@ -4,6 +4,7 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Effects
+import QtQuick.Shapes
 
 import qs.globals
 import qs.functions
@@ -25,7 +26,7 @@ Item {
         width: parent.width
         height: parent.height
         radius: 8
-        color: Colors.getPaletteColor("grey")
+        color: Colors.palette.m3background
 
         ProgressRing {
             anchors.centerIn: parent
@@ -33,14 +34,15 @@ Item {
             width: 0.6 * parent.width
             height: width
 
-            fillColor: Colors.interpolate(Colors.getPaletteColor("navy"), Colors.getPaletteColor("red"), System.percentMemory)
-            underlyingColor: Colors.transparentize(Colors.getPaletteColor("silver"), 0.7)
+            fillColor: Colors.blend(Colors.palette.success, Colors.palette.warning, System.percentMemory)
+            underlyingColor: Colors.transparentize(Colors.palette.m3surfaceBright, 0.7)
             percent: System.percentMemory
 
             Behavior on percent {
                 NumberAnimation {
                     duration: MaterialEasing.standardTime
-                    easing.type: Easing.OutCubic
+                    easing.type: Easing.Bezier
+                    easing.bezierCurve: MaterialEasing.standard
                 }
             }
         }
@@ -55,7 +57,8 @@ Item {
             Behavior on shadowScale {
                 NumberAnimation {
                     duration: MaterialEasing.standardTime
-                    easing.type: Easing.OutCurve
+                    easing.type: Easing.Bezier
+                    easing.bezierCurve: MaterialEasing.standard
                 }
             }
         }
@@ -76,6 +79,19 @@ Item {
         visible: true
         color: "transparent"
 
+        Shape {
+            anchors.centerIn: parent
+            width: 500
+            height: 500
+            preferredRendererType: Shape.CurveRenderer
+
+            ShapePath {
+                strokeWidth: 4
+                strokeStyle: ShapePath.SolidLine
+                strokeColor: Colors.palette.m3background
+            }
+        }
+
         Rectangle {
             id: rect
             height: systemInfoCard.height
@@ -84,7 +100,8 @@ Item {
             Behavior on width {
                 NumberAnimation {
                     duration: MaterialEasing.standardTime
-                    easing.type: Easing.OutCurve
+                    easing.type: Easing.Bezier
+                    easing.bezierCurve: MaterialEasing.standard
                 }
             }
 
@@ -146,8 +163,8 @@ Item {
                         Layout.preferredWidth: 100
                         Layout.preferredHeight: 100
 
-                        fillColor: Colors.interpolate(Colors.getPaletteColor("navy"), Colors.getPaletteColor("red"), System.percentMemory)
-                        underlyingColor: Colors.transparentize(Colors.getPaletteColor("silver"), 0.7)
+                        fillColor: Colors.blend(Colors.palette.success, Colors.palette.warning, System.percentMemory)
+                        underlyingColor: Colors.transparentize(Colors.palette.m3surfaceBright, 0.7)
                         percent: System.percentMemory
                         showText: true
                         text: "RAM:"
@@ -155,7 +172,8 @@ Item {
                         Behavior on percent {
                             NumberAnimation {
                                 duration: MaterialEasing.standardTime
-                                easing.type: Easing.OutCubic
+                                easing.type: Easing.Bezier
+                                easing.bezierCurve: MaterialEasing.standard
                             }
                         }
                     }
@@ -164,8 +182,8 @@ Item {
                         Layout.preferredWidth: 100
                         Layout.preferredHeight: 100
 
-                        fillColor: Colors.interpolate(Colors.getPaletteColor("navy"), Colors.getPaletteColor("red"), System.load)
-                        underlyingColor: Colors.transparentize(Colors.getPaletteColor("silver"), 0.7)
+                        fillColor: Colors.blend(Colors.palette.success, Colors.palette.warning, System.load)
+                        underlyingColor: Colors.transparentize(Colors.palette.m3surfaceBright, 0.7)
                         percent: System.load
                         showText: true
                         text: "CPU:"
@@ -173,7 +191,8 @@ Item {
                         Behavior on percent {
                             NumberAnimation {
                                 duration: MaterialEasing.standardTime
-                                easing.type: Easing.OutCubic
+                                easing.type: Easing.Bezier
+                                easing.bezierCurve: MaterialEasing.standard
                             }
                         }
                     }
@@ -182,8 +201,8 @@ Item {
                         Layout.preferredWidth: 100
                         Layout.preferredHeight: 100
 
-                        fillColor: Colors.interpolate(Colors.getPaletteColor("navy"), Colors.getPaletteColor("red"), System.percentSwap)
-                        underlyingColor: Colors.transparentize(Colors.getPaletteColor("silver"), 0.7)
+                        fillColor: Colors.blend(Colors.palette.success, Colors.palette.warning, System.percentSwap)
+                        underlyingColor: Colors.transparentize(Colors.palette.m3surfaceBright, 0.7)
                         percent: System.percentSwap
                         showText: true
                         text: "Swap:"
@@ -191,7 +210,8 @@ Item {
                         Behavior on percent {
                             NumberAnimation {
                                 duration: MaterialEasing.standardTime
-                                easing.type: Easing.OutCubic
+                                easing.type: Easing.Bezier
+                                easing.bezierCurve: MaterialEasing.standard
                             }
                         }
                     }
@@ -201,8 +221,8 @@ Item {
                         Layout.preferredWidth: 100
                         Layout.preferredHeight: 100
 
-                        fillColor: Colors.interpolate(Colors.getPaletteColor("navy"), Colors.getPaletteColor("red"), System.temperature / 100)
-                        underlyingColor: Colors.transparentize(Colors.getPaletteColor("silver"), 0.7)
+                        fillColor: Colors.blend(Colors.palette.success, Colors.palette.warning, System.temperature / 100)
+                        underlyingColor: Colors.transparentize(Colors.palette.m3surfaceBright, 0.7)
                         percent: System.temperature / 100
                         showText: false
                         text: "Temp:"
@@ -238,7 +258,8 @@ Item {
                         Behavior on percent {
                             NumberAnimation {
                                 duration: MaterialEasing.standardTime
-                                easing.type: Easing.OutCubic
+                                easing.type: Easing.Bezier
+                                easing.bezierCurve: MaterialEasing.standard
                             }
                         }
                     }

@@ -34,7 +34,8 @@ Rectangle {
             NumberAnimation on blur {
                 id: blurInAnimation
                 duration: Glo.MaterialEasing.emphasizedTime
-                easing.type: Easing.Linear
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Glo.MaterialEasing.emphasized
                 from: 0
                 to: 0.69
                 running: true
@@ -44,7 +45,8 @@ Rectangle {
             NumberAnimation {
                 id: blurOutAnimation
                 duration: Glo.MaterialEasing.emphasizedTime * 1.5
-                easing.type: Easing.Linear
+                easing.type: Easing.Bezier
+                easing.bezierCurve: Glo.MaterialEasing.emphasized
                 property: "blur"
                 running: root.context.timerInProgress
                 target: walBlur
@@ -157,6 +159,7 @@ Rectangle {
         NumberAnimation on spacing {
             duration: Glo.MaterialEasing.standardTime
             easing.type: Easing.BezierSpline
+            easing.bezierCurve: Glo.MaterialEasing.standard
         }
 
         Repeater {
@@ -187,7 +190,8 @@ Rectangle {
                 duration: Glo.MaterialEasing.standardTime
                 from: 0
                 to: 300
-                easing.type: Easing.OutCubic
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: Glo.MaterialEasing.standard
             }
         }
 

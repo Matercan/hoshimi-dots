@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 // Managed by Hoshimi
 
 pragma Singleton
@@ -48,6 +49,47 @@ Singleton {
         return Qt.rgba(c.r, c.g, c.b, c.a * (1 - percentage));
     }
 
+    function lighten(color, factor) {
+        return interpolate(color, "#ffffff", factor);
+    }
+
+    function darken(color, factor) {
+        return interpolate(color, "#000000", factor);
+    }
+
+    function desaturate(color, factor) {
+        // Convert to HSV, reduce saturation
+        let hsv = Qt.hsva(color.hsvHue, color.hsvSaturation * (1 - factor), color.hsvValue, color.a);
+        return hsv;
+    }
+
+    function adjustAlpha(color, alpha) {
+        return Qt.rgba(color.r, color.g, color.b, alpha);
+    }
+
+    function blend(baseColor, overlayColor, opacity) {
+        return interpolate(baseColor, overlayColor, opacity);
+    }
+
+    /**
+     * Interpelates between 2 colors depending on a percentage
+     *
+     * @param {string} color A - The starting color (Any Qt.Color)
+     * @param [string] color B - The end color (Any Qt.Color)
+     * @param {number} percentage - The percent B vs A
+     * @return {Qt.rba} The resulting color
+     */
+    function interpolate(colorA, colorB, percentage: real) {
+        var a = Qt.color(colorA);
+        var b = Qt.color(colorB);
+
+        var rTrack = (a.r * (1 - percentage) + b.r * percentage);
+        var gTrack = (a.g * (1 - percentage) + b.g * percentage);
+        var bTrack = (a.b * (1 - percentage) + b.b * percentage);
+
+        return Qt.rgba(rTrack, gTrack, bTrack, 1);
+    }
+
     /**
      * Gets the palette color of a specified string
      *
@@ -94,78 +136,89 @@ Singleton {
     }
 
     component M3Palette: QtObject {
-        property color m3primary_paletteKeyColor: "#a26387"
-        property color m3secondary_paletteKeyColor: "#8b6f7d"
-        property color m3tertiary_paletteKeyColor: "#9c6c53"
-        property color m3neutral_paletteKeyColor: "#7f7478"
-        property color m3neutral_variant_paletteKeyColor: "#827379"
-        property color m3background: "#181115"
-        property color m3onBackground: "#eddfe4"
-        property color m3surface: "#181115"
-        property color m3surfaceDim: "#181115"
-        property color m3surfaceBright: "#40373b"
-        property color m3surfaceContainerLowest: "#130c10"
-        property color m3surfaceContainerLow: "#211a1d"
-        property color m3surfaceContainer: "#251e21"
-        property color m3surfaceContainerHigh: "#30282b"
-        property color m3surfaceContainerHighest: "#3b3236"
-        property color m3onSurface: "#eddfe4"
-        property color m3surfaceVariant: "#504349"
-        property color m3onSurfaceVariant: "#d3c2c9"
-        property color m3inverseSurface: "#eddfe4"
-        property color m3inverseOnSurface: "#362e32"
-        property color m3outline: "#9c8d93"
-        property color m3outlineVariant: "#504349"
-        property color m3shadow: "#000000"
-        property color m3scrim: "#000000"
-        property color m3surfaceTint: "#fbb1d8"
-        property color m3primary: "#fbb1d8"
-        property color m3onPrimary: "#511d3e"
-        property color m3primaryContainer: "#6b3455"
-        property color m3onPrimaryContainer: "#ffd8ea"
-        property color m3inversePrimary: "#864b6e"
-        property color m3secondary: "#dfbecd"
-        property color m3onSecondary: "#402a36"
-        property color m3secondaryContainer: "#5a424f"
-        property color m3onSecondaryContainer: "#fcd9e9"
-        property color m3tertiary: "#f3ba9c"
-        property color m3onTertiary: "#4a2713"
-        property color m3tertiaryContainer: "#b8856a"
-        property color m3onTertiaryContainer: "#000000"
-        property color m3error: "#ffb4ab"
-        property color m3onError: "#690005"
-        property color m3errorContainer: "#93000a"
-        property color m3onErrorContainer: "#ffdad6"
-        property color m3primaryFixed: "#ffd8ea"
-        property color m3primaryFixedDim: "#fbb1d8"
-        property color m3onPrimaryFixed: "#370728"
-        property color m3onPrimaryFixedVariant: "#6b3455"
-        property color m3secondaryFixed: "#fcd9e9"
-        property color m3secondaryFixedDim: "#dfbecd"
-        property color m3onSecondaryFixed: "#291520"
-        property color m3onSecondaryFixedVariant: "#58404c"
-        property color m3tertiaryFixed: "#ffdbca"
-        property color m3tertiaryFixedDim: "#f3ba9c"
-        property color m3onTertiaryFixed: "#311302"
-        property color m3onTertiaryFixedVariant: "#653d27"
-    }
 
-    /**
-     * Interpelates between 2 colors depending on a percentage
-     *
-     * @param {string} color A - The starting color (Any Qt.Color)
-     * @param [string] color B - The end color (Any Qt.Color)
-     * @param {number} percentage - The percent B vs A
-     * @return {Qt.rba} The resulting color
-     */
-    function interpolate(colorA, colorB, percentage: real) {
-        var a = Qt.color(colorA);
-        var b = Qt.color(colorB);
+        // Key Colors main colors
+        property color m3primary_paletteKeyColor: root.paletteColor6     // Use paletteColor5 as primary
+        property color m3secondary_paletteKeyColor: root.paletteColor5       // Use blue as secondary
+        property color m3tertiary_paletteKeyColor: root.paletteColor4      // Use yellow as tertiary
+        property color m3neutral_paletteKeyColor: root.paletteColor8       // Use white/gray as neutral
+        property color m3neutral_variant_paletteKeyColor: root.paletteColor9
 
-        var rTrack = (a.r * (1 - percentage) + b.r * percentage);
-        var gTrack = (a.g * (1 - percentage) + b.g * percentage);
-        var bTrack = (a.b * (1 - percentage) + b.b * percentage);
+        // Surface Colors (backgrounds)
+        property color m3background: root.paletteColor1
+        property color m3onBackground: root.paletteColor16
+        property color m3surface: root.paletteColor1
+        property color m3surfaceDim: root.paletteColor1
+        property color m3surfaceBright: root.lighten(root.paletteColor9, 0.3)
+        property color m3surfaceContainerLowest: root.darken(root.paletteColor1, 0.1)
+        property color m3surfaceContainerLow: root.lighten(root.paletteColor1, 0.05)
+        property color m3surfaceContainer: root.paletteColor9
+        property color m3surfaceContainerHigh: root.lighten(root.paletteColor9, 0.15)
+        property color m3surfaceContainerHighest: root.lighten(root.paletteColor9, 0.25)
+        property color m3onSurface: root.paletteColor15
+        property color m3surfaceVariant: root.blend(root.paletteColor1, root.paletteColor16, 0.15)
+        property color m3onSurfaceVariant: root.lighten(root.paletteColor16, 0.2)
 
-        return Qt.rgba(rTrack, gTrack, bTrack, 1);
+        // Inverse Colors
+        property color m3inverseSurface: root.paletteColor16
+        property color m3inverseOnSurface: root.darken(root.paletteColor1, 0.2)
+
+        // Outline Colors
+        property color m3outline: root.desaturate(root.paletteColor16, 0.4)
+        property color m3outlineVariant: root.blend(root.paletteColor9, root.paletteColor16, 0.2)
+
+        // Utility Colors
+        property color m3shadow: root.paletteColor1
+        property color m3scrim: root.paletteColor1
+        property color m3surfaceTint: root.lighten(root.paletteColor6, 0.2)
+
+        // Primary Colors
+        property color m3primary: root.lighten(root.paletteColor6, 0.1)
+        property color m3onPrimary: root.darken(root.paletteColor1, 0.1)
+        property color m3primaryContainer: root.darken(root.paletteColor6, 0.3)
+        property color m3onPrimaryContainer: root.lighten(root.paletteColor6, 0.4)
+        property color m3inversePrimary: root.darken(root.paletteColor6, 0.2)
+
+        // Secondary Colors
+        property color m3secondary: root.lighten(root.paletteColor5, 0.2)
+        property color m3onSecondary: root.darken(root.paletteColor1, 0.1)
+        property color m3secondaryContainer: root.darken(root.paletteColor5, 0.3)
+        property color m3onSecondaryContainer: root.lighten(root.paletteColor5, 0.4)
+
+        // Tertiary Colors
+        property color m3tertiary: root.lighten(root.paletteColor4, 0.1)
+        property color m3onTertiary: root.darken(root.paletteColor1, 0.1)
+        property color m3tertiaryContainer: root.darken(root.paletteColor4, 0.2)
+        property color m3onTertiaryContainer: root.lighten(root.paletteColor4, 0.3)
+
+        // Error Colors
+        property color m3error: root.lighten(root.paletteColor2, 0.2)
+        property color m3onError: root.darken(root.paletteColor1, 0.1)
+        property color m3errorContainer: root.darken(root.paletteColor2, 0.4)
+        property color m3onErrorContainer: root.lighten(root.paletteColor2, 0.4)
+
+        // Fixed Colors
+        property color m3primaryFixed: root.lighten(root.paletteColor6, 0.4)
+        property color m3primaryFixedDim: root.lighten(root.paletteColor6, 0.1)
+        property color m3onPrimaryFixed: root.darken(root.paletteColor6, 0.6)
+        property color m3onPrimaryFixedVariant: root.darken(root.paletteColor6, 0.3)
+
+        property color m3secondaryFixed: root.lighten(root.paletteColor5, 0.4)
+        property color m3secondaryFixedDim: root.lighten(root.paletteColor5, 0.2)
+        property color m3onSecondaryFixed: root.darken(root.paletteColor5, 0.6)
+        property color m3onSecondaryFixedVariant: root.darken(root.paletteColor5, 0.3)
+
+        property color m3tertiaryFixed: root.lighten(root.paletteColor4, 0.3)
+        property color m3tertiaryFixedDim: root.lighten(root.paletteColor4, 0.1)
+        property color m3onTertiaryFixed: root.darken(root.paletteColor4, 0.6)
+        property color m3onTertiaryFixedVariant: root.darken(root.paletteColor4, 0.3)
+
+        // Additional helpers
+        property color success: root.paletteColor3
+        property color onSuccess: root.darken(root.paletteColor1, 0.1)
+        property color warning: root.paletteColor5
+        property color onWarning: root.darken(root.paletteColor1, 0.1)
+        property color info: root.paletteColor7
+        property color onInfo: root.darken(root.paletteColor1, 0.1)
     }
 }

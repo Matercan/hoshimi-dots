@@ -10,17 +10,22 @@ WARNING: the screenshots are outdated!
 
 ## Installation
 ```shell
-wget https://github.com/Matercan/hoshimi-cli/blob/main/main.cpp
-g++ main.cpp -o hoshimi.out
-./hoshimi.out install
+git clone https://github.com/Matercan/hoshimi-cli.git
+mkdir -p build
+cmake -B build -DCMAKE_BUILD_TYPE=Debug
+cmake --build build --config Debug --target hoshimi --
+build/bin/hoshimi install
 ```
 
 Dependencies:
-gcc
+cmake
+cjson
+jsoncpp
+boost
+a C compiler
 
 For best user experience:
 - playerctl
-- candy-icons
 - cava
 - pipewire-pulse
 - sweet gtk/kvantum themes
@@ -36,42 +41,34 @@ Hoshimi - Hyprland Dotfiles Manager
 ===================================
 
 USAGE:
-    ./hoshimi.out <command> [options]
+    build/bin/hoshimi <command> [options]
 
 COMMANDS:
-    install     Install dotfiles by cloning repository and creating symlinks
-    update      Update dotfiles by pulling the repository
-    help        Show this help message
+    install       Install dotfiles by cloning repository and creating symlinks
+    help          Show this help message
+    arch-install  Install all the packages neccessary for this shell using paru
+    version       Get version information of hoshimi
+    update        Update dotfiles to the most recent master commit
+    config        Get or set the config options within your configuration
+    source        Source the current configuration, updating the modifiable dotfiles
 
 OPTIONS:
     -v, --verbose    Enable verbose output (show detailed operations)
     -f, --force    Force overwrite existing files without backup
     -h, --help    Show this help message
+    -p, --packages    Packages only install the packages for example
+         hypr,fastfetch,starship.toml,../.zshrc
+         hypr,nvim,btop
 
 EXAMPLES:
-    ./hoshimi.out install           # Install dotfiles silently
-    ./hoshimi.out install -v        # Install with Enable
-    ./hoshimi.out install -f        # Install with Force
-    ./hoshimi.out install -h        # Install with Show
-    ./hoshimi.out help              # Show this help
-
-DESCRIPTION:
-    Hoshimi manages Hyprland dotfiles by:
-    1. Cloning the dotfiles repository to ~/.local/share/hoshimi
-    2. Backing up existing dotfiles to ./backup/
-    3. Creating symlinks from the repository to your home directory
-
-PATHS:
-    Repository:     ~/.local/share/hoshimi (or $XDG_DATA_HOME/hoshimi)
-    Backup:         ./backup/
-    Source:         https://github.com/Matercan/hoshimi.git
+    build/bin/hoshimi install -p hypr,fastfetch
+    build/bin/hoshimi source -p quickshell
+    build/bin/hoshimi arch-install
 ```
 
 ## TODO:
 
-Creating and sourcing from a config
-Pywal integraton for generating colorschemes
-
+Matugen integraton for generating colorschemes
 
 ## Showcase (LEGACY)
 
@@ -106,6 +103,7 @@ for helping me make thia rice and introducing me to my lord and saviour quickshe
 [end-4's dotfiles](https://github.com/end-4/dots-hyprland)
 
 [celaestia shell](https://github.com/caelestia-dots/shell/tree/main)
+
 
 
 

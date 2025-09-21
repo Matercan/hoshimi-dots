@@ -41,6 +41,13 @@ Item {
                     return Quickshell.env("HOME") + ".local/share/hoshimi/assets/m3icons/headset_off_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg";
                 }
             }
+            visible: false // It will be covered by the colorOverlay
+        }
+
+        ColorOverlay {
+            anchors.fill: icon
+            source: icon
+            color: Colors.palette.m3onBackground
         }
 
         layer.enabled: true

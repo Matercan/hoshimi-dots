@@ -10,25 +10,25 @@ Singleton {
     id: root
 
     // Colors used throuhgout the configuration
-    property string backgroundColor: "#282828"
-    property string foregroundColor: "#d4be98"
+    property string backgroundColor: "#303446"
+    property string foregroundColor: "#c6d0f5"
 
-    property string paletteColor1: "#1b1b1b"
-    property string paletteColor2: "#ea6962"
-    property string paletteColor3: "#a9b665"
-    property string paletteColor4: "#d8a657"
-    property string paletteColor5: "#7daea3"
-    property string paletteColor6: "#d3869b"
-    property string paletteColor7: "#89b482"
-    property string paletteColor8: "#d4be98"
-    property string paletteColor9: "#32302f"
-    property string paletteColor10: "#ea6962"
-    property string paletteColor11: "#a9b665"
-    property string paletteColor12: "#d8a657"
-    property string paletteColor13: "#7daea3"
-    property string paletteColor14: "#d3869b"
-    property string paletteColor15: "#89b482"
-    property string paletteColor16: "#d4be98"
+    property string paletteColor1: "#51576d"
+    property string paletteColor2: "#e78284"
+    property string paletteColor3: "#a6d189"
+    property string paletteColor4: "#e5c890"
+    property string paletteColor5: "#8caaee"
+    property string paletteColor6: "#f4b8e4"
+    property string paletteColor7: "#81c8be"
+    property string paletteColor8: "#a5adce"
+    property string paletteColor9: "#626880"
+    property string paletteColor10: "#e78284"
+    property string paletteColor11: "#a6d189"
+    property string paletteColor12: "#e5c890"
+    property string paletteColor13: "#8caaee"
+    property string paletteColor14: "#f4b8e4"
+    property string paletteColor15: "#81c8be"
+    property string paletteColor16: "#b5bfe2"
 
     property string activeColor: paletteColor5
     property string selectedColor: paletteColor3

@@ -26,7 +26,7 @@ Item {
         width: parent.width
         height: parent.height
         radius: Config.radius
-        color: Colors.palette.m3background
+        color: Colors.palette.m3surfaceDim
 
         ProgressRing {
             anchors.centerIn: parent

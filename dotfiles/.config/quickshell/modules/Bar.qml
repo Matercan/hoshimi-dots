@@ -106,9 +106,7 @@ Scope {
                             id: widgets
                             implicitWidth: Variables.barSize
                             implicitHeight: widgetLayout.implicitHeight + 2 * Config.padding  // Add padding
-                            color: Colors.palette.m3surface
-                            border.color: Colors.palette.m3outlineVariant
-                            border.width: 1
+                            color: "transparent"
                             radius: Config.radius
                             Layout.fillWidth: true
                             Layout.alignment: Qt.AlignBottom

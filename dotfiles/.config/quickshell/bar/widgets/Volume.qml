@@ -25,7 +25,7 @@ Item {
         width: parent.width
         height: parent.height
         radius: Config.radius
-        color: Colors.palette.m3background
+        color: Colors.palette.m3surfaceDim
 
         Image {
             id: icon
@@ -38,7 +38,7 @@ Item {
                 if (Audio.volume != 0) {
                     return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/m3icons/headphones_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg";
                 } else {
-                    return Quickshell.env("HOME") + ".local/share/hoshimi/assets/m3icons/headset_off_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg";
+                    return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/m3icons/headset_off_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg";
                 }
             }
             visible: false // It will be covered by the colorOverlay

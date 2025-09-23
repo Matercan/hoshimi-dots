@@ -78,6 +78,7 @@ Item {
         implicitHeight: rect.height + Config.padding
         visible: true
         color: "transparent"
+        mask: Region {}
 
         Shape {
             anchors.centerIn: parent

@@ -79,6 +79,8 @@ Item {
             implicitHeight: 500 + Config.padding
             visible: true
             color: "transparent"
+
+            mask: Region {}
         }
     }
 }

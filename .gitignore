@@ -1,13 +1,6 @@
-# Ignore my secret fish stuff
-__pycache__/
-*.pyc
-
 # Ignore Vim swap files
 *.swp
 *.swo
 
-*-bin
-*.txt
-*.png
+# Hoshimi-cli backup
 **backup*
-build*

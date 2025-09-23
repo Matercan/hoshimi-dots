@@ -10,25 +10,25 @@ Singleton {
     id: root
 
     // Colors used throuhgout the configuration
-    property string backgroundColor: "#303446"
-    property string foregroundColor: "#c6d0f5"
+    property string backgroundColor: "#1e1e2e"
+    property string foregroundColor: "#cdd6f4"
 
-    property string paletteColor1: "#51576d"
-    property string paletteColor2: "#e78284"
-    property string paletteColor3: "#a6d189"
-    property string paletteColor4: "#e5c890"
-    property string paletteColor5: "#8caaee"
-    property string paletteColor6: "#f4b8e4"
-    property string paletteColor7: "#81c8be"
-    property string paletteColor8: "#a5adce"
-    property string paletteColor9: "#626880"
-    property string paletteColor10: "#e78284"
-    property string paletteColor11: "#a6d189"
-    property string paletteColor12: "#e5c890"
-    property string paletteColor13: "#8caaee"
-    property string paletteColor14: "#f4b8e4"
-    property string paletteColor15: "#81c8be"
-    property string paletteColor16: "#b5bfe2"
+    property string paletteColor1: "#45475a"
+    property string paletteColor2: "#f38ba8"
+    property string paletteColor3: "#a6e3a1"
+    property string paletteColor4: "#f9e2af"
+    property string paletteColor5: "#89b4fa"
+    property string paletteColor6: "#f5c2e7"
+    property string paletteColor7: "#94e2d5"
+    property string paletteColor8: "#a6adc8"
+    property string paletteColor9: "#585b70"
+    property string paletteColor10: "#f38ba8"
+    property string paletteColor11: "#a6e3a1"
+    property string paletteColor12: "#f9e2af"
+    property string paletteColor13: "#89b4fa"
+    property string paletteColor14: "#f5c2e7"
+    property string paletteColor15: "#94e2d5"
+    property string paletteColor16: "#bac2de"
 
     property string activeColor: paletteColor5
     property string selectedColor: paletteColor3
@@ -79,15 +79,21 @@ Singleton {
      * @param {number} percentage - The percent B vs A
      * @return {Qt.rba} The resulting color
      */
-    function interpolate(colorA, colorB, percentage: real) {
-        var a = Qt.color(colorA);
-        var b = Qt.color(colorB);
+    function interpolate(color1: color, color2: color, factor: real): color {
+        // Your existing interpolation function
+        let r1 = color1.r;
+        let g1 = color1.g;
+        let b1 = color1.b;
 
-        var rTrack = (a.r * (1 - percentage) + b.r * percentage);
-        var gTrack = (a.g * (1 - percentage) + b.g * percentage);
-        var bTrack = (a.b * (1 - percentage) + b.b * percentage);
+        let r2 = color2.r;
+        let g2 = color2.g;
+        let b2 = color2.b;
 
-        return Qt.rgba(rTrack, gTrack, bTrack, 1);
+        let r = Math.round(r1 + (r2 - r1) * factor);
+        let g = Math.round(g1 + (g2 - g1) * factor);
+        let b = Math.round(b1 + (b2 - b1) * factor);
+
+        return Qt.rgba(r, g, b, 1);
     }
 
     /**

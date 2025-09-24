@@ -583,9 +583,6 @@
         "SilentTyping": {
             "enabled": false
         },
-        "SortFriendRequests": {
-            "enabled": false
-        },
         "SpotifyControls": {
             "enabled": false
         },
@@ -1342,19 +1339,23 @@
         },
         "JumpTo": {
             "enabled": false
+        },
+        "SortFriends": {
+            "enabled": false
         }
     },
     "notifications": {
         "timeout": 5000,
         "position": "bottom-right",
         "useNative": "not-focused",
-        "logLimit": 50
+        "logLimit": 50,
+        "missed": true
     },
     "cloud": {
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1758383980714
+        "settingsSyncVersion": 1758648401672
     },
     "enabledThemeLinks": [],
     "ignoreResetWarning": false,

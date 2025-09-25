@@ -1,7 +1,5 @@
 eza
 lf
-hyprland
-hypridle
 fctix5
 lib-mozc
 libnotify

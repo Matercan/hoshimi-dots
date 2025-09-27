@@ -36,7 +36,7 @@ ShellRoot {
         sourceComponent: Content {}
     }
     Loader {
-        active: true
+        active: false
 
         sourceComponent: AltTAB {}
     }

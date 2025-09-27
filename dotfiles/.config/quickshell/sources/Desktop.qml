@@ -12,7 +12,6 @@ Singleton {
     property var windows: []
     property var workspaces: []
 
-    // Process to get all windows in all workspaces
     Process {
         id: windowsProc
         command: ["hyprctl", "clients", "-j"]
@@ -26,9 +25,6 @@ Singleton {
 
                     // Filter windows that are in the current workspace and visible
                     allClients.forEach(client => {
-                        // Only include windows that are:
-                        // 1. Not hidden or minimized
-                        // 2. Not special windows (like overlays)
                         if (!client.hidden && client.mapped && !client.floating || client.floating) {
                             currentWorkspaceWindows.push({
                                 address: client.address,
@@ -45,7 +41,7 @@ Singleton {
                         if (a.workspace !== b.workspace) {
                             return a.workspace - b.workspace;
                         }
-                        // Then sort by title within the same workspace (optional)
+                        // Then sort by title within the same workspace
                         return a.title.localeCompare(b.title);
                     });
 
@@ -112,7 +108,7 @@ Singleton {
     }
 
     Timer {
-        interval: Variables.timerProcInterval * 5
+        interval: Variables.timerProcInterval
         running: true
         repeat: true
 

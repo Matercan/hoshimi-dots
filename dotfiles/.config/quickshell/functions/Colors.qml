@@ -10,25 +10,25 @@ Singleton {
     id: root
 
     // Colors used throuhgout the configuration
-    property string backgroundColor: "#1d2021"
-    property string foregroundColor: "#d4be98"
+    property string backgroundColor: "#1e1e2e"
+    property string foregroundColor: "#cdd6f4"
 
-    property string paletteColor1: "#141617"
-    property string paletteColor2: "#ea6962"
-    property string paletteColor3: "#a9b665"
-    property string paletteColor4: "#d8a657"
-    property string paletteColor5: "#7daea3"
-    property string paletteColor6: "#d3869b"
-    property string paletteColor7: "#89b482"
-    property string paletteColor8: "#d4be98"
-    property string paletteColor9: "#32302f"
-    property string paletteColor10: "#ea6962"
-    property string paletteColor11: "#a9b665"
-    property string paletteColor12: "#d8a657"
-    property string paletteColor13: "#7daea3"
-    property string paletteColor14: "#d3869b"
-    property string paletteColor15: "#89b482"
-    property string paletteColor16: "#d4be98"
+    property string paletteColor1: "#45475a"
+    property string paletteColor2: "#f38ba8"
+    property string paletteColor3: "#a6e3a1"
+    property string paletteColor4: "#f9e2af"
+    property string paletteColor5: "#89b4fa"
+    property string paletteColor6: "#f5c2e7"
+    property string paletteColor7: "#94e2d5"
+    property string paletteColor8: "#a6adc8"
+    property string paletteColor9: "#585b70"
+    property string paletteColor10: "#f38ba8"
+    property string paletteColor11: "#a6e3a1"
+    property string paletteColor12: "#f9e2af"
+    property string paletteColor13: "#89b4fa"
+    property string paletteColor14: "#f5c2e7"
+    property string paletteColor15: "#94e2d5"
+    property string paletteColor16: "#bac2de"
 
     property string activeColor: paletteColor5
     property string selectedColor: paletteColor3
@@ -134,12 +134,13 @@ Singleton {
     }
 
     component M3Palette: QtObject {
+        property bool xterm: false
 
         // Key Colors main colors
-        property color m3primary_paletteKeyColor: root.paletteColor6     // Use paletteColor5 as primary
-        property color m3secondary_paletteKeyColor: root.paletteColor5       // Use blue as secondary
-        property color m3tertiary_paletteKeyColor: root.paletteColor4      // Use yellow as tertiary
-        property color m3neutral_paletteKeyColor: root.paletteColor8       // Use white/gray as neutral
+        property color m3primary_paletteKeyColor: root.paletteColor6
+        property color m3secondary_paletteKeyColor: root.paletteColor5
+        property color m3tertiary_paletteKeyColor: root.paletteColor4
+        property color m3neutral_paletteKeyColor: root.paletteColor8
         property color m3neutral_variant_paletteKeyColor: root.paletteColor9
 
         // Surface Colors (backgrounds)
@@ -162,35 +163,35 @@ Singleton {
         property color m3inverseSurface: root.paletteColor16
         property color m3inverseOnSurface: root.darken(root.paletteColor1, 0.2)
 
-        // Outline Colors
+        //  Outline Colors
         property color m3outline: root.desaturate(root.paletteColor16, 0.4)
         property color m3outlineVariant: root.blend(root.paletteColor9, root.paletteColor16, 0.2)
 
-        // Utility Colors
+        //  Utility Colors
         property color m3shadow: root.paletteColor1
         property color m3scrim: root.paletteColor1
         property color m3surfaceTint: root.lighten(root.paletteColor6, 0.2)
 
-        // Primary Colors
+        //  Primary Colors
         property color m3primary: root.lighten(root.paletteColor6, 0.1)
         property color m3onPrimary: root.darken(root.paletteColor1, 0.1)
         property color m3primaryContainer: root.darken(root.paletteColor6, 0.3)
         property color m3onPrimaryContainer: root.lighten(root.paletteColor6, 0.4)
         property color m3inversePrimary: root.darken(root.paletteColor6, 0.2)
 
-        // Secondary Colors
+        //  Secondary Colors
         property color m3secondary: root.lighten(root.paletteColor5, 0.2)
         property color m3onSecondary: root.darken(root.paletteColor1, 0.1)
         property color m3secondaryContainer: root.darken(root.paletteColor5, 0.3)
         property color m3onSecondaryContainer: root.lighten(root.paletteColor5, 0.4)
 
-        // Tertiary Colors
+        //  Tertiary Colors
         property color m3tertiary: root.lighten(root.paletteColor4, 0.1)
         property color m3onTertiary: root.darken(root.paletteColor1, 0.1)
         property color m3tertiaryContainer: root.darken(root.paletteColor4, 0.2)
         property color m3onTertiaryContainer: root.lighten(root.paletteColor4, 0.3)
 
-        // Error Colors
+        //   Error Colors
         property color m3error: root.lighten(root.paletteColor2, 0.2)
         property color m3onError: root.darken(root.paletteColor1, 0.1)
         property color m3errorContainer: root.darken(root.paletteColor2, 0.4)
@@ -221,5 +222,95 @@ Singleton {
         property color onInfo: root.darken(root.paletteColor1, 0.1)
     }
 
-    property M3Palette palette: M3Palette {}
+    property bool xterm
+    property M3Palette palette: M3Palette {
+        xterm: root.xterm
+
+        // Key Colors main colors
+        // property color m3primary_paletteKeyColor: ""
+        // // property color m3secondary_paletteKeyColor: ""
+        // property color m3tertiary_paletteKeyColor: ""
+        // property color m3neutral_paletteKeyColor: ""
+        // property color m3neutral_variant_paletteKeyColor: ""
+
+        // Surface Colors (backgrounds)
+        // property color m3background: ""
+        // property color m3onBackground: ""
+
+        // property color m3surface: ""
+        // property color m3surfaceDim: ""
+        // property color m3surfaceBright:  ""
+        // property color m3surfaceContainerLowest:  ""
+        // property color m3surfaceContainerLow:  ""
+        // property color m3surfaceContainer: ""
+        // property color m3surfaceContainerHigh: ""
+        // property color m3surfaceContainerHighest:  ""
+        // property color m3onSurface: ""
+        // property color m3surfaceVariant: ""
+        // property color m3onSurfaceVariant: ""
+
+        // Inverse Colors
+        // property color m3inverseSurface: ""
+        // property color m3inverseOnSurface: ""
+
+        // Outline Colors
+        // property color m3outline: ""
+        // property color m3outlineVariant: ""
+
+        // Utility Colors
+        // property color m3shadow: ""
+        // property color m3scrim: ""
+        // property color m3surfaceTint: ""
+
+        // Primary Colors
+        // property color m3primary: ""
+        // // property color m3onPrimary: ""
+        // property color m3primaryContainer: ""
+        // property color m3onPrimaryContainer: ""
+        // property color m3inversePrimary:""
+
+        // Secondary Colors
+        // property color m3secondary: ""
+        // property color m3onSecondary: ""
+        // property color m3secondaryContainer: ""
+        // property color m3onSecondaryContainer: ""
+
+        // Tertiary Colors
+        // property color m3tertiary: ""
+        // property color m3onTertiary: ""
+        // property color m3tertiaryContainer: ""
+        // property color m3onTertiaryContainer: ""
+
+        // Error Colors
+        // property color m3error: ""
+        // property color m3onError: ""
+        // property color m3errorContainer: ""
+        // property color m3onErrorContainer: ""
+
+        // Fixed Colors
+        // property color m3primaryFixed: ""
+        // property color m3primaryFixedDim: ""
+        // property color m3onPrimaryFixed: ""
+        // property color m3onPrimaryFixedVariant: ""
+
+        // property color m3secondaryFixed: ""
+        // property color m3secondaryFixedDim: ""
+        // property color m3onSecondaryFixed: ""
+        // property color m3onSecondaryFixedVariant: ""
+
+        // property color m3tertiaryFixed: ""
+        // property color m3tertiaryFixedDim: ""
+        // property color m3onTertiaryFixed: ""
+        // property color m3onTertiaryFixedVariant: ""
+
+        // Additional helpers
+        // property color success: ""
+        // property color onSuccess: ""
+        // property color warning: ""
+        // property color onWarning: ""
+        // property color info: ""
+        // property color onInfo: ""
+
+        property var amogus
+    }
 }

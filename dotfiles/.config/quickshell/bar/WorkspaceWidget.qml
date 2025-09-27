@@ -5,6 +5,7 @@ import qs.functions
 import qs.sources
 import Quickshell.Hyprland
 import QtQuick.Layouts
+import QtQuick.Shapes
 
 Rectangle {
 
@@ -37,6 +38,7 @@ Rectangle {
                     radius: width / 2
                     color: "white"
                 }
+                Shape {}
                 Rectangle {
                     anchors.fill: parent
                     anchors.margins: parent.padding
@@ -44,12 +46,15 @@ Rectangle {
                     color: {
                         if (area.containsMouse)
                             return Colors.iconColor;
-                        else if (!Desktop.workspaces[container.modelData])
-                            return Colors.palette.m3error;
-                        else if (Desktop.workspaces[container.modelData].id === Desktop.activeWorkspace.id)
-                            return Colors.selectedColor;
-                        else
-                            return Colors.palette.m3primary;
+                        for (let wk of Desktop.workspaces) {
+                            if (wk.id === container.modelData + 1) {
+                                if (wk.id === Desktop.activeWorkspace.id)
+                                    return Colors.selectedColor;
+                                else
+                                    return Colors.palette.m3primaryContainer;
+                            }
+                        }
+                        return Colors.palette.m3surface;
                     }
 
                     Text {
@@ -57,7 +62,7 @@ Rectangle {
                         text: container.modelData + 1
                         color: "white"
                         font.pixelSize: parent.width - container.textPadding
-                        font.family: "monospace"
+                        font.family: "CaskaydiaMono Nerd Font Propo"
                     }
 
                     MouseArea {
@@ -65,10 +70,7 @@ Rectangle {
                         anchors.fill: parent
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
-                        onClicked: {
-                            console.log("workspace " + (container.modelData + 1).toString());
-                            Hyprland.dispatch("workspace " + (container.modelData + 1).toString());
-                        }
+                        onClicked: Hyprland.dispatch("workspace " + (container.modelData + 1).toString())
                     }
                 }
             }

@@ -16,3 +16,4 @@ qt5-base
 dolphin 
 pipewire-alsa
 matugen-bin
+sysstat

@@ -69,9 +69,6 @@
         "AppleMusicRichPresence": {
             "enabled": false
         },
-        "WebRichPresence (arRPC)": {
-            "enabled": false
-        },
         "BetterFolders": {
             "enabled": true,
             "sidebar": true,
@@ -1342,6 +1339,9 @@
         },
         "SortFriends": {
             "enabled": false
+        },
+        "WebRichPresence": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -1355,7 +1355,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1758648401672
+        "settingsSyncVersion": 1758962494261
     },
     "enabledThemeLinks": [],
     "ignoreResetWarning": false,

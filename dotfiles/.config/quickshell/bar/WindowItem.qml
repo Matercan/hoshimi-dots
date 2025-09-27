@@ -9,7 +9,7 @@ import qs.globals
 Image {
     id: icon
     required property var modelData
-    source: Variables.iconDirectory + F.Desktop.appropriate(modelData.className, modelData.title) + ".svg" || Variables.iconDirectory + "help-about" + ".svg"
+    // source: Variables.iconDirectory + F.Desktop.appropriate(modelData.className, modelData.title) + ".svg" || Variables.iconDirectory + "help-about" + ".svg"
 
     mipmap: true
     smooth: true

@@ -10,25 +10,25 @@ Singleton {
     id: root
 
     // Colors used throuhgout the configuration
-    property string backgroundColor: "#1e1e2e"
-    property string foregroundColor: "#cdd6f4"
+    property string backgroundColor: "#1d2021"
+    property string foregroundColor: "#d4be98"
 
-    property string paletteColor1: "#45475a"
-    property string paletteColor2: "#f38ba8"
-    property string paletteColor3: "#a6e3a1"
-    property string paletteColor4: "#f9e2af"
-    property string paletteColor5: "#89b4fa"
-    property string paletteColor6: "#f5c2e7"
-    property string paletteColor7: "#94e2d5"
-    property string paletteColor8: "#a6adc8"
-    property string paletteColor9: "#585b70"
-    property string paletteColor10: "#f38ba8"
-    property string paletteColor11: "#a6e3a1"
-    property string paletteColor12: "#f9e2af"
-    property string paletteColor13: "#89b4fa"
-    property string paletteColor14: "#f5c2e7"
-    property string paletteColor15: "#94e2d5"
-    property string paletteColor16: "#bac2de"
+    property string paletteColor1: "#141617"
+    property string paletteColor2: "#ea6962"
+    property string paletteColor3: "#a9b665"
+    property string paletteColor4: "#d8a657"
+    property string paletteColor5: "#7daea3"
+    property string paletteColor6: "#d3869b"
+    property string paletteColor7: "#89b482"
+    property string paletteColor8: "#d4be98"
+    property string paletteColor9: "#32302f"
+    property string paletteColor10: "#ea6962"
+    property string paletteColor11: "#a9b665"
+    property string paletteColor12: "#d8a657"
+    property string paletteColor13: "#7daea3"
+    property string paletteColor14: "#d3869b"
+    property string paletteColor15: "#89b482"
+    property string paletteColor16: "#d4be98"
 
     property string activeColor: paletteColor5
     property string selectedColor: paletteColor3
@@ -38,7 +38,7 @@ Singleton {
     property string borderColor: paletteColor7
 
     /**
-    * Transparentizes a color by a given percentage.
+    * Transparentizes a color by a given factor.
     *
     * @param {string} color - The color (any Qt.color-compatible string).
     * @param {number} percentage - The amount to transparentize (0-1).
@@ -49,12 +49,14 @@ Singleton {
         return Qt.rgba(c.r, c.g, c.b, c.a * (1 - percentage));
     }
 
-    function lighten(color, factor) {
-        return interpolate(color, "#ffffff", factor);
+    function lighten(color: color, factor) {
+        let c = Qt.color(color);
+        return Qt.rgba(c.r + c.r * factor, c.g + c.g * factor, c.b + c.b * factor);
     }
 
     function darken(color, factor) {
-        return interpolate(color, "#000000", factor);
+        let c = Qt.color(color);
+        return Qt.rgba(c.r - c.r * factor, c.g - c.g * factor, c.b - c.b * factor);
     }
 
     function desaturate(color, factor) {
@@ -64,7 +66,8 @@ Singleton {
     }
 
     function adjustAlpha(color, alpha) {
-        return Qt.rgba(color.r, color.g, color.b, alpha);
+        let c = Qt.color(color);
+        return Qt.rgba(c.r, c.g, c.b, alpha);
     }
 
     function blend(baseColor, overlayColor, opacity) {
@@ -79,21 +82,10 @@ Singleton {
      * @param {number} percentage - The percent B vs A
      * @return {Qt.rba} The resulting color
      */
-    function interpolate(color1: color, color2: color, factor: real): color {
-        // Your existing interpolation function
-        let r1 = color1.r;
-        let g1 = color1.g;
-        let b1 = color1.b;
-
-        let r2 = color2.r;
-        let g2 = color2.g;
-        let b2 = color2.b;
-
-        let r = Math.round(r1 + (r2 - r1) * factor);
-        let g = Math.round(g1 + (g2 - g1) * factor);
-        let b = Math.round(b1 + (b2 - b1) * factor);
-
-        return Qt.rgba(r, g, b, 1);
+    function interpolate(color1, color2, factor): color {
+        var c1 = Qt.color(color1);
+        var c2 = Qt.color(color2);
+        return Qt.rgba(factor * c1.r + (1 - factor) * c2.r, factor * c1.g + (1 - factor) * c2.g, factor * c1.b + (1 - factor) * c2.b, factor * c1.a + (1 - factor) * c2.a);
     }
 
     /**
@@ -153,6 +145,7 @@ Singleton {
         // Surface Colors (backgrounds)
         property color m3background: root.backgroundColor
         property color m3onBackground: root.paletteColor16
+
         property color m3surface: root.paletteColor1
         property color m3surfaceDim: root.paletteColor1
         property color m3surfaceBright: root.lighten(root.paletteColor9, 0.3)
@@ -227,6 +220,6 @@ Singleton {
         property color info: root.paletteColor7
         property color onInfo: root.darken(root.paletteColor1, 0.1)
     }
-    // Instantiate the palette
+
     property M3Palette palette: M3Palette {}
 }

@@ -50,7 +50,7 @@ Scope {
                     }
 
                     Loader {
-                        active: false
+                        active: true
                         sourceComponent: WorkspaceWidget {
                             id: workspaces
 

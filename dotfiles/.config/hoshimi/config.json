@@ -4,5 +4,5 @@
     "iconDirectory": "/usr/share/icons/candy-icons/",
     "wallpaperDirectory": "/home/matercan/Pictures/wallpapers"
   },
-  "config": "gruvbox/hard-dark"
+  "config": "catppuccin/mocha"
 }

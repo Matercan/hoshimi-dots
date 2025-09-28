@@ -1,0 +1,17 @@
+[general]
+import = [
+    "themes/hoshimi.toml"
+]
+
+[window]
+blur = true
+startup_mode = "Windowed"
+title = "terminyal"
+opacity = 0.9
+
+[font]
+size = 9
+normal = { family = "Fira Code iScript" }
+
+[bell]
+duration = 0

@@ -5,7 +5,7 @@
     "themeLinks": [],
     "eagerPatches": false,
     "enabledThemes": [
-        "DarkNeon.theme.css"
+        "tokyo-night.theme.css"
     ],
     "enableReactDevtools": false,
     "frameless": false,
@@ -341,7 +341,10 @@
             "hideRepliesToBlockedMessages": false,
             "disableNotifications": false,
             "alsoHideIgnoredUsers": true,
-            "hideBlockedUserReplies": false
+            "hideBlockedUserReplies": false,
+            "allowAutoModMessages": true,
+            "defaultHideUsers": true,
+            "overrideUsers": ""
         },
         "NoDevtoolsWarning": {
             "enabled": false
@@ -391,7 +394,8 @@
             "channelToAffect": "both_dms",
             "allowMentions": false,
             "allowEveryone": false,
-            "ignoreUsers": ""
+            "ignoreUsers": "",
+            "alwaysPlaySound": false
         },
         "OpenInApp": {
             "enabled": false
@@ -1323,7 +1327,9 @@
             "enabled": true
         },
         "EquicordHelper": {
-            "enabled": true
+            "enabled": true,
+            "disableCreateDMButton": false,
+            "disableDMContextMenu": false
         },
         "ChatButtonsPlus": {
             "enabled": false
@@ -1342,6 +1348,15 @@
         },
         "WebRichPresence": {
             "enabled": false
+        },
+        "ListenBrainzRPC": {
+            "enabled": false
+        },
+        "VoiceButtons": {
+            "enabled": false
+        },
+        "AudioPlayerAPI": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -1355,7 +1370,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1758962494261
+        "settingsSyncVersion": 1759066255816
     },
     "enabledThemeLinks": [],
     "ignoreResetWarning": false,

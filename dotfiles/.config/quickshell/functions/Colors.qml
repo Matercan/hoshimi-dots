@@ -30,12 +30,12 @@ Singleton {
     property string paletteColor15: "#94e2d5"
     property string paletteColor16: "#bac2de"
 
-    property string activeColor: paletteColor5
-    property string selectedColor: paletteColor3
-    property string iconColor: paletteColor13
-    property string errorColor: paletteColor2
-    property string passwordColor: paletteColor4
-    property string borderColor: paletteColor7
+    property string activeColor: "paletteColor2"
+    property string selectedColor: "paletteColor5"
+    property string iconColor: "paletteColor4"
+    property string errorColor: "paletteColor4"
+    property string passwordColor: "paletteColor5"
+    property string borderColor: "paletteColor6"
 
     /**
     * Transparentizes a color by a given factor.

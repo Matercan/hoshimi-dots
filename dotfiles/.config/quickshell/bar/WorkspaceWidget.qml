@@ -5,7 +5,7 @@ import qs.functions
 import qs.sources
 import Quickshell.Hyprland
 import QtQuick.Layouts
-import QtQuick.Shapes
+import Quickshell
 
 Rectangle {
 
@@ -27,55 +27,31 @@ Rectangle {
             delegate: Item {
                 id: container
                 Layout.alignment: Qt.AlignHCenter
-                Layout.preferredHeight: 20
-                Layout.preferredWidth: 20
-                property real padding: 2
-                property real textPadding: 10
+                Layout.preferredHeight: 30
+                Layout.preferredWidth: 30
                 required property var modelData
 
-                Shape {
+                Image {
                     anchors.fill: parent
-                    preferredRendererType: Shape.CurveRenderer
+                    sourceSize.width: width
+                    sourceSize.height: height
+                    source: {
+                        if (area.containsMouse)
+                            return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/palette3-1.png";
 
-                    ShapePath {
-                        fillColor: {
-                            if (area.containsMouse)
-                                return Colors.transparentize(Colors.iconColor, 0.5);
+                        const matchingWorkspace = Desktop.workspaces.find(wk => wk.id === container.modelData - 1);
 
-                            // Find the workspace that matches the current container
-                            const matchingWorkspace = Desktop.workspaces.find(wk => wk.id === container.modelData + 1);
-
-                            if (matchingWorkspace) {
-                                // Check if this matching workspace is the active one
-                                if (matchingWorkspace.id === Desktop.activeWorkspace.id)
-                                    return Colors.transparentize(Colors.iconColor, 0.5);
-                                else
-                                    return Colors.transparentize(Colors.palette.m3secondaryFixedDim, 0.5);
-                            }
-
-                            return Colors.transparentize(Colors.palette.m3surface, 0.5);
+                        if (matchingWorkspace) {
+                            if (matchingWorkspace.id === Desktop.activeWorkspace.id)
+                                return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/palette3-1.png";
+                            else
+                                return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/palette5-1.png";
                         }
-                        strokeColor: Colors.light ? "black" : "white"
-                        strokeWidth: container.padding
 
-                        PathAngleArc {
-                            centerX: (container.width - container.padding * 2) / 2
-                            centerY: (container.height - container.padding * 2) / 2
-                            radiusX: (container.width - container.padding * 2) / 2
-                            radiusY: (container.height - container.padding * 2) / 2
-                            startAngle: 0
-                            sweepAngle: 360
-                        }
+                        return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/palette1-1.png";
                     }
-
-                    Text {
-                        x: parent.x + parent.width / 4
-                        y: parent.y + parent.height / 2
-                        text: container.modelData + 1
-                        color: Colors.light ? "black" : "white"
-                        font.pixelSize: parent.width - container.textPadding
-                        font.family: "CaskaydiaMono Nerd Font Propo"
-                    }
+                    smooth: true
+                    mipmap: true
 
                     MouseArea {
                         id: area

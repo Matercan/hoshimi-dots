@@ -2,147 +2,53 @@
 # ~/.config/lf/preview.sh
 # Preview script for lf file manager
 
-file="$1"
-w="$2"
-h="$3"
-x="$4"
-y="$5"
-
 # Get file type and extension
 mimetype=$(file --dereference --brief --mime-type -- "$file")
 extension="${file##*.}"
 extension=$(echo "$extension" | tr '[:upper:]' '[:lower:]')
 
-case "$mimetype" in
-    # Text files - use bat
-    text/*)
-        bat --color=always --style=plain --pager=never "$file"
-        exit 0
-        ;;
-    
-    # Images - use chafa
+BAT_THEME="Solarized (light)"
+
+batorcat() {
+    file="$1"
+    shift
+    if command -v bat >/dev/null 2>&1; then
+        bat --color=always --theme="$BAT_THEME" --style=numbers --pager=never "$file" "$@"
+    else
+        cat "$file"
+    fi
+}
+
+image() {
+    if [ -n "$WT_SESSION" ] || [ -n "$TMUX" ]; then
+      # windows terminal (no sixels yet) or tmux (not much success with passthrough to iterm here)
+      chafa -f symbols -s "$2x$3" --animate off --polite on "$1"
+    else
+      chafa -f sixels -s "$2x$3" --animate off --polite on "$1"
+    fi
+}
+
+# cpbotha's simplified version
+CACHE="$HOME/.cache/lf/thumbnail.$(sha256sum "$1" | awk '{print $1}')"
+
+case "$(file -Lb --mime-type -- "$1")" in
     image/*)
-        chafa --fill=block --symbols=block --colors=256 --size="$w"x"$h" "$file"
-        exit 0
+        #chafa -f sixel -s "$2x$3" --animate off --polite on "$1"
+        image "$1" "$2" "$3" "$4" "$5"
+        exit 1
         ;;
-    
-    # PDFs - use pdftotext
     application/pdf)
-        pdftotext "$file" - | bat --color=always --language=txt --style=plain --pager=never
-        exit 0
+        [ ! -f "${CACHE}.jpg" ] && pdftoppm -jpeg -f 1 -singlefile "$1" "$CACHE"
+        image "${CACHE}.jpg" "$2" "$3" "$4" "$5"
         ;;
-    
-    # Archives - show contents
-    application/zip|application/x-rar-compressed|application/x-7z-compressed)
-        case "$extension" in
-            zip)
-                unzip -l "$file"
-                ;;
-            rar)
-                unrar l "$file" 2>/dev/null
-                ;;
-            7z)
-                7z l "$file"
-                ;;
-            *)
-                echo "Archive: $file"
-                ;;
-        esac
-        exit 0
+    text/*|application/json)
+        batorcat "$1"
         ;;
-    
-    # Videos - show metadata
-    video/*)
-        if command -v mediainfo >/dev/null 2>&1; then
-            mediainfo "$file"
-        elif command -v ffprobe >/dev/null 2>&1; then
-            ffprobe -v quiet -print_format json -show_format -show_streams "$file" | bat --color=always --language=json --style=plain --pager=never
-        else
-            echo "Video file: $file"
-            file -b "$file"
-        fi
-        exit 0
-        ;;
-    
-    # Audio files - show metadata
-    audio/*)
-        if command -v mediainfo >/dev/null 2>&1; then
-            mediainfo "$file"
-        elif command -v ffprobe >/dev/null 2>&1; then
-            ffprobe -v quiet -print_format json -show_format -show_streams "$file" | bat --color=always --language=json --style=plain --pager=never
-        else
-            echo "Audio file: $file"
-            file -b "$file"
-        fi
-        exit 0
-        ;;
-    
-    # JSON files
-    application/json)
-        bat --color=always --language=json --style=plain --pager=never "$file"
-        exit 0
-        ;;
-    
-    # Binary files - show file info
-    application/octet-stream)
-        echo "Binary file: $file"
-        file -b "$file"
-        echo
-        ls -la "$file"
-        exit 0
+    *)
+        #file -b "$1"
+        # lesspipe can list many archives, and even do docx files
+        # if it does not work (e.g. message/rfc822) then batorcat can try
+        lesspipe "$1" || batorcat "$1" || echo "lesspipe not installed or could not open file"
         ;;
 esac
 
-# Handle by file extension if mimetype detection failed
-case "$extension" in
-    # Programming languages
-    py|python)
-        bat --color=always --language=python --style=plain --pager=never "$file"
-        ;;
-    js|javascript)
-        bat --color=always --language=javascript --style=plain --pager=never "$file"
-        ;;
-    html|htm)
-        bat --color=always --language=html --style=plain --pager=never "$file"
-        ;;
-    css)
-        bat --color=always --language=css --style=plain --pager=never "$file"
-        ;;
-    json)
-        bat --color=always --language=json --style=plain --pager=never "$file"
-        ;;
-    xml)
-        bat --color=always --language=xml --style=plain --pager=never "$file"
-        ;;
-    yaml|yml)
-        bat --color=always --language=yaml --style=plain --pager=never "$file"
-        ;;
-    md|markdown)
-        bat --color=always --language=markdown --style=plain --pager=never "$file"
-        ;;
-    sh|bash)
-        bat --color=always --language=bash --style=plain --pager=never "$file"
-        ;;
-    
-    # Configuration files
-    conf|config|cfg|ini)
-        bat --color=always --language=ini --style=plain --pager=never "$file"
-        ;;
-    
-    # Default for text-like files
-    *)
-        if [[ -f "$file" && -r "$file" ]]; then
-            # Check if file is text
-            if file -b "$file" | grep -q "text"; then
-                bat --color=always --style=plain --pager=never "$file"
-            else
-                echo "File: $file"
-                file -b "$file"
-                echo
-                ls -la "$file"
-            fi
-        else
-            echo "Cannot preview: $file"
-        fi
-        ;;
-esac

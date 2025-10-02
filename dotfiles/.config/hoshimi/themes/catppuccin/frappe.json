@@ -1,6 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/Matercan/hoshimi-cli/refs/heads/main/schema/theme_schema.json",
   "wallpaper": "nord_car_live.gif",
+  "commands": [
+    "spicetify config current_theme catppuccin",
+    "spicetify config color_scheme frappe",
+    "spicetify apply"
+  ],
   "bar": {
     "globals": {
       "visible": true,

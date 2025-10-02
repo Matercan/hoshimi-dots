@@ -2,6 +2,8 @@ map D $rm -fr "$fx"
 
 set ifs "\n"
 set icons true
+set sixel true
+set incsearch true
 
 # Preview settings
 set previewer '~/.config/lf/preview.sh'

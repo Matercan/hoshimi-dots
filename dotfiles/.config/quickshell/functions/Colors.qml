@@ -1,6 +1,5 @@
-pragma ComponentBehavior: Bound
 // Managed by Hoshimi
-
+pragma ComponentBehavior: Bound
 pragma Singleton
 
 import Quickshell
@@ -30,12 +29,13 @@ Singleton {
     property string paletteColor15: "#94e2d5"
     property string paletteColor16: "#bac2de"
 
-    property string activeColor: "paletteColor2"
-    property string selectedColor: "paletteColor5"
-    property string iconColor: "paletteColor4"
-    property string errorColor: "paletteColor4"
-    property string passwordColor: "paletteColor5"
-    property string borderColor: "paletteColor6"
+    property string activeColor: "#f38ba8"
+    property string selectedColor: "#45475a"
+    property string iconColor: "#a6e3a1"
+    property string errorColor: "#f9e2af"
+    property string passwordColor: "#89b4fa"
+    property string borderColor: "#f5c2e7"
+    property bool light: false
 
     /**
     * Transparentizes a color by a given factor.

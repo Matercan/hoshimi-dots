@@ -5,7 +5,7 @@
     "themeLinks": [],
     "eagerPatches": false,
     "enabledThemes": [
-        "tokyo-night.theme.css"
+        "neutron.theme.css"
     ],
     "enableReactDevtools": false,
     "frameless": false,
@@ -61,7 +61,8 @@
         "AlwaysTrust": {
             "enabled": true,
             "domain": true,
-            "file": true
+            "file": true,
+            "noDeleteSafety": true
         },
         "AnonymiseFileNames": {
             "enabled": false
@@ -1146,9 +1147,6 @@
         "RandomVoice": {
             "enabled": false
         },
-        "Remix": {
-            "enabled": false
-        },
         "RemixMe": {
             "enabled": false
         },
@@ -1329,7 +1327,8 @@
         "EquicordHelper": {
             "enabled": true,
             "disableCreateDMButton": false,
-            "disableDMContextMenu": false
+            "disableDMContextMenu": false,
+            "noMirroredCamera": false
         },
         "ChatButtonsPlus": {
             "enabled": false
@@ -1357,6 +1356,9 @@
         },
         "AudioPlayerAPI": {
             "enabled": false
+        },
+        "RemixRevived": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -1370,7 +1372,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1759066255816
+        "settingsSyncVersion": 1759245500457
     },
     "enabledThemeLinks": [],
     "ignoreResetWarning": false,

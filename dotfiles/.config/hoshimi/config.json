@@ -2,7 +2,8 @@
   "$schema": "https://raw.githubusercontent.com/Matercan/hoshimi-cli/refs/heads/main/schema/json_schema.json",
   "globals": {
     "iconDirectory": "/usr/share/icons/candy-icons/",
-    "wallpaperDirectory": "/home/matercan/Pictures/wallpapers"
+    "wallpaperDirectory": "/home/matercan/Pictures/wallpapers",
+    "osuSkin": "~/.local/share/hoshimi/assets/osu/"
   },
   "config": "catppuccin/mocha"
 }

@@ -30,37 +30,49 @@ Rectangle {
                 Layout.preferredHeight: 20
                 Layout.preferredWidth: 20
                 property real padding: 2
-                property real textPadding: 5
+                property real textPadding: 10
                 required property var modelData
 
-                Rectangle {
+                Shape {
                     anchors.fill: parent
-                    radius: width / 2
-                    color: "white"
-                }
-                Shape {}
-                Rectangle {
-                    anchors.fill: parent
-                    anchors.margins: parent.padding
-                    radius: width / 2
-                    color: {
-                        if (area.containsMouse)
-                            return Colors.iconColor;
-                        for (let wk of Desktop.workspaces) {
-                            if (wk.id === container.modelData + 1) {
-                                if (wk.id === Desktop.activeWorkspace.id)
-                                    return Colors.selectedColor;
+                    preferredRendererType: Shape.CurveRenderer
+
+                    ShapePath {
+                        fillColor: {
+                            if (area.containsMouse)
+                                return Colors.transparentize(Colors.iconColor, 0.5);
+
+                            // Find the workspace that matches the current container
+                            const matchingWorkspace = Desktop.workspaces.find(wk => wk.id === container.modelData + 1);
+
+                            if (matchingWorkspace) {
+                                // Check if this matching workspace is the active one
+                                if (matchingWorkspace.id === Desktop.activeWorkspace.id)
+                                    return Colors.transparentize(Colors.iconColor, 0.5);
                                 else
-                                    return Colors.palette.m3primaryContainer;
+                                    return Colors.transparentize(Colors.palette.m3secondaryFixedDim, 0.5);
                             }
+
+                            return Colors.transparentize(Colors.palette.m3surface, 0.5);
                         }
-                        return Colors.palette.m3surface;
+                        strokeColor: Colors.light ? "black" : "white"
+                        strokeWidth: container.padding
+
+                        PathAngleArc {
+                            centerX: (container.width - container.padding * 2) / 2
+                            centerY: (container.height - container.padding * 2) / 2
+                            radiusX: (container.width - container.padding * 2) / 2
+                            radiusY: (container.height - container.padding * 2) / 2
+                            startAngle: 0
+                            sweepAngle: 360
+                        }
                     }
 
                     Text {
-                        anchors.centerIn: parent
+                        x: parent.x + parent.width / 4
+                        y: parent.y + parent.height / 2
                         text: container.modelData + 1
-                        color: "white"
+                        color: Colors.light ? "black" : "white"
                         font.pixelSize: parent.width - container.textPadding
                         font.family: "CaskaydiaMono Nerd Font Propo"
                     }

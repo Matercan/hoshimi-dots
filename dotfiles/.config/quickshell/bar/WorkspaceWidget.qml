@@ -6,6 +6,7 @@ import qs.sources
 import Quickshell.Hyprland
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Io
 
 Rectangle {
 
@@ -30,7 +31,8 @@ Rectangle {
                 Layout.preferredHeight: 30
                 Layout.preferredWidth: 30
                 required property var modelData
-                property string idStr: (modelData + 1).toString()
+                property int idInt: modelData + 1
+                property string idStr: idInt.toString()
 
                 Image {
                     anchors.fill: parent
@@ -38,18 +40,18 @@ Rectangle {
                     sourceSize.height: height
                     source: {
                         if (area.containsMouse)
-                            return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/palette3-" + (container.modelData + 1).toString() + ".png";
+                            return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/palette3-" + container.idStr + ".png";
 
-                        const matchingWorkspace = Desktop.workspaces.find(wk => wk.id === container.modelData + 1);
+                        const matchingWorkspace = Desktop.workspaces.find(wk => wk.id === container.idInt);
 
                         if (matchingWorkspace) {
                             if (matchingWorkspace.id === Desktop.activeWorkspace.id)
-                                return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/palette3-" + (container.modelData + 1).toString() + ".png";
+                                return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/palette3-" + container.idStr + ".png";
                             else
-                                return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/palette5-" + (container.modelData + 1).toString() + ".png";
+                                return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/palette5-" + container.idStr + ".png";
                         }
 
-                        return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/palette1-" + (container.modelData + 1).toString() + ".png";
+                        return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/palette1-" + container.idStr + ".png";
                     }
                     smooth: true
                     mipmap: true
@@ -59,7 +61,15 @@ Rectangle {
                         anchors.fill: parent
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
-                        onClicked: Hyprland.dispatch("workspace " + (container.modelData + 1).toString())
+                        onClicked: {
+                            sfx.running = true, Hyprland.dispatch("workspace " + container.idStr);
+                        }
+                    }
+
+                    Process {
+                        id: sfx
+                        running: false
+                        command: ["mpv", Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/drum-hitnormal-hitfinish.wav"]
                     }
                 }
             }

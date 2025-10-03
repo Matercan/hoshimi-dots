@@ -467,7 +467,7 @@
                         "id": "41bwcnj68u8",
                         "name": "irl",
                         "color": 10070709,
-                        "collapsed": true,
+                        "collapsed": false,
                         "channels": [
                             "1088903579236044802",
                             "1388884298022653952",
@@ -1359,6 +1359,12 @@
         },
         "RemixRevived": {
             "enabled": false
+        },
+        "RecentDMSwitcher": {
+            "enabled": false
+        },
+        "StatusWhileActive": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -1372,7 +1378,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1759245500457
+        "settingsSyncVersion": 1759510047996
     },
     "enabledThemeLinks": [],
     "ignoreResetWarning": false,

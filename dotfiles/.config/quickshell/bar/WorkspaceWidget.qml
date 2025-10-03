@@ -30,6 +30,7 @@ Rectangle {
                 Layout.preferredHeight: 30
                 Layout.preferredWidth: 30
                 required property var modelData
+                property string idStr: (modelData + 1).toString()
 
                 Image {
                     anchors.fill: parent
@@ -37,18 +38,18 @@ Rectangle {
                     sourceSize.height: height
                     source: {
                         if (area.containsMouse)
-                            return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/palette3-1.png";
+                            return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/palette3-" + (container.modelData + 1).toString() + ".png";
 
-                        const matchingWorkspace = Desktop.workspaces.find(wk => wk.id === container.modelData - 1);
+                        const matchingWorkspace = Desktop.workspaces.find(wk => wk.id === container.modelData + 1);
 
                         if (matchingWorkspace) {
                             if (matchingWorkspace.id === Desktop.activeWorkspace.id)
-                                return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/palette3-1.png";
+                                return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/palette3-" + (container.modelData + 1).toString() + ".png";
                             else
-                                return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/palette5-1.png";
+                                return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/palette5-" + (container.modelData + 1).toString() + ".png";
                         }
 
-                        return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/palette1-1.png";
+                        return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/palette1-" + (container.modelData + 1).toString() + ".png";
                     }
                     smooth: true
                     mipmap: true

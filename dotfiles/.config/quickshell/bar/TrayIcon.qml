@@ -19,7 +19,7 @@ Rectangle {
 
     width: trayIcon.width + 4
     height: trayIcon.height + 4
-    radius: 4
+    radius: width / 2
 
     color: {
         if (mouseArea.containsMouse) {
@@ -31,13 +31,23 @@ Rectangle {
 
     Image {
         id: trayIcon
+        width: 30
+        height: 30
+        sourceSize.width: width
+        sourceSize.height: height
         anchors.centerIn: parent
-        width: 15
-        height: 15
-        sourceSize.width: 15
-        sourceSize.height: 15
-        source: root.item.icon
-        fillMode: Image.PreserveAspectFit
+
+        source: G.Variables.osuDirectory + "/palette1.png"
+
+        Image {
+            anchors.centerIn: parent
+            width: 10
+            height: 10
+            sourceSize.width: width
+            sourceSize.height: height
+            source: root.item.icon
+            fillMode: Image.PreserveAspectFit
+        }
 
         // Fallback to text if image fails
         Text {

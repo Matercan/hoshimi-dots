@@ -1,12 +1,14 @@
 pragma ComponentBehavior: Bound
 import QtQuick
+import QtQuick.Layouts
+import QtMultimedia
+
+import Quickshell.Hyprland
+
 import qs.globals
 import qs.functions
 import qs.sources
-import Quickshell.Hyprland
-import QtQuick.Layouts
-import Quickshell
-import Quickshell.Io
+import qs.globals
 
 Rectangle {
 
@@ -40,18 +42,18 @@ Rectangle {
                     sourceSize.height: height
                     source: {
                         if (area.containsMouse)
-                            return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/palette3-" + container.idStr + ".png";
+                            return Variables.osuDirectory + "/palette3-" + container.idStr + ".png";
 
                         const matchingWorkspace = Desktop.workspaces.find(wk => wk.id === container.idInt);
 
                         if (matchingWorkspace) {
                             if (matchingWorkspace.id === Desktop.activeWorkspace.id)
-                                return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/palette3-" + container.idStr + ".png";
+                                return Variables.osuDirectory + "/palette3-" + container.idStr + ".png";
                             else
-                                return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/palette5-" + container.idStr + ".png";
+                                return Variables.osuDirectory + "/palette5-" + container.idStr + ".png";
                         }
 
-                        return Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/palette1-" + container.idStr + ".png";
+                        return Variables.osuDirectory + "/palette1-" + container.idStr + ".png";
                     }
                     smooth: true
                     mipmap: true
@@ -61,15 +63,15 @@ Rectangle {
                         anchors.fill: parent
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
-                        onClicked: {
-                            sfx.running = true, Hyprland.dispatch("workspace " + container.idStr);
+                        onPressed: {
+                            sfx.play();
+                            Hyprland.dispatch("workspace " + container.idStr);
                         }
                     }
 
-                    Process {
+                    SoundEffect {
                         id: sfx
-                        running: false
-                        command: ["mpv", Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/drum-hitnormal-hitfinish.wav"]
+                        source: Variables.osuDirectory + "/drum-hitnormal-hitfinish.wav"
                     }
                 }
             }

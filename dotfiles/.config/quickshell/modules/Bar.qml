@@ -73,21 +73,6 @@ Scope {
                         }
                     } */
 
-                    Loader {
-                        active: false
-                        Layout.fillWidth: true
-                        Layout.alignment: Qt.AlignBottom
-
-                        sourceComponent: Cava {
-                            id: cava
-                            barY: y
-
-                            Layout.fillWidth: true
-                            Layout.alignment: Qt.AlignBottom
-                            implicitHeight: 75
-                        }
-                    }
-
                     TrayWidget {
                         id: tray
                         rectY: y

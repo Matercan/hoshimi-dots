@@ -16,6 +16,7 @@ Singleton {
     property int wrapSize: 8
     property string iconDirectory: "/usr/share/icons/candy-icons/apps/scalable/"
     property string statusDirectory: "/usr/share/icons/candy-icons/status/scalable/"
+    property string osuDirectory: Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/"
 
     property int timerProcInterval: 400
 

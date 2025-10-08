@@ -1,7 +1,7 @@
 pragma ComponentBehavior: Bound
 // TrayWidget.qml
 import QtQuick
-import QtQuick.Layouts as L
+import QtQuick.Layouts
 import Quickshell.Services.SystemTray
 
 Rectangle {
@@ -14,7 +14,7 @@ Rectangle {
     implicitWidth: 25
     implicitHeight: rowLayout.height + 2 * margin
 
-    L.ColumnLayout {
+    ColumnLayout {
         id: rowLayout
         anchors.centerIn: parent
         spacing: 2

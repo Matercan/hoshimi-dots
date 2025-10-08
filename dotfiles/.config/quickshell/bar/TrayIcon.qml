@@ -1,5 +1,6 @@
 pragma ComponentBehavior: Bound
 import QtQuick
+import QtQuick.Layouts
 import Quickshell.Services.SystemTray
 import Quickshell
 import Qt5Compat.GraphicalEffects
@@ -7,6 +8,7 @@ import Qt5Compat.GraphicalEffects
 import qs.generics
 import qs.functions
 import qs.globals
+import qs.generics
 
 Rectangle {
     id: root
@@ -17,9 +19,12 @@ Rectangle {
     required property var modelData
     property SystemTrayItem item: modelData
 
-    width: trayIcon.width + 4
-    height: trayIcon.height + 4
+    Layout.preferredWidth: trayIcon.width + 4
+    Layout.preferredHeight: trayIcon.height + 4
+
     radius: width / 2
+
+    Layout.alignment: Qt.AlignHCenter
 
     color: {
         if (mouseArea.containsMouse) {
@@ -29,26 +34,24 @@ Rectangle {
         }
     }
 
-    Image {
+    Circle {
         id: trayIcon
-        width: 30
-        height: 30
-        sourceSize.width: width
-        sourceSize.height: height
+        width: mouseArea.containsMouse ? 33 : 22
+        height: width
         anchors.centerIn: parent
-
-        source: Colors.light ? Variables.osuDirectory + "/palette12.png" : Variables.osuDirectory + "/palette1.png"
+        paletteColor: Colors.light ? 16 : 1
 
         Image {
             id: sysTrayIcon
             anchors.centerIn: parent
-            width: 10
-            height: 10
+            width: trayIcon.width / 3
+            height: width
             sourceSize.width: width
             sourceSize.height: height
             source: root.item.icon
             fillMode: Image.PreserveAspectFit
-            visible: true
+            smooth: true
+            mipmap: true
         }
 
         // Fallback to text if image fails
@@ -66,6 +69,14 @@ Rectangle {
             source: sysTrayIcon
             color: Colors.light ? Colors.transparentize(Colors.palette.m3surface, 0.5) : Colors.transparentize(Colors.palette.m3onSurface, 0.5)
         }
+
+        Behavior on width {
+            NumberAnimation {
+                duration: MaterialEasing.expressiveEffectsTime
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MaterialEasing.expressiveEffects
+            }
+        }
     }
 
     MouseArea {
@@ -79,9 +90,11 @@ Rectangle {
             case Qt.LeftButton:
                 console.log(menuOpener.menu.objectName);
                 root.item.activate();
+                trayIcon.playSfx();
                 break;
             case Qt.RightButton:
                 menuOpener.open();
+                trayIcon.playEnter();
                 break;
             }
 

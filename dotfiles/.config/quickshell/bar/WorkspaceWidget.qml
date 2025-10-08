@@ -1,7 +1,6 @@
 pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
-import QtMultimedia
 
 import Quickshell.Hyprland
 
@@ -9,6 +8,7 @@ import qs.globals
 import qs.functions
 import qs.sources
 import qs.globals
+import qs.generics
 
 Rectangle {
 
@@ -27,51 +27,47 @@ Rectangle {
 
             model: Desktop.workspaces[Desktop.workspaces.length - 1].id
 
-            delegate: Item {
-                id: container
+            delegate: Circle {
+                id: circle
                 Layout.alignment: Qt.AlignHCenter
-                Layout.preferredHeight: 30
-                Layout.preferredWidth: 30
+                Layout.preferredHeight: area.containsMouse ? 40 : 30
+                Layout.preferredWidth: height
                 required property var modelData
+
+                Behavior on Layout.preferredHeight {
+                    NumberAnimation {
+                        duration: MaterialEasing.expressiveEffectsTime
+                        easing.type: Easing.BezierSpline
+                        easing.bezierCurve: MaterialEasing.expressiveEffects
+                    }
+                }
+
                 property int idInt: modelData + 1
-                property string idStr: idInt.toString()
+                number: idInt
+                paletteColor: {
+                    if (area.containsMouse)
+                        return 3;
 
-                Image {
+                    const matchingWorkspace = Desktop.workspaces.find(wk => wk.id === circle.idInt);
+
+                    if (matchingWorkspace) {
+                        if (matchingWorkspace.id === Desktop.activeWorkspace.id)
+                            return 3;
+                        else
+                            return 5;
+                    }
+
+                    return 1;
+                }
+
+                MouseArea {
+                    id: area
                     anchors.fill: parent
-                    sourceSize.width: width
-                    sourceSize.height: height
-                    source: {
-                        if (area.containsMouse)
-                            return Variables.osuDirectory + "/palette3-" + container.idStr + ".png";
-
-                        const matchingWorkspace = Desktop.workspaces.find(wk => wk.id === container.idInt);
-
-                        if (matchingWorkspace) {
-                            if (matchingWorkspace.id === Desktop.activeWorkspace.id)
-                                return Variables.osuDirectory + "/palette3-" + container.idStr + ".png";
-                            else
-                                return Variables.osuDirectory + "/palette5-" + container.idStr + ".png";
-                        }
-
-                        return Variables.osuDirectory + "/palette1-" + container.idStr + ".png";
-                    }
-                    smooth: true
-                    mipmap: true
-
-                    MouseArea {
-                        id: area
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        cursorShape: Qt.PointingHandCursor
-                        onPressed: {
-                            sfx.play();
-                            Hyprland.dispatch("workspace " + container.idStr);
-                        }
-                    }
-
-                    SoundEffect {
-                        id: sfx
-                        source: Variables.osuDirectory + "/drum-hitnormal-hitfinish.wav"
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onPressed: {
+                        Hyprland.dispatch("workspace " + circle.idInt.toString());
+                        circle.playSfx();
                     }
                 }
             }

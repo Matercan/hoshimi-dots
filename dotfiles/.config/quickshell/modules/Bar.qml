@@ -5,7 +5,6 @@ import QtQuick
 import QtQuick.Layouts
 
 import qs.bar
-import qs.bar.widgets
 
 import qs.functions
 import qs.globals
@@ -107,27 +106,11 @@ Scope {
                                     active: true
                                     Layout.fillWidth: true
                                     Layout.alignment: Qt.AlignHCenter
-                                    Layout.preferredHeight: width
-
-                                    sourceComponent: SystemStatus {
-                                        id: status
-                                        anchors.centerIn: parent
-                                        topLevel: window
-                                        widgetLayoutY: widgets.parent.y + widgetLayout.anchors.margins
-                                    }
                                 }
                                 Loader {
                                     active: true
                                     Layout.fillWidth: true
                                     Layout.alignment: Qt.AlignHCenter
-                                    Layout.preferredHeight: width
-
-                                    sourceComponent: Volume {
-                                        id: volume
-                                        anchors.centerIn: parent
-                                        topLevel: window
-                                        widgetLayoutY: widgets.parent.y + widgetLayout.anchors.margins
-                                    }
                                 }
                                 Loader {
                                     active: true

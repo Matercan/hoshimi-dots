@@ -4,9 +4,9 @@ import Quickshell.Services.SystemTray
 import Quickshell
 import Qt5Compat.GraphicalEffects
 
-import qs.generics as Gen
-import qs.functions as F
-import qs.globals as G
+import qs.generics
+import qs.functions
+import qs.globals
 
 Rectangle {
     id: root
@@ -23,7 +23,7 @@ Rectangle {
 
     color: {
         if (mouseArea.containsMouse) {
-            return F.Colors.selectedColor;
+            return Colors.selectedColor;
         } else {
             return "transparent";
         }
@@ -37,9 +37,10 @@ Rectangle {
         sourceSize.height: height
         anchors.centerIn: parent
 
-        source: G.Variables.osuDirectory + "/palette1.png"
+        source: Colors.light ? Variables.osuDirectory + "/palette12.png" : Variables.osuDirectory + "/palette1.png"
 
         Image {
+            id: sysTrayIcon
             anchors.centerIn: parent
             width: 10
             height: 10
@@ -47,6 +48,7 @@ Rectangle {
             sourceSize.height: height
             source: root.item.icon
             fillMode: Image.PreserveAspectFit
+            visible: true
         }
 
         // Fallback to text if image fails
@@ -54,15 +56,15 @@ Rectangle {
             anchors.centerIn: parent
             text: "?"
             visible: trayIcon.status === Image.Error
-            font.family: G.Variables.fontFamily
+            font.family: Variables.fontFamily
             font.pixelSize: 12
-            color: F.Colors.foregroundColor
+            color: Colors.foregroundColor
         }
 
         ColorOverlay {
-            anchors.fill: parent
-            source: parent
-            color: F.Colors.transparentize(F.Colors.getPaletteColor("blue"), 0.9)
+            anchors.fill: sysTrayIcon
+            source: sysTrayIcon
+            color: Colors.light ? Colors.transparentize(Colors.palette.m3surface, 0.5) : Colors.transparentize(Colors.palette.m3onSurface, 0.5)
         }
     }
 
@@ -92,7 +94,7 @@ Rectangle {
         menu: root.item.menu
 
         anchor.window: root.bar
-        anchor.rect.x: G.Variables.barSize
+        anchor.rect.x: Variables.barSize
         anchor.rect.y: root.popupY
         anchor.rect.height: root.height
         anchor.rect.width: root.width
@@ -120,7 +122,7 @@ Rectangle {
         implicitWidth: rect.width
         implicitHeight: rect.height
 
-        Gen.PopupBox {
+        PopupBox {
             id: rect
             root: tooltip
             fullyOpen: tooltip.fullyOpen
@@ -139,8 +141,8 @@ Rectangle {
                     id: tooltipText
                     anchors.centerIn: parent
                     text: root.item.title
-                    color: F.Colors.foregroundColor
-                    font.family: G.Variables.fontFamily
+                    color: Colors.foregroundColor
+                    font.family: Variables.fontFamily
                     font.pixelSize: 10
                 }
             }

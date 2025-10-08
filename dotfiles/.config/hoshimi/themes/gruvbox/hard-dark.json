@@ -1,6 +1,15 @@
 {
   "$schema": "https://raw.githubusercontent.com/Matercan/hoshimi-cli/refs/heads/main/schema/theme_schema.json",
   "wallpaper": "after_school_stroll_gruvbox.png",
+  "writers": [
+    {
+      "file": "~/.config/nvim/init.lua",
+      "lines": [
+        "vim.cmd(\"set background=dark\")"
+      ],
+      "linesDeleted": 2
+    }
+  ],
   "bar": {
     "globals": {
       "visible": true,

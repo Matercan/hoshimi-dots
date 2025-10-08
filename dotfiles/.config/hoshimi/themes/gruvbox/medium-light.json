@@ -1,5 +1,12 @@
 {
   "$schema": "https://raw.githubusercontent.com/Matercan/hoshimi-cli/refs/heads/main/schema/theme_schema.json",
+  "writers": [
+    {
+      "lines": [
+        "vim.cmd(\"set background=light\")"
+      ]
+    }
+  ],
   "wallpaper": "joyboy.png",
   "bar": {
     "globals": {

@@ -1,6 +1,13 @@
 {
   "$schema": "https://raw.githubusercontent.com/Matercan/hoshimi-cli/refs/heads/main/schema/theme_schema.json",
   "wallpaper": "The-Wind_Rises.jpg",
+  "writers": [
+    {
+      "lines": [
+        "vim.cmd(\"set background=light\")"
+      ]
+    }
+  ],
   "bar": {
     "globals": {
       "visible": true,

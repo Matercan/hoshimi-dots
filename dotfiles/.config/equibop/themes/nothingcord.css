@@ -1,0 +1,601 @@
+/**
+ * @name clean transparent
+ * @description Transparent lightweight theme. Colors based on wallpapers with pywal.
+ * @author arialdead
+ * @version 1.0.0
+*/
+
+
+@import url(https://mrtipson.github.io/DiscordCSS/css/server-bar.css);
+@import url(https://mrtipson.github.io/DiscordCSS/css/server-folders.css);
+
+:root {
+  --bg-color-1: rgb(255, 0, 0);
+  --background-base-low: rgb(255, 255, 255);
+  --background-base-lowest: rgba(14,
+      26,
+      43,
+      0.6);
+  --color-1: #e2ecf2;
+  --color-2: #0E1A2B;
+  --color-3: #21709B;
+  --color-4: #506E8B;
+  --color-5: #47A2B6;
+  --color-6: #BCB4A3;
+  --color-7: #E3CAA8;
+  --color-8: #F2D6B0;
+  --color-9: #e2ecf2;
+
+  --background-floating: rgba(14,
+      26,
+      43,
+      0.6);
+  --mention: linear-gradient(to right, color-mix(in hsl, var(--color-1), transparent 90%) 40%, transparent);
+  /* background of messages that mention you */
+  --mention-hover: linear-gradient(to right, color-mix(in hsl, var(--color-1), transparent 95%) 40%, transparent);
+  /* background of messages that mention you when hovered */
+  --reply: linear-gradient(to right, color-mix(in hsl, var(--color-3), transparent 90%) 40%, transparent);
+  /* background of messages that reply to you */
+  --reply-hover: linear-gradient(to right, color-mix(in hsl, var(--color-3), transparent 95%) 40%, transparent);
+  /* background of messages that reply to you when hovered */
+}
+
+#online-tab {
+  background: none;
+}
+
+.bg__960e4 {
+  /* Main background color*/
+  background: none;
+}
+
+.theme-dark,
+.theme-darker,
+.container_c8ffbb,
+.members_c8ffbb,
+/* Member list server */
+.container__2637a,
+/* Channel list */
+.chatContent_f75fb0,
+/* Chat in dms and servers */
+.sidebarList_c48ade,
+/* channel list */
+.panels_c48ade,
+/* bottom left pannel */
+.sidebarList_c48ade,
+.privateChannels__35e86,
+.scroller__99e7c,
+/* friends dms and groupchat list */
+.chat_f75fb0
+
+/* random ass background that makes chat hilighted */
+  {
+  background: none !important;
+  box-shadow: none;
+  border: 0 !important;
+}
+
+.children__9293f:after,
+.chatGradient__36d07,
+.sidebar_c48ade:after {
+  /* Random ass grandient "shadowy" */
+  background: none !important;
+}
+
+.member_c8ffbb
+
+/* Single user in member list */
+  {
+  background: none;
+  border: 0px solid var(--color-2);
+  margin-bottom: 2px;
+
+}
+
+.appMount__51fd7,
+body
+
+/* je sais pas c quoi mais c plus joli sans */
+  {
+  background: none;
+}
+
+.sidebarListRounded_c48ade {
+  /* le truc de merde qui fait que c'est blanc la liste des channels */
+  backdrop-filter: none;
+}
+
+.bar_c38106 {
+  min-height: 4px !important;
+  height: 4px;
+  padding: 0px;
+  /* display: none; */
+}
+
+.bar_c38106:hover {
+  min-height: 0px !important;
+  height: 32px;
+  padding: 0px;
+}
+
+.content_c48ade {
+  grid-row-start: -32px !important;
+}
+
+.button__85643 {
+  display: none;
+}
+
+.base_c48ade {
+  padding-top: 5px;
+  top: 48px;
+  grid-template-areas: "guildsList channelsList page";
+  grid-template-rows: [top] min-content [end];
+  position: absolute;
+  left: 0px;
+  bottom: var(--sb-bottom);
+  right: var(--sb-right);
+}
+
+.wrapper_ef3116 {
+  margin: 0 !important;
+}
+
+.pill_e5445c,
+.pill__1f388,
+.pill_ed9a5f {
+  left: 57px;
+  transform: rotate(0.5turn) !important;
+}
+
+.bar_c38106 {
+  display: none;
+}
+
+.themedBackground__74017,
+.channelTextArea_f75fb0 {
+  background: none !important;
+}
+
+.icon_d98031,
+[aria-label="Notification Settings"] {
+  /* Remove bell and threads icon from trop bar */
+  display: none;
+}
+
+.avatarWrapper__37e49 {
+  display: none;
+}
+
+.buttons__37e49 {
+  margin: auto;
+}
+
+.itemsContainer_ef3116 {
+  align-items: stretch !important;
+  justify-items: stretch;
+  justify-self: stretch;
+  justify-content: space-around;
+}
+
+.container__2637a {
+  flex-grow: 1;
+  max-height: 20000px;
+  max-width: 300px;
+  overflow-y: visible;
+  overflow-x: hidden;
+}
+
+.scroller__629e4
+
+/* channel list inner scroller */
+  {
+  scrollbar-color: transparent;
+  overflow: visible !important;
+  max-height: 100%;
+}
+
+.searchBar__35e86 {
+  border: 0 !important;
+  padding-left: 16px;
+}
+
+.sectionDivider__35e86,
+.sectionDivider__629e4 {
+  display: none;
+}
+
+.folderButtonContent__48112 {
+  background-color: transparent;
+  height: 40px;
+  width: 40px;
+}
+
+.folderIcon__48112 {
+  color: var(--color-1);
+  background-color: var(--color-2);
+  ;
+  border-color: var(--color-1);
+}
+
+.folderIcon__48112:hover {
+  color: var(--color-1);
+  background-color: var(--color-3);
+  ;
+  border-color: var(--color-1);
+}
+
+.button__74017,
+.buttonContainer_e6e74f {
+  display: none;
+  ;
+}
+
+/* .folderIconWrapper__48112{
+        height: 40px;
+        width: 40px;
+        padding:0px;
+} */
+
+.chatTypingGradientAtBottom__36d07 {
+  display: none;
+}
+
+.channelTextArea_f75fb0,
+.header_f37cb1 {
+  border: 0;
+}
+
+[href="/library"],
+[href="/store"],
+[href="/shop"] {
+  display: none;
+}
+
+.link__972a0 {
+  justify-content: center;
+  padding-bottom: 4px;
+}
+
+.layout__20a53 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  align-self: center;
+  width: auto;
+  height: auto;
+}
+
+.subText__20a53 {
+  align-self: center;
+  justify-self: center;
+}
+
+/* .layout__20a53 div {
+    display: flex;
+    justify-self: center;
+} */
+
+.content__20a53 {
+  flex-shrink: 1;
+  flex-grow: 0;
+  width: auto;
+  height: auto;
+}
+
+.avatar__20a53 {
+  flex-shrink: 0;
+}
+
+.sidebar_c48ade {
+  position: relative;
+}
+
+
+.sidebarList_c48ade::-webkit-scrollbar {
+  background: transparent;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 5px;
+  /* largeur */
+}
+
+.sidebarList_c48ade::-webkit-scrollbar-track {
+  background: transparent;
+  /* fond de la piste */
+}
+
+.sidebarList_c48ade::-webkit-scrollbar-thumb {
+  background: transparent;
+  /* couleur du thumb */
+  border-radius: 8px;
+  /* arrondi */
+}
+
+.sidebarList_c48ade::-webkit-scrollbar-thumb:hover {
+  background: transparent;
+  /* couleur au hover */
+}
+
+.sidebarList_c48ade {
+  overflow: scroll;
+  scrollbar-gutter: overlay;
+  width: 300px;
+  left: -260px;
+  height: 70%;
+  backdrop-filter: blur(32px) brightness(30%) opacity(0);
+  transform: translate(0%, 0%);
+  opacity: 0%;
+  transition: transform 0.5s, opacity 0.5s, backdrop-filter 1s ease-out;
+  border-radius: 20px;
+  /* background-color: var(--background-base-lowest) !important; */
+  display: block;
+  z-index: 101;
+  position: fixed;
+}
+
+.panels_c48ade {
+  width: 400px;
+  left: -350px;
+  bottom: 60px;
+  padding-left: 30px;
+  transform: translate(0%, 0%);
+  opacity: 0%;
+  backdrop-filter: blur(32px) brightness(30%) opacity(0);
+  transition: transform 0.5s, opacity 0.5s, backdrop-filter 1s ease-out;
+  /* background-color: var(--background-base-lowest) !important; */
+  position: fixed;
+  display: block;
+  z-index: 102;
+}
+
+.panels_c48ade:hover {
+  transform: translate(80%, 0%);
+  backdrop-filter: blur(32px) brightness(30%) opacity(1);
+  opacity: 100%;
+  transition: transform 0.5s, opacity 0.5s, backdrop-filter 1s ease-out;
+}
+
+.sidebarList_c48ade:hover {
+  transform: translate(90%, 0%);
+  backdrop-filter: blur(32px) brightness(30%) opacity(1);
+  opacity: 100%;
+  transition: transform 0.5s, opacity 0.5s, backdrop-filter 1s ease-out;
+}
+
+/* .name__2ea32{
+    color: #e2ecf2 !important;
+} */
+
+/* remove excess background from settings  */
+.standardSidebarView__23e6b,
+.contentRegion__23e6b,
+.sidebarRegionScroller__23e6b,
+.contentRegionScroller__23e6b {
+  background: none;
+}
+
+.standardSidebarView__23e6b {
+  backdrop-filter: var(--panel-backdrop-filter);
+}
+
+.layer__960e4 {
+  background-color: var(--background-base-lowest);
+}
+
+.limitedFeatureBorder__65c15,
+.background__65c15 {
+  background: none;
+  border-radius: 20px;
+}
+
+/* Text anc colors*/
+
+::placeholder {
+  color: var(--color-8);
+}
+
+.modeUnreadImportant__2ea32 .icon__2ea32,
+.wrapper__2ea32:hover .icon__2ea32
+
+/* correct channel icon color */
+  {
+  color: var(--color-1);
+}
+
+.text_b88801>strong
+
+/* xxx is typing.. */
+  {
+  color: var(--color-1);
+}
+
+.expandedFolderIconWrapper__48112>svg[style="color: rgb(88, 101, 242);"]
+
+/* folder icon */
+  {
+  color: var(--color-3) !important;
+}
+
+.colorPickerSwatch__459fb[style="background-color: rgb(88, 101, 242);"]
+/* folder color picker swatch */
+,
+.newBadge_faa96b
+/* forum post new badge */
+,
+.mentioned__5126c:before
+
+/* mention message left edge */
+  {
+  background-color: var(--color-3) !important;
+}
+
+.replying__5126c:before
+
+/* reply message left edge */
+  {
+  background-color: var(--color-2) !important;
+}
+
+#app-mount .message__5126c.replying__5126c:hover
+
+/* override fix for message reply hover */
+  {
+  background: var(--reply-hover);
+}
+
+.voiceBar__7aaec .barText__7aaec,
+.voiceChannelsIcon__7aaec
+
+/* x in voice bar text */
+  {
+  color: var(--color-2);
+}
+
+.wrapper__6e9f8.selected__6e9f8 .childWrapper__6e9f8,
+.wrapper__6e9f8:hover .childWrapper__6e9f8 {
+  background-color: var(--color-1);
+  color: var(--background-base-lowest);
+}
+
+.botTagRegular__82f07
+
+/* bot tag */
+  {
+  background-color: var(--color-8);
+}
+
+.categoryText_d02962
+/* gif chooser category names */
+,
+.bannerColor_fb7f94
+/* profile banner button */
+,
+.backButton_e4cb9a
+/* stream preview back button */
+,
+.viewersIcon_d6b206
+/* stream preview viewers icon */
+,
+.bottomControls_e4cb9a
+/* stream preview viewer number */
+,
+.pictureInPictureVideo_e4cb9a .controlIcon_f1ceac
+/* stream preview control icon */
+,
+.bannerVisible_f37cb1 .name_f37cb1
+/* server name over banner image */
+,
+.dropdownButtonBannerVisible__2637a
+/* server name over banner dropdown button */
+,
+.mediaMosaicAltText__0f481
+
+/* image alt text label */
+  {
+  color: var(--color-1);
+}
+
+.unread__3b95d
+
+/* new unreads bar (channel list */
+  {
+  color: var(--color-4);
+}
+
+.newMessagesBar__0f481
+
+/* unread bar */
+  {
+  background-color: var(--color-5);
+}
+
+::selection,
+.highlight {
+  background: var(--color-3);
+  color: var(--color-0);
+}
+
+.root_bfe55a {
+  background: none;
+}
+
+.wrapper_cb9592 {
+  background: none;
+}
+
+.background_fb62e2,
+.tile__2f4f7,
+.idle__2f4f7,
+.tile__90dc5 {
+  background: none !important;
+  border-color: var(--color-1);
+}
+
+
+.border__2f4f7.speaking__2f4f7 {
+  box-shadow: none !important;
+}
+
+
+.tileChild__2f4f7:has(> .border__2f4f7) .background_fb62e2 .wrapper__44b0c {
+  transform: scale(1);
+  border-radius: 99px;
+  transition: transform 0.1s ease-out, filter 0.1s ease-out;
+  filter: opacity(0.4) drop-shadow(0 0 0px var(--color-3));
+}
+
+.tileChild__2f4f7:has(> .border__2f4f7.speaking__2f4f7) .background_fb62e2 .wrapper__44b0c {
+
+  /* Tes styles quand border a la classe speaking */
+  transform: scale(1.3);
+  filter: opacity(1) drop-shadow(0 0 20px var(--color-3));
+  border-radius: 99px;
+}
+
+/* .tile_d6271c {
+    width: 150px !important;
+} */
+
+.tabBody__133bf {
+  background: none !important;
+}
+
+.container__133bf {
+  background: none !important;
+  border: none !important;
+}
+
+.tabBar__133bf .addFriend__133bf.addFriend__133bf.addFriend__133bf {
+  background-color: var(--color-2);
+  color: var(--color-0)
+}
+
+.menu_c1e9c4 {
+  background-color: var(--background-floating);
+}
+
+.container__7d20c,
+.nowPlayingColumn__133bf {
+  background: none;
+  border: none;
+}
+
+.container__7d20c:hover,
+.nowPlayingColumn__133bf:hover {
+  background: none;
+  border: none;
+}
+
+.itemCard__7e549,
+.section__00943 {
+  background: none;
+  border: none;
+}
+
+.outer_bf1984.active_bf1984,
+.outer_bf1984.interactive_bf1984:hover {
+  background-color: var(--background-base-lowest);
+  border: none;
+}

@@ -1,6 +1,13 @@
 {
   "$schema": "https://raw.githubusercontent.com/Matercan/hoshimi-cli/refs/heads/main/schema/theme_schema.json",
   "wallpaper": "tanjiro-kamado-gruv.jpg",
+  "writers": [
+    {
+      "lines": [
+        "vim.cmd(\"set background=dark\")"
+      ]
+    }
+  ],
   "bar": {
     "globals": {
       "visible": true,

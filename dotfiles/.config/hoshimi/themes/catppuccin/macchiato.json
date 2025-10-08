@@ -1,64 +1,17 @@
 {
   "$schema": "https://raw.githubusercontent.com/Matercan/hoshimi-cli/refs/heads/main/schema/theme_schema.json",
-  "wallpaper": "nord_car_live.gif",
   "commands": [
-    "spicetify config current_theme catppuccin",
     "spicetify config color_scheme macchiato",
     "spicetify apply"
   ],
-  "bar": {
-    "globals": {
-      "visible": true,
-      "position": "left"
-    },
-    "WorkspaceWidget": {
-      "position": 1,
-      "visible": true,
-      "location": "center"
-    },
-    "WindowTitle": {
-      "position": 0,
-      "visible": false,
-      "location": "center"
-    },
-    "Cava": {
-      "position": 2,
-      "visible": true,
-      "location": "bottom"
-    },
-    "Taskbar": {
-      "position": 0,
-      "location": "center",
-      "visible": false
-    },
-    "Widgets": {
-      "positon": 5,
-      "location": "center",
-      "visible": true,
-      "ClockWidget": {
-        "visible": true,
-        "location": "center"
-      },
-      "BatteryWidget": {
-        "visible": true,
-        "location": "top"
-      },
-      "VolumeWidget": {
-        "visible": true,
-        "location": "bottom"
-      }
-    },
-    "TrayWidget": {
-      "position": 4,
-      "visible": true,
-      "location": "bottom"
-    },
-    "DevButtons": {
-      "position": 6,
-      "visible": true,
-      "location": "bottom"
+  "writers": [
+    {
+      "lines": [
+        "vim.cmd(\"Catppuccin macchiato\")",
+        ""
+      ]
     }
-  },
+  ],
   "colors": {
     "backgroundColor": "#24273a",
     "foregroundColor": "#cad3f5",

@@ -1,5 +1,4 @@
 pragma ComponentBehavior: Bound
-import qs.lockscreen
 import qs.globals as V
 
 import Quickshell.Wayland

@@ -5,7 +5,6 @@ import QtQuick
 import QtQuick.Layouts
 import QtMultimedia
 
-import qs.bar
 import qs.functions
 import qs.globals
 

@@ -1,9 +1,10 @@
 // Managed by Hoshimi
 //@ pragma UseQApplication
 
-import qs.bar
-import qs.notifications
-import qs.modules
+import qs.modules.bar
+import qs.modules.notifications
+import qs.modules.lockscreen
+import qs.modules.background
 
 import Quickshell
 import QtQuick
@@ -34,10 +35,5 @@ ShellRoot {
     Loader {
         active: true
         sourceComponent: Content {}
-    }
-    Loader {
-        active: false
-
-        sourceComponent: AltTAB {}
     }
 }

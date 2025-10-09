@@ -11,9 +11,10 @@ WARNING: the screenshots are outdated!
 ## Installation
 ```shell
 git clone https://github.com/Matercan/hoshimi-cli.git
+cd hoshimi-cli
 mkdir -p build
-cmake -B build -DCMAKE_BUILD_TYPE=Debug
-cmake --build build --config Debug --target hoshimi --
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --config Release --target hoshimi --
 build/bin/hoshimi install
 ```
 
@@ -34,41 +35,11 @@ For best user experience:
 - Mutsuki font
 - Any japanese font
 
-## Usage
-
-```
-Hoshimi - Hyprland Dotfiles Manager
-===================================
-
-USAGE:
-    build/bin/hoshimi <command> [options]
-
-COMMANDS:
-    install       Install dotfiles by cloning repository and creating symlinks
-    help          Show this help message
-    arch-install  Install all the packages neccessary for this shell using paru
-    version       Get version information of hoshimi
-    update        Update dotfiles to the most recent master commit
-    config        Get or set the config options within your configuration
-    source        Source the current configuration, updating the modifiable dotfiles
-
-OPTIONS:
-    -v, --verbose    Enable verbose output (show detailed operations)
-    -f, --force    Force overwrite existing files without backup
-    -h, --help    Show this help message
-    -p, --packages    Packages only install the packages for example
-         hypr,fastfetch,starship.toml,../.zshrc
-         hypr,nvim,btop
-
-EXAMPLES:
-    build/bin/hoshimi install -p hypr,fastfetch
-    build/bin/hoshimi source -p quickshell
-    build/bin/hoshimi arch-install
-```
-
 ## TODO:
 
-Matugen integraton for generating colorschemes
+Generating colorschemes based on wallpapers
+Integrating hoshimi-cli into shell
+.ocz unzipping
 
 ## Showcase (LEGACY)
 

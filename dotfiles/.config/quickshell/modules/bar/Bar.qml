@@ -34,7 +34,7 @@ Scope {
             }
 
             color: "transparent"
-            implicitWidth: Variables.barSize
+            implicitWidth: Config.bar.barSize
 
             Rectangle {
                 color: Colors.palette.m3background
@@ -48,7 +48,7 @@ Scope {
                     implicitWidth: parent.width
 
                     Text {
-                        Layout.margins: Config.padding
+                        Layout.margins: Config.layout.padding
                         text: ""
                         font.family: Variables.fontFamily
                         Layout.alignment: Qt.AlignCenter
@@ -68,17 +68,6 @@ Scope {
                         Layout.alignment: Qt.AlignTop
                     }
 
-                    /* Loader {
-                        asyncrhonous: true
-                        Window {
-
-                            id: spacer
-
-                            implicitHeight: 200
-                            Layout.alignment: Qt.AlignHCenter
-                        }
-                    } */
-
                     TrayWidget {
                         id: tray
                         rectY: y
@@ -96,9 +85,9 @@ Scope {
                         sourceComponent: Rectangle {
                             id: widgets
                             implicitWidth: Variables.barSize
-                            implicitHeight: widgetLayout.implicitHeight + 2 * Config.padding  // Add padding
+                            implicitHeight: widgetLayout.implicitHeight + 2 * Config.layout.padding
                             color: "transparent"
-                            radius: Config.radius
+                            radius: Config.layout.radius
                             Layout.fillWidth: true
                             Layout.alignment: Qt.AlignBottom
                             Layout.leftMargin: 1
@@ -106,8 +95,8 @@ Scope {
                             ColumnLayout {
                                 id: widgetLayout
                                 anchors.fill: parent
-                                anchors.margins: Config.padding
-                                spacing: Config.spacing
+                                anchors.margins: Config.layout.padding
+                                spacing: Config.layout.spacing
 
                                 Loader {
                                     active: true

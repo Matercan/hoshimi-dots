@@ -19,7 +19,7 @@ Rectangle {
         id: layout
         anchors.centerIn: parent
         width: Variables.barSize
-        spacing: Config.padding
+        spacing: Config.layout.padding
 
         Repeater {
             id: trueLayout

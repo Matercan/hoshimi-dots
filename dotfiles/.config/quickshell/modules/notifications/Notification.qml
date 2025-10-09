@@ -36,7 +36,7 @@ Item {
         RowLayout {
             id: mainLayout
 
-            spacing: Config.spacing
+            spacing: Config.layout.spacing
 
             anchors.top: parent.top
             anchors.right: parent.right
@@ -50,9 +50,9 @@ Item {
                 visible: root.modelData.image != ""
 
                 Layout.alignment: Qt.AlignTop
-                implicitHeight: 32
-                implicitWidth: 32
-                Layout.margins: 12
+                implicitHeight: Config.icons.mediumSize
+                implicitWidth: Config.icons.mediumSize
+                Layout.margins: Config.layout.padding * 3 / 2
                 Layout.rightMargin: 0
 
                 ClippingWrapperRectangle {
@@ -63,8 +63,8 @@ Item {
                     anchors {
                         horizontalCenter: coverItem.right
                         verticalCenter: coverItem.bottom
-                        horizontalCenterOffset: -2 * Config.padding
-                        verticalCenterOffset: -2 * Config.padding
+                        horizontalCenterOffset: -2 * Config.layout.padding
+                        verticalCenterOffset: -2 * Config.layout.padding
                     }
 
                     radius: 2
@@ -81,9 +81,9 @@ Item {
                 id: contentLayout
 
                 Layout.fillWidth: true
-                Layout.margins: Config.padding * 3 / 2
-                Layout.leftMargin: coverItem.visible ? Config.padding / 2 : Config.padding * 3 / 2
-                spacing: Config.spacing
+                Layout.margins: Config.layout.padding * 3 / 2
+                Layout.leftMargin: coverItem.visible ? Config.layout.padding / 2 : Config.layout.padding * 3 / 2
+                spacing: Config.layout.spacing
 
                 RowLayout {
                     Layout.maximumWidth: contentLayout.width

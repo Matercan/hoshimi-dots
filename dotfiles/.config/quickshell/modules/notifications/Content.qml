@@ -35,16 +35,25 @@ PanelWindow {
             anchors.right: parent.right
             anchors.bottomMargin: 25
             width: 360
-            height: (50 + Config.spacing) * notifs.popups.length
-            spacing: Config.spacing
+            height: Quickshell.screens[0].height
+            spacing: Config.layout.spacing
 
-            model: notifs.popups
+            model: ScriptModel {
+                values: notifs.popups.filter(a => a != null)
+            }
 
             delegate: Notification {
                 Layout.fillWidth: true
-                Layout.alignment: {
-                    console.log(notifs.popups.length);
-                    Qt.AlignHCenter;
+                Layout.alignment: Qt.AlignHCenter
+                required property int index
+            }
+
+            add: Transition {
+                NumberAnimation {
+                    property: "y"
+                    duration: MaterialEasing.expressiveEffectsTime
+                    easing.type: Easing.Bezier
+                    easing.bezierCurve: MaterialEasing.expressiveEffects
                 }
             }
         }

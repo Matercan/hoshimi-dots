@@ -63,8 +63,8 @@ Scope {
 
                         Rectangle {
                             anchors.fill: parent
-                            anchors.margins: G.Variables.wrapSize
-                            radius: 8
+                            anchors.margins: G.Config.bar.wrapSize
+                            radius: G.Config.layout.radius * 2
                         }
                     }
                 }

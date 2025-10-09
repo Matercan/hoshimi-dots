@@ -1,6 +1,5 @@
 theme = hoshimi
-background-opacity = 0.9
-background-blur = 10
+background-blur = 5
 font-family = "Fira Code iScript"
 font-size = 9
 

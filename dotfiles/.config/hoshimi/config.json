@@ -44,5 +44,5 @@
       "config": "catppuccin/mocha"
     }
   },
-  "config": "catppuccin/latte"
+  "config": "catppuccin/mocha"
 }

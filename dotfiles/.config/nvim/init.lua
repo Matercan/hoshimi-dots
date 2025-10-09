@@ -38,5 +38,14 @@ require("lazy").setup(plugins)
 
 -- Global options after plugins are loaded (e.g., configurations that might depend on plugins)
 require("configs.options")
-
 vim.cmd("Catppuccin latte")
+
+
+
+
+
+
+
+
+vim.cmd("Catppuccin mocha")
+

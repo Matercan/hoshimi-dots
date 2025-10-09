@@ -2,5 +2,6 @@
 *.swp
 *.swo
 
-# Hoshimi-cli backup
+# Hoshimi-cli generated files
 **backup*
+assets/osuGen**

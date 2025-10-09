@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 
 import qs.services as S
 import qs.functions
+import qs.globals
 
 import Quickshell
 import Quickshell.Io
@@ -72,8 +73,8 @@ Scope {
         readonly property list<NotificationAction> actions: notification.actions
 
         readonly property Timer timer: Timer {
-            running: true
-            interval: notif.notification.expireTimeout > 0 ? notif.notification.expireTimeout : 5000
+            running: Config.notifs.timeOut
+            interval: notif.notification.expireTimeout > 0 ? notif.notification.expireTimeout : Config.notifs.timeOutTime
 
             onTriggered: notif.popup = false
         }

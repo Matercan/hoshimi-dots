@@ -30,7 +30,7 @@ Rectangle {
             delegate: Circle {
                 id: circle
                 Layout.alignment: Qt.AlignHCenter
-                Layout.preferredHeight: area.containsMouse ? 40 : 30
+                Layout.preferredHeight: area.containsMouse ? Config.icons.bigSize : Config.icons.mediumSize
                 Layout.preferredWidth: height
                 required property var modelData
 

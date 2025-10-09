@@ -1,4 +1,3 @@
-import qs.services as S
 import qs.globals
 import qs.functions
 
@@ -14,8 +13,7 @@ Item {
     required property var modelData
     implicitHeight: layout.height
     implicitWidth: layout.width
-    readonly property date time: new Date()
-    readonly property real now: time.getTime()
+
     Layout.rightMargin: 15
 
     MouseArea {

@@ -25,4 +25,13 @@ Singleton {
             smallSize: 22
         };
     }
+
+    property var notifs: {
+        return {
+            timeOut: true,
+            timeOutTime: 5000,
+            width: 360,
+            height: 100
+        };
+    }
 }

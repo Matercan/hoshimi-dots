@@ -36,7 +36,7 @@ Rectangle {
 
     Circle {
         id: trayIcon
-        width: mouseArea.containsMouse ? 33 : 22
+        width: mouseArea.containsMouse ? Config.icons.mediumSize : Config.icons.smallSize
         height: width
         anchors.centerIn: parent
         paletteColor: Colors.light ? 16 : 1

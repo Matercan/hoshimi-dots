@@ -40,11 +40,4 @@ require("lazy").setup(plugins)
 
 require("configs.options")
 
-
-
-
-
-
-
 vim.cmd("Catppuccin latte")
-

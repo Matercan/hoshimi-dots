@@ -3,14 +3,22 @@ pragma ComponentBehavior: Bound
 import Quickshell
 import QtQuick
 import QtQuick.Layouts
+import QtMultimedia
 
 import qs.bar
-
 import qs.functions
 import qs.globals
 
 Scope {
     id: root
+
+    SoundEffect {
+        id: sfx
+        source: {
+            return Variables.osuDirectory + "/start.wav";
+        }
+        onLoadedChanged: play()
+    }
 
     Variants {
         model: Quickshell.screens

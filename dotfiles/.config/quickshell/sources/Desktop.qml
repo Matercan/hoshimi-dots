@@ -1,120 +1,74 @@
 pragma Singleton
 import Quickshell
-import Quickshell.Io
-import QtQuick
-
-import qs.globals
+import Quickshell.Hyprland
 
 Singleton {
     id: root
-    property var activeWindow
-    property var activeWorkspace
-    property var windows: []
-    property var workspaces: []
+    property var activeWindow: {
+        const wn = Hyprland.activeToplevel;
+        if (!wn)
+            return null;
 
-    Process {
-        id: windowsProc
-        command: ["hyprctl", "clients", "-j"]
-        running: true
+        return {
+            title: wn.title,
+            adress: wn.address,
+            activated: wn.activated,
+            monitor: wn.monitor,
+            workspace: wn.workspace
+        };
+    }
+    property var activeWorkspace: {
+        const ws = Hyprland.activeToplevel?.workspace;
+        if (!ws)
+            return null;
 
-        stdout: StdioCollector {
-            onStreamFinished: {
-                try {
-                    const allClients = JSON.parse(this.text.trim());
-                    let currentWorkspaceWindows = [];
-
-                    // Filter windows that are in the current workspace and visible
-                    allClients.forEach(client => {
-                        if (!client.hidden && client.mapped && !client.floating || client.floating) {
-                            currentWorkspaceWindows.push({
-                                address: client.address,
-                                title: client.title || client.class || "Unknown",
-                                className: client.class || "unknown",
-                                workspace: client.workspace.id
-                            });
-                        }
-                    });
-
-                    // Sort windows by workspace ID
-                    currentWorkspaceWindows.sort((a, b) => {
-                        // First sort by workspace ID
-                        if (a.workspace !== b.workspace) {
-                            return a.workspace - b.workspace;
-                        }
-                        // Then sort by title within the same workspace
-                        return a.title.localeCompare(b.title);
-                    });
-
-                    root.windows = currentWorkspaceWindows;
-                } catch (e) {
-                    console.log("Failed to parse windows:", e);
-                }
-            }
-        }
+        return {
+            id: ws.id,
+            name: ws.name,
+            monitor: ws.monitor,
+            toplevels: ws.toplevels,
+            active: ws.active
+        };
     }
 
-    Process {
-        id: workspacesProc
-        command: ["hyprctl", "workspaces", "-j"]
-        running: true
+    property var windows: {
+        const result = [];
+        Hyprland.toplevels.values.forEach(client => {
+            result.push({
+                title: client.title,
+                address: client.address,
+                activated: client.activated,
+                monitor: client.monitor,
+                workspace: client.workspaces
+            });
+        });
 
-        stdout: StdioCollector {
-            onStreamFinished: {
-                try {
-                    const allWorkspaces = JSON.parse(this.text.trim());
-                    allWorkspaces.sort((a, b) => {
-                        return a.id - b.id;
-                    });
-                    root.workspaces = allWorkspaces;
-                } catch (e) {
-                    console.log("failed to parse workspaces:", e);
-                }
+        result.sort((a, b) => {
+            if (a.workspace !== b.workspace) {
+                return a.workspace - b.workspace;
             }
-        }
+
+            return a.title.localeCompare(b.title);
+        });
+
+        return result;
     }
+    property var workspaces: {
+        const result = [];
+        Hyprland.workspaces.values.forEach(client => {
+            result.push({
+                id: client.id,
+                name: client.name,
+                monitor: client.monitor,
+                toplevels: client.toplevels,
+                active: client.active
+            });
+        });
 
-    Process {
-        id: windowProc
-        command: ["hyprctl", "activewindow", "-j"]
-        running: true
+        result.sort((a, b) => {
+            return a.id - b.id;
+        });
 
-        stdout: StdioCollector {
-            onStreamFinished: {
-                try {
-                    const thisWindow = JSON.parse(this.text.trim());
-                    root.activeWindow = thisWindow;
-                } catch (e) {
-                    console.log("Failed to parse window:", e);
-                }
-            }
-        }
-    }
-
-    Process {
-        id: workspaceProc
-        command: ["hyprctl", "activeworkspace", "-j"]
-        running: true
-
-        stdout: StdioCollector {
-            onStreamFinished: {
-                try {
-                    const thisWorkspace = JSON.parse(this.text.trim());
-                    root.activeWorkspace = thisWorkspace;
-                } catch (e) {
-                    console.log("failed to parse workspace: ", e);
-                }
-            }
-        }
-    }
-
-    Timer {
-        interval: Variables.timerProcInterval
-        running: true
-        repeat: true
-
-        onTriggered: {
-            workspaceProc.running = true, windowProc.running = true;
-            workspacesProc.running = true, windowsProc.running = true;
-        }
+        return result;
     }
 }

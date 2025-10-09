@@ -1,130 +1,164 @@
-import qs.services
+import qs.services as S
 import qs.globals
 import qs.functions
 
+import Quickshell.Services.Notifications
+import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
 
 import QtQuick
 
-Rectangle {
+Item {
     id: root
     required property var modelData
     implicitHeight: layout.height
     implicitWidth: layout.width
     readonly property date time: new Date()
     readonly property real now: time.getTime()
-    color: Colors.transparentize(Colors.getPaletteColor("teal"), 0.5)
     Layout.rightMargin: 15
-    radius: 16
-
-    NumberAnimation on y {
-        easing.type: Easing.Bezier
-        easing.bezierCurve: MaterialEasing.expressiveEffects
-    }
-
-    ColumnLayout {
-        id: layout
-        Rectangle {
-            id: countDown
-
-            radius: 5
-            color: Colors.getPaletteColor("blue")
-            Layout.preferredHeight: 5
-        }
-
-        Timer {
-            id: timer
-            repeat: true
-            running: true
-            interval: 50
-            onTriggered: {
-                var timeNow = Time.dateStringToUnix(Time.datetime);
-                var timeDiff = timeNow - root.modelData.time.getTime();
-                countDown.implicitWidth = 300 * (5 - timeDiff / 1000) / 5;
-            }
-        }
-
-        RowLayout {
-
-            Rectangle {
-                Layout.preferredWidth: 32
-                Layout.preferredHeight: 32
-                radius: 16
-                color: Colors.getPaletteColor("teal")
-
-                Image {
-                    anchors.fill: parent
-                    source: root.modelData.image || "/usr/share/icons/candy-icons/status/scalable/notification-active.svg"
-                    anchors.margins: 5
-
-                    sourceSize.width: parent.width - anchors.margins
-                    sourceSize.height: parent.height - anchors.margins
-
-                    mipmap: true
-                    smooth: true
-                }
-            }
-
-            ColumnLayout {
-                id: textLayout
-                spacing: 0
-
-                function truncateText(text: string, pixelSize: real): string {
-                    pixelSize /= 2;
-                    if (text.length * pixelSize <= 300) {
-                        return text;
-                    }
-                    var maxLength = 300 / pixelSize;
-                    return text.substring(0, maxLength - 3) + "...";
-                }
-
-                RowLayout {
-                    Layout.preferredWidth: 270
-                    Text {
-                        color: Colors.foregroundColor
-                        Layout.alignment: Qt.AlignLeft
-                        text: textLayout.truncateText(root.modelData.summary, 18) // one size bigger to account for time
-                        font.pixelSize: 14
-                        font.weight: Font.Bold
-                    }
-                    Rectangle {
-                        Layout.preferredWidth: 3
-                        Layout.alignment: Qt.AlignLeft
-                        Layout.preferredHeight: 3
-                        color: Colors.foregroundColor
-                        radius: 1.5
-                    }
-                    Text {
-                        Layout.leftMargin: 0
-                        color: Colors.foregroundColor
-                        text: root.modelData.timeStr
-                        font.weight: Font.Thin
-                        Layout.alignment: Qt.AlignLeft
-                    }
-                    Text {
-                        color: Colors.foregroundColor
-                        text: ""
-                        font.weight: Font.Thin
-                        Layout.alignment: Qt.AlignRight
-                    }
-                }
-
-                Text {
-                    color: Colors.foregroundColor
-                    text: area.containsMouse ? root.modelData.body : textLayout.truncateText(root.modelData.body, 12)
-                    wrapMode: Text.WordWrap
-                    Layout.preferredWidth: 300
-                    font.pixelSize: 12
-                }
-            }
-        }
-    }
 
     MouseArea {
         id: area
         anchors.fill: parent
         hoverEnabled: true
         cursorShape: Qt.WhatsThisCursor
+    }
+
+    Rectangle {
+        id: layout
+        implicitWidth: 360
+        implicitHeight: mainLayout.height
+        radius: 15
+        anchors.centerIn: parent
+        color: Colors.palette.m3background
+
+        RowLayout {
+            id: mainLayout
+
+            spacing: Config.spacing
+
+            anchors.top: parent.top
+            anchors.right: parent.right
+            anchors.left: parent.left
+
+            implicitWidth: parent.width
+
+            Item {
+                id: coverItem
+
+                visible: root.modelData.image != ""
+
+                Layout.alignment: Qt.AlignTop
+                implicitHeight: 32
+                implicitWidth: 32
+                Layout.margins: 12
+                Layout.rightMargin: 0
+
+                ClippingWrapperRectangle {
+                    visible: true
+
+                    color: "transparent"
+
+                    anchors {
+                        horizontalCenter: coverItem.right
+                        verticalCenter: coverItem.bottom
+                        horizontalCenterOffset: -2 * Config.padding
+                        verticalCenterOffset: -2 * Config.padding
+                    }
+
+                    radius: 2
+
+                    IconImage {
+                        implicitSize: coverItem.height
+                        source: root.modelData.image
+                        smooth: true
+                    }
+                }
+            }
+
+            ColumnLayout {
+                id: contentLayout
+
+                Layout.fillWidth: true
+                Layout.margins: Config.padding * 3 / 2
+                Layout.leftMargin: coverItem.visible ? Config.padding / 2 : Config.padding * 3 / 2
+                spacing: Config.spacing
+
+                RowLayout {
+                    Layout.maximumWidth: contentLayout.width
+
+                    Text {
+                        Layout.alignment: Qt.AlignLeft
+                        text: root.modelData.summary
+                        elide: Text.ElideRight
+                        font.weight: Font.Bold
+                        font.family: Variables.fontFamily
+                        color: Colors.light ? Colors.palette.m3inverseOnSurface : Colors.palette.m3onSurface
+                    }
+
+                    Text {
+                        Layout.alignment: Qt.AlignRight
+                        text: root.modelData.timeStr
+                        font.family: Variables.fontFamily
+                        color: Colors.light ? Colors.palette.m3inverseOnSurface : Colors.palette.m3onSurface
+                    }
+                }
+
+                Text {
+                    id: boyText
+                    Layout.fillWidth: true
+                    elide: Text.ElideRight
+                    wrapMode: Text.Wrap
+                    font.weight: Font.Medium
+                    maximumLineCount: 5
+                    text: root.modelData.body
+                    font.family: Variables.fontFamily
+                    color: Colors.light ? Colors.palette.m3inverseOnSurface : Colors.palette.m3onSurface
+                }
+
+                RowLayout {
+                    visible: root.modelData.actions.length > 1
+
+                    Layout.fillWidth: true
+                    implicitHeight: actionRepeater.height
+
+                    Repeater {
+                        id: actionRepeater
+                        model: root.modelData.actions.slice(1)
+
+                        Rectangle {
+                            id: actionButtomMA
+                            required property NotificationAction modelData
+                            implicitHeight: actionButton.height
+
+                            MouseArea {
+                                id: mArea
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                onPressed: actionButtomMA.modelData.invoke()
+                            }
+
+                            Rectangle {
+                                id: actionButton
+
+                                radius: 16
+                                color: mArea.containsMouse ? Colors.palette.m3secondary : Colors.palette.m3primary
+                                implicitHeight: buttonText.height
+
+                                Layout.fillWidth: true
+
+                                Text {
+                                    id: buttonText
+
+                                    anchors.centerIn: parent
+                                    text: actionButtomMA.modelData.text
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

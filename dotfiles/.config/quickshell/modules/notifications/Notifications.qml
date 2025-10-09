@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound
 
-import qs.services
+import qs.services as S
 import qs.functions
 
 import Quickshell
@@ -50,7 +50,7 @@ Scope {
         property bool popup
         readonly property date time: new Date()
         readonly property string timeStr: {
-            const diff = Time.dateStringToUnix(Time.datetime) - time.getTime();
+            const diff = Time.dateStringToUnix(S.Time.datetime) - time.getTime();
 
             const m = Math.floor(diff / 60000);
             const h = Math.floor(m / 60);
@@ -73,13 +73,9 @@ Scope {
 
         readonly property Timer timer: Timer {
             running: true
-            interval: {
-                console.log(notif.notification.expireTimeout);
-                return notif.notification.expireTimeout > 0 ? notif.notification.expireTimeout : 5000;
-            }
-            onTriggered: {
-                notif.popup = false;
-            }
+            interval: notif.notification.expireTimeout > 0 ? notif.notification.expireTimeout : 5000
+
+            onTriggered: notif.popup = false
         }
 
         readonly property Connections conn: Connections {

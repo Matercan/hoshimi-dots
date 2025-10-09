@@ -1,10 +1,8 @@
 import Quickshell
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Effects
 
 import qs.globals
-import qs.functions
 
 PanelWindow {
     anchors {
@@ -17,34 +15,36 @@ PanelWindow {
     }
 
     margins {
-        left: 300
+        right: 15
         top: 0
     }
 
-    implicitWidth: notifs.popups.length > 0 ? rectangle.width : 0
-    implicitHeight: notifs.popups.length > 0 ? rectangle.height : 0
+    implicitWidth: rectangle.width
+    implicitHeight: rectangle.height
     color: "transparent"
 
     Rectangle {
         id: rectangle
         implicitWidth: layout.width + 25
         implicitHeight: layout.height + 50
-        color: Colors.backgroundColor
+        color: "transparent"
 
-        ColumnLayout {
+        ListView {
             id: layout
             anchors.bottom: parent.bottom
             anchors.right: parent.right
             anchors.bottomMargin: 25
+            width: 360
+            height: (50 + Config.spacing) * notifs.popups.length
+            spacing: Config.spacing
 
-            Repeater {
-                model: {
-                    notifs.popups;
-                    popups: notifs.popups;
-                }
-                delegate: Notification {
-                    Layout.fillWidth: true
-                    Layout.alignment: Qt.AlignHCenter
+            model: notifs.popups
+
+            delegate: Notification {
+                Layout.fillWidth: true
+                Layout.alignment: {
+                    console.log(notifs.popups.length);
+                    Qt.AlignHCenter;
                 }
             }
         }

@@ -1,7 +1,7 @@
 pragma ComponentBehavior: Bound
 
-import qs.sources
-import qs.functions as F
+import qs.services
+import qs.functions
 
 import Quickshell
 import Quickshell.Io
@@ -50,7 +50,7 @@ Scope {
         property bool popup
         readonly property date time: new Date()
         readonly property string timeStr: {
-            const diff = F.Time.dateStringToUnix(Time.datetime) - time.getTime();
+            const diff = Time.dateStringToUnix(Time.datetime) - time.getTime();
 
             const m = Math.floor(diff / 60000);
             const h = Math.floor(m / 60);

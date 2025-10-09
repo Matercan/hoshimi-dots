@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import Quickshell
 
 import qs.functions as F
-import qs.sources as S
+import qs.services
 import qs.globals
 
 AnimatedImage {
@@ -27,14 +27,14 @@ AnimatedImage {
         y: 900
 
         Text {
-            text: S.Time.time || "No Time Data"
+            text: Time.time || "No Time Data"
             color: F.Colors.transparentize(F.Colors.foregroundColor, 0.3) || "#ffffff"
             font.family: "MRK Maston"
             font.pointSize: 50
         }
 
         Text {
-            text: S.Time.date || "No Date Data"
+            text: Time.date || "No Date Data"
             color: F.Colors.transparentize(F.Colors.foregroundColor, 0.3) || "#ffffff"
             font.family: "MRK Maston"
             font.pointSize: 60

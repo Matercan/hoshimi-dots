@@ -6,7 +6,7 @@ import Quickshell.Hyprland
 
 import qs.globals
 import qs.functions
-import qs.sources
+import qs.services
 import qs.globals
 import qs.generics
 

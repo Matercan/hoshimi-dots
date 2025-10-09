@@ -7,7 +7,7 @@ import Quickshell.Hyprland
 import Quickshell.Io
 import Qt5Compat.GraphicalEffects
 
-import qs.sources
+import qs.services
 import qs.functions as F
 
 import qs.globals

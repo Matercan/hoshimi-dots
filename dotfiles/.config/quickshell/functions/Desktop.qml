@@ -1,7 +1,7 @@
 pragma Singleton
 
 import Quickshell
-import qs.sources as S
+import qs.services
 
 Singleton {
     function getWorkspaceIcon(ident) {
@@ -56,7 +56,7 @@ Singleton {
 
     function getWindowsInWorkspace(workspace: int): var {
         var windowsInWorkwpace = [];
-        var openWindows = S.Desktop.windows;
+        var openWindows = Desktop.windows;
         for (let window of openWindows) {
             if (window.workspace == workspace) {
                 windowsInWorkwpace.push(window);

@@ -1,4 +1,4 @@
-import qs.sources as S
+import qs.services
 import qs.globals
 import qs.functions
 
@@ -39,7 +39,7 @@ Rectangle {
             running: true
             interval: 50
             onTriggered: {
-                var timeNow = Time.dateStringToUnix(S.Time.datetime);
+                var timeNow = Time.dateStringToUnix(Time.datetime);
                 var timeDiff = timeNow - root.modelData.time.getTime();
                 countDown.implicitWidth = 300 * (5 - timeDiff / 1000) / 5;
             }

@@ -29,7 +29,6 @@ PanelWindow {
         id: rectangle
         implicitWidth: layout.width + 25
         implicitHeight: layout.height + 50
-        bottomLeftRadius: 50
         color: Colors.backgroundColor
 
         ColumnLayout {

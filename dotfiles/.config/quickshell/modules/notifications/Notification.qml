@@ -160,11 +160,11 @@ Item {
             gradient: Gradient {
                 GradientStop {
                     position: 0
-                    color: Colors.transparentize("#ffffff", 0.9)
+                    color: Colors.transparentize(Colors.foregroundColor, 0.9)
                 }
                 GradientStop {
                     position: 1
-                    color: Colors.transparentize("#000000", 0.9)
+                    color: Colors.transparentize(Colors.backgroundColor, 0.9)
                 }
             }
         }

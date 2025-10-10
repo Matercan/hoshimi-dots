@@ -71,11 +71,7 @@ Rectangle {
         }
 
         Behavior on width {
-            NumberAnimation {
-                duration: MaterialEasing.expressiveEffectsTime
-                easing.type: Easing.BezierSpline
-                easing.bezierCurve: MaterialEasing.expressiveEffects
-            }
+            Anims.ExpAnim {}
         }
     }
 

@@ -18,7 +18,7 @@ Rectangle {
     ColumnLayout {
         id: layout
         anchors.centerIn: parent
-        width: Variables.barSize
+        width: Config.bar.barSize
         spacing: Config.layout.padding
 
         Repeater {
@@ -35,11 +35,7 @@ Rectangle {
                 required property var modelData
 
                 Behavior on Layout.preferredHeight {
-                    NumberAnimation {
-                        duration: MaterialEasing.expressiveEffectsTime
-                        easing.type: Easing.BezierSpline
-                        easing.bezierCurve: MaterialEasing.expressiveEffects
-                    }
+                    Anims.ExpAnim {}
                 }
 
                 property int idInt: modelData + 1

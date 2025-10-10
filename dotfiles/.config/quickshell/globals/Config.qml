@@ -4,7 +4,7 @@ import Quickshell
 Singleton {
     property var layout: {
         return {
-            ratios: [0.9, 0.6],
+            ratios: [1 / 0.9, 0.9, 0.6],
             padding: 8,
             spacing: 6,
             radius: 4

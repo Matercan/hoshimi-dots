@@ -11,17 +11,12 @@ import QtQuick
 Item {
     id: root
     required property var modelData
-    implicitHeight: layout.height
+    required property bool expandText
+
+    implicitHeight: expandText ? layout.height + Config.layout.ratios[0] * Config.layout.spacing : layout.height
     implicitWidth: layout.width
 
     Layout.rightMargin: 15
-
-    MouseArea {
-        id: area
-        anchors.fill: parent
-        hoverEnabled: true
-        cursorShape: Qt.WhatsThisCursor
-    }
 
     Rectangle {
         id: layout
@@ -109,7 +104,7 @@ Item {
                     elide: Text.ElideRight
                     wrapMode: Text.Wrap
                     font.weight: Font.Medium
-                    maximumLineCount: 5
+                    maximumLineCount: root.expandText ? 5 : 1
                     text: root.modelData.body
                     font.family: Variables.fontFamily
                     color: Colors.light ? Colors.palette.m3inverseOnSurface : Colors.palette.m3onSurface
@@ -155,6 +150,21 @@ Item {
                             }
                         }
                     }
+                }
+            }
+        }
+
+        Rectangle {
+            anchors.fill: parent
+            radius: parent.radius
+            gradient: Gradient {
+                GradientStop {
+                    position: 0
+                    color: Colors.transparentize("#ffffff", 0.9)
+                }
+                GradientStop {
+                    position: 1
+                    color: Colors.transparentize("#000000", 0.9)
                 }
             }
         }

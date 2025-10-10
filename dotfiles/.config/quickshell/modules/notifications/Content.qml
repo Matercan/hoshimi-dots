@@ -19,41 +19,81 @@ PanelWindow {
         top: 0
     }
 
+    mask: Region {
+        height: (Config.notifs.height + Config.layout.spacing) * layout.count
+        width: (Config.notifs.width)
+    }
+
     implicitWidth: rectangle.width
     implicitHeight: rectangle.height
     color: "transparent"
 
     Rectangle {
         id: rectangle
-        implicitWidth: layout.width + 25
-        implicitHeight: layout.height + 50
+        implicitWidth: layout.width
+        implicitHeight: layout.height
         color: "transparent"
 
         ListView {
             id: layout
             anchors.bottom: parent.bottom
             anchors.right: parent.right
-            anchors.bottomMargin: 25
-            width: 360
+            width: Config.notifs.width * Config.layout.ratios[0]
             height: Quickshell.screens[0].height
             spacing: Config.layout.spacing
+            anchors.bottomMargin: -0.2 * Config.notifs.height
+            anchors.horizontalCenter: parent.horizontalCenter
 
             model: ScriptModel {
                 values: notifs.popups.filter(a => a != null)
             }
 
             delegate: Notification {
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignHCenter
+                id: notif
                 required property int index
+                expandText: area.containsMouse
+
+                anchors.horizontalCenter: parent.horizontalCenter
+
+                MouseArea {
+                    id: area
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.WhatsThisCursor
+                }
+
+                scale: notif.expandText ? Config.layout.ratios[0] : 1
+
+                Behavior on scale {
+                    Anims.ExpAnim {}
+                }
+
+                Behavior on implicitHeight {
+                    Anims.ExpAnim {}
+                }
             }
 
             add: Transition {
-                NumberAnimation {
+                Anims.ExpAnim {
                     property: "y"
-                    duration: MaterialEasing.expressiveEffectsTime
-                    easing.type: Easing.Bezier
-                    easing.bezierCurve: MaterialEasing.expressiveEffects
+                }
+            }
+
+            remove: Transition {
+                Anims.EmphAnim {
+                    property: "y"
+                }
+            }
+
+            displaced: Transition {
+                Anims.EmphAnim {
+                    property: "y"
+                }
+            }
+
+            move: Transition {
+                Anims.EmphAnim {
+                    property: "y"
                 }
             }
         }

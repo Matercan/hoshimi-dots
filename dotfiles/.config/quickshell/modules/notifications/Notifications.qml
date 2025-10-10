@@ -45,6 +45,26 @@ Scope {
         }
     }
 
+    function clear() {
+        for (const notif of root.list) {
+            notif.popup = false;
+        }
+    }
+
+    function close(i: int) {
+        root.list[i].popup = false;
+    }
+
+    function closeFrom(i: int) {
+        const matchingIndexes = root.list.splice(i);
+
+        root.list.forEach(el => {
+            if (matchinIndexes.includes(el)) {
+                el.popup = false;
+            }
+        });
+    }
+
     component Notif: QtObject {
         id: notif
 

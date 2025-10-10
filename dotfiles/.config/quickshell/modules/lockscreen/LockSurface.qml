@@ -4,9 +4,9 @@ import QtQuick.Layouts
 import QtQuick.Controls.Fusion
 import QtQuick.Effects
 
-import qs.functions as F
-import qs.generics as Gen
-import qs.globals as Glo
+import qs.functions
+import qs.generics
+import qs.globals
 
 Rectangle {
     id: root
@@ -24,30 +24,21 @@ Rectangle {
     property string inputBuffer: ""
     property string maskedBuffer: ""
 
-    Gen.Wallpaper {
+    Wallpaper {
         layer.enabled: true
         layer.effect: MultiEffect {
             id: walBlur
             blurEnabled: true
 
-            // Fix: Animate blur in when screen locks
-            NumberAnimation on blur {
+            Anims.EmphAnim on blur {
                 id: blurInAnimation
-                duration: Glo.MaterialEasing.emphasizedTime
-                easing.type: Easing.Bezier
-                easing.bezierCurve: Glo.MaterialEasing.emphasized
                 from: 0
                 to: 0.69
                 running: true
             }
 
-            // Fix: Animate blur out when unlocking
-            NumberAnimation {
+            Anims.EmphAnim {
                 id: blurOutAnimation
-                duration: Glo.MaterialEasing.emphasizedTime * 1.5
-                easing.type: Easing.Bezier
-                easing.bezierCurve: Glo.MaterialEasing.emphasized
-                property: "blur"
                 running: root.context.timerInProgress
                 target: walBlur
                 to: 0
@@ -67,7 +58,7 @@ Rectangle {
             text: root.samuraiText.join("")
             font.family: "Mutsuki"
             font.pointSize: 30
-            color: F.Colors.iconColor
+            color: Colors.iconColor
             Layout.alignment: Qt.AlignHCenter
         }
 
@@ -75,7 +66,7 @@ Rectangle {
             text: root.englishText
             font.pointSize: 30
             font.family: "Shadow Whisper"
-            color: F.Colors.iconColor
+            color: Colors.iconColor
             Layout.alignment: Qt.AlignHCenter
         }
     }
@@ -136,7 +127,7 @@ Rectangle {
         Label {
             text: "失敗行いました"
             font.pointSize: 30
-            color: F.Colors.errorColor
+            color: Colors.errorColor
             font.family: "Mutsuki"
             horizontalAlignment: Qt.AlignCenter
             verticalAlignment: Qt.AlignCenter
@@ -145,7 +136,7 @@ Rectangle {
         Label {
             font.pointSize: 30
             text: "Incorrect password"
-            color: F.Colors.errorColor
+            color: Colors.errorColor
             font.family: "Shadow Whisper"
             horizontalAlignment: Qt.AlignCenter
         }
@@ -156,11 +147,7 @@ Rectangle {
         anchors.centerIn: parent
         opacity: 1
         spacing: root.maskedBuffer.length * 14
-        NumberAnimation on spacing {
-            duration: Glo.MaterialEasing.standardTime
-            easing.type: Easing.BezierSpline
-            easing.bezierCurve: Glo.MaterialEasing.standard
-        }
+        Anims.Anim on spacing {}
 
         Repeater {
             model: root.maskedBuffer
@@ -169,7 +156,7 @@ Rectangle {
                 required property var index
                 text: root.maskedBuffer[index]
                 font.family: "Libre Barcode 128"
-                color: F.Colors.passwordColor
+                color: Colors.passwordColor
                 property int size: Math.floor(Math.random() * 100) + 350
                 font.pixelSize: size
             }
@@ -179,19 +166,16 @@ Rectangle {
             id: newChar
             font.family: "Libre Barcode 128"
             text: root.inputBuffer
-            color: F.Colors.transparentize(F.Colors.passwordColor, 0.3)
+            color: Colors.transparentize(Colors.passwordColor, 0.3)
             property int size: 0
             font.pixelSize: size
 
-            NumberAnimation {
+            Anims.Anim {
                 id: textAnimation
                 target: newChar
                 properties: "size"
-                duration: Glo.MaterialEasing.standardTime
                 from: 0
                 to: 300
-                easing.type: Easing.BezierSpline
-                easing.bezierCurve: Glo.MaterialEasing.standard
             }
         }
 
@@ -200,7 +184,7 @@ Rectangle {
             target: displayText
             to: 0
             from: 1
-            duration: Glo.MaterialEasing.emphasizedTime * 1.5
+            duration: MaterialEasing.emphasizedTime * 1.5
             easing.type: Easing.Linear
         }
 

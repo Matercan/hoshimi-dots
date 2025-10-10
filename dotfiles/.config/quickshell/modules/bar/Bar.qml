@@ -84,7 +84,7 @@ Scope {
 
                         sourceComponent: Rectangle {
                             id: widgets
-                            implicitWidth: Variables.barSize
+                            implicitWidth: Config.bar.barSize
                             implicitHeight: widgetLayout.implicitHeight + 2 * Config.layout.padding
                             color: "transparent"
                             radius: Config.layout.radius

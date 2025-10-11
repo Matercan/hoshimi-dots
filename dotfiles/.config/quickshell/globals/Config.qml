@@ -1,3 +1,5 @@
+// Managed by hoshimi
+
 pragma Singleton
 import Quickshell
 
@@ -32,6 +34,14 @@ Singleton {
             timeOutTime: 5000,
             width: 360,
             height: 100
+        };
+    }
+
+    property var background: {
+        return {
+            clockX: 100,
+            clockY: 900,
+            clockFont: "MRK Maston"
         };
     }
 }

@@ -162,18 +162,18 @@
         },
         "CustomRPC": {
             "enabled": true,
-            "type": 0,
+            "type": 2,
             "timestampMode": 1,
             "appID": "1",
-            "appName": "QUICKSHELL",
-            "details": "Guys it's quick",
-            "imageBig": "",
+            "appName": "Yuri theme songs",
+            "details": "",
+            "imageBig": "https://media1.tenor.com/m/cRs4lnEWw48AAAAd/everknight-evernight.gif",
             "imageBigTooltip": "",
             "imageSmall": "",
-            "buttonOneText": "Stop leaking memory",
-            "buttonOneURL": "",
-            "buttonTwoText": "Leak your pants instead",
-            "buttonTwoURL": ""
+            "buttonOneText": "Meow",
+            "buttonOneURL": "https://youtube.com/watch?v=t8YAQAYhvNA",
+            "buttonTwoText": "Mrrrp",
+            "buttonTwoURL": "https://youtube.com/watch?v=RVNdQP-Rl6U"
         },
         "Dearrow": {
             "enabled": false
@@ -827,7 +827,11 @@
         },
         "BetterQuickReact": {
             "enabled": true,
-            "frequentEmojis": true
+            "frequentEmojis": true,
+            "compactMode": false,
+            "columns": 4,
+            "scroll": true,
+            "rows": 2
         },
         "BlockKeywords": {
             "enabled": false
@@ -1354,7 +1358,8 @@
             "enabled": true,
             "disableCreateDMButton": false,
             "disableDMContextMenu": false,
-            "noMirroredCamera": false
+            "noMirroredCamera": false,
+            "removeActivitySection": false
         },
         "ChatButtonsPlus": {
             "enabled": false
@@ -1391,6 +1396,9 @@
         },
         "StatusWhileActive": {
             "enabled": false
+        },
+        "ZipPreview": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -1404,7 +1412,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1759941808781
+        "settingsSyncVersion": 1760181661594
     },
     "enabledThemeLinks": [],
     "ignoreResetWarning": false,

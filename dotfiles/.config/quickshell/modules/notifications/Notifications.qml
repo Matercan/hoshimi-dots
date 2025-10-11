@@ -45,7 +45,7 @@ Scope {
         }
     }
 
-    function clear() {
+    function clear(interval: real) {
         for (const notif of root.list) {
             notif.popup = false;
         }
@@ -59,10 +59,22 @@ Scope {
         const matchingIndexes = root.list.splice(i);
 
         root.list.forEach(el => {
-            if (matchinIndexes.includes(el)) {
+            if (matchingIndexes.includes(el)) {
                 el.popup = false;
             }
         });
+    }
+
+    function swapIdx(idx: int): int {
+        let i = 0;
+        for (let el of root.list) {
+            if (root.popups[idx] === el)
+                break;
+            ++i;
+        }
+
+        console.log(i);
+        return i;
     }
 
     component Notif: QtObject {

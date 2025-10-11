@@ -10,7 +10,7 @@ Singleton {
     property bool locked: false
 
     property int popupMenuOpenTime: 5000
-    property string fontFamily: "CaskaydiaCove Nerd Font"
+    property string fontFamily: "roboto"
     property string wallpaper: "/home/matercan/.local/share/hoshimi/assets/wallpapers/nord_car_live.gif"
     property string iconDirectory: "/usr/share/icons/candy-icons/apps/scalable/"
     property string statusDirectory: "/usr/share/icons/candy-icons/status/scalable/"

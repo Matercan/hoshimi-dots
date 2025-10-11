@@ -20,7 +20,7 @@ Item {
 
     Rectangle {
         id: layout
-        implicitWidth: 360
+        implicitWidth: Config.notifs.width
         implicitHeight: mainLayout.height
         radius: 15
         anchors.centerIn: parent
@@ -78,13 +78,25 @@ Item {
                 Layout.leftMargin: coverItem.visible ? Config.layout.padding / 2 : Config.layout.padding * 3 / 2
                 spacing: Config.layout.spacing
 
+                function truncateTitle(fontSisze: int, text: string, boxWidth = contentLayout.width): string {
+                    const maxLength = parseInt(boxWidth / fontSisze);
+
+                    if (text.length < maxLength)
+                        return text;
+                    else {
+                        return text.substr(0, maxLength) + "...";
+                    }
+                }
+
                 RowLayout {
                     Layout.maximumWidth: contentLayout.width
 
                     Text {
                         Layout.alignment: Qt.AlignLeft
-                        text: root.modelData.summary
+                        text: contentLayout.truncateTitle(font.pixelSize, root.modelData.summary)
                         elide: Text.ElideRight
+                        wrapMode: Text.Wrap
+                        maximumLineCount: 1
                         font.weight: Font.Bold
                         font.family: Variables.fontFamily
                         color: Colors.light ? Colors.palette.m3inverseOnSurface : Colors.palette.m3onSurface
@@ -99,13 +111,13 @@ Item {
                 }
 
                 Text {
-                    id: boyText
+                    id: bodyText
                     Layout.fillWidth: true
                     elide: Text.ElideRight
                     wrapMode: Text.Wrap
                     font.weight: Font.Medium
                     maximumLineCount: root.expandText ? 5 : 1
-                    text: root.modelData.body
+                    text: root.expandText ? root.modelData.body : contentLayout.truncateTitle(font.pixelSize / 2, root.modelData.body)
                     font.family: Variables.fontFamily
                     color: Colors.light ? Colors.palette.m3inverseOnSurface : Colors.palette.m3onSurface
                 }

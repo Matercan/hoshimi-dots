@@ -846,7 +846,7 @@
             "enabled": false
         },
         "ChannelBadges": {
-            "enabled": false
+            "enabled": true
         },
         "ChannelTabs": {
             "enabled": false
@@ -876,7 +876,7 @@
             "enabled": false
         },
         "CustomFolderIcons": {
-            "enabled": false
+            "enabled": true
         },
         "CustomSounds": {
             "enabled": false
@@ -1412,7 +1412,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1760181661594
+        "settingsSyncVersion": 1760287198450
     },
     "enabledThemeLinks": [],
     "ignoreResetWarning": false,

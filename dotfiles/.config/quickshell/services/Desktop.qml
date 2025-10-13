@@ -4,6 +4,9 @@ import Quickshell.Hyprland
 
 Singleton {
     id: root
+
+    property int biggestWindow: workspaces[workspaces.length - 1].id
+
     property var activeWindow: {
         const wn = Hyprland.activeToplevel;
         if (!wn)

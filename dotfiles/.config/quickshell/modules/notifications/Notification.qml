@@ -165,20 +165,5 @@ Item {
                 }
             }
         }
-
-        Rectangle {
-            anchors.fill: parent
-            radius: parent.radius
-            gradient: Gradient {
-                GradientStop {
-                    position: 0
-                    color: Colors.transparentize(Colors.foregroundColor, 0.9)
-                }
-                GradientStop {
-                    position: 1
-                    color: Colors.transparentize(Colors.backgroundColor, 0.9)
-                }
-            }
-        }
     }
 }

@@ -5,8 +5,7 @@
     "themeLinks": [],
     "eagerPatches": false,
     "enabledThemes": [
-        "DarkNeon.theme.css",
-        "Translucence.theme.css"
+        "DarkNeon.theme.css"
     ],
     "enableReactDevtools": false,
     "frameless": false,
@@ -1432,7 +1431,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1760467117650
+        "settingsSyncVersion": 1760470132888
     },
     "enabledThemeLinks": [],
     "ignoreResetWarning": false,

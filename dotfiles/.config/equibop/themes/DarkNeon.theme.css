@@ -593,6 +593,6 @@ img[src*="users/137259132305539072"]+.header_c19a55:hover::after {
   /* Scales the background image */
   --background-blur: 10px;
   /* Blurs the image which helps with readability of text infront of it */
-  --background-brightness: 75%;
+  --background-brightness: 50%;
   /* Changes the background images brightness */
 }

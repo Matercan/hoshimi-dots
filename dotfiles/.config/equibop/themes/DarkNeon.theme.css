@@ -228,7 +228,7 @@
   --border-faint: rgb(var(--rgb-highlight));
   --border-subtle: rgb(var(--rgb-highlight));
   --app-border-frame: rgb(var(--rgb-highlight));
-  --background-modifier-accent: rgb(var(--rgb-highlight))
+  --background-modifier-accent: rgb(var(--rgb-highlight));
 }
 
 .theme-dark body {
@@ -277,7 +277,7 @@
 .theme-dark .pageWrapper_a3a4ce,
 .theme-dark .footer__214dc,
 .theme-dark .container_f369db {
-  background: rgba(0, 0, 0, 0.2) !important
+  background: rgba(0, 0, 0, 0) !important
 }
 
 .theme-dark #app-mount .wrapper__44b0c rect[fill="#593695"],
@@ -593,6 +593,6 @@ img[src*="users/137259132305539072"]+.header_c19a55:hover::after {
   /* Scales the background image */
   --background-blur: 10px;
   /* Blurs the image which helps with readability of text infront of it */
-  --background-brightness: 75;
+  --background-brightness: 75%;
   /* Changes the background images brightness */
 }

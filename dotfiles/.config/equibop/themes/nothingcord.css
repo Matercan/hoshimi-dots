@@ -6,8 +6,6 @@
 */
 
 
-@import url(https://mrtipson.github.io/DiscordCSS/css/server-bar.css);
-@import url(https://mrtipson.github.io/DiscordCSS/css/server-folders.css);
 
 :root {
   --bg-color-1: rgb(255, 0, 0);
@@ -146,10 +144,6 @@ body
 .pill_ed9a5f {
   left: 57px;
   transform: rotate(0.5turn) !important;
-}
-
-.bar_c38106 {
-  display: none;
 }
 
 .themedBackground__74017,

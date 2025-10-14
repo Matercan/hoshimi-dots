@@ -5,7 +5,8 @@
     "themeLinks": [],
     "eagerPatches": false,
     "enabledThemes": [
-        "NotAnotherAnimeTheme.theme.css"
+        "DarkNeon.theme.css",
+        "Translucence.theme.css"
     ],
     "enableReactDevtools": false,
     "frameless": false,
@@ -329,7 +330,8 @@
             "logEdits": true,
             "logDeletes": true,
             "inlineEdits": true,
-            "showEditDiffs": false
+            "showEditDiffs": false,
+            "separatedDiffs": false
         },
         "MessageTags": {
             "enabled": false
@@ -769,7 +771,10 @@
         "AllCallTimers": {
             "enabled": true,
             "showWithoutHover": true,
-            "watchLargeGuilds": false
+            "watchLargeGuilds": false,
+            "format": "stopwatch",
+            "showSeconds": true,
+            "showRoleColor": true
         },
         "AltKrispSwitch": {
             "enabled": true
@@ -846,7 +851,22 @@
             "enabled": false
         },
         "ChannelBadges": {
-            "enabled": true
+            "enabled": true,
+            "showTextBadge": true,
+            "oneBadgePerChannel": false,
+            "showRulesBadge": true,
+            "rulesBadgeLabel": "Rules",
+            "textBadgeLabel": "Text",
+            "showAnnouncementBadge": true,
+            "announcementBadgeLabel": "News",
+            "showForumBadge": true,
+            "forumBadgeLabel": "Forum",
+            "showPublicThreadBadge": true,
+            "publicThreadBadgeLabel": "Thread",
+            "showVoiceBadge": true,
+            "voiceBadgeLabel": "Voice",
+            "showNSFWBadge": true,
+            "nsfwBadgeLabel": "NSFW"
         },
         "ChannelTabs": {
             "enabled": false
@@ -1412,7 +1432,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1760287198450
+        "settingsSyncVersion": 1760467117650
     },
     "enabledThemeLinks": [],
     "ignoreResetWarning": false,

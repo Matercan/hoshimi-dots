@@ -23,6 +23,13 @@ Variants {
 
         exclusionMode: ExclusionMode.Ignore
         WlrLayershell.layer: WlrLayer.Background
-        Wallpaper {}
+        Wallpaper {
+
+            Clock {
+                spacing: 2
+                x: 300
+                y: 1000
+            }
+        }
     }
 }

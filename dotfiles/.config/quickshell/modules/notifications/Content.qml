@@ -62,13 +62,13 @@ PanelWindow {
                 ListView.onRemove: removeAnim.start()
                 ListView.onAdd: addAnim.start()
 
-                Anims.ExpAnim {
+                Anim {
                     id: removeAnim
                     property: "anchors.rightMargin"
                     target: notif
                     to: (notif.x > 0 ? Config.notifs.width : -Config.notifs.width) * 3
                 }
-                Anims.ExpAnim {
+                Anim {
                     id: addAnim
                     property: "anchors.rightMargin"
                     target: notif
@@ -102,31 +102,32 @@ PanelWindow {
                 scale: notif.expandText ? Config.layout.ratios[0] : 1
 
                 Behavior on scale {
-                    Anims.ExpAnim {}
+                    Anim {}
                 }
                 Behavior on implicitHeight {
-                    Anims.ExpAnim {}
+                    Anim {}
                 }
             }
 
             add: Transition {
-                Anims.ExpAnim {}
+                Anim {}
             }
             remove: Transition {
-                Anims.EmphAnim {
+                Anim {
                     property: "y"
                 }
             }
             displaced: Transition {
-                Anims.EmphAnim {
+                Anim {
                     property: "y"
                 }
             }
             move: Transition {
-                Anims.EmphAnim {
+                Anim {
                     property: "y"
                 }
             }
         }
     }
+    component Anim: Anims.ExpAnim {}
 }

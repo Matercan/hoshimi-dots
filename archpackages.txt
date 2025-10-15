@@ -1,3 +1,4 @@
+--rebuild
 eza
 lf
 fctix5
@@ -15,5 +16,17 @@ qt6ct-kde
 qt5-base
 dolphin 
 pipewire-alsa
-matugen-bin
 sysstat
+hyprutils-git
+hyprgraphics-git
+hyprwayland-scanner-git 
+hyprland-protocols-git 
+hyprlang-git 
+hyprcursor-git 
+hyprland-qt-support-git 
+hyprland-qtutils-git 
+aquamarine-git 
+hyprland-git 
+hypridle-git 
+xdg-desktop-portal-hyprland-git 
+quickshell-git

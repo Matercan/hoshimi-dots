@@ -1,6 +1,8 @@
 import Quickshell
 import qs.generics
+import qs.globals
 
+import QtQuick
 import Quickshell
 import Quickshell.Wayland
 
@@ -9,11 +11,13 @@ Variants {
 
     PanelWindow {
         id: w
-        WlrLayershell.namespace: "wallpaper"
+        WlrLayershell.namespace: "quickshell:wallpaper"
+        WlrLayershell.layer: WlrLayer.Background
 
         required property var modelData
         screen: modelData
 
+        // Position
         anchors {
             right: true
             left: true
@@ -21,14 +25,12 @@ Variants {
             top: true
         }
 
-        exclusionMode: ExclusionMode.Ignore
-        WlrLayershell.layer: WlrLayer.Background
         Wallpaper {
 
             Clock {
                 spacing: 2
-                x: 300
-                y: 1000
+                x: Config.background.clock.x
+                y: Config.background.clock.y
             }
         }
     }

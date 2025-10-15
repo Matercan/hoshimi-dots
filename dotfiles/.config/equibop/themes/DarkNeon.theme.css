@@ -231,8 +231,57 @@
   --background-modifier-accent: rgb(var(--rgb-highlight));
 }
 
+.theme-light body {
+  background-color: rgba(var(--background), 0);
+  background-image: var(--background-image);
+  background-position: var(--background-position);
+  background-size: var(--background-size);
+  backdrop-filter: blur(var(--background-blur)) brightness(var(--background-brightness))
+}
+
+.theme-light .appMount__51fd7,
+.theme-light .app__160d8,
+.theme-light .bg__960e4,
+.theme-light .guilds_c48ade,
+.theme-light .scroller_ef3116,
+.theme-light .sidebar_c48ade,
+.theme-light .sidebar_c48ade::after,
+.theme-light .container__2637a,
+.theme-light .chat_f75fb0,
+.theme-light .chatContent_f75fb0,
+.theme-light .title_f75fb0,
+.theme-light .searchBar__97492,
+.theme-light .container_c8ffbb,
+.theme-light .members_c8ffbb,
+.theme-light .content_f75fb0,
+.theme-light .container__91a9d,
+.theme-light .channelTextArea__74017,
+.theme-light .container__133bf,
+.theme-light .section__00943,
+.theme-light .nowPlayingColumn__133bf,
+.theme-light .container__7d20c,
+.theme-light .itemCard__7e549,
+.theme-light .section__00943,
+.theme-light .inset_bf1984,
+.theme-light .container__9293f,
+.theme-light .privateChannels__35e86,
+.theme-light .scroller__99e7c,
+.theme-light .layer__960e4,
+.theme-light .standardSidebarView__23e6b,
+.theme-light .sidebarRegionScroller__23e6b,
+.theme-light .contentRegion__23e6b,
+.theme-light .contentRegionScroller__23e6b,
+.theme-light .container__4a84a,
+.theme-light .stickyHeader_adb41f,
+.theme-light .scroller_fb04e1,
+.theme-light .pageWrapper_a3a4ce,
+.theme-light .footer__214dc,
+.theme-light .container_f369db {
+  background: rgba(255, 255, 255, 0.05) !important
+}
+
 .theme-dark body {
-  background-color: var(--background);
+  background-color: rgba(var(--background), 0.4);
   background-image: var(--background-image);
   background-position: var(--background-position);
   background-size: var(--background-size);
@@ -277,7 +326,7 @@
 .theme-dark .pageWrapper_a3a4ce,
 .theme-dark .footer__214dc,
 .theme-dark .container_f369db {
-  background: rgba(0, 0, 0, 0) !important
+  background: rgba(0, 0, 0, 0.1) !important
 }
 
 .theme-dark #app-mount .wrapper__44b0c rect[fill="#593695"],
@@ -585,14 +634,16 @@ img[src*="users/137259132305539072"]+.header_c19a55:hover::after {
   --transition-time: .3s;
   /* How fast animations added by the theme happen. Default is 0.3 seconds */
 
-  --background-image: url(https://w.wallhaven.cc/full/k8/wallhaven-k8x2zd.jpg);
+  --background-image: unset;
+  /* url(https://w.wallhaven.cc/full/k8/wallhaven-k8x2zd.jpg) */
   /* To add an image, replace unset with url(https://www.YOUR-URL-HERE.com) */
+
   --background-position: center;
   /* Positions the background image */
   --background-size: cover;
   /* Scales the background image */
   --background-blur: 10px;
   /* Blurs the image which helps with readability of text infront of it */
-  --background-brightness: 50%;
+  --background-brightness: 75%;
   /* Changes the background images brightness */
 }

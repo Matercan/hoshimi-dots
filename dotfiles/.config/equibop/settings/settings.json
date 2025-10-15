@@ -285,7 +285,8 @@
             "enabled": false
         },
         "InvisibleChat": {
-            "enabled": false
+            "enabled": false,
+            "savedPasswords": "password, Password"
         },
         "IrcColors": {
             "enabled": false
@@ -352,7 +353,7 @@
             "overrideUsers": ""
         },
         "NoDevtoolsWarning": {
-            "enabled": false
+            "enabled": true
         },
         "NoF1": {
             "enabled": false
@@ -548,7 +549,7 @@
             "enabled": false
         },
         "ReverseImageSearch": {
-            "enabled": false
+            "enabled": true
         },
         "ReviewDB": {
             "enabled": false
@@ -994,7 +995,10 @@
             "enabled": false
         },
         "GitHubRepos": {
-            "enabled": false
+            "enabled": false,
+            "showStars": true,
+            "showLanguage": true,
+            "showInMiniProfile": true
         },
         "Glide": {
             "enabled": false
@@ -1092,7 +1096,10 @@
             "enabled": false
         },
         "MessageBurst": {
-            "enabled": false
+            "enabled": false,
+            "timePeriod": 3,
+            "shouldMergeWithAttachment": false,
+            "useSpace": false
         },
         "MessageColors": {
             "enabled": false
@@ -1152,7 +1159,7 @@
             "enabled": false
         },
         "NoNitroUpsell": {
-            "enabled": false
+            "enabled": true
         },
         "NoOnboarding": {
             "enabled": false
@@ -1431,7 +1438,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1760541840128
+        "settingsSyncVersion": 1760547774480
     },
     "enabledThemeLinks": [],
     "ignoreResetWarning": false,

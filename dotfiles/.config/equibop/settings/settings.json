@@ -653,7 +653,7 @@
             "receivedInput": "ja",
             "receivedOutput": "en",
             "sentInput": "auto",
-            "sentOutput": "nl"
+            "sentOutput": "ja"
         },
         "TypingIndicator": {
             "enabled": false
@@ -995,7 +995,7 @@
             "enabled": false
         },
         "GitHubRepos": {
-            "enabled": false,
+            "enabled": true,
             "showStars": true,
             "showLanguage": true,
             "showInMiniProfile": true
@@ -1438,7 +1438,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1760547774480
+        "settingsSyncVersion": 1760634487146
     },
     "enabledThemeLinks": [],
     "ignoreResetWarning": false,

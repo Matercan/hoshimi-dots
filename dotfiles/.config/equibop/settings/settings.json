@@ -173,7 +173,7 @@
             "buttonOneText": "Meow",
             "buttonOneURL": "https://youtube.com/watch?v=t8YAQAYhvNA",
             "buttonTwoText": "Mrrrp",
-            "buttonTwoURL": "https://youtube.com/watch?v=RVNdQP-Rl6U"
+            "buttonTwoURL": "https://youtube.com/watch?v=HQnJ1mOgw9E"
         },
         "Dearrow": {
             "enabled": false
@@ -1425,6 +1425,9 @@
         },
         "ZipPreview": {
             "enabled": false
+        },
+        "KeyboardNavigation": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -1438,7 +1441,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1760634487146
+        "settingsSyncVersion": 1760736669152
     },
     "enabledThemeLinks": [],
     "ignoreResetWarning": false,

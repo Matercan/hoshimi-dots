@@ -12,6 +12,15 @@
 */
 
 
+::-webkit-input-placeholder,
+body,
+button,
+input,
+select,
+textarea {
+  font-family: "Roboto";
+}
+
 :root,
 .visual-refresh,
 .visual-refresh.theme-dark {
@@ -42,27 +51,27 @@
   --background-size: cover;
   --background-blur: 5px;
   --background-brightness: 100%;
-  --background-primary: var(--background);
-  --background-mobile-primary: var(--background);
-  --background-secondary: var(--background) !important;
-  --background-mobile-secondary: var(--background);
-  --background-secondary-alt: var(--background);
-  --background-tertiary: var(--background);
-  --background-accent: var(--background);
-  --background-floating: var(--background);
-  --background-nested-floating: var(--background);
+  --background-primary: rgba(var(--background), 20%);
+  --background-mobile-primary: rgba(var(--background), 20%);
+  --background-secondary: rgba(var(--background), 20%) !important;
+  --background-mobile-secondary: rgba(var(--background), 20%);
+  --background-secondary-alt: rgba(var(--background), 20%);
+  --background-tertiary: rgba(var(--background), 20%);
+  --background-accent: rgba(var(--background), 20%);
+  --background-floating: rgba(var(--background), 20%);
+  --background-nested-floating: rgba(var(--background), 20%);
   --background-modifier-accent: rgba(var(--rgb-highlight), 20%);
   --background-modifier-hover: rgba(var(--rgb-highlight), 10%);
   --background-modifier-active: rgba(var(--rgb-highlight), 30%);
   --background-modifier-selected: var(--rgb-highlight);
-  --background-base-lowest: var(--background);
-  --background-base-low: var(--background);
-  --background-surface-high: var(--background);
-  --modal-background: var(--background);
-  --modal-footer-background: var(--background);
-  --background-floating: var(--background);
-  --bg-surface-overlay: var(--background);
-  --activity-card-background: var(--background);
+  --background-base-lowest: rgba(var(--background), 20%);
+  --background-base-low: rgba(var(--background), 20%);
+  --background-surface-high: rgba(var(--background), 20%);
+  --modal-background: rgba(var(--background), 20%);
+  --modal-footer-background: rgba(var(--background), 20%);
+  --background-floating: rgba(var(--background), 20%);
+  --bg-surface-overlay: rgba(var(--background), 20%);
+  --activity-card-background: rgba(var(--background), 20%);
   --header-primary: rgb(var(--rgb-highlight));
   --header-secondary: rgb(var(--rgb-highlight));
   --chat-background: var(--background);
@@ -232,187 +241,89 @@
 }
 
 .c,
-.theme-dark,
-.theme-darker,
 .container_c8ffbb,
 .members_c8ffbb,
 .container__2637a,
 .chatContent_f75fb0,
 .sidebarList_c48ade,
 .panels_c48ade,
-.sidebarList_c48ade,
 .privateChannels__35e86,
 .scroller__99e7c,
 .chat_f75fb0,
 .channelTextArea__74017 {
   background: none !important;
-  box-shadow: none;
+  box-shadow: none !important;
+  text-shadow: none !important;
   border: 0 !important;
 }
 
-.theme-light body {
-  background-color: rgba(var(--background), 0);
+
+
+.theme-light body,
+.theme-dark body,
+.theme-darker body {
+  background-color: rgba(var(--background), 20%);
   background-image: var(--background-image);
   background-position: var(--background-position);
   background-size: var(--background-size);
   backdrop-filter: blur(var(--background-blur)) brightness(var(--background-brightness))
 }
 
-.theme-dark body {
-  background-color: rgba(var(--background), 0.4);
-  background-image: var(--background-image);
-  background-position: var(--background-position);
-  background-size: var(--background-size);
-  backdrop-filter: blur(var(--background-blur)) brightness(var(--background-brightness))
+
+.appMount__51fd7,
+.app__160d8,
+.bg__960e4,
+.guilds_c48ade,
+.scroller_ef3116,
+.sidebar_c48ade,
+.sidebar_c48ade::after,
+.container__2637a,
+.chat_f75fb0,
+.chatContent_f75fb0,
+.title_f75fb0,
+.searchBar__97492,
+.container_c8ffbb,
+.members_c8ffbb,
+.content_f75fb0,
+.container__91a9d,
+.channelTextArea__74017,
+.container__133bf,
+.section__00943,
+.nowPlayingColumn__133bf,
+.container__7d20c,
+.itemCard__7e549,
+.section__00943,
+.inset_bf1984,
+.container__9293f,
+.privateChannels__35e86,
+.scroller__99e7c,
+.layer__960e4,
+.standardSidebarView__23e6b,
+.sidebarRegionScroller__23e6b,
+.contentRegion__23e6b,
+.contentRegionScroller__23e6b,
+.container__4a84a,
+.stickyHeader_adb41f,
+.scroller_fb04e1,
+.pageWrapper_a3a4ce,
+.footer__214dc,
+.container_f369db {
+  background: rgba(var(--background), 20%) !important;
 }
 
-.theme-light .appMount__51fd7,
-.theme-light .app__160d8,
-.theme-light .bg__960e4,
-.theme-light .guilds_c48ade,
-.theme-light .scroller_ef3116,
-.theme-light .sidebar_c48ade,
-.theme-light .sidebar_c48ade::after,
-.theme-light .container__2637a,
-.theme-light .chat_f75fb0,
-.theme-light .chatContent_f75fb0,
-.theme-light .title_f75fb0,
-.theme-light .searchBar__97492,
-.theme-light .container_c8ffbb,
-.theme-light .members_c8ffbb,
-.theme-light .content_f75fb0,
-.theme-light .container__91a9d,
-.theme-light .channelTextArea__74017,
-.theme-light .container__133bf,
-.theme-light .section__00943,
-.theme-light .nowPlayingColumn__133bf,
-.theme-light .container__7d20c,
-.theme-light .itemCard__7e549,
-.theme-light .section__00943,
-.theme-light .inset_bf1984,
-.theme-light .container__9293f,
-.theme-light .privateChannels__35e86,
-.theme-light .scroller__99e7c,
-.theme-light .layer__960e4,
-.theme-light .standardSidebarView__23e6b,
-.theme-light .sidebarRegionScroller__23e6b,
-.theme-light .contentRegion__23e6b,
-.theme-light .contentRegionScroller__23e6b,
-.theme-light .container__4a84a,
-.theme-light .stickyHeader_adb41f,
-.theme-light .scroller_fb04e1,
-.theme-light .pageWrapper_a3a4ce,
-.theme-light .footer__214dc,
-.theme-light .container_f369db {
-  background: rgba(255, 255, 255, 0.05) !important
-}
-
-.theme-dark .appMount__51fd7,
-.theme-dark .app__160d8,
-.theme-dark .bg__960e4,
-.theme-dark .guilds_c48ade,
-.theme-dark .scroller_ef3116,
-.theme-dark .sidebar_c48ade,
-.theme-dark .sidebar_c48ade::after,
-.theme-dark .container__2637a,
-.theme-dark .chat_f75fb0,
-.theme-dark .chatContent_f75fb0,
-.theme-dark .title_f75fb0,
-.theme-dark .searchBar__97492,
-.theme-dark .container_c8ffbb,
-.theme-dark .members_c8ffbb,
-.theme-dark .content_f75fb0,
-.theme-dark .container__91a9d,
-.theme-dark .channelTextArea__74017,
-.theme-dark .container__133bf,
-.theme-dark .section__00943,
-.theme-dark .nowPlayingColumn__133bf,
-.theme-dark .container__7d20c,
-.theme-dark .itemCard__7e549,
-.theme-dark .section__00943,
-.theme-dark .inset_bf1984,
-.theme-dark .container__9293f,
-.theme-dark .privateChannels__35e86,
-.theme-dark .scroller__99e7c,
-.theme-dark .layer__960e4,
-.theme-dark .standardSidebarView__23e6b,
-.theme-dark .sidebarRegionScroller__23e6b,
-.theme-dark .contentRegion__23e6b,
-.theme-dark .contentRegionScroller__23e6b,
-.theme-dark .container__4a84a,
-.theme-dark .stickyHeader_adb41f,
-.theme-dark .scroller_fb04e1,
-.theme-dark .pageWrapper_a3a4ce,
-.theme-dark .footer__214dc,
-.theme-dark .container_f369db {
-  background: rgba(0, 0, 0, 0.2) !important
-}
-
-.theme-light .contentWrapper__08434,
-.theme-light .header__8ef02,
-.theme-light .header_fed6d3,
-.theme-light .header_c0e32c,
-.theme-light .categoryList__3ad28,
-.theme-light .scroller_affa7e,
-.theme-light .packHeader_e94b8c,
-.theme-light .header_c656ac,
-.theme-light .inspector_aeaaeb,
-.theme-light .emojiPicker_c0e32c,
-.theme-light .unicodeShortcut_b9ee0c,
-.theme-light #gif-picker-tab-panel {
-  background-color: rgba(255, 255, 255, 0.2)
-}
-
-.theme-dark .contentWrapper__08434,
-.theme-dark .header__8ef02,
-.theme-dark .header_fed6d3,
-.theme-dark .header_c0e32c,
-.theme-dark .categoryList__3ad28,
-.theme-dark .scroller_affa7e,
-.theme-dark .packHeader_e94b8c,
-.theme-dark .header_c656ac,
-.theme-dark .inspector_aeaaeb,
-.theme-dark .emojiPicker_c0e32c,
-.theme-dark .unicodeShortcut_b9ee0c,
-.theme-dark #gif-picker-tab-panel {
-  background-color: var(--background)
-}
-
-img[src*="avatars/137259132305539072"]+.header_c19a55::after,
-img[src*="users/137259132305539072"]+.header_c19a55::after {
-  content: " Theme Author";
-  display: inline-block;
-  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0ibTExLjQgMTguMTYxbDcuMzk2LTcuMzk2YTEwLjMgMTAuMyAwIDAgMS0zLjMyNi0yLjIzNGExMC4zIDEwLjMgMCAwIDEtMi4yMzUtMy4zMjdMNS44MzkgMTIuNmMtLjU3Ny41NzctLjg2Ni44NjYtMS4xMTQgMS4xODRhNi42IDYuNiAwIDAgMC0uNzQ5IDEuMjExYy0uMTczLjM2NC0uMzAyLjc1Mi0uNTYgMS41MjZsLTEuMzYyIDQuMDgzYTEuMDYgMS4wNiAwIDAgMCAxLjM0MiAxLjM0Mmw0LjA4My0xLjM2MmMuNzc1LS4yNTggMS4xNjItLjM4NyAxLjUyNi0uNTZxLjY0Ny0uMzA4IDEuMjExLS43NDljLjMxOC0uMjQ4LjYwNy0uNTM3IDEuMTg0LTEuMTE0bTkuNDQ4LTkuNDQ4YTMuOTMyIDMuOTMyIDAgMCAwLTUuNTYxLTUuNTYxbC0uODg3Ljg4N2wuMDM4LjExMWE4Ljc1IDguNzUgMCAwIDAgMi4wOTIgMy4zMmE4Ljc1IDguNzUgMCAwIDAgMy40MzEgMi4xM3oiLz48L3N2Zz4=");
-  background-size: 12px 12px;
-  background-position: 3px;
-  background-repeat: no-repeat;
-  background-color: var(--highlight);
-  color: var(--background);
-  width: 15px !important;
-  height: 13px !important;
-  padding-bottom: 5px;
-  padding-right: 3px;
-  margin-left: 5px;
-  margin-bottom: -3px;
-  font-size: 10px;
-  font-weight: 600;
-  overflow: hidden;
-  text-align: center;
-  border-radius: 3px;
-  transition-duration: var(--transition-time)
-}
-
-img[src*="avatars/137259132305539072"]+.header_c19a55:hover::after,
-img[src*="users/137259132305539072"]+.header_c19a55:hover::after {
-  padding-left: 16px;
-  width: 70px !important
-}
-
-.info__2debe:last-child::after {
-  content: "Dark Neon Version 3.0.1";
-  font-size: 12px;
-  line-height: 16px;
-  color: rgb(var(--rgb-highlight))
+.contentWrapper__08434,
+.header__8ef02,
+.header_fed6d3,
+.header_c0e32c,
+.categoryList__3ad28,
+.scroller_affa7e,
+.packHeader_e94b8c,
+.header_c656ac,
+.inspector_aeaaeb,
+.emojiPicker_c0e32c,
+.unicodeShortcut_b9ee0c,
+#gif-picker-tab-panel {
+  background-color: rgba(var(--background), 40%) !important;
 }
 
 @import url('https://B4T3S.github.io/DiscordDarkNeon/css/hideUsers.css');
@@ -422,9 +333,9 @@ img[src*="users/137259132305539072"]+.header_c19a55:hover::after {
 :root,
 .visual-refresh,
 .visual-refresh.theme-dark {
-  --rgb-highlight: 4, 217, 255;
+  --rgb-highlight: 4, 4, 255;
   /* The main highlight color */
-  --rgb-background: 0, 0, 0;
+  --rgb-background: 255, 255, 255;
   /* The main background color */
   --rgb-text: 197, 200, 198;
   /* The main text color */

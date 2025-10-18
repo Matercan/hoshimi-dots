@@ -75,7 +75,7 @@ textarea {
   --header-primary: rgb(var(--rgb-highlight));
   --header-secondary: rgb(var(--rgb-highlight));
   --chat-background: var(--background);
-  --chat-border: var(--highlight);
+  --chat-border: transparent;
   --chat-input-container-background: var(--background);
   --spoiler-hidden-background: var(--highlight);
   --spoiler-revealed-background: rgba(var(--rgb-highlight), 20%);
@@ -234,9 +234,9 @@ textarea {
   --brand-experiment-90a: var(--highlight);
   --brand-experiment-95a: var(--highlight);
   --primary-630: var(--background);
-  --border-faint: rgb(var(--rgb-highlight));
-  --border-subtle: rgb(var(--rgb-highlight));
-  --app-border-frame: rgb(var(--rgb-highlight));
+  --border-faint: transparent;
+  --border-subtle: transparent;
+  --app-border-frame: transparent;
   --background-modifier-accent: rgb(var(--rgb-highlight));
 }
 
@@ -257,7 +257,12 @@ textarea {
   border: 0 !important;
 }
 
-
+.children__9293f:after,
+.chatGradient__36d07,
+.sidebar_c48ade:after,
+.chatGradientBase__36d07 {
+  background: none !important;
+}
 
 .theme-light body,
 .theme-dark body,

@@ -179,7 +179,7 @@
             "enabled": false
         },
         "Decor": {
-            "enabled": true,
+            "enabled": false,
             "agreedToGuidelines": true,
             "baseUrl": "https://decor.fieryflames.dev"
         },
@@ -1441,7 +1441,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1760736669152
+        "settingsSyncVersion": 1760781392092
     },
     "enabledThemeLinks": [],
     "ignoreResetWarning": false,

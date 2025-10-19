@@ -1,8 +1,9 @@
---rebuild
 eza
-lf
-fctix5
-lib-mozc
+yazi
+fcitx5
+fcitx5-mozc
+fcitx5-configtool
+fcitx5-config-qt
 libnotify
 color-scripts-git
 hyprqt6engine-git
@@ -12,6 +13,8 @@ zsh
 git
 nvim
 asciiquarium-transparent-git
+qt5-multimedia
+qt6-multimedia
 qt6ct-kde 
 qt5-base
 dolphin 

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Matercan/hoshimi-cli/refs/heads/main/schema/theme_schema.json",
+  "writers": [
+    {
+      "file": "~/.config/nvim/init.lua",
+      "lines": [
+        "vim.cmd(\"colorscheme gruvbox\")"
+      ],
+      "linesDeleted": 2
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Matercan/hoshimi-cli/refs/heads/main/schema/theme_schema.json",
+  "wallpaper": "nord_car_live.gif",
+  "commands": [
+    "spicetify config current_theme catppuccin"
+  ],
+  "writers": [
+    {
+      "file": "~/.config/nvim/init.lua",
+      "linesDeleted": 2
+    }
+  ]
+}

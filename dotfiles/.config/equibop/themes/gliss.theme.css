@@ -1,0 +1,36 @@
+/**
+ * @name Gliss
+ * @author Matercan
+ * @version 1.0.0
+ * @source https://github.com/Matercan/Gliss
+ * @description An elegant dignified curated transparent better discord theme
+ * @authorId 777170937682329601
+*/
+
+
+@import "https://raw.githubusercontent.com/Matercan/Gliss/refs/heads/main/main.css";
+
+/* CUSTOMIZE COLORS IN HERE! */
+:root,
+.visual-refresh,
+.visual-refresh.theme-dark {
+  --rgb-highlight: 4, 4, 255;
+  /* The main highlight color */
+  --rgb-background: 255, 255, 255;
+  /* The main background color */
+  --rgb-text: 197, 200, 198;
+  /* The main text color */
+  --rgb-close-button: 212, 18, 39;
+  /* The main "close this" or "deny" color */
+  --rgb-online-color: 57, 255, 20;
+  /* The color used in the "online" user status symbol */
+  --rgb-afk-color: 255, 255, 51;
+  /* The color used in the "idle" user status symbol */
+  --rgb-dnd-color: 255, 0, 0;
+  /* The color used in the "do not disturb" user status symbol */
+  --rgb-streaming-color: 188, 19, 254;
+  /* The color used in the "streaming X" user status symbol */
+
+  --transition-time: .3s;
+  /* How fast animations added by the theme happen. Default is 0.3 seconds */
+}

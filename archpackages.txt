@@ -37,4 +37,4 @@ quickshell-git
 equibop
 spicetify-cli
 spotify
-catppuccin-whiskers
+zen-browser-bin

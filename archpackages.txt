@@ -34,3 +34,7 @@ hyprland-git
 hypridle-git 
 xdg-desktop-portal-hyprland-git 
 quickshell-git
+equibop
+spicetify-cli
+spotify
+catppuccin-whiskers

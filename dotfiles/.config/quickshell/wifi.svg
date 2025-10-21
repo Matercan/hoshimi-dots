@@ -1,0 +1,26 @@
+<svg width="75" height="75" rx="8" ry="8">
+  <!-- Black rounded rectangle background -->
+  <rect x="0" y="0" width="75" height="75" rx="8"
+    style="fill: none; stroke-width:5;stroke:white" />
+  
+  <!-- RSS icon in white -->
+  <g transform="translate(47.5, 25)">
+    <!-- Small circle (dot) at bottom left -->
+    <circle cx="-25" cy="25" r="10" fill="white"/>
+    
+    <!-- Inner arc using quadratic bezier -->
+    <path d="M -25 5 Q -5 5 -5 25" 
+          stroke="white" 
+          stroke-width="8" 
+          fill="none"
+          stroke-linecap="round"/>
+    
+    <!-- Outer arc using quadratic bezier -->
+    <path d="M -20 -15 Q 15 -15 15 20"
+          transform="translate(-5, 5)"
+          stroke="white" 
+          stroke-width="8" 
+          fill="none"
+          stroke-linecap="round"/>
+  </g>
+</svg>

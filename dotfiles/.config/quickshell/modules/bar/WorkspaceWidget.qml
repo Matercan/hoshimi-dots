@@ -65,6 +65,7 @@ Rectangle {
                         Hyprland.dispatch("workspace " + circle.idInt.toString());
                         circle.playSfx();
                     }
+                    onEntered: circle.playEnter()
                 }
             }
         }

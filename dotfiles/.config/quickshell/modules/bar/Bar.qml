@@ -13,9 +13,8 @@ Scope {
 
     SoundEffect {
         id: sfx
-        source: {
-            return Variables.osuDirectory + "/start.wav";
-        }
+        source: "/home/matercan/.config/quickshell/modules/bar/start.wav"
+
         onLoadedChanged: play()
     }
 

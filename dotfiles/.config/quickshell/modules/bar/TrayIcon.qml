@@ -103,7 +103,7 @@ Rectangle {
         menu: root.item.menu
 
         anchor.window: root.bar
-        anchor.rect.x: Variables.barSize
+        anchor.rect.x: 50
         anchor.rect.y: root.popupY
         anchor.rect.height: root.height
         anchor.rect.width: root.width

@@ -1,8 +1,8 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
-import QtMultimedia
 
+import qs.functions
 import qs.globals
 
 Item {
@@ -37,19 +37,8 @@ Item {
         MouseArea {
             id: area
             cursorShape: Qt.PointingHandCursor
-            onPressed: sfx.play()
-
-            onEntered: enterSfx.play()
-        }
-
-        SoundEffect {
-            id: sfx
-            source: Variables.osuDirectory + "/drum-hitnormal-hitfinish.wav"
-        }
-
-        SoundEffect {
-            id: enterSfx
-            source: Variables.osuDirectory + "/soft-hitnormal-hitfinish.wav"
+            onPressed: Sounds.drums.play("", 0.7)
+            onEntered: Sounds.softs.play("", 0.5)
         }
     }
 }

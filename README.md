@@ -35,11 +35,16 @@ For best user experience:
 - Mutsuki font
 - Any japanese font
 
+> [! IMPORTANT]
+> custom osu files need to be specified within the hoshmi config
+> To do this run the command ``hoshiimi config globals osuSkin set <path to osu skin>``
+> The skin needs to be zipped. 
+> The required assets will be placed within the directory of the skin and will be found by hoshimi
+
 ## TODO:
 
 Generating colorschemes based on wallpapers
 Integrating hoshimi-cli into shell
-.ocz unzipping
 
 ## Showcase (LEGACY)
 

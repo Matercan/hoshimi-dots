@@ -163,12 +163,12 @@
         "CustomRPC": {
             "enabled": true,
             "type": 2,
-            "timestampMode": 1,
-            "appID": "1",
+            "timestampMode": 2,
+            "appID": "1391149264154919093",
             "appName": "Yuri theme songs",
-            "details": "",
+            "details": "The best of songs",
             "imageBig": "https://media1.tenor.com/m/cRs4lnEWw48AAAAd/everknight-evernight.gif",
-            "imageBigTooltip": "",
+            "imageBigTooltip": "Peak",
             "imageSmall": "",
             "buttonOneText": "Meow",
             "buttonOneURL": "https://youtube.com/watch?v=t8YAQAYhvNA",
@@ -455,7 +455,11 @@
                             "1380847547618295881",
                             "1366847826570645595",
                             "1279218346805690449",
-                            "1340410917531418724"
+                            "1340410917531418724",
+                            "1342434973365305386",
+                            "1276553145916588094",
+                            "1293600211754549321",
+                            "1323067390598316117"
                         ]
                     },
                     {
@@ -489,7 +493,7 @@
                         "id": "z2xh4o8d6mr",
                         "name": "eternal suffering",
                         "color": 10070709,
-                        "collapsed": true,
+                        "collapsed": false,
                         "channels": [
                             "1321917122561052672",
                             "1288386038481420300",
@@ -504,7 +508,12 @@
                         "color": 12745742,
                         "collapsed": false,
                         "channels": [
-                            "1410333676130013365"
+                            "1410333676130013365",
+                            "1426649835582394512",
+                            "1426301475776233552",
+                            "1422595328150081586",
+                            "1425013234653462541",
+                            "1424073686520168448"
                         ]
                     }
                 ],
@@ -1441,7 +1450,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1760907409864
+        "settingsSyncVersion": 1761002665379
     },
     "enabledThemeLinks": [],
     "ignoreResetWarning": false,

@@ -5,7 +5,7 @@ fcitx5-mozc
 fcitx5-configtool
 fcitx5-config-qt
 libnotify
-color-scripts-git
+shell-color-scripts-git
 hyprqt6engine-git
 quickshell-git
 bat

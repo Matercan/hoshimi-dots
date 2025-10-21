@@ -93,7 +93,7 @@ Item {
 
                     Text {
                         Layout.alignment: Qt.AlignLeft
-                        text: contentLayout.truncateTitle(font.pixelSize, root.modelData.summary)
+                        text: contentLayout.truncateTitle(font.pixelSize / 1.5, root.modelData.summary)
                         elide: Text.ElideRight
                         wrapMode: Text.Wrap
                         maximumLineCount: 1

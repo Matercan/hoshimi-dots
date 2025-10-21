@@ -5,3 +5,7 @@
 # Hoshimi-cli generated files
 **backup*
 assets/osuGen**
+
+# osu zip files
+*.ocz
+*.zip

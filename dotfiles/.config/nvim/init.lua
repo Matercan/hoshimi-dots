@@ -41,5 +41,5 @@ require("configs.options")
 
 
 -- Written by hoshimi
-vim.cmd("Catppuccin latte")
+vim.cmd("Catppuccin mocha")
 

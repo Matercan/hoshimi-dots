@@ -3,46 +3,7 @@
   "globals": {
     "iconDirectory": "/usr/share/icons/candy-icons/",
     "wallpaperDirectory": "/home/matercan/Pictures/wallpapers",
-    "osuSkin": "~/.local/share/hoshimi/assets/osu"
+    "osuSkin": "~/.local/share/hoshimi/assets/osu.ocz"
   },
-  "--max-followup-commands": {
-    "1": {
-      "-np": {
-        "foot": {
-          "config": "catppuccin/latte"
-        }
-      }
-    },
-    "3": {
-      "-np": {
-        "foot": {
-          "config": "catppuccin/latte"
-        }
-      },
-      "-p": {
-        "alacritty": {
-          "config": "gruvbox/hard-dark"
-        }
-      }
-    }
-  },
-  "-p": {
-    "alacritty": {
-      "--max-followup-commands": {
-        "1": {
-          "config": "catppuccin/latte"
-        },
-        "2": {
-          "config": "catppuccin/latte"
-        },
-        "3": {
-          "config": "gruvbox/medium-dark"
-        }
-      }
-    },
-    "quickshell": {
-      "config": "catppuccin/mocha"
-    }
-  },
-  "config": "catppuccin/latte"
+  "config": "catppuccin/mocha"
 }

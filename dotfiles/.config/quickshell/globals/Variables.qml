@@ -15,6 +15,7 @@ Singleton {
     property string iconDirectory: "/usr/share/icons/candy-icons/apps/scalable/"
     property string statusDirectory: "/usr/share/icons/candy-icons/status/scalable/"
     property string osuDirectory: Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuGen/"
+    property string osuIcons: Quickshell.env("HOME") + "/.local/share/hoshimi/assets/osuIcons/"
 
     property int timerProcInterval: 400
 

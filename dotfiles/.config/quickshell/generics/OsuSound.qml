@@ -10,12 +10,13 @@ Item {
     property bool playing: sfx.playing
 
     function play() {
+        console.log(sfx.volume);
         sfx.play();
     }
 
     SoundEffect {
         id: sfx
-        volume: root.volume
+        volume: 0.5
         source: Variables.osuDirectory + "/" + root.source
     }
 }

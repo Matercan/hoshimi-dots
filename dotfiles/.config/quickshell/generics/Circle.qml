@@ -12,11 +12,11 @@ Item {
     property string numberStr: number?.toString()
 
     function playSfx() {
-        sfx.play();
+        Sounds.drums.play("", 0.1);
     }
 
     function playEnter() {
-        enterSfx.play();
+        Sounds.softs.play("", 0.1);
     }
 
     Image {
@@ -38,7 +38,7 @@ Item {
             id: area
             cursorShape: Qt.PointingHandCursor
             onPressed: Sounds.drums.play("", 0.7)
-            onEntered: Sounds.softs.play("", 0.5)
+            onEntered: Sounds.softs.play("", 0.3)
         }
     }
 }

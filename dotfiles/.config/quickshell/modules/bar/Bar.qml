@@ -93,14 +93,24 @@ Scope {
 
                             ColumnLayout {
                                 id: widgetLayout
-                                anchors.fill: parent
+                                anchors.left: parent.left
+                                implicitHeight: 500
+                                anchors.right: parent.right
                                 anchors.margins: Config.layout.padding
                                 spacing: Config.layout.spacing
 
                                 Loader {
+                                    id: wifiWidget
                                     active: true
-                                    Layout.fillWidth: true
+                                    Layout.preferredWidth: Config.bar.barSize * 0.5
                                     Layout.alignment: Qt.AlignHCenter
+                                    Layout.preferredHeight: width
+                                    sourceComponent: Wifi {
+                                        anchors.fill: {
+                                            console.log(width);
+                                            return parent;
+                                        }
+                                    }
                                 }
                                 Loader {
                                     active: true

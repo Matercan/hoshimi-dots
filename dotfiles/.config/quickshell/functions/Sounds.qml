@@ -52,16 +52,16 @@ Singleton {
             case "whistle":
                 return whistle;
             default:
-                return "finish";
+                return finish;
             }
         }
 
         function play(sfx: string, volume = 1) {
-            const preVol = getComponent(sfx).volume;
+            const preVol = getComponent(sfx).volume === null ? 1 : getComponent(sfx).volume;
             setVolume(sfx, volume);
             if (!getComponent(sfx).playing)
                 getComponent(sfx).play();
-            setVolume(sfx, preVol);
+            console.log(getComponent(sfx).volume);
         }
 
         function setVolume(sfx: string, volume: real) {

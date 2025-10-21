@@ -41,3 +41,5 @@ zen-browser-bin
 noto-fonts-cjk
 noto-fonts-extra
 noto-fonts-emoji
+ttf-cascadia-code-nerd
+ttf-cascadia-mono-nerd

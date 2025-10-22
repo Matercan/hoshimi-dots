@@ -16,7 +16,7 @@ Item {
 
     SoundEffect {
         id: sfx
-        volume: 0.5
+        volume: root.volume
         source: Variables.osuDirectory + "/" + root.source
     }
 }

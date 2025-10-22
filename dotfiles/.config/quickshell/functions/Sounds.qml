@@ -61,7 +61,6 @@ Singleton {
             setVolume(sfx, volume);
             if (!getComponent(sfx).playing)
                 getComponent(sfx).play();
-            console.log(getComponent(sfx).volume);
         }
 
         function setVolume(sfx: string, volume: real) {

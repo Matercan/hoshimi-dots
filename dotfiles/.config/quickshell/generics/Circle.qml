@@ -12,11 +12,11 @@ Item {
     property string numberStr: number?.toString()
 
     function playSfx() {
-        Sounds.drums.play("", 0.1);
+        Sounds.drums.play("", 0.7);
     }
 
     function playEnter() {
-        Sounds.softs.play("", 0.1);
+        Sounds.softs.play("", 0.3);
     }
 
     Image {

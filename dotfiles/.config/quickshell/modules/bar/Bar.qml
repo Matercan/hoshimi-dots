@@ -1,21 +1,23 @@
 // Bar.qml
 pragma ComponentBehavior: Bound
 import Quickshell
+import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
 import QtMultimedia
 
 import qs.functions
 import qs.globals
+import "./components"
 
 Scope {
     id: root
 
-    SoundEffect {
+    Process {
         id: sfx
-        source: "/home/matercan/.config/quickshell/modules/bar/start.wav"
+        command: ["mpv", Quickshell.env("HOME") + "/.config/quickshell/modules/bar/start.wav"]
 
-        onLoadedChanged: play()
+        Component.onCompleted: running = true
     }
 
     Variants {

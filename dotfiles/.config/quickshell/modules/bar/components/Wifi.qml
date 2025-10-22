@@ -4,7 +4,6 @@ import Quickshell
 import qs.globals
 
 Item {
-
     Image {
         anchors.fill: parent
         source: Variables.osuIcons + "/wifi.svg"

@@ -1,8 +1,5 @@
 return {
   {
-    "elkowar/yuck.vim",
-  },
-  {
     "nvim-tree/nvim-web-devicons",
     priority = 100
   },
@@ -25,19 +22,6 @@ return {
           ['`'] = { action = 'closeopen', pair = '``', neigh_pattern = '[^\\].', register = { cr = false } },
         },
       })
-    end
-  },
-  {
-    "pseewald/vim-anyfold",
-    config = function()
-      vim.keymap.set('n', '<leader>vf', '<CMD>AnyFoldActivate <CR>', { silent = true, desc = 'enables folding ' })
-    end
-  },
-  {
-    "GustavEikaas/easy-dotnet.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", 'nvim-telescope/telescope.nvim', },
-    config = function()
-      require("easy-dotnet").setup()
     end
   },
   {

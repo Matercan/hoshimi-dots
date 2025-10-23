@@ -19,7 +19,6 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
   require("plugins.themes"),
-  ---@diagnostic disable-next-line: different-requires
   require("plugins.telescope"),
   require("plugins.neotree"),
   require("plugins.lualine"),
@@ -29,7 +28,6 @@ local plugins = {
   require("plugins.essentials"),
   require("plugins.git"),
   require("plugins.trouble"),
-  require("plugins.testing"),
   require("plugins")
 }
 

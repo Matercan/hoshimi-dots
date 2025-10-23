@@ -13,28 +13,24 @@ return {
     require("neo-tree").setup({
       -- Your Neo-tree configuration options here
       window = {
-          position = "left",
-          width = 45,
-          mapping_options = {
-              -- You can put specific mappings for Neo-tree here
-              -- For example, to close with 'q':
-              -- ["q"] = "close_window",
-          },
+        position = "left",
+        width = 45,
+        mapping_options = {
+          -- You can put specific mappings for Neo-tree here
+          -- For example, to close with 'q':
+          -- ["q"] = "close_window",
+        },
       },
 
       filesystem = {
-          -- Other filesystem options
-          filtered_items = {
-              hide_dotfiles = false,
-              hide_hidden = false,   
-              hide_git_ignored = true,
-              always_show_folders = false, -- Important for some people
-          },
+        -- Other filesystem options
+        filtered_items = {
+          hide_dotfiles = false,
+          hide_hidden = false,
+          hide_git_ignored = true,
+          always_show_folders = false,     -- Important for some people
+        },
       },
-      -- More configuration...
     })
   end
 }
-
-
-

@@ -3,7 +3,7 @@
   "globals": {
     "iconDirectory": "/usr/share/icons/candy-icons/",
     "wallpaperDirectory": "/home/matercan/Pictures/wallpapers",
-    "osuSkin": "/home/matercan/Downloads/Rafis 2018-03-26 HDDT (404 cursor)(1).osk"
+    "osuSkin": "/home/matercan/.local/share/hoshimi/assets/osu.ocz"
   },
-  "config": "gruvbox/medium-dark"
+  "config": "catppuccin/latte"
 }

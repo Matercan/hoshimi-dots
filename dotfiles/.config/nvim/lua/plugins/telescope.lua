@@ -3,12 +3,6 @@ return {
   -- Main Telescope plugin definition
   {
     "nvim-telescope/telescope.nvim",
-    -- CHANGE THIS LINE:
-    -- Instead of branch = "0.1.x", use a specific tag or the master branch
-    tag = "0.1.5", -- <--- RECOMMENDED: Use the latest stable tag (as of this knowledge cut-off)
-    -- OR, if 0.1.5 still gives issues (less likely), use the master branch for bleeding edge:
-    -- branch = "master",
-
     dependencies = {
       "nvim-lua/plenary.nvim",
       { "folke/trouble.nvim", opts = {} },

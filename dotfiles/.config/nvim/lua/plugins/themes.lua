@@ -13,8 +13,7 @@ return {
           "catppuccin", "gruvbox",
           "kanagawa", "tokyonight",
           "cyberdream", "night-owl",
-          "mellifluous", "miasma",
-          "moonlight", "citruszest",
+          "mellifluous", "moonlight",
           "aurora", "nightfox",
           "onedark", "materscheme"
         },
@@ -29,8 +28,6 @@ return {
     priority = 999,
     config = function()
       require("configs.themes.catppuccin")
-      -- If 'catppuccin' is in 'themery's loaders, REMOVE this:
-      -- vim.cmd("colorscheme catppuccin-mocha") -- Or your preferred variant
     end,
   },
   {
@@ -38,8 +35,6 @@ return {
     priority = 998,
     config = function()
       require('configs.themes.kanagawa')
-      -- If 'kanagawa' is in 'themery's loaders, REMOVE this:
-      -- vim.cmd("colorscheme kanagawa")
     end
   },
   {
@@ -47,8 +42,6 @@ return {
     priority = 997,
     config = function()
       require("configs.themes.gruvbox")
-      -- If 'gruvbox' is in 'themery's loaders, REMOVE this:
-      -- vim.cmd("colorscheme gruvbox")
     end,
   },
   {
@@ -57,8 +50,6 @@ return {
     priority = 999,
     opts = {},
     config = function()
-      -- If 'tokyonight' is in 'themery's loaders, REMOVE this:
-      -- vim.cmd("colorscheme tokyonight-night") -- Or your preferred variant
     end,
   },
   {
@@ -67,8 +58,6 @@ return {
     priority = 999,
     config = function()
       require("configs.themes.cyberdream")
-      -- If 'cyberdream' is in 'themery's loaders, REMOVE this:
-      -- vim.cmd("colorscheme cyberdream")
     end,
   },
   {
@@ -84,8 +73,6 @@ return {
         undercurl = true,
         transparent_background = false,
       })
-      -- If 'night-owl' is in 'themery's loaders, REMOVE this:
-      -- vim.cmd.colorscheme("night-owl")
     end,
   },
   {
@@ -94,36 +81,14 @@ return {
     priority = 999,
     config = function()
       require("configs.themes.melliflous")
-      -- If 'mellifluous' is in 'themery's loaders, REMOVE this:
-      -- vim.cmd("colorscheme mellifluous")
     end
-  },
-  {
-    "xero/miasma.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      -- If 'miasma' is in 'themery's loaders, REMOVE this:
-      vim.cmd("colorscheme miasma")
-    end,
   },
   {
     "shaunsingh/moonlight.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      -- If 'moonlight' is in 'themery's loaders, REMOVE this:
       vim.cmd("colorscheme moonlight")
-    end
-  },
-  {
-    "zootedb0t/citruszest.nvim",
-    lazy = false,
-    priority = 999,
-    config = function()
-      require("configs.themes.citruszest")
-      -- If 'citruszest' is in 'themery's loaders, REMOVE this:
-      -- vim.cmd("colorscheme citruszest")
     end
   },
   {
@@ -134,7 +99,6 @@ return {
       vim.g.aurora_bold = 1
     end,
     config = function()
-      -- If 'aurora' is in 'themery's loaders, REMOVE this:
       vim.cmd.colorscheme "aurora"
       vim.api.nvim_set_hl(0, '@number', { fg = '#e933e3' })
     end

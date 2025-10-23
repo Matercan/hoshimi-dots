@@ -104,7 +104,7 @@ Scope {
                                 Loader {
                                     id: wifiWidget
                                     active: true
-                                    Layout.preferredWidth: Config.bar.barSize * 0.5
+                                    Layout.preferredWidth: Config.bar.barSize * 0.4
                                     Layout.alignment: Qt.AlignHCenter
                                     Layout.preferredHeight: width
                                     sourceComponent: Wifi {

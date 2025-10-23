@@ -52,7 +52,12 @@
             "prioritizeServerProfile": false
         },
         "AlwaysAnimate": {
-            "enabled": true
+            "enabled": true,
+            "icons": true,
+            "statusEmojis": true,
+            "serverBanners": true,
+            "nameplates": true,
+            "roleGradients": true
         },
         "AlwaysExpandRoles": {
             "enabled": true,
@@ -1437,6 +1442,9 @@
         },
         "KeyboardNavigation": {
             "enabled": false
+        },
+        "AutoZipper": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -1450,7 +1458,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1761002665379
+        "settingsSyncVersion": 1761212806462
     },
     "enabledThemeLinks": [],
     "ignoreResetWarning": false,

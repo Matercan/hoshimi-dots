@@ -137,7 +137,7 @@ Singleton {
         property bool xterm: false
 
         // Key Colors main colors
-        property color m3primary_paletteKeyColor: root.paletteColor6
+        property color m3primary_paletteKeyColor: root.paletteColor2
         property color m3secondary_paletteKeyColor: root.paletteColor5
         property color m3tertiary_paletteKeyColor: root.paletteColor4
         property color m3neutral_paletteKeyColor: root.paletteColor8
@@ -170,14 +170,14 @@ Singleton {
         //  Utility Colors
         property color m3shadow: root.paletteColor1
         property color m3scrim: root.paletteColor1
-        property color m3surfaceTint: root.lighten(root.paletteColor6, 0.2)
+        property color m3surfaceTint: root.lighten(root.paletteColor2, 0.2)
 
         //  Primary Colors
-        property color m3primary: root.lighten(root.paletteColor6, 0.1)
+        property color m3primary: root.lighten(root.paletteColor2, 0.1)
         property color m3onPrimary: root.darken(root.paletteColor1, 0.1)
-        property color m3primaryContainer: root.darken(root.paletteColor6, 0.3)
-        property color m3onPrimaryContainer: root.lighten(root.paletteColor6, 0.4)
-        property color m3inversePrimary: root.darken(root.paletteColor6, 0.2)
+        property color m3primaryContainer: root.darken(root.paletteColor2, 0.3)
+        property color m3onPrimaryContainer: root.lighten(root.paletteColor2, 0.4)
+        property color m3inversePrimary: root.darken(root.paletteColor2, 0.2)
 
         //  Secondary Colors
         property color m3secondary: root.lighten(root.paletteColor5, 0.2)
@@ -198,10 +198,10 @@ Singleton {
         property color m3onErrorContainer: root.lighten(root.paletteColor2, 0.4)
 
         // Fixed Colors
-        property color m3primaryFixed: root.lighten(root.paletteColor6, 0.4)
-        property color m3primaryFixedDim: root.lighten(root.paletteColor6, 0.1)
-        property color m3onPrimaryFixed: root.darken(root.paletteColor6, 0.6)
-        property color m3onPrimaryFixedVariant: root.darken(root.paletteColor6, 0.3)
+        property color m3primaryFixed: root.lighten(root.paletteColor2, 0.4)
+        property color m3primaryFixedDim: root.lighten(root.paletteColor2, 0.1)
+        property color m3onPrimaryFixed: root.darken(root.paletteColor2, 0.6)
+        property color m3onPrimaryFixedVariant: root.darken(root.paletteColor2, 0.3)
 
         property color m3secondaryFixed: root.lighten(root.paletteColor5, 0.4)
         property color m3secondaryFixedDim: root.lighten(root.paletteColor5, 0.2)

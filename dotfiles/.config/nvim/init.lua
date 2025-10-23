@@ -41,5 +41,5 @@ require("configs.options")
 
 
 -- Written by hoshimi
-vim.cmd("Catppuccin mocha")
-
+vim.cmd("colorscheme gruvbox")
+vim.cmd("set background=dark")

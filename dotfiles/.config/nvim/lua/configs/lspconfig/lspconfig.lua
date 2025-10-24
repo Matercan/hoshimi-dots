@@ -1,21 +1,18 @@
-local lspconfig = require('lspconfig')
+
+-- Modern LSP configuration (Neovim 0.11+)
+
 local pid = vim.fn.getpid()
 
--- Modern approach: define capabilities once
+--  Capabilities (add cmp_nvim_lsp if you use it)
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-
--- If using nvim-cmp or similar, merge those capabilities
 -- local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- capabilities = vim.tbl_deep_extend('force', capabilities, cmp_capabilities)
 
--- Modern on_attach using vim.lsp.buf directly
+--  Common on_attach
 local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
   vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-  -- Modern buffer-local keymaps using vim.keymap.set
   local opts = { buffer = bufnr, silent = true }
-  
+
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
@@ -28,40 +25,32 @@ local on_attach = function(client, bufnr)
   end, opts)
 end
 
--- Configure border style for LSP floating windows
+--  Borders for floating windows
 local BORDER_STYLE = "rounded"
 
--- Modern handlers configuration
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover,
-  { border = BORDER_STYLE }
-)
+vim.lsp.handlers["textDocument/hover"] =
+  vim.lsp.with(vim.lsp.handlers.hover, { border = BORDER_STYLE })
 
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-  vim.lsp.handlers.signature_help,
-  { border = BORDER_STYLE }
-)
+vim.lsp.handlers["textDocument/signatureHelp"] =
+  vim.lsp.with(vim.lsp.handlers.signature_help, { border = BORDER_STYLE })
 
--- Override vim.ui.select for code actions and other selections
+--  Optional UI override (telescope integration)
 local original_ui_select = vim.ui.select
 vim.ui.select = function(items, opts, on_choice)
   opts = opts or {}
   opts.format_item = opts.format_item or function(item)
     return tostring(item)
   end
-  
-  -- Use telescope if available, otherwise use builtin with borders
-  local has_telescope, telescope = pcall(require, 'telescope.themes')
+
+  local has_telescope, telescope_builtin = pcall(require, 'telescope.builtin')
   if has_telescope then
-    return require('telescope.builtin').select(items, opts, on_choice)
+    return telescope_builtin.select(items, opts, on_choice)
   else
-    -- Fallback to vim.ui.select with custom format
-    opts.kind = opts.kind or 'generic'
     return original_ui_select(items, opts, on_choice)
   end
 end
 
--- Configure floating window borders globally
+--  Global border override for floating previews
 vim.lsp.util.open_floating_preview = (function(original_fn)
   return function(contents, syntax, opts, ...)
     opts = opts or {}
@@ -70,7 +59,7 @@ vim.lsp.util.open_floating_preview = (function(original_fn)
   end
 end)(vim.lsp.util.open_floating_preview)
 
--- Modern diagnostic configuration
+--  Diagnostics configuration
 vim.diagnostic.config({
   virtual_text = true,
   signs = true,
@@ -83,14 +72,14 @@ vim.diagnostic.config({
   },
 })
 
--- Define diagnostic signs
+--  Define diagnostic signs
 local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
--- Setup LSP servers with modern config
+--  Define all servers using the new vim.lsp.config API
 local servers = {
   lua_ls = {},
   jsonls = {},
@@ -117,18 +106,23 @@ local servers = {
   postgres_lsp = {},
   omnisharp = {
     cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(pid) },
-    root_dir = lspconfig.util.root_pattern("*.sln", ".git", "*.csproj", "omnisharp.json"),
+    root_dir = vim.fs.root(0, { "*.sln", ".git", "*.csproj", "omnisharp.json" }),
   },
   clangd = {},
   cmake = {},
   qmlls = {
-    root_dir = lspconfig.util.root_pattern("shell.qml"),
+    root_dir = vim.fs.root(0, { "shell.qml" }),
   },
 }
 
--- Setup all servers
-for server, config in pairs(servers) do
-  config.on_attach = on_attach
-  config.capabilities = capabilities
-  vim.lsp.enable(server, config)
+--  Register and enable all servers
+for name, config in pairs(servers) do
+  vim.lsp.config(name, vim.tbl_deep_extend("force", {
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }, config))
+
+  -- Automatically enable the LSP for its filetypes
+  vim.lsp.enable(name)
 end
+

@@ -30,7 +30,7 @@ return {
           "omnisharp",
           "clangd",
           "qmlls",
-          "cmake"
+          "neocmake"
         }
       })
     end

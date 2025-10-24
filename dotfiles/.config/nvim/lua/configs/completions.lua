@@ -8,32 +8,33 @@ local kind_icons = require("nvim-web-devicons").get_icons()
 -- You can also define custom icons for LSP kind (optional)
 -- This maps LSP kinds to specific icons, overriding devicons if needed
 local lsp_kind_icons = {
-  Text = "",
-  Method = "",
-  Function = "󰊕", -- Changed from 'ू' to a more common function icon
-  Constructor = "",
-  Field = "", -- Common icon for Field
-  Variable = "",
-  Class = "",
-  Interface = "",
-  Module = "",
-  Property = "", -- Changed from 'ert' to a common property icon
-  Unit = "",
-  Value = "",
-  Enum = "",
-  Keyword = "",
-  Snippet = "",
-  Color = "",
-  File = "",
-  Reference = "",
-  Folder = "",
-  EnumMember = "",
-  Constant = "",
-  Struct = "",
+  Text = "󰉿",
+  Method = "󰆧",
+  Function = "󰊕",
+  Constructor = "",
+  Field = "󰇽",
+  Variable = "󰂡",
+  Class = "󰠱",
+  Interface = "",
+  Module = "󰏗",
+  Property = "󰜢",
+  Unit = "󰑭",
+  Value = "󰎠",
+  Enum = "",
+  Keyword = "󰌋",
+  Snippet = "󰘍",
+  Color = "󰏘",
+  File = "󰈙",
+  Reference = "󰈇",
+  Folder = "󰉋",
+  EnumMember = "",
+  Constant = "󰏿",
+  Struct = "󰙅",
   Event = "",
-  Operator = "",
-  TypeParameter = "", -- Common icon for TypeParameter
+  Operator = "󰆕",
+  TypeParameter = "󰊄",
 }
+
 
 cmp.setup({
   snippet = {

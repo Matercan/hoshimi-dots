@@ -1,11 +1,9 @@
 -- ~/.config/nvim/lua/configs/lspconfig/nvlsp.lua
 
 -- Define on_attach function
+--  Common on_attach
 local on_attach = function(client, bufnr)
-  -- This function runs when an LSP client attaches to a buffer.
-  -- You can set up keymaps, autocommands, etc., here.
-
-  -- Example: enable formatting on save if the client supports it
+   -- Example: enable formatting on save if the client supports it
   if client.supports_method("textDocument/formatting") then
     vim.api.nvim_create_autocmd("BufWritePre", {
       group = vim.api.nvim_create_augroup("LspFormatting.buffer" .. bufnr, { clear = true }),
@@ -17,10 +15,7 @@ local on_attach = function(client, bufnr)
   end
 
 
-  -- Enable completion triggered by <c-x><c-o>
   vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-  -- Modern buffer-local keymaps using vim.keymap.set
   local opts = { buffer = bufnr, silent = true }
 
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
@@ -35,23 +30,13 @@ local on_attach = function(client, bufnr)
   end, opts)
 end
 
--- Define on_init function
-local on_init = function(client)
-  -- For example, disable specific capabilities if needed.
-  -- client.server_capabilities.foldingRange = false -- Example to disable foldingRange 
-
-  client.server_capabilities.foldingRange = true
-end
-
-
-local cmp_nvim_lsp_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+--  Capabilities (add cmp_nvim_lsp if you use it)
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-if cmp_nvim_lsp_ok then
-  capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
-end
+-- local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- capabilities = vim.tbl_deep_extend('force', capabilities, cmp_capabilities)
+
 
 return {
   on_attach = on_attach,
-  on_init = on_init,
   capabilities = capabilities,
 }

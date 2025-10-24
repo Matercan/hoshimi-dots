@@ -3,34 +3,13 @@ local pid = vim.fn.getpid()
 -- Modern approach: define capabilities once
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
--- If using nvim-cmp or similar, merge those capabilities
--- local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
--- capabilities = vim.tbl_deep_extend('force', capabilities, cmp_capabilities)
+local vimlsp = require("lua.configs.lspconfig.nvlsp")
 
--- Modern on_attach using vim.lsp.buf directly
-local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-  -- Modern buffer-local keymaps using vim.keymap.set
-  local opts = { buffer = bufnr, silent = true }
-
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-  vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
-  vim.keymap.set('n', '<leader>f', function()
-    vim.lsp.buf.format({ async = true })
-  end, opts)
-end
+local on_attach = vimlsp.on_attach
 
 -- Configure border style for LSP floating windows
 local BORDER_STYLE = "rounded"
 
--- Modern handlers configuration
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
   vim.lsp.handlers.hover,
   { border = BORDER_STYLE }
@@ -55,6 +34,7 @@ vim.diagnostic.config({
 })
 
 -- Define diagnostic signs
+
 local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
@@ -99,5 +79,5 @@ local servers = {
 for server, config in pairs(servers) do
   config.on_attach = on_attach
   config.capabilities = capabilities
-  vim.lsp.enable(server); 
+  vim.lsp.enable(server, config)
 end

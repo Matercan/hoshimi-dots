@@ -5,6 +5,7 @@ import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
 import QtMultimedia
+import Quickshell.Wayland
 
 import qs.functions
 import qs.globals
@@ -29,113 +30,70 @@ Scope {
             screen: modelData
 
             anchors {
-                left: true
                 top: true
-                bottom: true
+                left: true
+                right: true
             }
 
-            color: "transparent"
-            implicitWidth: Config.bar.barSize
+            Component.onCompleted: {
+                WlrLayershell.layer = WlrLayer.Top;
+                visible = true;
+            }
+
+            visible: false
+            implicitHeight: Config.bar.barSize
 
             Rectangle {
-                color: Colors.palette.m3background
+
+                Component.onCompleted: {
+                    color = Colors.palette.m3background;
+                }
+
+                Behavior on color {
+                    ColorAnimation {
+                        duration: MaterialEasing.standardAccelTime
+                        easing.bezierCurve: MaterialEasing.standardAccel
+                    }
+                }
+
                 implicitHeight: parent.height
                 implicitWidth: parent.width
 
-                ColumnLayout {
-                    id: mainyout
-                    Layout.alignment: Qt.AlignLeft
-                    height: parent.height
-                    implicitWidth: parent.width
+                color: "transparent"
 
-                    Text {
-                        Layout.margins: Config.layout.padding
-                        text: ""
-                        font.family: Variables.fontFamily
-                        Layout.alignment: Qt.AlignCenter
-                        color: Colors.palette.m3onBackground
-                    }
+                RowLayout {
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.fill: parent
 
                     Loader {
                         active: true
+                        asynchronous: true
+                        Layout.preferredHeight: children[0].implicitHeight
+                        Layout.preferredWidth: children[0].implicitWidth
+                        Layout.leftMargin: Config.bar.wrapSize
+
                         sourceComponent: WorkspaceWidget {
-                            id: workspaces
-
-                            Layout.fillWidth: true
-                            Layout.alignment: Qt.AlignTop
-                            color: "transparent"
+                            id: wkw
+                            anchors.centerIn: parent
                         }
-                        Layout.fillHeight: true
-                        Layout.alignment: Qt.AlignTop
                     }
 
-                    TrayWidget {
-                        id: tray
-                        rectY: y
+                    Rectangle {
+                        id: nix
+                        implicitHeight: parent.height
+                        implicitWidth: 3 * nixLogo.width
 
-                        implicitWidth: parent.width
-                        Layout.fillWidth: true
-                        Layout.alignment: Qt.AlignBottom
+                        Layout.rightMargin: Config.bar.wrapSize
                         color: "transparent"
-                    }
 
-                    Loader {
-                        active: true
-                        Layout.alignment: Qt.AlignBottom
-
-                        sourceComponent: Rectangle {
-                            id: widgets
-                            implicitWidth: Config.bar.barSize
-                            implicitHeight: widgetLayout.implicitHeight + 2 * Config.layout.padding
-                            color: "transparent"
-                            radius: Config.layout.radius
-                            Layout.fillWidth: true
-                            Layout.alignment: Qt.AlignBottom
-                            Layout.leftMargin: 1
-
-                            ColumnLayout {
-                                id: widgetLayout
-                                anchors.left: parent.left
-                                implicitHeight: 500
-                                anchors.right: parent.right
-                                anchors.margins: Config.layout.padding
-                                spacing: Config.layout.spacing
-
-                                Loader {
-                                    id: wifiWidget
-                                    active: true
-                                    Layout.preferredWidth: Config.bar.barSize * 0.4
-                                    Layout.alignment: Qt.AlignHCenter
-                                    Layout.preferredHeight: width
-                                    sourceComponent: Wifi {
-                                        anchors.fill: {
-                                            console.log(width);
-                                            return parent;
-                                        }
-                                    }
-                                }
-                                Loader {
-                                    active: true
-                                    Layout.fillWidth: true
-                                    Layout.alignment: Qt.AlignHCenter
-                                }
-                                Loader {
-                                    active: true
-                                    Layout.fillWidth: true
-                                    Layout.alignment: Qt.AlignHCenter
-                                }
-                                Loader {
-                                    active: true
-                                    Layout.fillWidth: true
-                                    Layout.alignment: Qt.AlignHCenter
-                                }
-                                Loader {
-                                    active: true
-                                    Layout.fillWidth: true
-                                    Layout.alignment: Qt.AlignHCenter
-                                }
-                            }
+                        Text {
+                            id: nixLogo
+                            text: " "
+                            color: Colors.light ? Colors.palette.m3inverseOnSurface : Colors.palette.m3onSurface
+                            anchors.centerIn: parent
                         }
+
+                        Layout.alignment: Qt.AlignRight
                     }
                 }
             }

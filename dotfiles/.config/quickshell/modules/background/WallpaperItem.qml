@@ -1,9 +1,9 @@
-import Quickshell
 import qs.generics
 import qs.globals
 
 import QtQuick
 import Quickshell
+import Quickshell.Widgets
 import Quickshell.Wayland
 
 Variants {
@@ -25,12 +25,18 @@ Variants {
             top: true
         }
 
-        Wallpaper {
+        ClippingRectangle {
+            anchors.fill: parent
+            color: "white"
 
-            Clock {
-                spacing: 2
-                x: Config.background.clock.x
-                y: Config.background.clock.y
+            Wallpaper {
+                anchors.fill: parent
+
+                Clock {
+                    spacing: 2
+                    x: Config.background.clock.x
+                    y: Config.background.clock.y
+                }
             }
         }
     }

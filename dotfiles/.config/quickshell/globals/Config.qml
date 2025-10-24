@@ -16,7 +16,7 @@ Singleton {
     }
 
     property JsonObject bar: JsonObject {
-        property int barSize: 50
+        property int barSize: 30
         property int wrapSize: 8
     }
 

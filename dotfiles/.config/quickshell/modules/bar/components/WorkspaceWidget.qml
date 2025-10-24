@@ -3,69 +3,64 @@ import QtQuick
 import QtQuick.Layouts
 
 import Quickshell.Hyprland
+import Quickshell
 
-import qs.globals
 import qs.functions
 import qs.services
 import qs.globals
-import qs.generics
 
 Rectangle {
 
     implicitWidth: layout.width
     implicitHeight: layout.height
+    color: "transparent"
 
-    ColumnLayout {
+    RowLayout {
         id: layout
+        spacing: 10
         anchors.centerIn: parent
-        width: Config.bar.barSize
-        spacing: Config.layout.padding
 
         Repeater {
-            id: trueLayout
-            Layout.fillWidth: true
+            model: ScriptModel {
+                values: {
+                    const lastWindow = Desktop.biggestWindow;
+                    const result = [];
 
-            model: Desktop.workspaces[Desktop.workspaces.length - 1].id
-
-            delegate: Circle {
-                id: circle
-                Layout.alignment: Qt.AlignHCenter
-                Layout.preferredHeight: area.containsMouse ? Config.icons.bigSize : Config.icons.mediumSize
-                Layout.preferredWidth: height
-                required property var modelData
-
-                Behavior on Layout.preferredHeight {
-                    Anims.ExpAnim {}
+                    for (let i = 1; i <= lastWindow; ++i) {
+                        result.push(i);
+                    }
+                    return result.filter(a => a != null);
                 }
+            }
 
-                property int idInt: modelData + 1
-                number: idInt
-                paletteColor: {
-                    if (area.containsMouse)
-                        return 3;
+            delegate: Rectangle {
+                Layout.preferredWidth: {
+                    if (modelData == Desktop.activeWorkspace?.id ?? 0) {
+                        return 20;
+                    }
+                    return 10;
+                }
+                Layout.preferredHeight: 10
+                radius: width / 2
+                required property int modelData
 
-                    const matchingWorkspace = Desktop.workspaces.find(wk => wk.id === circle.idInt);
-
-                    if (matchingWorkspace) {
-                        if (matchingWorkspace.id === Desktop.activeWorkspace.id)
-                            return 3;
-                        else
-                            return 5;
+                color: {
+                    if (modelData === Desktop.activeWorkspace?.id ?? 0) {
+                        return Colors.palette.m3primary;
                     }
 
-                    return 1;
+                    return Colors.palette.m3surfaceDim;
                 }
 
-                MouseArea {
-                    id: area
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-                    onPressed: {
-                        Hyprland.dispatch("workspace " + circle.idInt.toString());
-                        circle.playSfx();
+                Behavior on color {
+                    ColorAnimation {
+                        duration: MaterialEasing.emphasizedTime
+                        easing.bezierCurve: MaterialEasing.emphasized
                     }
-                    onEntered: circle.playEnter()
+                }
+
+                Behavior on Layout.preferredWidth {
+                    Anims.EmphAnim {}
                 }
             }
         }

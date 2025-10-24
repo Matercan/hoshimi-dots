@@ -16,20 +16,21 @@ ShellRoot {
         active: true
         sourceComponent: WallpaperItem {}
     }
-    Loader {
-        active: true
-        sourceComponent: ScreenWrap {}
-    }
+
     Loader {
         active: true
         sourceComponent: Notifications {}
+    }
+    Loader {
+        active: true
+        sourceComponent: ScreenWrap {}
     }
     Loader {
         active: false
         sourceComponent: LockItem {}
     }
     Loader {
-        active: false
+        active: true
         sourceComponent: Bar {}
     }
     Loader {

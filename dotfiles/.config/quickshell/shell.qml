@@ -25,11 +25,11 @@ ShellRoot {
         sourceComponent: Notifications {}
     }
     Loader {
-        active: true
+        active: false
         sourceComponent: LockItem {}
     }
     Loader {
-        active: true
+        active: false
         sourceComponent: Bar {}
     }
     Loader {

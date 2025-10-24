@@ -73,8 +73,27 @@ Scope {
                         Layout.leftMargin: Config.bar.wrapSize
 
                         sourceComponent: WorkspaceWidget {
-                            id: wkw
                             anchors.centerIn: parent
+                        }
+                    }
+
+                    Rectangle {
+                        Layout.fillWidth: true
+                        color: "transparent"
+                    }
+
+                    Loader {
+                        id: tray
+                        active: true
+                        asynchronous: true
+                        Layout.preferredHeight: children[0].implicitHeight
+                        Layout.preferredWidth: children[0].implicitWidth
+
+                        Layout.alignment: Qt.AlignRight
+
+                        sourceComponent: TrayWidget {
+                            anchors.centerIn: parent
+                            pos: tray.x - tray.width
                         }
                     }
 

@@ -13,7 +13,7 @@ import qs.generics
 Rectangle {
     id: root
 
-    required property var popupY
+    required property var popupX
 
     property var bar: root.QsWindow.window
     required property var modelData
@@ -34,17 +34,16 @@ Rectangle {
         }
     }
 
-    Circle {
+    Item {
         id: trayIcon
-        width: mouseArea.containsMouse ? Config.icons.mediumSize : Config.icons.smallSize
+        width: 16
         height: width
         anchors.centerIn: parent
-        paletteColor: Colors.light ? 16 : 1
 
         Image {
             id: sysTrayIcon
             anchors.centerIn: parent
-            width: trayIcon.width / 3
+            width: trayIcon.width
             height: width
             sourceSize.width: width
             sourceSize.height: height
@@ -103,58 +102,9 @@ Rectangle {
         menu: root.item.menu
 
         anchor.window: root.bar
-        anchor.rect.x: 50
-        anchor.rect.y: root.popupY
+        anchor.rect.x: root.popupX
+        anchor.rect.y: 45
         anchor.rect.height: root.height
         anchor.rect.width: root.width
-    }
-
-    // Tooltip
-    PanelWindow {
-        id: tooltip
-        property bool varShow: false
-        property bool fullyOpen: false
-        visible: rect.varShow
-
-        anchors {
-            top: true
-            left: true
-        }
-
-        color: "transparent"
-
-        margins {
-            top: root.popupY
-            left: 5
-        }
-
-        implicitWidth: rect.width
-        implicitHeight: rect.height
-
-        PopupBox {
-            id: rect
-            root: tooltip
-            fullyOpen: tooltip.fullyOpen
-            varShow: mouseArea.containsMouse && root.item.title.length > 0
-            radius: 10
-            implicitWidth: layout.width + 2
-            implicitHeight: layout.height + 2
-
-            Rectangle {
-                id: layout
-                implicitHeight: tooltipText.implicitHeight + 15
-                implicitWidth: tooltipText.implicitWidth + 5
-                color: "transparent"
-
-                Text {
-                    id: tooltipText
-                    anchors.centerIn: parent
-                    text: root.item.title
-                    color: Colors.foregroundColor
-                    font.family: Variables.fontFamily
-                    font.pixelSize: 10
-                }
-            }
-        }
     }
 }

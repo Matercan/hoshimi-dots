@@ -5,5 +5,5 @@
     "wallpaperDirectory": "/home/matercan/Pictures/wallpapers",
     "osuSkin": "/home/matercan/.local/share/hoshimi/assets/osu.ocz"
   },
-  "config": "catppuccin/latte"
+  "config": "gruvbox/medium-dark"
 }

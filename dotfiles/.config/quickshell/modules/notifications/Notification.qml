@@ -136,6 +136,8 @@ Item {
                             id: actionButtomMA
                             required property NotificationAction modelData
                             implicitHeight: actionButton.height
+                            Layout.fillWidth: true
+                            color: "transparent"
 
                             MouseArea {
                                 id: mArea
@@ -148,16 +150,23 @@ Item {
                                 id: actionButton
 
                                 radius: 16
-                                color: mArea.containsMouse ? Colors.palette.m3secondary : Colors.palette.m3primary
+                                color: mArea.containsMouse ? Colors.palette.m3primary : Colors.palette.m3surfaceDim
                                 implicitHeight: buttonText.height
+                                implicitWidth: parent.width
 
-                                Layout.fillWidth: true
+                                Behavior on color {
+                                    ColorAnimation {
+                                        duration: MaterialEasing.emphasizedTime
+                                        easing.bezierCurve: MaterialEasing.standard
+                                    }
+                                }
 
                                 Text {
                                     id: buttonText
 
                                     anchors.centerIn: parent
                                     text: actionButtomMA.modelData.text
+                                    color: Colors.light ? Colors.palette.m3inverseOnSurface : Colors.palette.m3onSurface
                                 }
                             }
                         }

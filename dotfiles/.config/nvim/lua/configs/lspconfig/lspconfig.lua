@@ -3,7 +3,7 @@ local pid = vim.fn.getpid()
 -- Modern approach: define capabilities once
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-local vimlsp = require("lua.configs.lspconfig.nvlsp")
+local vimlsp = require("configs.lspconfig.nvlsp")
 
 local on_attach = vimlsp.on_attach
 

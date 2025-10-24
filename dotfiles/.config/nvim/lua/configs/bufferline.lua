@@ -46,7 +46,7 @@ bufferline.setup {
     },
     indicator = {
       icon = '▎',
-      style = 'icon', -- CORRECT: Choose one value, e.g., 'icon'
+      style = 'icon',
     },
     buffer_close_icon = '󰅖',
     modified_icon = '● ',

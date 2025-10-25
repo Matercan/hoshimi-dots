@@ -7,7 +7,7 @@
     "enabledThemes": [
         "gliss.theme.css"
     ],
-    "enableReactDevtools": false,
+    "enableReactDevtools": true,
     "frameless": false,
     "transparent": true,
     "winCtrlQ": false,
@@ -1212,7 +1212,8 @@
             "enabled": false
         },
         "Quoter": {
-            "enabled": true
+            "enabled": true,
+            "userIdentifier": 0
         },
         "RandomVoice": {
             "enabled": false
@@ -1458,7 +1459,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1761212806462
+        "settingsSyncVersion": 1761340638095
     },
     "enabledThemeLinks": [],
     "ignoreResetWarning": false,

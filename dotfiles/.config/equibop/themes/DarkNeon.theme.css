@@ -66,6 +66,7 @@ textarea {
   --background-modifier-selected: var(--rgb-highlight);
   --background-base-lowest: rgba(var(--background), 20%);
   --background-base-low: rgba(var(--background), 20%);
+  --background-base-lower: rgba(var(var(--background)), 20%);
   --background-surface-high: rgba(var(--background), 20%);
   --modal-background: rgba(var(--background), 20%);
   --modal-footer-background: rgba(var(--background), 20%);

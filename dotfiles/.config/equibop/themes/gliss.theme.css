@@ -14,21 +14,21 @@
 :root,
 .visual-refresh,
 .visual-refresh.theme-dark {
-  --rgb-highlight: 211, 67, 155;
+  --rgb-highlight: 244, 92, 228;
   /* The main highlight color */
-  --rgb-background: 40, 40, 40;
+  --rgb-background: 48, 52, 70;
   /* The main background color */
-  --rgb-text: 212, 190, 152;
+  --rgb-text: 198, 208, 245;
   /* The main text color */
-  --rgb-close-button: 169, 182, 101;
+  --rgb-close-button: 166, 209, 137;
   /* The main "close this" or "deny" color */
-  --rgb-online-color: 169, 182, 101;
+  --rgb-online-color: 166, 209, 137;
   /* The color used in the "online" user status symbol */
-  --rgb-afk-color: 216, 166, 87;
+  --rgb-afk-color: 229, 200, 144;
   /* The color used in the "idle" user status symbol */
-  --rgb-dnd-color: 234, 105, 98;
+  --rgb-dnd-color: 231, 130, 132;
   /* The color used in the "do not disturb" user status symbol */
-  --rgb-streaming-color: 211, 134, 155;
+  --rgb-streaming-color: 244, 184, 228;
   /* The color used in the "streaming X" user status symbol */
 
   --transition-time: .3s;

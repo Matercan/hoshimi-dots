@@ -15,10 +15,12 @@ Rectangle {
     implicitHeight: layout.height
     color: "transparent"
 
-    RowLayout {
+    Row {
         id: layout
         spacing: 10
         anchors.centerIn: parent
+        width: 400
+        height: 35
 
         Repeater {
             model: ScriptModel {
@@ -34,13 +36,17 @@ Rectangle {
             }
 
             delegate: Rectangle {
-                Layout.preferredWidth: {
+                implicitWidth: {
                     if (modelData == Desktop.activeWorkspace?.id ?? 0) {
+                        return 20;
+                    }
+                    if (area.containsMouse) {
                         return 20;
                     }
                     return 10;
                 }
-                Layout.preferredHeight: 10
+                anchors.verticalCenter: parent.verticalCenter
+                implicitHeight: 10
                 radius: width / 2
                 required property int modelData
 
@@ -48,8 +54,19 @@ Rectangle {
                     if (modelData === Desktop.activeWorkspace?.id ?? 0) {
                         return Colors.palette.m3primary;
                     }
+                    if (area.containsMouse) {
+                        return Colors.palette.m3secondary;
+                    }
 
                     return Colors.palette.m3surfaceDim;
+                }
+
+                MouseArea {
+                    id: area
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    onClicked: Hyprland.dispatch("workspace " + parent.modelData)
+                    cursorShape: Qt.PointingHandCursor
                 }
 
                 Behavior on color {
@@ -59,7 +76,7 @@ Rectangle {
                     }
                 }
 
-                Behavior on Layout.preferredWidth {
+                Behavior on implicitWidth {
                     Anims.EmphAnim {}
                 }
             }

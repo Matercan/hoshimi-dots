@@ -5,16 +5,17 @@ import QtQuick.Layouts
 import Quickshell.Services.SystemTray
 
 import qs.globals
+import qs.functions
 
 Rectangle {
     id: trayRect
-    color: "transparent"
+    color: Colors.palette.m3surfaceDim
 
     required property int pos
-
-    property int margin: 10
+    property int margin: 5
     implicitWidth: rowLayout.width + 2 * margin
-    implicitHeight: rowLayout.height
+    implicitHeight: rowLayout.height + margin
+    radius: implicitHeight / 2
 
     RowLayout {
         id: rowLayout

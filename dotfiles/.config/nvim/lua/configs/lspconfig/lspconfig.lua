@@ -102,6 +102,5 @@ for name, config in pairs(servers) do
     capabilities = nvlsp.capabilities,
   }, config))
 
-  -- Automatically enable the LSP for its filetypes
   vim.lsp.enable(name)
 end

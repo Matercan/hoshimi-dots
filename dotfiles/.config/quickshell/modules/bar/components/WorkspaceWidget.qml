@@ -36,8 +36,10 @@ Rectangle {
             }
 
             delegate: Rectangle {
+                id: icon
+
                 implicitWidth: {
-                    if (modelData == Desktop.activeWorkspace?.id ?? 0) {
+                    if (icon.modelData == Desktop.activeWorkspace?.id ?? 0) {
                         return 20;
                     }
                     if (area.containsMouse) {
@@ -69,6 +71,22 @@ Rectangle {
                     cursorShape: Qt.PointingHandCursor
                 }
 
+                Anim {
+                    target: icon
+                    property: "implicitWidth"
+                    from: 0
+                    to: {
+                        if (icon.modelData == Desktop.activeWorkspace?.id ?? 0) {
+                            return 20;
+                        }
+                        if (area.containsMouse) {
+                            return 20;
+                        }
+                        return 10;
+                    }
+                    running: true
+                }
+
                 Behavior on color {
                     ColorAnimation {
                         duration: MaterialEasing.emphasizedTime
@@ -77,9 +95,11 @@ Rectangle {
                 }
 
                 Behavior on implicitWidth {
-                    Anims.EmphAnim {}
+                    Anim {}
                 }
             }
         }
     }
+
+    component Anim: Anims.EmphAnim {}
 }

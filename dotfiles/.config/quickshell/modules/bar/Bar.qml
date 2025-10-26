@@ -83,9 +83,13 @@ Scope {
                         color: "transparent"
                     }
 
-                    Text {
-                        id: clock
-                        text: "meow meow"
+                    Loader {
+                        asynchronous: true
+                        active: true
+                        Layout.preferredWidth: children[0].implicitHeight
+                        Layout.preferredHeight: children[0].implicitWidth
+
+                        sourceComponent: Clock {}
                     }
 
                     Rectangle {

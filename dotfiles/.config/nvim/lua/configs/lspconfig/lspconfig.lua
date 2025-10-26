@@ -36,10 +36,12 @@ vim.lsp.util.open_floating_preview = (function(original_fn)
   end
 end)(vim.lsp.util.open_floating_preview)
 
+
+local diagSigns = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
+
 --  Diagnostics configuration
 vim.diagnostic.config({
   virtual_text = true,
-  signs = true,
   underline = true,
   update_in_insert = false,
   severity_sort = true,
@@ -47,14 +49,15 @@ vim.diagnostic.config({
     border = BORDER_STYLE,
     source = "always",
   },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR]   = diagSigns.Error,
+      [vim.diagnostic.severity.WARN] = diagSigns.Warn,
+      [vim.diagnostic.severity.HINT]    = diagSigns.Hint,
+      [vim.diagnostic.severity.INFO]    = diagSigns.Info,
+    }
+  }
 })
-
---  Define diagnostic signs
-local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
 
 --  Define all servers using the new vim.lsp.config API
 local servers = {

@@ -60,7 +60,7 @@ Rectangle {
                         return Colors.palette.m3secondary;
                     }
 
-                    return Colors.palette.m3surfaceDim;
+                    return Colors.light ? Colors.darken(Colors.palette.m3inverseSurface, 0.1) : Colors.palette.m3surfaceDim;
                 }
 
                 MouseArea {

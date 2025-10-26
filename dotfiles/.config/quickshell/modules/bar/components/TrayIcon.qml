@@ -51,6 +51,7 @@ Rectangle {
             fillMode: Image.PreserveAspectFit
             smooth: true
             mipmap: true
+            visible: false
         }
 
         // Fallback to text if image fails
@@ -66,7 +67,7 @@ Rectangle {
         ColorOverlay {
             anchors.fill: sysTrayIcon
             source: sysTrayIcon
-            color: Colors.light ? Colors.transparentize(Colors.palette.m3surface, 0.5) : Colors.transparentize(Colors.palette.m3onSurface, 0.5)
+            color: Colors.light ? Colors.palette.m3surface : Colors.palette.m3onSurface
         }
 
         Behavior on width {

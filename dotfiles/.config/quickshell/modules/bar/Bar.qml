@@ -78,6 +78,18 @@ Scope {
                     }
 
                     Rectangle {
+                        id: leftSpacer
+                        Layout.fillWidth: true
+                        color: "transparent"
+                    }
+
+                    Text {
+                        id: clock
+                        text: "meow meow"
+                    }
+
+                    Rectangle {
+                        id: rightSpacer
                         Layout.fillWidth: true
                         color: "transparent"
                     }

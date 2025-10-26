@@ -9,7 +9,7 @@ import qs.functions
 
 Rectangle {
     id: trayRect
-    color: Colors.palette.m3surfaceDim
+    color: Colors.light ? Colors.darken(Colors.palette.m3inverseSurface, 0.1) : Colors.palette.m3surfaceDim
 
     required property int pos
     property int margin: 5

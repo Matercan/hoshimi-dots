@@ -150,7 +150,7 @@ Item {
                                 id: actionButton
 
                                 radius: 16
-                                color: mArea.containsMouse ? Colors.palette.m3primary : Colors.palette.m3surfaceDim
+                                color: mArea.containsMouse ? Colors.palette.m3primary : (Colors.light ? Colors.darken(Colors.palette.m3inverseSurface, 0.1) : Colors.palette.m3surfaceDim)
                                 implicitHeight: buttonText.height
                                 implicitWidth: parent.width
 

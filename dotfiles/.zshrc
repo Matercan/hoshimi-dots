@@ -113,6 +113,15 @@ qsr () {
   tail -f ~/Documents/qs.log; rm -f ~/Documents/qs.log
 }
 
+flamegraph () {
+  perf record -F 99 -g -- $@ 
+  perf script > out.perf
+  stackcollapse-perf.pl out.perf > out.folded
+  flamegraph.pl out.folded > flamegraph.svg
+  rm out.perf out.folded perf.data*
+  chafa flamegraph.svg
+}
+
 # Aliases
 
 alias ga="git add"
@@ -134,7 +143,6 @@ eval "$(zoxide init  --cmd cd zsh)"
 
 source "${ZINIT_HOME}/../plugins/romkatv---powerlevel10k/powerlevel10k.zsh-theme"
 
-
 PATH="${HOME}/.local/bin${PATH:+:${PATH}}"; export PATH;
 
 # Screensaver
@@ -152,3 +160,10 @@ PERL5LIB="/home/matercan/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5
 PERL_LOCAL_LIB_ROOT="/home/matercan/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/matercan/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/matercan/perl5"; export PERL_MM_OPT;
+
+# bun completions
+[ -s "/home/matercan/.bun/_bun" ] && source "/home/matercan/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

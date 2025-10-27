@@ -15,11 +15,35 @@ return {
 
     config = function()
       require("nvim-treesitter.configs").setup {
-        ensure_installed = { "lua", "python", "json", "javascript", "c_sharp" }, -- Add other languages you need
+        ensure_installed = { "lua", "python", "json", "javascript", "c_sharp", "cpp", "c" }, -- Add other languages you need
         highlight = { enable = true },
         indent = { enable = true },
         folds = { enabled = true, }
       }
+    end,
+  },
+  {
+    'kevinhwang91/nvim-ufo',
+    dependencies = {
+      'kevinhwang91/promise-async'
+    },
+
+    config = function()
+      vim.o.foldcolumn = '1'
+      vim.o.foldlevel = 99
+      vim.o.foldlevelstart = 99
+      vim.o.foldenable = true
+
+      local ufo = require('ufo')
+
+      vim.keymap.set('n', 'zR', ufo.openAllFolds)
+      vim.keymap.set('n', 'zM', ufo.closeAllFolds)
+
+      ufo.setup({
+        provider_selecter = function(bufnr, filetype, buftype)
+          return { 'treesitter', 'indent' }
+        end
+      })
     end,
   },
   {

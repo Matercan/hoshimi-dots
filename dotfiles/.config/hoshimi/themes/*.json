@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Matercan/hoshimi-cli/refs/heads/main/schema/theme_schema.json",
+  "writers": [
+    {
+      "file": "~/.config/nvim/init.lua",
+      "lines": [
+        "vim.api.nvim_set_hl(0, \"NormalFloat\", { bg = \"none\" })",
+        "vim.api.nvim_set_hl(0, \"FloatBorder\", { bg = \"none\", })"
+      ]
+    }
+  ]
+}

@@ -6,8 +6,7 @@
   ],
   "writers": [
     {
-      "file": "~/.config/nvim/init.lua",
-      "linesDeleted": 2
+      "file": "~/.config/nvim/init.lua"
     }
   ]
 }

@@ -86,11 +86,11 @@ Rectangle {
             case Qt.LeftButton:
                 console.log(menuOpener.menu.objectName);
                 root.item.activate();
-                trayIcon.playSfx();
+                Sounds.softs.play("finish", 0.6);
                 break;
             case Qt.RightButton:
                 menuOpener.open();
-                trayIcon.playEnter();
+                Sounds.softs.play("finish", 0.6);
                 break;
             }
 

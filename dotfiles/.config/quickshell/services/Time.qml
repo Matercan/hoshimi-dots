@@ -14,6 +14,16 @@ Singleton {
         Qt.formatDateTime(clock.date, "hh:mm:ss");
     }
 
+    readonly property int hours: {
+        return parseInt(time.split(':')[0]);
+    }
+    readonly property int minutes: {
+        return parseInt(time.split(':')[1]);
+    }
+    readonly property int seconds: {
+        return parseInt(time.split(':')[2]);
+    }
+
     SystemClock {
         id: clock
         precision: SystemClock.Seconds

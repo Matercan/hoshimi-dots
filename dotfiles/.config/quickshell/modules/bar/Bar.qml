@@ -85,11 +85,18 @@ Scope {
 
                     Loader {
                         asynchronous: true
-                        active: true
-                        Layout.preferredWidth: children[0].implicitHeight
-                        Layout.preferredHeight: children[0].implicitWidth
+                        active: false
+                        Layout.preferredHeight: children[0].implicitHeight
+                        Layout.preferredWidth: children[0].implicitWidth
+                        Layout.alignment: Qt.AlignHCenter
 
-                        sourceComponent: Clock {}
+                        sourceComponent: Clock {
+                            anchors.centerIn: parent
+                            Component.onCompleted: {
+                                console.log(Status.widgetHeight);
+                                Status.setHeight(height);
+                            }
+                        }
                     }
 
                     Rectangle {
@@ -110,6 +117,10 @@ Scope {
                         sourceComponent: TrayWidget {
                             anchors.centerIn: parent
                             pos: tray.x - tray.width
+                            Component.onCompleted: {
+                                console.log(Status.widgetHeight);
+                                Status.setHeight(height);
+                            }
                         }
                     }
 
